@@ -1,0 +1,52 @@
+//Variables
+$header-height:120px;
+$color-gray:#282828;
+
+
+//Styling-------------------------------------Styling//
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+  //Header Styling-------------------------------------------------Header Styling//
+.landing-video {
+  iframe {
+    width: 100%;
+    height: calc(100vh - #{$header-height});
+  }
+}
+div#main-header{
+  text-align: center;
+  background-color: #fff;
+  height: $header-height;
+
+  .right-nav, .left-nav, .logo-area {
+    display:inline-block;
+  }
+
+  .right-nav, .left-nav {
+    width: 200px;
+  }
+
+  .right-nav {
+    h3 {
+      float: left;
+    }
+  }
+
+  .left-nav {
+    h3 {
+      float: right;
+    }
+  }
+
+  .logo-area {
+    img {
+      width: 200px;
+    }
+  }
+}

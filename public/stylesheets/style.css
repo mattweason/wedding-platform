@@ -1,0 +1,26 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+.landing-video iframe {
+  width: 100%;
+  height: calc(100vh - 120px); }
+
+div#main-header {
+  text-align: center;
+  background-color: #fff;
+  height: 120px; }
+  div#main-header .right-nav, div#main-header .left-nav, div#main-header .logo-area {
+    display: inline-block; }
+  div#main-header .right-nav, div#main-header .left-nav {
+    width: 200px; }
+  div#main-header .right-nav h3 {
+    float: left; }
+  div#main-header .left-nav h3 {
+    float: right; }
+  div#main-header .logo-area img {
+    width: 200px; }
+
+/*# sourceMappingURL=style.css.map */
