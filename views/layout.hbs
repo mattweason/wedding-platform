@@ -16,47 +16,59 @@
       <iframe src="https://player.vimeo.com/video/52857746?color=ffffff&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
   </div>
 
-  <header>
-      <div id="main-header">
-          <div class="container">
-              <div class="col-sm-8 col-sm-offset-2">
-                  <div class="left-nav">
-                      <a href="#"><h3>Featured Vendors</h3></a>
-                  </div>
-                  <a href="#" class="logo-area">
-                      <img class = "logo" src="/images/logo.png" alt="">
-                  </a>
-                  <div class="right-nav">
-                      <a href="#"><h3>Vendor List</h3></a>
-                  </div>
-              </div>
-              <div class="col-sm-2">
-                  <div class="user-area">
-                      <a href="" class="sign-in">Sign In</a>
-                      <a href="" class="sign-up">Sign Up</a>
-                  </div>
-              </div>
-
-          </div>
-      </div>
-  </header>
-
   <body>
-    {{{body}}}
-  </body>
 
-  <footer id = "mastfooter">
-      <div class="container">
-          <div class="col-sm-4">
-              <div class="footer-logo"></div>
+      <header>
+          <div id="main-header">
+              <div class="container">
+                  <div class="col-sm-8 col-sm-offset-2">
+                      <div class="left-nav">
+                          <a href="#"><h3>Featured Vendors</h3></a>
+                      </div>
+                      <a href="#" class="logo-area">
+                          <img class = "logo" src="/images/logo.png" alt="">
+                      </a>
+                      <div class="right-nav">
+                          <a href="#"><h3>Vendor List</h3></a>
+                      </div>
+                  </div>
+                  <div class="col-sm-2">
+                      <div class="user-area">
+                          <a href="" class="sign-in">Sign In</a>
+                          <a href="" class="sign-up">Sign Up</a>
+                      </div>
+                  </div>
+
+              </div>
           </div>
-          <div class="col-sm-4">
-              <div class="newsletter"></div>
-          </div>
-          <div class="col-sm-4">
-              <div class="social-media"></div>
+      </header>
+
+    {{{body}}}
+
+      <div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-md">
+              <div class="modal-content failure">
+                  <div class="form-response"></div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                  <a class="view-button notdisplay" href=""><button type="button" class="btn btn-secondary"></button></a>
+              </div>
           </div>
       </div>
-  </footer>
+
+      <footer id = "mastfooter">
+          <div class="container">
+              <div class="col-sm-4">
+                  <div class="footer-logo"></div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="newsletter"></div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="social-media"></div>
+              </div>
+          </div>
+      </footer>
+
+  </body>
 
 </html>
