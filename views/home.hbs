@@ -1,8 +1,26 @@
-{{#each vendor}}
-    <h2>{{this.vendor_name}}</h2>
-    <p>{{this.category}}</p>
-    <p>{{this.address}}, {{this.address_2}}, {{this.city}}, {{this.province}} {{this.postal_code}}</p>
-    <p>Price:{{this.price}}</p>
-    <p>Rating:{{this.rating}}</p>
-    <a href="/vendor/{{this.vendor_url}}/">View Vendor</a>
-{{/each}}
+
+<div class="container">
+    <div class="row">
+
+        {{#each vendor}}
+
+            <div class="col-sm-6">
+                <h2>{{this.vendor_name}}</h2>
+                <p>{{this.category}}</p>
+                <p>{{this.address}}, {{this.address_2}}, {{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Price: {{this.price}}</p>
+                        <p>Rating: {{this.rating}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="/vendor/{{this.vendor_url}}/">View Vendor</a>
+                    </div>
+                </div>
+
+            </div>
+
+        {{/each}}
+
+    </div>
+</div>
