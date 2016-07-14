@@ -1,0 +1,8 @@
+{{#each vendor}}
+    <h2>{{this.vendor_name}}</h2>
+    <p>{{this.category}}</p>
+    <p>{{this.address}}, {{this.address_2}}, {{this.city}}, {{this.province}} {{this.postal_code}}</p>
+    <p>Price:{{this.price}}</p>
+    <p>Rating:{{this.rating}}</p>
+    <a href="/vendor/{{this.vendor_url}}/">View Vendor</a>
+{{/each}}

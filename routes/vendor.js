@@ -44,17 +44,25 @@ router.post('/create', function(req, res){
     //Get all basic form data (separate category)
     for (var propName in req.body) {
         if (req.body.hasOwnProperty(propName)) {
-            if(propName == 'category')
+            if(propName == 'category') {
                 var category = req.body[propName];
-            else
-                dataCollection[propName]=req.body[propName];
+            }
+            else if(propName == 'vendor_name') {
+                dataCollection[propName] = req.body[propName];
+                var str = req.body[propName];
+                str = str.replace(/\s+/g, '_').toLowerCase();
+                dataCollection['vendor_url'] = str;
+            }
+            else {
+                dataCollection[propName] = req.body[propName];
+            }
         }
     }
     
-    insertCompany();
+    insertVendor();
 
-    //insert values into company table
-    function insertCompany() {
+    //insert values into vendor table
+    function insertVendor() {
 
         //create array of all values
         var dbValues = [];

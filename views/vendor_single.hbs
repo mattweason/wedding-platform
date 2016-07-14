@@ -1,0 +1,26 @@
+
+<div class="container">
+
+    {{#each vendor}}
+
+        <div class="row">
+            <div class="col-sm-5">
+                <p>Address: {{this.address}}, {{this.address_2}}
+                    <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                <p>Phone: {{this.phone_number}}</p>
+                <p>Price: {{this.price}}</p>
+                <p>Rating: {{this.rating}}</p>
+                <a href="{{this.url}}" target="_blank">VISIT WEBSITE</a>
+            </div>
+            <div class="col-sm-7">
+                <h2>{{this.vendor_name}}</h2>
+                <p>{{this.category}}</p>
+                <p>{{this.description}}</p>
+            </div>
+        </div>
+
+    {{/each}}
+
+</div>
+
+
