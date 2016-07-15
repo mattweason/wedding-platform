@@ -4,8 +4,7 @@
     <input type="text" name="vendor_name"><br>
 
     <label class = "form-label" for="category">Category</label>
-    <select name="category" id = "category" multiple required>
-        <option value = "" selected>Select a Category</option>
+    <select name="category" id = "category" data-placeholder="Choose a Category" multiple required>
         {{#each category}}
             <option value="{{this.category_id}}">{{this.category_name}}</option>
         {{/each}}
@@ -39,6 +38,5 @@
     <textarea name="description" placeholder = "Vendor Description" required></textarea>
 
     <input type="submit" value="Add Vendor">
-    <div class="form-response"></div>
 
 </form>

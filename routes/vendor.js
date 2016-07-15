@@ -1,37 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var custom = require('./../lib/functions'); //bring in all custom functions
+var functions = require('./../lib/functions'); //bring in all custom functions
 
 //---------------------ADDING NEW VENDOR------------------------
 router.get('/add', function(req,res, next){
 
-    //initial empty objects to be filled by MySQL queries
-    var category = {};
-
-    function readyToRender(){
-        var runState = true;
-        if(Object.keys(category).length === 0 && category.constructor === Object)
-            runState = false;
-
-        if(runState){
-            //console.log("Data is ready!");
-            res.render('vendor_add', { title: 'Add New Vendor', category: category});
-        }
-        else{
-            //console.log("Data not Ready");
-            console.log("Run State: "+runState);
-        }
-    }
-
-    function insertContent(obj, key){ //1 is for category data
-        if(key==1)
-            category = obj;
-        readyToRender();
-    }
-
     connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
-        if (err) {throw err;}
-        else {insertContent(category, 1);} //populate our object with results
+        res.render('vendor_add', { title: 'Add New Vendor', category: category});
+    });
+
+});
+
+//---------------------EDITING VENDOR------------------------
+router.get('/:vendorName/edit', function(req,res, next){
+
+    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+
+        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, categoryJoin) {
+            if (err) {throw err;}
+
+            else {
+                //Append categories as strings onto vendor object
+                var vendorCategory = functions.vendorJoin(vendor, categoryJoin);
+                console.log(vendorCategory[0]);
+
+                connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
+                    res.render('vendor_edit', { title: 'Update Vendor', vendor: vendorCategory[0], category: category});
+                });
+            }
+        });
     });
 
 });

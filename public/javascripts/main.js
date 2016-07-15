@@ -28,4 +28,7 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //Chosen field for category
+    $("select#category").chosen();
+
 }); //end of document ready

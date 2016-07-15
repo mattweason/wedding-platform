@@ -14725,5 +14725,8 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //Chosen field for category
+    $("select#category").chosen();
+
 }); //end of document ready
 },{"bootstrap":1,"jquery":16,"jquery-ui":14,"jquery-validation":15}]},{},[17]);
