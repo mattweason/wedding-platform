@@ -4,9 +4,9 @@
     <input type="text" name="vendor_name" value="{{vendor.vendor_name}}" required><br>
 
     <label class = "form-label" for="category">Category</label>
-    <select name="category" id = "category" data-placeholder="Choose a Category" multiple required>
+    <select name="category" id = "category" data-placeholder="Choose Categories" multiple required>
         {{#each category}}
-            <option value="{{this.category_id}}">{{this.category_name}}</option>
+            <option value="{{this.category_id}}" {{#if this.selected}}selected{{/if}}>{{this.category_name}}</option>
         {{/each}}
     </select><br>
 

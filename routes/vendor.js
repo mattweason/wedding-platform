@@ -16,16 +16,25 @@ router.get('/:vendorName/edit', function(req,res, next){
 
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
 
-        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, categoryJoin) {
+        connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, categoryJoin) {
             if (err) {throw err;}
 
             else {
-                //Append categories as strings onto vendor object
-                var vendorCategory = functions.vendorJoin(vendor, categoryJoin);
-                console.log(vendorCategory[0]);
+
+                //Take categories belonging to vendor and add the selected property
+                var selectedCategoryArray = [];
+                for (var i = 0; i < categoryJoin.length; i++) {
+                    selectedCategoryArray.push(categoryJoin[i].category_fid);
+                }
 
                 connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
-                    res.render('vendor_edit', { title: 'Update Vendor', vendor: vendorCategory[0], category: category});
+                    for (var i = 0; i < category.length; i++) {
+                        if (selectedCategoryArray.indexOf(category[i].category_id) > -1){
+                            category[i].selected = true;
+                        }
+                    }
+
+                    res.render('vendor_edit', { title: 'Update Vendor', vendor: vendor[0], category: category});
                 });
             }
         });
