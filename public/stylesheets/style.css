@@ -8,19 +8,41 @@ a {
   width: 100%;
   height: calc(100vh - 120px); }
 
-div#main-header {
+#masthead {
   text-align: center;
   background-color: #fff;
   height: 120px; }
-  div#main-header .right-nav, div#main-header .left-nav, div#main-header .logo-area {
+  #masthead .right-nav, #masthead .left-nav, #masthead .logo-area {
     display: inline-block; }
-  div#main-header .right-nav, div#main-header .left-nav {
+  #masthead .right-nav, #masthead .left-nav {
     width: 200px; }
-  div#main-header .right-nav h3 {
+  #masthead .right-nav h3 {
     float: left; }
-  div#main-header .left-nav h3 {
+  #masthead .left-nav h3 {
     float: right; }
-  div#main-header .logo-area img {
+  #masthead .logo-area img {
     width: 200px; }
+
+#add-form {
+  padding: 40px 0; }
+  #add-form textarea {
+    height: 300px;
+    width: 100%; }
+  #add-form input, #add-form .chosen-container {
+    width: 100% !important;
+    margin: 5px 0; }
+  #add-form label {
+    margin: 5px 0; }
+
+#mastfooter .main-footer {
+  height: 260px;
+  background-color: #282828; }
+  #mastfooter .main-footer .footer-logo {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%); }
+#mastfooter .sub-footer {
+  height: 50px;
+  line-height: 50px; }
 
 /*# sourceMappingURL=style.css.map */

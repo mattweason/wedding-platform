@@ -1,5 +1,6 @@
 //Variables
 $header-height:120px;
+$footer-height:260px;
 $color-gray:#282828;
 
 
@@ -12,14 +13,14 @@ a {
   color: #00B7FF;
 }
 
-  //Header Styling-------------------------------------------------Header Styling//
+//Header Styling-------------------------------------------------Header Styling//
 .landing-video {
   iframe {
     width: 100%;
     height: calc(100vh - #{$header-height});
   }
 }
-div#main-header{
+#masthead{
   text-align: center;
   background-color: #fff;
   height: $header-height;
@@ -48,5 +49,39 @@ div#main-header{
     img {
       width: 200px;
     }
+  }
+}
+
+//Add-form Styling----------------------------------------------------Add-form Styling//
+#add-form{
+  padding: 40px 0;
+
+  textarea{
+    height: 300px;
+    width: 100%;
+  }
+
+  input, .chosen-container{
+    width:100% !important;
+    margin: 5px 0;
+  }
+
+  label{margin: 5px 0;}
+}
+
+//Footer Styling------------------------------------------------------Footer Styling//
+#mastfooter{
+  .main-footer {
+    .footer-logo{
+      position: relative;
+      top: 50%;
+      transform: translateY(50%);
+    }
+    height: $footer-height;
+    background-color: $color-gray;
+  }
+  .sub-footer{
+    height: 50px;
+    line-height: 50px;
   }
 }
