@@ -34,6 +34,8 @@ router.get('/:vendorName/edit', function(req,res, next){
                         }
                     }
 
+                    console.log(vendor);
+
                     res.render('vendor_edit', { title: 'Update Vendor', vendor: vendor[0], category: category});
                 });
             }
@@ -64,7 +66,7 @@ router.post('/create', function(req, res){
             }
         }
     }
-    
+
     insertVendor();
 
     //insert values into vendor table
@@ -86,7 +88,65 @@ router.post('/create', function(req, res){
                 throw err;
             else{
                 connection.query('SELECT max(vendor_id) FROM vendor', function(err,vendor){
-                    custom.addCategory(vendor[0]['max(vendor_id)'], category, 'Vendor successfully added',res);
+                    functions.addCategory(vendor[0]['max(vendor_id)'], category, 'Vendor successfully added',res);
+                });
+            }
+        });
+    }
+
+});
+
+//----------------------UPDATING VENDOR IN DATABASE-----------------------
+router.post('/update', function(req, res){
+
+    var dataCollection = {};
+
+    //Get all basic form data (separate category)
+    for (var propName in req.body) {
+        if (req.body.hasOwnProperty(propName)) {
+            if(propName == 'category') {
+                var category = req.body[propName];
+            }
+            else if(propName == 'vendor_name') {
+                dataCollection[propName] = req.body[propName];
+                var str = req.body[propName];
+                str = str.replace(/\s+/g, '_').toLowerCase();
+                dataCollection['vendor_url'] = str;
+            }
+            else {
+                dataCollection[propName] = req.body[propName];
+            }
+        }
+    }
+
+    insertVendor();
+
+    //insert values into vendor table
+    function insertVendor() {
+
+        //create array of all values
+        var vendorValues = [];
+        for(var key in dataCollection) {
+            vendorValues.push(dataCollection[key]);
+        }
+        var vendorKeys = Object.keys(dataCollection);
+        var sqlQuery = '';
+        for (var i = 0; i < vendorKeys.length; i++) {
+            if (i == vendorKeys.length - 1) {
+                sqlQuery += vendorKeys[i] + ' = ' + "'" + vendorValues[i] + "'";
+            }
+            else {
+                sqlQuery += vendorKeys[i] + ' = ' + "'" + vendorValues[i] + "'" + ',';
+            }
+        }
+        var query = `UPDATE vendor SET ${sqlQuery} WHERE vendor_id = '${dataCollection.vendor_id}';`;
+        // execute the query
+        connection.query(query, function(err,feedback){
+            if (err)
+                throw err;
+            else{
+                connection.query(`DELETE FROM vendor2category WHERE vendor_fid = ${dataCollection.vendor_id}`, function (err, output) {
+                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully added', res);
                 });
             }
         });
