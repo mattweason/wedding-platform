@@ -146,12 +146,27 @@ router.post('/update', function(req, res){
                 throw err;
             else{
                 connection.query(`DELETE FROM vendor2category WHERE vendor_fid = ${dataCollection.vendor_id}`, function (err, output) {
-                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully added', res);
+                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited', res);
                 });
             }
         });
     }
 
+});
+
+//-------------------------------------DELETING VENDOR FROM DATABASE--------------------------------------------------//
+router.post('/delete', function(req, res){
+    var vendorID;
+
+    for (var propName in req.body) {
+        if(propName == 'vendor_id') {
+            vendorID = req.body[propName];
+        }
+    }
+
+    console.log(vendorID);
+    
+    functions.vendorDelete(vendorID, 'Vendor successfully deleted', res);
 });
 
 module.exports = router;

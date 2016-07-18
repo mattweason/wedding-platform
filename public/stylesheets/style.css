@@ -33,6 +33,28 @@ a {
     margin: 5px 0; }
   #add-form label {
     margin: 5px 0; }
+  #add-form .submit-area {
+    margin-top: 10px; }
+    #add-form .submit-area .add-submit {
+      height: 45px;
+      background: #fff;
+      width: 100%;
+      border: 1px solid #282828; }
+      #add-form .submit-area .add-submit:hover {
+        background: #e6e6e6; }
+    #add-form .submit-area .delete-submit {
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      margin: 5px 0;
+      line-height: 45px;
+      display: block;
+      height: 45px;
+      background: #282828;
+      width: 100%;
+      border: none; }
+      #add-form .submit-area .delete-submit:hover {
+        background: #424242; }
 
 #mastfooter .main-footer {
   height: 260px;

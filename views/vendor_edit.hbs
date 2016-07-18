@@ -1,6 +1,7 @@
-<form id = "add-form" class = "add-vendor" action="/vendor/update" method = "post">
+<div class="container">
 
-    <div class="container">
+    <form id = "add-form" class = "add-vendor" action="/vendor/update" method = "post">
+
         <div class="col-sm-6">
             <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
 
@@ -103,8 +104,33 @@
         <div class="col-sm-6">
             <label class = "form-label" for="description">Description</label>
             <textarea name="description" placeholder = "Vendor Description" required>{{vendor.description}}</textarea>
-            <input type="submit" value="Update Vendor">
         </div>
-    </div>
 
-</form>
+        <div class="submit-area row">
+            <div class="col-sm-offset-3 col-sm-3">
+                <input class="add-submit" type="submit" value="Update Vendor">
+            </div>
+            <div class="col-sm-2">
+                <button id="delete-modal-button">Delete Vendor</button>
+            </div>
+        </div>
+
+    </form>
+
+    <form id = "delete-form" class = "delete-vendor" action="/vendor/delete" method = "post">
+        <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <p>Are you sure you want to delete {{vendor.vendor_name}} from the database?</p>
+                    <input class="delete-submit" type="submit" value="Delete Vendor">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+

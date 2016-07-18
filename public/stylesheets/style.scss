@@ -53,21 +53,58 @@ a {
 }
 
 //Add-form Styling----------------------------------------------------Add-form Styling//
-#add-form{
+#add-form {
   padding: 40px 0;
 
-  textarea{
+  textarea {
     height: 300px;
     width: 100%;
   }
 
-  input, .chosen-container{
-    width:100% !important;
+  input, .chosen-container {
+    width: 100% !important;
     margin: 5px 0;
   }
 
-  label{margin: 5px 0;}
+  label {
+    margin: 5px 0;
+  }
+
+  .submit-area {
+    margin-top: 10px;
+
+    .add-submit {
+      height: 45px;
+      background: #fff;
+      width: 100%;
+      border: 1px solid $color-gray;
+
+      &:hover {
+        background: darken(#fff, 10%);
+      }
+    }
+
+    .delete-submit {
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      margin: 5px 0;
+      line-height: 45px;
+      display: block;
+      height: 45px;
+      background: $color-gray;
+      width: 100%;
+      border: none;
+
+      &:hover {
+        background: lighten($color-gray, 10%);
+
+      }
+    }
+  }
 }
+
+
 
 //Footer Styling------------------------------------------------------Footer Styling//
 #mastfooter{
