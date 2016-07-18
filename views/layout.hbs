@@ -47,12 +47,16 @@
 
     {{{body}}}
 
-      <div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
+      <div class="modal fade" id="message-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-md">
               <div class="modal-content failure">
                   <div class="form-response"></div>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                  <a class="view-button notdisplay" href=""><button type="button" class="btn btn-secondary"></button></a>
+                  <div class="row">
+                      <div class="col-sm-offset-3 col-sm-6">
+                          <button id="dismiss-button" type="button" class="btn btn-secondary notdisplay" data-dismiss="modal">Dismiss</button>
+                          <a class="view-button" href=""><button type="button" class="btn btn-secondary"></button></a>
+                      </div>
+                  </div>
               </div>
           </div>
       </div>

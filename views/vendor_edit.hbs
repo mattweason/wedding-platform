@@ -1,117 +1,119 @@
 <div class="container">
 
     <form id = "add-form" class = "add-vendor" action="/vendor/update" method = "post">
+        <div class="row">
 
-        <div class="col-sm-6">
-            <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
+            <div class="col-sm-6">
+                <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="vendor_name">Vendor Name</label>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="vendor_name">Vendor Name</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="vendor_name" value="{{vendor.vendor_name}}" required><br>
+                    </div>
                 </div>
-                <div class="col-sm-9">
-                    <input type="text" name="vendor_name" value="{{vendor.vendor_name}}" required><br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="category">Category</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <select name="category" id = "category" data-placeholder="Choose Categories" multiple required>
+                            {{#each category}}
+                                <option value="{{this.category_id}}" {{#if this.selected}}selected{{/if}}>{{this.category_name}}</option>
+                            {{/each}}
+                        </select><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="address">Address 1</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="address" value="{{vendor.address}}" required><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="address_2">Address 2</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="address_2" value="{{vendor.address_2}}"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="city">City</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="city" class = "datePicker" value="{{vendor.city}}" required><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="province">Province</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="province" value="{{vendor.province}}"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="postal_code">Postal Code</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="postal_code" value="{{vendor.postal_code}}"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="phone_number">Phone Number</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="phone_number" value="{{vendor.phone_number}}"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="price">Price</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="number" name="price" value="{{vendor.price}}"><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class = "form-label" for="url">Vendor Website</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" name="url" value="{{vendor.url}}"><br>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="category">Category</label>
-                </div>
-                <div class="col-sm-9">
-                    <select name="category" id = "category" data-placeholder="Choose Categories" multiple required>
-                        {{#each category}}
-                            <option value="{{this.category_id}}" {{#if this.selected}}selected{{/if}}>{{this.category_name}}</option>
-                        {{/each}}
-                    </select><br>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="address">Address 1</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="address" value="{{vendor.address}}" required><br>
-                </div>
+            <div class="col-sm-6">
+                <label class = "form-label" for="description">Description</label>
+                <textarea name="description" placeholder = "Vendor Description" required>{{vendor.description}}</textarea>
             </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="address_2">Address 2</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="address_2" value="{{vendor.address_2}}"><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="city">City</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="city" class = "datePicker" value="{{vendor.city}}" required><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="province">Province</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="province" value="{{vendor.province}}"><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="postal_code">Postal Code</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="postal_code" value="{{vendor.postal_code}}"><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="phone_number">Phone Number</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="phone_number" value="{{vendor.phone_number}}"><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="price">Price</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="number" name="price" value="{{vendor.price}}"><br>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <label class = "form-label" for="url">Vendor Website</label>
-                </div>
-                <div class="col-sm-9">
-                    <input type="text" name="url" value="{{vendor.url}}"><br>
-                </div>
-            </div>
-
         </div>
 
-        <div class="col-sm-6">
-            <label class = "form-label" for="description">Description</label>
-            <textarea name="description" placeholder = "Vendor Description" required>{{vendor.description}}</textarea>
-        </div>
-
-        <div class="submit-area row">
+        <div class="row submit-area">
             <div class="col-sm-offset-3 col-sm-3">
                 <input class="add-submit" type="submit" value="Update Vendor">
             </div>
             <div class="col-sm-2">
-                <button id="delete-modal-button">Delete Vendor</button>
+                <button id="delete-modal-button" class="delete-submit" >Delete Vendor</button>
             </div>
         </div>
 
@@ -119,12 +121,14 @@
 
     <form id = "delete-form" class = "delete-vendor" action="/vendor/delete" method = "post">
         <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
-        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <p>Are you sure you want to delete {{vendor.vendor_name}} from the database?</p>
-                    <input class="delete-submit" type="submit" value="Delete Vendor">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <div class="row">
+                        <div class="col-sm-6"><input id="delete-modal-confirm" type="submit" value="Delete Vendor"></div>
+                        <div class="col-sm-6"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></div>
+                    </div>
                 </div>
             </div>
         </div>

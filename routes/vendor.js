@@ -67,28 +67,52 @@ router.post('/create', function(req, res){
         }
     }
 
-    insertVendor();
+    var result = [];
+    var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}"`;
+    connection.query(query, function(err, rows) {
+        if(err) {
+            throw err;
+        } else {
+            setValue(rows);
+        }
+    });
+
+    function setValue(value) {
+        result = value;
+        checkExists(result);
+    }
+
+    function checkExists(result) {
+        if (result.length) {
+            res.send({
+                message: 'Duplicate entry: ' + dataCollection.vendor_name + ' already exists in the Vendor database.',
+                status: 'failure'
+            });
+        } else {
+            insertVendor();
+        }
+    }
 
     //insert values into vendor table
     function insertVendor() {
 
         //create array of all values
         var dbValues = [];
-        for(var key in dataCollection) {
+        for (var key in dataCollection) {
             dbValues.push(dataCollection[key]);
         }
 
         var query1 = Object.keys(dataCollection).join(", ");
-        var query2 = "'"+dbValues.join("','")+"'";
+        var query2 = "'" + dbValues.join("','") + "'";
         var query = `INSERT INTO vendor (${query1}) VALUES (${query2})`;
 
         //execute the query
-        connection.query(query, function(err,feedback){
+        connection.query(query, function (err, feedback) {
             if (err)
                 throw err;
-            else{
-                connection.query('SELECT max(vendor_id) FROM vendor', function(err,vendor){
-                    functions.addCategory(vendor[0]['max(vendor_id)'], category, 'Vendor successfully added',res);
+            else {
+                connection.query('SELECT max(vendor_id) FROM vendor', function (err, vendor) {
+                    functions.addCategory(vendor[0]['max(vendor_id)'], category, 'Vendor successfully added.', dataCollection.vendor_url, res);
                 });
             }
         });
@@ -146,7 +170,7 @@ router.post('/update', function(req, res){
                 throw err;
             else{
                 connection.query(`DELETE FROM vendor2category WHERE vendor_fid = ${dataCollection.vendor_id}`, function (err, output) {
-                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited', res);
+                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited.', dataCollection.vendor_url, res);
                 });
             }
         });

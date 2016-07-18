@@ -56,6 +56,39 @@ a {
       #add-form .submit-area .delete-submit:hover {
         background: #424242; }
 
+#message-modal .modal-content, #delete-modal .modal-content {
+  margin: 0 100px;
+  padding: 20px;
+  color: #282828;
+  text-align: center;
+  border-radius: 0; }
+  #message-modal .modal-content button, #delete-modal .modal-content button {
+    background: #fff;
+    height: 45px;
+    margin: 5px 0;
+    color: #282828;
+    border: 1px solid #282828;
+    border-radius: 0;
+    width: 100%; }
+    #message-modal .modal-content button:hover, #delete-modal .modal-content button:hover {
+      background: #e6e6e6; }
+  #message-modal .modal-content .notdisplay, #delete-modal .modal-content .notdisplay {
+    display: none; }
+  #message-modal .modal-content #delete-modal-confirm, #message-modal .modal-content #dismiss-button, #delete-modal .modal-content #delete-modal-confirm, #delete-modal .modal-content #dismiss-button {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    margin: 15px 0 5px 0;
+    display: block;
+    height: 45px;
+    background: #282828;
+    width: 100%;
+    border: none; }
+    #message-modal .modal-content #delete-modal-confirm:hover, #message-modal .modal-content #dismiss-button:hover, #delete-modal .modal-content #delete-modal-confirm:hover, #delete-modal .modal-content #dismiss-button:hover {
+      background: #424242; }
+    #message-modal .modal-content #delete-modal-confirm.notdisplay, #message-modal .modal-content #dismiss-button.notdisplay, #delete-modal .modal-content #delete-modal-confirm.notdisplay, #delete-modal .modal-content #dismiss-button.notdisplay {
+      display: none; }
+
 #mastfooter .main-footer {
   height: 260px;
   background-color: #282828; }

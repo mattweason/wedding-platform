@@ -14714,10 +14714,14 @@ $(document).ready(function() {
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
-                        $('.modal-content').removeClass('failure').addClass('success'); //change background color if add-form is successful
-                        $('#message-modal').find('.view-button').removeClass('notdisplay').attr('href', data.url);
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('.view-button').attr('href', data.url);
                         $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                        console.log('success!');
+                    } else if (data.status == 'failure') {
+                        $('#dismiss-button').removeClass('notdisplay'); //Make dismiss button visible
+                        $('.view-button').addClass('notdisplay'); //Make variable modal button invisible
+                        console.log('failure');
                     }
                 }
             });
@@ -14734,11 +14738,10 @@ $(document).ready(function() {
                 url: $('#delete-form').attr('action'),
                 data: $('#delete-form').serialize(), // serializes the form's elements.
                 success: function(data){
+                    $('#delete-modal').modal('hide'); //toggle modal on form submit
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
-                        $('.modal-content').removeClass('failure').addClass('success'); //change background color if add-form is successful
-                        $('#message-modal').find('.view-button').removeClass('notdisplay').attr('href', data.url);
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
                         $(form).find('input[type=submit]').attr('disabled', 'disabled');
                     }
@@ -14748,8 +14751,36 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //-----------------------GENERAL JAVASCRIPT-------------------------------//
+
     //Chosen field for category
     $("select#category").chosen();
+
+    //Prevent delete form button default and open modal
+    $( "#delete-modal-button" ).click(function( event ) {
+        event.preventDefault();
+        $('#delete-modal').modal('toggle');
+    });
+
+    //Vertically center Modal
+    $(function() {
+        function reposition() {
+            var modal = $(this),
+                dialog = modal.find('.modal-dialog');
+            modal.css('display', 'block');
+
+            // Dividing by two centers the modal exactly, but dividing by three
+            // or four works better for larger screens.
+            dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+        }
+        // Reposition when a modal is shown
+        $('.modal').on('show.bs.modal', reposition);
+        // Reposition when the window is resized
+        $(window).on('resize', function() {
+            $('.modal:visible').each(reposition);
+        });
+    });
+
 
 }); //end of document ready
 },{"bootstrap":1,"jquery":16,"jquery-ui":14,"jquery-validation":15}]},{},[17]);
