@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var functions = require('./../lib/functions'); //bring in all custom functions
+// var multer = require('multer');
+
+//Set up multer
+// var storage =   multer.diskStorage({
+//     destination: function (req, file, callback) {
+//         callback(null, './uploads');
+//     },
+//     filename: function (req, file, callback) {
+//         callback(null, file.fieldname + '-' + Date.now());
+//     }
+// });
+// var upload = multer({ storage : storage}).array('upl');
 
 //---------------------ADDING NEW VENDOR------------------------
 router.get('/add', function(req,res, next){
@@ -175,7 +187,6 @@ router.post('/update', function(req, res){
             }
         });
     }
-
 });
 
 //-------------------------------------DELETING VENDOR FROM DATABASE--------------------------------------------------//
@@ -192,5 +203,19 @@ router.post('/delete', function(req, res){
     
     functions.vendorDelete(vendorID, 'Vendor successfully deleted', res);
 });
+
+//-----------------------------------------ADDING TO VENDOR GALLERY---------------------------------------------------//
+// router.post('/api/photo', function(req,res){
+//
+//     upload(req,res,function(err) {
+//         if(err) {
+//             return res.end("Error uploading file.");
+//         } else {
+//             console.log(req.files[0]);
+//             console.log(req.body);
+//             res.status(204).end();
+//         }
+//     });
+// });
 
 module.exports = router;

@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <h4>{{vendor.vendor_name}}</h4>
+
+        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+            <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
+            <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
+            <input type="file" name="upl" multiple>
+            <input type="submit" value="Upload Image" name="submit">
+        </form>
+    </div>
+</div>
+
