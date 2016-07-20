@@ -42,6 +42,19 @@ a {
       border: 1px solid #282828; }
       #add-form .submit-area .add-submit:hover {
         background: #e6e6e6; }
+    #add-form .submit-area #edit-gallery {
+      display: block;
+      margin: 5px 0;
+      color: #282828;
+      text-decoration: none;
+      text-align: center;
+      height: 45px;
+      line-height: 45px;
+      background: #fff;
+      width: 100%;
+      border: 1px solid #282828; }
+      #add-form .submit-area #edit-gallery:hover {
+        background: #e6e6e6; }
     #add-form .submit-area .delete-submit {
       text-decoration: none;
       color: #fff;

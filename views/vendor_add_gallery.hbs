@@ -1,8 +1,24 @@
 <div class="container">
-    <div class="row">
-        <h4>{{vendor.vendor_name}}</h4>
 
-        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+    <h4>{{vendor.vendor_name}} Gallery</h4>
+
+    <div class="row">
+        <form id="galleryDeleteForm" action="/gallerydelete" method="post">
+            {{#each photos}}
+                <div class="col-sm-3">
+                    <img src="/{{this.photo_url}}" alt=""><br>
+                    <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
+                    <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
+                    <label class="form-label" for="delete_photo">Mark for deletion.</label>
+                </div>
+            {{/each}}
+            <input type="submit" value="Delete Image(s)" name="submit">
+        </form>
+    </div>
+
+    <div class="row">
+
+        <form id="upload-gallery" enctype="multipart/form-data" action="/api/photo" method="post">
             <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
             <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
             <input type="file" name="upl" multiple>

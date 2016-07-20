@@ -84,6 +84,23 @@ a {
       }
     }
 
+    #edit-gallery {
+      display: block;
+      margin: 5px 0;
+      color: $color-gray;
+      text-decoration: none;
+      text-align: center;
+      height: 45px;
+      line-height: 45px;
+      background: #fff;
+      width: 100%;
+      border: 1px solid $color-gray;
+
+      &:hover {
+        background: darken(#fff, 10%);
+      }
+    }
+
     .delete-submit {
       text-decoration: none;
       color: #fff;

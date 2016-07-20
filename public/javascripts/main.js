@@ -54,6 +54,27 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //--------------------ADDING GALLERY TO VENDOR---------------------
+    // $('#upload-gallery').validate({
+    //
+    //     submitHandler: function(form){
+    //         $.ajax({
+    //             type: "POST",
+    //             url: $('#upload-gallery').attr('action'),
+    //             data: $('#upload-gallery').serialize(), // serializes the form's elements.
+    //             success: function(data){
+    //                 $('#message-modal').find('.form-response').html(data.message);
+    //                 $('#message-modal').modal('toggle'); //toggle modal on form submit
+    //                 if(data.status == 'success'){
+    //                     $('#message-modal').find('.view-button').children().html(data.buttontext);
+    //                     $(form).find('input[type=submit]').attr('disabled', 'disabled');
+    //                 }
+    //             }
+    //         });
+    //         return false; //since we use Ajax
+    //     }
+    // }); //end of validate
+
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
     //Chosen field for category

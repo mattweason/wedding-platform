@@ -12,6 +12,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "file-system": "^2.2.1",
     "hbs": "~4.0.0",
     "jquery": "^3.1.0",
     "jquery-ui": "^1.12.0",

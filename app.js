@@ -29,6 +29,9 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Make uploads folder accessible to front end
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/', routes);
 app.use('/users', users);
 
