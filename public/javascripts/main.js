@@ -46,6 +46,7 @@ $(document).ready(function() {
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('.view-button').attr('href', data.url);
                         $(form).find('input[type=submit]').attr('disabled', 'disabled');
                     }
                 }

@@ -1,4 +1,4 @@
-<form id = "add-form" class = "add-vendor" action="/vendor/create" method = "post">
+<form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
 
     <div class="container">
         <div class="row">
@@ -100,8 +100,11 @@
             </div>
 
             <div class="col-sm-6">
+                <label class="form-label" for="featured_image">Featured Image</label>
+                <input type="file" name="featured_image" id="featured_image"/>
+
                 <label class = "form-label" for="description">Description</label>
-                <textarea name="description" placeholder = "Vendor Description" required></textarea>
+                <textarea name="description" placeholder="Vendor Description" required></textarea>
             </div>
         </div>
 

@@ -79,6 +79,7 @@ router.post('/api/photo', function(req,res){
         if(err) {
             return res.end(err);
         } else {
+            console.log(req.files.path);
             var vendorID = req.body.vendor_id;
             var vendorURL = req.body.vendor_url;
             var vendorPhotos = [];
@@ -87,7 +88,6 @@ router.post('/api/photo', function(req,res){
                 var photoPathFixed = photoPath.replace("\\", "/");
                 vendorPhotos.push(photoPathFixed);
             }
-            console.log(__dirname);
             functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
         }
     });
@@ -109,6 +109,15 @@ router.post('/gallerydelete', function(req,res){
 
     functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
 
+});
+
+router.get('/multertest', function(req,res){
+    res.render('multertest');
+});
+
+router.post('/multertest', function(req,res){
+    console.log(req.files);
+    console.log(req.body);
 });
 
 module.exports = router;

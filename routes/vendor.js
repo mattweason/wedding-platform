@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
 var functions = require('./../lib/functions'); //bring in all custom functions
+
+//Set up multer
+var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, '/uploads/');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + '-' + Date.now());
+    }
+});
+var upload = multer({ storage : storage}).single('featured_image');
 
 //---------------------ADDING NEW VENDOR------------------------
 router.get('/add', function(req,res, next){
@@ -34,8 +46,6 @@ router.get('/:vendorName/edit', function(req,res, next){
                         }
                     }
 
-                    console.log(vendor);
-
                     res.render('vendor_edit', { title: 'Update Vendor', vendor: vendor[0], category: category});
                 });
             }
@@ -49,19 +59,26 @@ router.post('/create', function(req, res){
 
     var dataCollection = {};
 
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end(err);
+        } else {
+            dataCollection['featured_image'] = req.file.path;
+            console.log(req.file.path);
+        }
+    });
+
     //Get all basic form data (separate category)
     for (var propName in req.body) {
         if (req.body.hasOwnProperty(propName)) {
             if(propName == 'category') {
                 var category = req.body[propName];
-            }
-            else if(propName == 'vendor_name') {
+            } else if(propName == 'vendor_name') {
                 dataCollection[propName] = req.body[propName];
                 var str = req.body[propName];
                 str = str.replace(/\s+/g, '_').toLowerCase();
                 dataCollection['vendor_url'] = str;
-            }
-            else {
+            } else {
                 dataCollection[propName] = req.body[propName];
             }
         }
@@ -89,7 +106,8 @@ router.post('/create', function(req, res){
                 status: 'failure'
             });
         } else {
-            insertVendor();
+            res.end();
+            // insertVendor();
         }
     }
 
@@ -136,8 +154,7 @@ router.post('/update', function(req, res){
                 var str = req.body[propName];
                 str = str.replace(/\s+/g, '_').toLowerCase();
                 dataCollection['vendor_url'] = str;
-            }
-            else {
+            } else {
                 dataCollection[propName] = req.body[propName];
             }
         }
@@ -186,8 +203,6 @@ router.post('/delete', function(req, res){
             vendorID = req.body[propName];
         }
     }
-
-    console.log(vendorID);
     
     functions.vendorDelete(vendorID, 'Vendor successfully deleted', res);
 });
