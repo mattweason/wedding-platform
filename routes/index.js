@@ -97,19 +97,17 @@ router.post('/api/photo', function(req,res){
 router.post('/gallerydelete', function(req,res){
 
     var vendorURL = req.body.vendor_url;
-    var path = [];
-    req.body.delete_photo.push(path);
+    var path = req.body.delete_photo;
 
-    // if (path.length > 1) {
-    //     for (var i = 0; i < path.length; i++) {
-    //         fs.unlinkSync(path[i]);
-    //     }
-    // } else {
-    //     fs.unlinkSync(path);
-    // }
-    //
-    // functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
-    console.log(path);
+    if (path instanceof Array) {
+        for (var i = 0; i < path.length; i++) {
+            fs.unlinkSync(path[i]);
+        }
+    } else {
+        fs.unlinkSync(path);
+    }
+
+    functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
 
 });
 

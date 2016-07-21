@@ -14757,6 +14757,8 @@ $(document).ready(function() {
     //     submitHandler: function(form){
     //         $.ajax({
     //             type: "POST",
+    //             processData: false,
+    //             contentType: false,
     //             url: $('#upload-gallery').attr('action'),
     //             data: $('#upload-gallery').serialize(), // serializes the form's elements.
     //             success: function(data){
@@ -14764,7 +14766,6 @@ $(document).ready(function() {
     //                 $('#message-modal').modal('toggle'); //toggle modal on form submit
     //                 if(data.status == 'success'){
     //                     $('#message-modal').find('.view-button').children().html(data.buttontext);
-    //                     $(form).find('input[type=submit]').attr('disabled', 'disabled');
     //                 }
     //             }
     //         });
@@ -14802,6 +14803,31 @@ $(document).ready(function() {
         });
     });
 
+    //Change text in label for add to gallery button
+    var inputs = document.querySelectorAll( '#upl' );
+    Array.prototype.forEach.call( inputs, function( input )
+    {
+        var label	 = input.nextElementSibling,
+            labelVal = label.innerHTML;
 
+        input.addEventListener( 'change', function( e )
+        {
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( '\\' ).pop();
+
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        });
+    });
+
+    //If no images in gallery, delete button not shown.
+    if ($('.delete-box').length < 1) {
+        $('#delete-gallery-submit').hide();
+    }
 }); //end of document ready
 },{"bootstrap":1,"jquery":16,"jquery-ui":14,"jquery-validation":15}]},{},[17]);

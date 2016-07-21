@@ -1,29 +1,49 @@
-<div class="container">
+<div id="gallery-delete-page">
+    <div class="container">
 
-    <h4>{{vendor.vendor_name}} Gallery</h4>
+        <h4>{{vendor.vendor_name}} Gallery</h4>
 
-    <div class="row">
-        <form id="galleryDeleteForm" action="/gallerydelete" method="post">
-            {{#each photos}}
-                <div class="col-sm-3">
-                    <img src="/{{this.photo_url}}" alt=""><br>
+        <div class="row upload-gallery-area">
+            <form id="upload-gallery" enctype="multipart/form-data" action="/api/photo" method="post">
+                <div class="col-sm-offset-3 col-sm-3">
+                    <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
                     <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
-                    <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
-                    <label class="form-label" for="delete_photo">Mark for deletion.</label>
+                    <input type="file" name="upl" id="upl" data-multiple-caption="{count} photos selected" multiple required>
+                    <label class="button-light" for="upl"><span>Choose Photos</span></label>
                 </div>
-            {{/each}}
-            <input type="submit" value="Delete Image(s)" name="submit">
-        </form>
-    </div>
+                <div class="col-sm-3">
+                    <input class="button-light" type="submit" value="Upload Image(s)" name="submit">
+                </div>
+            </form>
 
-    <div class="row">
+        </div>
 
-        <form id="upload-gallery" enctype="multipart/form-data" action="/api/photo" method="post">
-            <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
-            <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
-            <input type="file" name="upl" multiple>
-            <input type="submit" value="Upload Image" name="submit">
+        <form id="delete-gallery" action="/gallerydelete" method="post">
+            <div class="row">
+                {{#each photos}}
+                    <div class="col-sm-3">
+                        <div class="delete-box">
+                            <div class="delete-photo">
+                                <img src="/{{this.photo_url}}" alt=""><br>
+                            </div>
+                            <div class="delete-form">
+                                <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
+                                <label class="form-label" for="delete_photo">Mark for deletion.</label>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-5 col-sm-2">
+                    <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
+                    <input id="delete-gallery-submit" class="button-dark" type="submit" value="Delete Image(s)" name="submit">
+                </div>
+            </div>
         </form>
+
     </div>
 </div>
+
+
 

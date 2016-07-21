@@ -4,6 +4,33 @@ body {
 a {
   color: #00B7FF; }
 
+.button-dark {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  margin: 15px 0 5px 0;
+  display: block;
+  height: 45px;
+  background: #282828;
+  width: 100%;
+  border: none; }
+  .button-dark:hover {
+    background: #424242; }
+
+.button-light {
+  display: block;
+  margin: 5px 0;
+  color: #282828;
+  text-decoration: none;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  background: #fff;
+  width: 100%;
+  border: 1px solid #282828; }
+  .button-light:hover {
+    background: #f2f2f2; }
+
 .landing-video iframe {
   width: 100%;
   height: calc(100vh - 120px); }
@@ -54,7 +81,7 @@ a {
       width: 100%;
       border: 1px solid #282828; }
       #add-form .submit-area #edit-gallery:hover {
-        background: #e6e6e6; }
+        background: #f2f2f2; }
     #add-form .submit-area .delete-submit {
       text-decoration: none;
       color: #fff;
@@ -68,6 +95,45 @@ a {
       border: none; }
       #add-form .submit-area .delete-submit:hover {
         background: #424242; }
+
+#gallery-delete-page {
+  padding: 10px 0; }
+  #gallery-delete-page h4 {
+    text-align: center; }
+  #gallery-delete-page .upload-gallery-area {
+    margin: 20px 0; }
+  #gallery-delete-page #upload-gallery #upl {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1; }
+    #gallery-delete-page #upload-gallery #upl:focus + label {
+      outline: 1px dotted #000;
+      outline: -webkit-focus-ring-color auto 5px; }
+  #gallery-delete-page #upload-gallery label {
+    cursor: pointer;
+    font-weight: 300; }
+  #gallery-delete-page #upload-gallery #upl + label * {
+    pointer-events: none; }
+  #gallery-delete-page .delete-box {
+    height: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+    border: 1px solid #e6e6e6;
+    text-align: center; }
+    #gallery-delete-page .delete-box:hover {
+      background: #f2f2f2; }
+    #gallery-delete-page .delete-box .delete-form {
+      display: inline-block; }
+    #gallery-delete-page .delete-box .delete-photo {
+      height: 150px; }
+      #gallery-delete-page .delete-box .delete-photo img {
+        display: block;
+        margin: auto;
+        max-width: 200px;
+        max-height: 200px; }
 
 #message-modal .modal-content, #delete-modal .modal-content {
   margin: 0 100px;
