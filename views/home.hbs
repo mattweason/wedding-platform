@@ -1,25 +1,68 @@
 
-<div class="container">
-    <div class="row">
-
-        {{#each vendor}}
-
-            <div class="col-sm-6">
-                <h2>{{this.vendor_name}}</h2>
-                <p>{{this.category}}</p>
-                <p>{{this.address}}, {{this.address_2}}, {{this.city}}, {{this.province}} {{this.postal_code}}</p>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p>Price: {{this.price}}</p>
-                        <p>Rating: {{this.rating}}</p>
+<div id="vendor-list-header">
+    <div class="container">
+        <div class="vend-list-title">
+            <h3>VENDOR LIST</h3>
+        </div>
+        <div class="filters">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="filter">
+                        <label for="search">Keyword Search</label>
+                        <input type="text" name="search">
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/vendor/{{this.vendor_url}}/">View Vendor</a>
+                </div>
+                <div class="col-sm-3">
+                    <div class="filter">
+                        <label for="categoryselect">Category</label>
+                        <select name="categoryselect"></select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="filter">
+                        <label for="location">Location</label>
+                        <input type="text" name="search">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="filter">
+                        <label for="pricerange">Price</label>
                     </div>
                 </div>
             </div>
-
-        {{/each}}
-
+        </div>
     </div>
+
+</div>
+
+<div class="container">
+    <div id="vendor-list">
+        <div class="row">
+
+            {{#each vendor}}
+
+                <div class="col-sm-6">
+                    <div class="box">
+                        <img class="feat-img" src="{{this.featured_image}}" alt=""/>
+                        <div class="desc-box">
+                            <h2>{{this.vendor_name}}</h2>
+                            <p class="vend-cat">{{this.category}}</p>
+                            <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
+                            <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                            <div class="row">
+                                <!--<p class="vend-price">Price: {{this.price}}</p>-->
+                                <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
+                                <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {{/each}}
+
+        </div>
+    </div>
+
 </div>

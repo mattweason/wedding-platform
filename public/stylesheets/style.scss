@@ -1,7 +1,28 @@
 //Fonts
 @font-face {
-  font-family: 'JosefinSans';
-  src: url('./JosefinSans-Thin.ttf') format('truetype');
+  font-family: 'Josefin Sans';
+  src: url('./JosefinSans-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('./PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato Light';
+  src: url('./Lato-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato Hairline';
+  src: url('./Lato-Hairline.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -10,9 +31,11 @@
 $header-height:120px;
 $footer-height:260px;
 $color-gray:#282828;
-$font-header: 'JosefinSans';
-
-
+$color-lgray:#828282;
+$font-header: 'Josefin Sans';
+$font-title: 'Playfair Display';
+$font-main: 'Lato Light';
+$font-mainlight: 'Lato Hairline';
 
 
 //Styling-------------------------------------Styling//
@@ -29,6 +52,7 @@ a {
   text-decoration: none;
   color: #fff;
   text-align: center;
+  font-family: $font-header;
   margin: 15px 0 5px 0;
   display: block;
   height: 45px;
@@ -45,7 +69,9 @@ a {
   display: block;
   margin: 5px 0;
   color: $color-gray;
+  font-family: $font-header;
   text-decoration: none;
+  text-transform: uppercase;
   text-align: center;
   height: 45px;
   line-height: 45px;
@@ -73,6 +99,7 @@ a {
   h3 {
     color: $color-gray;
     font-family: $font-header;
+    font-weight: 100;
   }
 
   .right-nav, .left-nav, .logo-area {
@@ -101,7 +128,105 @@ a {
     }
   }
 }
+//Home Page Styling---------------------------------------------------Home Page Styling//
+#vendor-list-header{
+  height: 160px;
+  background-color: $color-gray;
 
+  .vend-list-title {
+    h3{
+      text-align: center;
+      margin: 35px auto 35px auto;
+      font-family: $font-header;
+      font-weight: 100;
+      color: #fff;
+    }
+  }
+
+  .filters{
+    .filter{
+      label{
+        font-family: $font-header;
+        font-weight: 100;
+        font-size: 18px;
+        color: #fff;
+      }
+      input{
+        width: 100%;
+      }
+      select{
+        width: 100%;
+      }
+    }
+  }
+
+
+}
+#vendor-list{
+  padding: 40px 0;
+  .box{
+    padding: 20px 0;
+    .feat-img{
+      height: 220px;
+    }
+    .desc-box{
+      background-color: #fff;
+      width: 300px;
+      height: 190px;
+      position: absolute;
+      padding: 10px 20px;
+      top: 35px;
+      right: 20px;
+
+      h2 {
+        font-family: $font-title;
+        margin: 0 0 5px 0;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: $color-gray;
+      }
+
+      .vend-cat{
+        font-family: $font-main;
+        font-size: 14px;
+        color: $color-gray;
+        padding-bottom: 5px;
+        margin-bottom: 2px;
+        border-bottom: 1px solid $color-gray;
+      }
+
+      .vend-add{
+        font-family: $font-main;
+        color: $color-lgray;
+        font-size: 14px;
+        margin-bottom: 0px;
+      }
+
+      .vend-view{
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        font-family: $font-header;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 20px 5px 0;
+        font-size: 18px;
+        line-height: 40px;
+        display: block;
+        height: 40px;
+        width: 120px;
+        background: $color-gray;
+        border: none;
+
+        &:hover {
+          background: lighten($color-gray, 10%);
+        }
+      }
+    }
+  }
+}
 //Add-form Styling----------------------------------------------------Add-form Styling//
 #add-form {
   padding: 40px 0;

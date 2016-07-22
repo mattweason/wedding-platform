@@ -1,18 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 var functions = require('./../lib/functions'); //bring in all custom functions
 
-//Set up multer
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, '/uploads/');
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now());
-    }
-});
-var upload = multer({ storage : storage}).single('featured_image');
+const fs = require('fs');
 
 //---------------------ADDING NEW VENDOR------------------------
 router.get('/add', function(req,res, next){
@@ -59,14 +49,15 @@ router.post('/create', function(req, res){
 
     var dataCollection = {};
 
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end(err);
-        } else {
-            dataCollection['featured_image'] = req.file.path;
-            console.log(req.file.path);
-        }
-    });
+    // console.log(req.files.featured_image.path);
+
+    // fs.readFile(req.files.featured_image.path, function (err, data) {
+    //     var newName = file.fieldname + '-' + Date.now();
+    //     var newPath = __dirname + "/uploads/" + newName;
+    //     fs.writeFile(newPath, data, function (err) {
+    //         dataCollection['featured_image'] = req.files.featured_image.path;
+    //     });
+    // });
 
     //Get all basic form data (separate category)
     for (var propName in req.body) {
