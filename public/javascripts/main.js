@@ -133,4 +133,23 @@ $(document).ready(function() {
     if ($('.delete-box').length < 1) {
         $('#delete-gallery-submit').hide();
     }
+
+    //Fix header to top once scrolled to
+    var distance = $('#masthead').offset().top,
+        $window = $(window);
+    
+    $window.scroll(function(){
+        if ( $window.scrollTop() >= distance ) {
+            $('#masthead').addClass('catch-header');
+        } else if ( $('#masthead').hasClass('catch-header') && $window.scrollTop() <= distance ) {
+            $('#masthead').removeClass('catch-header');
+        }
+    })
+
+    //Initialize dotdotdot function
+    $("#overflow-box").dotdotdot({
+        ellipsis	: '... ',
+        wrap		: 'word'
+    });
+    
 }); //end of document ready

@@ -29,12 +29,19 @@ router.get('/', function(req, res, next) {
 
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function(err, category) {
 
-            //Append categories as strings onto vendor object
-            var vendorCategory = functions.vendorJoin(vendor, category);
+            connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function(err, featured) {
+                
+                connection.query('SELECT * FROM vendor2category WHERE vendor2category.vendor_fid = ?', featured[0].vendor_id, function(err, featuredCat) {
 
-            res.render('home', {
-                title: 'Vendors on a Dime',
-                vendor: vendor
+                    //Append categories as strings onto vendor object
+                    var vendorCategory = functions.vendorJoin(featured, featuredCat);
+
+                    res.render('home', {
+                        title: 'Vendors on a Dime',
+                        vendor: vendor,
+                        featured: vendorCategory
+                    });
+                });
             });
         });
     });
@@ -61,12 +68,16 @@ router.get('/vendor/:vendorName', function(req,res) {
 
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
 
-            //Append categories as strings onto vendor object
-            var vendorCategory = functions.vendorJoin(vendor, category);
+            connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, gallery) {
 
-            res.render('vendor_single', {
-                title: vendorCategory[0].vendor_name,
-                vendor: vendorCategory
+                //Append categories as strings onto vendor object
+                var vendorCategory = functions.vendorJoin(vendor, category);
+
+                res.render('vendor_single', {
+                    title: vendorCategory[0].vendor_name,
+                    vendor: vendorCategory,
+                    gallery: gallery
+                });
             });
         });
     });
@@ -109,15 +120,6 @@ router.post('/gallerydelete', function(req,res){
 
     functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
 
-});
-
-router.get('/multertest', function(req,res){
-    res.render('multertest');
-});
-
-router.post('/multertest', function(req,res){
-    console.log(req.files);
-    console.log(req.body);
 });
 
 module.exports = router;

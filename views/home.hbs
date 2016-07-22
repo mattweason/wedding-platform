@@ -1,3 +1,53 @@
+<div id="featured-vendor">
+    <div class="container">
+        <div class="col-sm-12">
+            <h3>FEATURED VENDORS</h3>
+
+            {{#each featured}}
+                <div class="featured-box">
+                    <img class="feat-img" src="{{this.featured_image}}" alt=""/>
+                    <div class="desc-box">
+                        <h2>{{this.vendor_name}}</h2>
+                        <p class="vend-cat">{{vendorCategory.category}}</p>
+                        <div id="overflow-box">
+                            <p class="vend-desc">{{this.description}}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="vend-info">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <span>Address: </span>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <p class="vend-add">{{this.address}}, {{this.address_2}}
+                                                <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <span>Phone: </span>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <p class="vend-phone">{{this.phone_number}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!--<p class="vend-price">Price: {{this.price}}</p>-->
+                            <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
+                            <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
+    </div>
+</div>
+
 
 <div id="vendor-list-header">
     <div class="container">

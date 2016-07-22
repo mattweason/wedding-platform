@@ -1,118 +1,121 @@
-<form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
+<div id="vendor-add">
+    <form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="vendor_name">Vendor Name</label>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="vendor_name">Vendor Name</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="vendor_name" required><br>
+                        </div>
                     </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="vendor_name" required><br>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="category">Category</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <select name="category" id = "category" data-placeholder="Choose a Category" multiple required>
+                                {{#each category}}
+                                    <option value="{{this.category_id}}">{{this.category_name}}</option>
+                                {{/each}}
+                            </select><br>
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="address">Address 1</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="address" required><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="address_2">Address 2</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="address_2"><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="city">City</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="city" class = "datePicker" required><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="province">Province</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="province"><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="postal_code">Postal Code</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="postal_code"><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="phone_number">Phone Number</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="phone_number"><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="price">Price</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="number" name="price"><br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="url">Vendor Website</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="url"><br>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="category">Category</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <select name="category" id = "category" data-placeholder="Choose a Category" multiple required>
-                            {{#each category}}
-                                <option value="{{this.category_id}}">{{this.category_name}}</option>
-                            {{/each}}
-                        </select><br>
-                    </div>
-                </div>
+                <div class="col-sm-6">
+                    <!--<label class="form-label" for="featured_image">Featured Image</label>-->
+                    <!--<input type="file" name="featured_image" id="featured_image"/>-->
+                    <input type="hidden" name="featured_image" value="uploads/featured_image.jpg">
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="address">Address 1</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="address" required><br>
-                    </div>
+                    <label class = "form-label" for="description">Description</label>
+                    <textarea name="description" placeholder="Vendor Description" required></textarea>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="address_2">Address 2</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="address_2"><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="city">City</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="city" class = "datePicker" required><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="province">Province</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="province"><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="postal_code">Postal Code</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="postal_code"><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="phone_number">Phone Number</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="phone_number"><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="price">Price</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="number" name="price"><br>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class = "form-label" for="url">Vendor Website</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input type="text" name="url"><br>
-                    </div>
-                </div>
-
             </div>
 
-            <div class="col-sm-6">
-                <!--<label class="form-label" for="featured_image">Featured Image</label>-->
-                <!--<input type="file" name="featured_image" id="featured_image"/>-->
-
-                <label class = "form-label" for="description">Description</label>
-                <textarea name="description" placeholder="Vendor Description" required></textarea>
+            <div class="row submit-area">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <input class="add-submit button-light" type="submit" value="Add Vendor">
+                </div>
             </div>
         </div>
 
-        <div class="row submit-area">
-            <div class="col-sm-offset-4 col-sm-4">
-                <input class="add-submit" type="submit" value="Add Vendor">
-            </div>
-        </div>
-    </div>
-
-</form>
+    </form>
+</div>

@@ -27,9 +27,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'socicon';
+  src: url('socicon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 //Variables
 $header-height:120px;
-$footer-height:260px;
+$footer-height:180px;
 $color-gray:#282828;
 $color-lgray:#828282;
 $font-header: 'Josefin Sans';
@@ -53,6 +60,7 @@ a {
   color: #fff;
   text-align: center;
   font-family: $font-header;
+  text-transform: uppercase;
   margin: 15px 0 5px 0;
   display: block;
   height: 45px;
@@ -95,40 +103,202 @@ a {
   text-align: center;
   background-color: #fff;
   height: $header-height;
+  position: absolute;
+  width: 100%;
+  -webkit-transition: all 0.2s; /* Safari */
+  transition: all 0.2s;
+
+  &.catch-header{
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    height: 80px;
+    box-shadow: 0px 2px 10px $color-gray;
+
+    .logo-area {
+      img {
+        padding: 0 40px 0 40px;
+      }
+    }
+    h3{font-size: 18px;}
+
+    .user-area{a{margin-top: 25px;}
+    }
+  }
 
   h3 {
     color: $color-gray;
     font-family: $font-header;
     font-weight: 100;
+    border-bottom: 1px solid #fff;
+
+    &:hover{
+      border-bottom: 1px solid $color-gray;
+    }
   }
 
   .right-nav, .left-nav, .logo-area {
     display:inline-block;
+    vertical-align: middle;
+    margin-top: 17px;
   }
 
   .right-nav, .left-nav {
-    width: 200px;
+    width: 160px;
   }
 
   .right-nav {
     h3 {
       float: left;
+      margin-top: 10px;
+      -webkit-transition: all 0.1s; /* Safari */
+      transition: all 0.1s;
     }
   }
 
   .left-nav {
     h3 {
       float: right;
+      margin-top: 10px;
+      -webkit-transition: all 0.2s; /* Safari */
+      transition: all 0.2s;
     }
   }
 
   .logo-area {
     img {
       width: 200px;
+      -webkit-transition: all 0.2s; /* Safari */
+      transition: all 0.2s;
+    }
+  }
+
+  .user-area {
+    a {
+      font-family: $font-header;
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 40px 20px 5px 0;
+      font-size: 14px;
+      line-height: 30px;
+      display: inline-block;
+      height: 30px;
+      width: 80px;
+      background: $color-gray;
+      border: none;
+      -webkit-transition: all 0.1s; /* Safari */
+      transition: all 0.1s;
+
+      &:hover {
+        background: lighten($color-gray, 10%);
+      }
     }
   }
 }
 //Home Page Styling---------------------------------------------------Home Page Styling//
+#featured-vendor{
+  margin-top: $header-height;
+  margin-bottom: 40px;
+
+  h3 {
+    text-align: center;
+    margin: 35px auto 35px auto;
+    font-family: $font-header;
+    font-weight: 100;
+    color: $color-gray;
+  }
+
+  .featured-box{
+    padding: 20px 0;
+    .feat-img{
+      height: 340px;
+    }
+    .desc-box{
+      background-color: #fff;
+      width: 660px;
+      height: 280px;
+      position: absolute;
+      padding: 10px 20px;
+      top: 145px;
+      right: 20px;
+
+
+      h2 {
+        font-family: $font-title;
+        margin: 0 0 5px 0;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: $color-gray;
+      }
+
+      .vend-cat{
+        font-family: $font-main;
+        font-size: 14px;
+        color: $color-gray;
+        padding-bottom: 5px;
+        margin-bottom: 2px;
+        border-bottom: 1px solid $color-gray;
+      }
+
+      #overflow-box{
+        height: 110px;
+
+        .vend-desc {
+          font-family: $font-main;
+          font-size: 16px;
+          color: $color-gray;
+          line-height: 20px;
+          margin: 10px 0;
+        }
+      }
+
+
+      .vend-info{
+        padding-top: 10px;
+        border-top: 1px solid $color-gray;
+        span {
+          font-size: 14px;
+          font-family: $font-main;
+          font-weight:700;
+          color: $color-gray;
+        }
+
+        .vend-add, .vend-phone {
+          font-family: $font-main;
+          color: $color-lgray;
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+      }
+
+      .vend-view{
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        font-family: $font-header;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 20px 5px 0;
+        font-size: 18px;
+        line-height: 40px;
+        display: block;
+        height: 40px;
+        width: 120px;
+        background: $color-gray;
+        border: none;
+
+        &:hover {
+          background: lighten($color-gray, 10%);
+        }
+      }
+    }
+  }
+}
+
 #vendor-list-header{
   height: 160px;
   background-color: $color-gray;
@@ -227,65 +397,110 @@ a {
     }
   }
 }
-//Add-form Styling----------------------------------------------------Add-form Styling//
-#add-form {
-  padding: 40px 0;
 
-  textarea {
-    height: 300px;
-    width: 100%;
-  }
+//Single Vendor Page Styling-----------------------------------------------Single Vendor Page Styling//
+#vendor-single{
+  margin-top: $header-height;
 
-  input, .chosen-container {
-    width: 100% !important;
-    margin: 5px 0;
-  }
+  #vendor-description {
+    padding: 40px 0 140px 0;
 
-  label {
-    margin: 5px 0;
-  }
-
-  .submit-area {
-    margin-top: 10px;
-
-    .add-submit {
-      height: 45px;
-      background: #fff;
+    .feat-img {
       width: 100%;
-      border: 1px solid $color-gray;
+    }
 
-      &:hover {
-        background: darken(#fff, 10%);
+    .info-box{
+      width: 300px;
+      height: 160px;
+      padding: 10px 20px;
+      position: absolute;
+      background-color: #fff;
+      top: 240px;
+      left: 90px;
+
+      .vend-info{
+        span {
+          font-size: 14px;
+          font-family: $font-main;
+          font-weight:700;
+          color: $color-gray;
+        }
+
+        .vend-add, .vend-phone {
+          font-family: $font-main;
+          color: $color-lgray;
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+      }
+
+      .vend-link{
+        width: 100%;
+        margin-top: 5px;
+        border-top: 1px solid $color-gray;
+
+        .vend-web{
+          position: absolute;
+          bottom: 10px;
+          right: 0;
+          font-family: $font-header;
+          text-decoration: none;
+          color: #fff;
+          text-align: center;
+          text-transform: uppercase;
+          margin: 15px 20px 5px 0;
+          font-size: 18px;
+          line-height: 40px;
+          display: block;
+          height: 40px;
+          width: 160px;
+          background: $color-gray;
+          border: none;
+
+          &:hover {
+            background: lighten($color-gray, 10%);
+          }
+        }
       }
     }
 
-    #edit-gallery {
-      display: block;
-      margin: 5px 0;
+    h2 {
+      font-family: $font-title;
+      font-size: 36px;
+      margin-top:0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid $color-gray;
+    }
+
+    .vend-cat {
+      font-family: $font-main;
+      font-size: 14px;
+      color: $color-lgray;
+    }
+
+    .vend-desc {
+      font-family: $font-main;
+      font-size: 16px;
       color: $color-gray;
-      text-decoration: none;
-      text-align: center;
-      height: 45px;
-      line-height: 45px;
-      background: #fff;
-      width: 100%;
-      border: 1px solid $color-gray;
-
-      &:hover {
-        background: darken(#fff, 5%);
-      }
+      line-height: 20px;
     }
 
-    .delete-submit {
+    .vend-edit-link{
+      position: absolute;
+      top: -20px;
+      right: 0;
+      font-family: $font-header;
       text-decoration: none;
       color: #fff;
       text-align: center;
-      margin: 5px 0;
-      line-height: 45px;
+      text-transform: uppercase;
+      margin: 15px 20px 5px 0;
+      font-size: 18px;
+      line-height: 40px;
       display: block;
-      height: 45px;
+      height: 40px;
+      width: 160px;
       background: $color-gray;
-      width: 100%;
       border: none;
 
       &:hover {
@@ -293,10 +508,101 @@ a {
       }
     }
   }
+
+  #vendor-gallery {
+    h3{
+      text-align: center;
+      margin: 35px auto 35px auto;
+      font-family: $font-header;
+      font-weight: 100;
+      color: $color-gray;
+    }
+
+    .grid-item{
+      img{
+        max-width: 200px;
+        margin: 10px;
+      }
+    }
+  }
+
 }
+
+//Add adn Edit Vendor Page Styling----------------------------------------------------Add Vendor Page Styling//
+#vendor-add, #vendor-edit {
+  margin-top: $header-height;
+  #add-form {
+    padding: 40px 0;
+
+    textarea {
+      height: 300px;
+      width: 100%;
+    }
+
+    input, .chosen-container {
+      width: 100% !important;
+      margin: 5px 0;
+    }
+
+    label {
+      margin: 5px 0;
+    }
+
+    .submit-area {
+      margin-top: 10px;
+
+      .add-submit {
+        height: 45px;
+        background: #fff;
+        width: 100%;
+        border: 1px solid $color-gray;
+
+        &:hover {
+          background: darken(#fff, 10%);
+        }
+      }
+
+      #edit-gallery {
+        display: block;
+        margin: 5px 0;
+        color: $color-gray;
+        text-decoration: none;
+        text-align: center;
+        height: 45px;
+        line-height: 45px;
+        background: #fff;
+        width: 100%;
+        border: 1px solid $color-gray;
+
+        &:hover {
+          background: darken(#fff, 5%);
+        }
+      }
+
+      .delete-submit {
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        margin: 5px 0;
+        line-height: 45px;
+        display: block;
+        height: 45px;
+        background: $color-gray;
+        width: 100%;
+        border: none;
+
+        &:hover {
+          background: lighten($color-gray, 10%);
+        }
+      }
+    }
+  }
+}
+
 
 //Gallery Delete Page Styling-----------------------------------------------Gallery Delete Page Styling
 #gallery-delete-page {
+  margin-top: $header-height;
   padding: 10px 0;
 
   h4 {text-align: center;}
@@ -409,16 +715,64 @@ a {
 //Footer Styling------------------------------------------------------Footer Styling//
 #mastfooter{
   .main-footer {
+    height: $footer-height;
+    background-color: $color-gray;
+
     .footer-logo{
       position: relative;
       top: 50%;
       transform: translateY(50%);
+      img{
+        height: 90px;
+      }
     }
-    height: $footer-height;
-    background-color: $color-gray;
+
+    .social-media{
+      height: 40px;
+      position: relative;
+      top: 50%;
+      transform: translateY(180%);
+
+      .social-button{
+        display: inline-block;
+        vertical-align: middle;
+        a{
+          margin: 0 10px;
+          display: block;
+          height: 40px;
+          width: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 20px;
+          color: #fff;
+          text-decoration: none;
+        }
+
+        .socicon-facebook:hover{color: #3e5b98;}
+        .socicon-twitter:hover{color: #4da7de;}
+        .socicon-instagram:hover{
+          background: -webkit-linear-gradient(#8a3ab9, #4c68d7, #cd486b, #fbad50, #fbad50);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .socicon-pinterest:hover{color: #c92619;}
+      }
+
+
+    }
   }
   .sub-footer{
     height: 50px;
     line-height: 50px;
+    text-align: center;
+    a {
+      font-family: $font-header;
+      color: $color-gray;
+
+      &:hover{
+        text-decoration: none;
+        border-bottom: 1px solid $color-gray;
+      }
+    }
   }
 }

@@ -1,27 +1,63 @@
+<div id="vendor-single">
+    <div class="container">
+        <div id="vendor-description">
 
-<div class="container">
+            {{#each vendor}}
 
-    {{#each vendor}}
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img class="feat-img" src="/{{this.featured_image}}" alt="">
+                        <div class="info-box">
+                            <div class="row">
+                                <div class="vend-info">
+                                    <div class="col-sm-3">
+                                        <span>Address: </span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="vend-add">{{this.address}}, {{this.address_2}}
+                                            <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <span>Phone: </span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="vend-phone">Price: {{this.phone_number}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vend-link">
+                                <a class="vend-web" href="{{this.url}}" target="_blank">VISIT WEBSITE</a>
+                            </div>
 
-        <div class="row">
-            <div class="col-sm-5">
-                <p>Address: {{this.address}}, {{this.address_2}}
-                    <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
-                <p>Phone: {{this.phone_number}}</p>
-                <p>Price: {{this.price}}</p>
-                <p>Rating: {{this.rating}}</p>
-                <a href="{{this.url}}" target="_blank">VISIT WEBSITE</a>
-            </div>
-            <div class="col-sm-7">
-                <h2>{{this.vendor_name}}</h2>
-                <p>{{this.category}}</p>
-                <p>{{this.description}}</p>
-                <a href="/vendor/{{this.vendor_url}}/edit">Edit Vendor</a>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7">
+                        <h2>{{this.vendor_name}}</h2>
+                        <p class="vend-cat">{{this.category}}</p>
+                        <p class="vend-desc">{{this.description}}</p>
+                        <a class="vend-edit-link" href="/vendor/{{this.vendor_url}}/edit">Edit Vendor</a>
+                    </div>
+                </div>
+
+            {{/each}}
+
+        </div>
+
+        <div id="vendor-gallery">
+            <h3>GALLERY</h3>
+
+            <div class="grid">
+
+                <!--{{#each gallery}}-->
+                    <!--<div class="grid-item"><img src="/{{this.photo_url}}" alt=""></div>-->
+                <!--{{/each}}-->
+
             </div>
         </div>
 
-    {{/each}}
-
+    </div>
 </div>
+
 
 

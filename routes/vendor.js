@@ -49,16 +49,6 @@ router.post('/create', function(req, res){
 
     var dataCollection = {};
 
-    // console.log(req.files.featured_image.path);
-
-    // fs.readFile(req.files.featured_image.path, function (err, data) {
-    //     var newName = file.fieldname + '-' + Date.now();
-    //     var newPath = __dirname + "/uploads/" + newName;
-    //     fs.writeFile(newPath, data, function (err) {
-    //         dataCollection['featured_image'] = req.files.featured_image.path;
-    //     });
-    // });
-
     //Get all basic form data (separate category)
     for (var propName in req.body) {
         if (req.body.hasOwnProperty(propName)) {
@@ -97,8 +87,7 @@ router.post('/create', function(req, res){
                 status: 'failure'
             });
         } else {
-            res.end();
-            // insertVendor();
+            insertVendor();
         }
     }
 
