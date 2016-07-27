@@ -8,8 +8,6 @@ connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs');
 
-
-
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
 
@@ -36,6 +34,7 @@ router.get('/', function(req, res, next) {
                     console.log(vendorCategory);
 
                     res.render('home', {
+                        home: 1,
                         title: 'Vendors on a Dime',
                         vendor: vendor,
                         featured: vendorCategory

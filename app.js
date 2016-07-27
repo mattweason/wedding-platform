@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var hbs = require('hbs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,6 +29,8 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+hbs.registerPartials(__dirname + '/views/partials');
 
 //Make uploads folder accessible to front end
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
