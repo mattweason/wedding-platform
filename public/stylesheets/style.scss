@@ -202,6 +202,61 @@ a {
   margin-top: $header-height;
   margin-bottom: 40px;
 
+  .slick-arrow {
+    background-color: $color-gray;
+    cursor: pointer;
+
+    &:hover {background-color: lighten($color-gray, 10%);}
+  }
+
+  .slick-prev{
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    left: 340px;
+  }
+
+  .slick-next{
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    right: 340px;
+  }
+
+  .slick-dots{
+    text-align: center;
+    padding-left: 0;
+    margin-top: 10px;
+
+    li {
+      display: inline-block;
+      width: 10px;
+      margin: 0 10px;
+
+      &.slick-active{
+        button {background: $color-gray;}
+      }
+
+      button {
+        height: 10px;
+        width: 10px;
+        border-radius: 5px;
+        border: 1px solid $color-gray;
+        background: #fff;
+        padding: 0;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background: $color-gray;
+        }
+      }
+    }
+  }
+
   h3 {
     text-align: center;
     margin: 35px auto 35px auto;
@@ -212,6 +267,17 @@ a {
 
   .featured-box{
     padding: 20px 0;
+    position: relative;
+    opacity: 0.15;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+
+    &.slick-center{
+      opacity: 1;
+    }
     .feat-img{
       height: 340px;
     }
@@ -221,8 +287,8 @@ a {
       height: 280px;
       position: absolute;
       padding: 10px 20px;
-      top: 145px;
-      right: 20px;
+      top: 50px;
+      right: 40px;
 
 
       h2 {
@@ -242,7 +308,7 @@ a {
         border-bottom: 1px solid $color-gray;
       }
 
-      #overflow-box{
+      .overflow-box{
         height: 110px;
 
         .vend-desc {

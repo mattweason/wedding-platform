@@ -21,11 +21,19 @@ router.get('/', function(req, res, next) {
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function(err, category) {
 
             connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function(err, featured) {
+
+                var featuredID = [];
+                for (var i = 0; i < featured.length; i++) {
+                    featuredID.push(featured[i].vendor_id);
+                }
+                var featuredString = featuredID.toString();
+                // var pathFixed = "'" + pathString.replace(/,/g, "', '") + "'";
                 
                 connection.query('SELECT * FROM vendor2category WHERE vendor2category.vendor_fid = ?', featured[0].vendor_id, function(err, featuredCat) {
 
-                    //Append categories as strings onto vendor object
+                    // Append categories as strings onto vendor object
                     var vendorCategory = functions.vendorJoin(featured, featuredCat);
+                    console.log(vendorCategory);
 
                     res.render('home', {
                         title: 'Vendors on a Dime',

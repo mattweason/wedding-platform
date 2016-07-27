@@ -14786,7 +14786,7 @@ $(document).ready(function() {
             var formData = new FormData($('form')[0]);
             $.ajax({
                 type: "POST",
-                processData: false,
+                processData: true,
                 contentType: false,
                 url: $('#delete-gallery').attr('action'),
                 data: formData,
@@ -14876,9 +14876,42 @@ $(document).ready(function() {
     })
 
     //Initialize dotdotdot function
-    $("#overflow-box").dotdotdot({
+    $(".overflow-box").dotdotdot({
         ellipsis	: '... ',
         wrap		: 'word'
+    });
+
+    //Initialize slick carousel for featured vendors
+    $('.featured-carousel').slick({
+        prevArrow:"<img class='a-left control-c prev slick-prev' src='/images/left-arrow.png'>",
+        nextArrow:"<img class='a-right control-c next slick-next' src='/images/right-arrow.png'>",
+        customPaging: function(slider) {
+            return $('<button type="button" data-role="none" role="button" tabindex="0" />');
+        },
+        dots: true,
+        centerMode: true,
+        centerPadding: '380px',
+        slidesToShow: 1,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
     
 }); //end of document ready

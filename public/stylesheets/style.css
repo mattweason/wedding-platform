@@ -138,6 +138,45 @@ a {
 #featured-vendor {
   margin-top: 120px;
   margin-bottom: 40px; }
+  #featured-vendor .slick-arrow {
+    background-color: #282828;
+    cursor: pointer; }
+    #featured-vendor .slick-arrow:hover {
+      background-color: #424242; }
+  #featured-vendor .slick-prev {
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    left: 340px; }
+  #featured-vendor .slick-next {
+    position: absolute;
+    z-index: 1;
+    top: 150px;
+    right: 340px; }
+  #featured-vendor .slick-dots {
+    text-align: center;
+    padding-left: 0;
+    margin-top: 10px; }
+    #featured-vendor .slick-dots li {
+      display: inline-block;
+      width: 10px;
+      margin: 0 10px; }
+      #featured-vendor .slick-dots li.slick-active button {
+        background: #282828; }
+      #featured-vendor .slick-dots li button {
+        height: 10px;
+        width: 10px;
+        border-radius: 5px;
+        border: 1px solid #282828;
+        background: #fff;
+        padding: 0;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out; }
+        #featured-vendor .slick-dots li button:hover {
+          background: #282828; }
   #featured-vendor h3 {
     text-align: center;
     margin: 35px auto 35px auto;
@@ -145,7 +184,16 @@ a {
     font-weight: 100;
     color: #282828; }
   #featured-vendor .featured-box {
-    padding: 20px 0; }
+    padding: 20px 0;
+    position: relative;
+    opacity: 0.15;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out; }
+    #featured-vendor .featured-box.slick-center {
+      opacity: 1; }
     #featured-vendor .featured-box .feat-img {
       height: 340px; }
     #featured-vendor .featured-box .desc-box {
@@ -154,8 +202,8 @@ a {
       height: 280px;
       position: absolute;
       padding: 10px 20px;
-      top: 145px;
-      right: 20px; }
+      top: 50px;
+      right: 40px; }
       #featured-vendor .featured-box .desc-box h2 {
         font-family: "Playfair Display";
         margin: 0 0 5px 0;
@@ -169,9 +217,9 @@ a {
         padding-bottom: 5px;
         margin-bottom: 2px;
         border-bottom: 1px solid #282828; }
-      #featured-vendor .featured-box .desc-box #overflow-box {
+      #featured-vendor .featured-box .desc-box .overflow-box {
         height: 110px; }
-        #featured-vendor .featured-box .desc-box #overflow-box .vend-desc {
+        #featured-vendor .featured-box .desc-box .overflow-box .vend-desc {
           font-family: "Lato Light";
           font-size: 16px;
           color: #282828;
