@@ -67,18 +67,13 @@ router.post('/create', function(req, res){
 
     var result = [];
     var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}"`;
-    connection.query(query, function(err, rows) {
+    connection.query(query, function(err, result) {
         if(err) {
             throw err;
         } else {
-            setValue(rows);
+            checkExists(result);
         }
     });
-
-    function setValue(value) {
-        result = value;
-        checkExists(result);
-    }
 
     function checkExists(result) {
         if (result.length) {

@@ -8,16 +8,7 @@ connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs');
 
-//Set up multer
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads/');
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now());
-    }
-});
-var upload = multer({ storage : storage}).array('upl');
+
 
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
@@ -86,11 +77,21 @@ router.get('/vendor/:vendorName', function(req,res) {
 //Upload photos and post to vendorgallery table
 router.post('/api/photo', function(req,res){
 
+    //Set up multer
+    var storage =   multer.diskStorage({
+        destination: function (req, file, callback) {
+            callback(null, './uploads/');
+        },
+        filename: function (req, file, callback) {
+            callback(null, req.body.vendor_url + '-' + Date.now());
+        }
+    });
+    var upload = multer({ storage : storage}).array('upl');
+
     upload(req,res,function(err) {
         if(err) {
             return res.end(err);
         } else {
-            console.log(req.files.path);
             var vendorID = req.body.vendor_id;
             var vendorURL = req.body.vendor_url;
             var vendorPhotos = [];
@@ -109,14 +110,6 @@ router.post('/gallerydelete', function(req,res){
 
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
-
-    if (path instanceof Array) {
-        for (var i = 0; i < path.length; i++) {
-            fs.unlinkSync(path[i]);
-        }
-    } else {
-        fs.unlinkSync(path);
-    }
 
     functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
 

@@ -18,13 +18,13 @@ $(document).ready(function() {
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
                         $('.view-button').attr('href', data.url);
+                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
                         $(form).find('input[type=submit]').attr('disabled', 'disabled');
-                        console.log('success!');
                     } else if (data.status == 'failure') {
                         $('#dismiss-button').removeClass('notdisplay'); //Make dismiss button visible
                         $('.view-button').addClass('notdisplay'); //Make variable modal button invisible
-                        console.log('failure');
                     }
                 }
             });
@@ -56,26 +56,58 @@ $(document).ready(function() {
     }); //end of validate
 
     //--------------------ADDING GALLERY TO VENDOR---------------------
-    // $('#upload-gallery').validate({
-    //
-    //     submitHandler: function(form){
-    //         $.ajax({
-    //             type: "POST",
-    //             processData: false,
-    //             contentType: false,
-    //             url: $('#upload-gallery').attr('action'),
-    //             data: $('#upload-gallery').serialize(), // serializes the form's elements.
-    //             success: function(data){
-    //                 $('#message-modal').find('.form-response').html(data.message);
-    //                 $('#message-modal').modal('toggle'); //toggle modal on form submit
-    //                 if(data.status == 'success'){
-    //                     $('#message-modal').find('.view-button').children().html(data.buttontext);
-    //                 }
-    //             }
-    //         });
-    //         return false; //since we use Ajax
-    //     }
-    // }); //end of validate
+    $('#upload-gallery').validate({
+
+        submitHandler: function(form){
+            var formData = new FormData($('form')[0]);
+            $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: $('#upload-gallery').attr('action'),
+                data: formData, // serializes the form's elements.
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
+                        $('.view-button').attr('href', data.url);
+                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    }); //end of validate
+
+    //--------------------ADDING GALLERY TO VENDOR---------------------
+    $('#delete-gallery').validate({
+
+        submitHandler: function(form){
+            var formData = new FormData($('form')[0]);
+            $.ajax({
+                type: "POST",
+                processData: true,
+                contentType: false,
+                url: $('#delete-gallery').attr('action'),
+                data: formData,
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
+                        $('.view-button').attr('href', data.url);
+                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    }); //end of validate
 
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
