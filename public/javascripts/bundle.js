@@ -14779,7 +14779,7 @@ $(document).ready(function() {
         }
     }); //end of validate
 
-    //--------------------ADDING GALLERY TO VENDOR---------------------
+    //--------------------DELETING GALLERY FROM VENDOR---------------------
     $('#delete-gallery').validate({
 
         submitHandler: function(form){
@@ -14864,7 +14864,7 @@ $(document).ready(function() {
     }
 
     //Fix header to top once scrolled to
-    var distance = $('#masthead').offset().top,
+    var distance = $('#masthead').offset().top + 1,
         $window = $(window);
     
     $window.scroll(function(){

@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+var mysql = require('mysql'); //bring in the mysql package
+var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var functions = require('./../lib/functions'); //bring in all custom functions
+connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs');
 

@@ -46,8 +46,14 @@ $font-mainlight: 'Lato Hairline';
 
 
 //Styling-------------------------------------Styling//
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-bottom: 230px;
 }
 
 a {
@@ -399,7 +405,8 @@ a {
 
 }
 #vendor-list{
-  padding: 40px 0;
+  padding-top: 40px;
+
   .box{
     padding: 20px 0;
     .feat-img{
@@ -466,7 +473,7 @@ a {
 
 //Single Vendor Page Styling-----------------------------------------------Single Vendor Page Styling//
 #vendor-single{
-  margin-top: $header-height;
+  padding-top: $header-height;
 
   #vendor-description {
     padding: 40px 0 140px 0;
@@ -596,7 +603,13 @@ a {
 
 //Add adn Edit Vendor Page Styling----------------------------------------------------Add Vendor Page Styling//
 #vendor-add, #vendor-edit {
-  margin-top: $header-height;
+  padding-top: $header-height;
+
+  h3 {
+    text-align: center;
+    font-family: $font-header;
+  }
+
   #add-form {
     padding: 40px 0;
 
@@ -668,10 +681,13 @@ a {
 
 //Gallery Delete Page Styling-----------------------------------------------Gallery Delete Page Styling
 #gallery-delete-page {
-  margin-top: $header-height;
-  padding: 10px 0;
+  padding-top: $header-height;
+  padding-bottom:40px;
 
-  h4 {text-align: center;}
+  h3 {
+    text-align: center;
+    font-family: $font-header;
+  }
 
   .upload-gallery-area {
     margin: 20px 0;
@@ -780,6 +796,12 @@ a {
 
 //Footer Styling------------------------------------------------------Footer Styling//
 #mastfooter{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 230px;
+
   .main-footer {
     height: $footer-height;
     background-color: $color-gray;

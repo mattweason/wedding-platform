@@ -21,101 +21,104 @@
 
   <body>
 
-  {{#if home}}
-      {{>video}}
-  {{/if}}
+      <!--<div id="wrapper">-->
 
-  <header>
-      <div id="masthead">
-          <div class="container">
-              <div class="col-sm-6 col-sm-offset-3">
-                  <div class="left-nav">
-                      <a href="#"><h3>Featured Vendors</h3></a>
-                  </div>
-                  <a href="/" class="logo-area">
-                      <img class = "logo" src="/images/logo.png" alt="">
-                  </a>
-                  <div class="right-nav">
-                      <a href="#"><h3>Vendor List</h3></a>
-                  </div>
-              </div>
-              <div class="col-sm-3">
-                  <div class="user-area">
-                      <a href="" class="sign-in">Sign In</a>
-                      <a href="" class="sign-up">Sign Up</a>
-                  </div>
-              </div>
+          {{#if home}}
+              {{>video}}
+          {{/if}}
 
-          </div>
-      </div>
-  </header>
-
-
-    {{{body}}}
-
-      <div class="modal fade" id="message-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-md">
-              <div class="modal-content failure">
-                  <div class="form-response"></div>
-                  <div class="row">
-                      <div class="col-sm-offset-3 col-sm-6">
-                          <button id="dismiss-button" type="button" class="btn btn-secondary notdisplay" data-dismiss="modal">Dismiss</button>
-                          <a class="view-button" href=""><button type="button" class="btn btn-secondary"></button></a>
-                          <a class="gallery-button notdisplay" href=""><button type="button" class="btn btn-secondary"></button></a>
+          <header>
+              <div id="masthead">
+                  <div class="container">
+                      <div class="col-sm-6 col-sm-offset-3">
+                          <div class="left-nav">
+                              <a href="#"><h3>Featured Vendors</h3></a>
+                          </div>
+                          <a href="/" class="logo-area">
+                              <img class = "logo" src="/images/logo.png" alt="">
+                          </a>
+                          <div class="right-nav">
+                              <a href="#"><h3>Vendor List</h3></a>
+                          </div>
                       </div>
+                      <div class="col-sm-3">
+                          <div class="user-area">
+                              <a href="" class="sign-in">Sign In</a>
+                              <a href="" class="sign-up">Sign Up</a>
+                          </div>
+                      </div>
+
                   </div>
               </div>
-          </div>
-      </div>
+          </header>
 
-      <footer id="mastfooter">
-          <div class="main-footer">
-              <div class="container">
-                  <div class="col-sm-4">
-                      <div class="footer-logo">
-                          <img class = "logo" src="/images/logo-white.png" alt="">
-                      </div>
-                  </div>
-                  <div class="col-sm-4">
-                      <!--<div class="newsletter">Join our newsletter.</div>-->
-                  </div>
-                  <div class="col-sm-4">
-                      <div class="social-media">
-                          <div class="social-button">
-                              <a class="socicon-facebook" href=""></a>
-                          </div>
-                          <div class="social-button">
-                              <a class="socicon-twitter" href=""></a>
-                          </div>
-                          <div class="social-button">
-                              <a class="socicon-instagram" href=""></a>
-                          </div>
-                          <div class="social-button">
-                              <a class="socicon-pinterest" href=""></a>
+
+        {{{body}}}
+
+          <div class="modal fade" id="message-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-md">
+                  <div class="modal-content failure">
+                      <div class="form-response"></div>
+                      <div class="row">
+                          <div class="col-sm-offset-3 col-sm-6">
+                              <button id="dismiss-button" type="button" class="btn btn-secondary notdisplay" data-dismiss="modal">Dismiss</button>
+                              <a class="view-button" href=""><button type="button" class="btn btn-secondary"></button></a>
+                              <a class="gallery-button notdisplay" href=""><button type="button" class="btn btn-secondary"></button></a>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
-          <div class="sub-footer">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-sm-offset-3 col-sm-2">
-                          <a href="#">Privacy Policy</a>
+
+          <footer id="mastfooter">
+              <div class="main-footer">
+                  <div class="container">
+                      <div class="col-sm-4">
+                          <div class="footer-logo">
+                              <img class = "logo" src="/images/logo-white.png" alt="">
+                          </div>
                       </div>
-                      <div class="col-sm-2">
-                          <a href="#">Terms of Use</a>
+                      <div class="col-sm-4">
+                          <!--<div class="newsletter">Join our newsletter.</div>-->
                       </div>
-                      <div class="col-sm-2">
-                          <a href="#">Copyright 2016</a>
+                      <div class="col-sm-4">
+                          <div class="social-media">
+                              <div class="social-button">
+                                  <a class="socicon-facebook" href=""></a>
+                              </div>
+                              <div class="social-button">
+                                  <a class="socicon-twitter" href=""></a>
+                              </div>
+                              <div class="social-button">
+                                  <a class="socicon-instagram" href=""></a>
+                              </div>
+                              <div class="social-button">
+                                  <a class="socicon-pinterest" href=""></a>
+                              </div>
+                          </div>
                       </div>
                   </div>
-
-
-
               </div>
-          </div>
-      </footer>
+              <div class="sub-footer">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-sm-offset-3 col-sm-2">
+                              <a href="#">Privacy Policy</a>
+                          </div>
+                          <div class="col-sm-2">
+                              <a href="#">Terms of Use</a>
+                          </div>
+                          <div class="col-sm-2">
+                              <a href="#">Copyright 2016</a>
+                          </div>
+                      </div>
+
+
+
+                  </div>
+              </div>
+          </footer>
+      <!--</div>-->
 
   </body>
 
