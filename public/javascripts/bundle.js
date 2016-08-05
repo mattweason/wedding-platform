@@ -14783,13 +14783,12 @@ $(document).ready(function() {
     $('#delete-gallery').validate({
 
         submitHandler: function(form){
-            var formData = new FormData($('form')[0]);
             $.ajax({
                 type: "POST",
-                processData: true,
+                processData: false,
                 contentType: false,
                 url: $('#delete-gallery').attr('action'),
-                data: formData,
+                data: $('#delete-gallery').serialize(),
                 success: function(data){
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
@@ -14810,6 +14809,9 @@ $(document).ready(function() {
 
     //Chosen field for category
     $("select#category").chosen();
+
+    //Chosen field for category
+    // $("select#category-search").chosen();
 
     //Prevent delete form button default and open modal
     $( "#delete-modal-button" ).click(function( event ) {
@@ -14913,6 +14915,41 @@ $(document).ready(function() {
             }
         ]
     });
+
+    //List.js options
+    $(function() {
+        var options = {
+            valueNames: ['vendName', 'vendCat']
+        };
+
+        var vendorList = new List('vendors-list', options);
+
+        var updateList = function(){
+            var values_cat = $(".cat-s").val();
+
+            vendorList.filter(function(item) {
+                var vendorCategory = item.values().vendCat;
+                if(values_cat == 'All')
+                    return true;
+                else
+                    return (vendorCategory.indexOf(values_cat) !== -1);
+            });
+        };
+
+        $(function(){
+            updateList();
+            $(".cat-s").change(updateList);
+        });
+    });
+
+    //Show #no-vendors if there are no vendors in the filter
+    $('.search-filter').change(function() {
+        if ($('#vendor-list').find('.vendor').length  ) {
+            $('#no-vendors').css({'display': 'block'});
+            console.log('hide no vendor');
+        }
+    });
+
     
 }); //end of document ready
 },{"bootstrap":1,"jquery":16,"jquery-ui":14,"jquery-validation":15}]},{},[17]);

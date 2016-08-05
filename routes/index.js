@@ -16,28 +16,23 @@ router.get('/', function(req, res, next) {
 
     connection.query('SELECT * FROM vendor ORDER BY vendor_name ASC', function(err, vendor) {
 
-        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function(err, category) {
+        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, allCategories) {
 
-            connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function(err, featured) {
+            connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
 
-                var featuredID = [];
-                for (var i = 0; i < featured.length; i++) {
-                    featuredID.push(featured[i].vendor_id);
-                }
-                var featuredString = featuredID.toString();
-                // var pathFixed = "'" + pathString.replace(/,/g, "', '") + "'";
-                
-                connection.query('SELECT * FROM vendor2category WHERE vendor2category.vendor_fid = ?', featured[0].vendor_id, function(err, featuredCat) {
+                connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
 
                     // Append categories as strings onto vendor object
-                    var vendorCategory = functions.vendorJoin(featured, featuredCat);
+                    var vendorCategory = functions.vendorJoin(vendor, category);
                     console.log(vendorCategory);
 
                     res.render('home', {
                         home: 1,
                         title: 'Vendors on a Dime',
-                        vendor: vendor,
-                        featured: vendorCategory
+                        vendor: vendorCategory,
+                        featured: featured,
+                        category: category,
+                        categories: allCategories
                     });
                 });
             });
@@ -117,8 +112,11 @@ router.post('/gallerydelete', function(req,res){
 
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
+    // console.log(req.body);
 
-    functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
+    if (req.body.delete_photo) {
+        functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);
+    }
 
 });
 

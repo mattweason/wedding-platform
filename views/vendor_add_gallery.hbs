@@ -27,8 +27,15 @@
                                 <img src="/{{this.photo_url}}" alt=""><br>
                             </div>
                             <div class="delete-form">
-                                <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
-                                <label class="form-label" for="delete_photo">Mark for deletion.</label>
+                                <div class="select-featured">
+                                    <input type="radio" name="set_feat_photo" value="{{this.photo_url}}">
+                                    <label class="form-label" for="set_feat_photo">Select Featured Image.</label>
+                                </div>
+                                <div class="select-delete">
+                                    <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
+                                    <label class="form-label" for="delete_photo">Mark for deletion.</label>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -429,7 +429,7 @@ a {
         color: $color-gray;
       }
 
-      .vend-cat{
+      .vendCat{
         font-family: $font-main;
         font-size: 14px;
         color: $color-gray;
@@ -468,6 +468,13 @@ a {
         }
       }
     }
+  }
+}
+
+#no-vendors{
+  display: none;
+  h4{
+    font-family: $font-main;
   }
 }
 
@@ -601,7 +608,7 @@ a {
 
 }
 
-//Add adn Edit Vendor Page Styling----------------------------------------------------Add Vendor Page Styling//
+//Add and Edit Vendor Page Styling----------------------------------------------------Add and Edit Vendor Page Styling//
 #vendor-add, #vendor-edit {
   padding-top: $header-height;
 

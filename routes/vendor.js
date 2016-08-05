@@ -92,6 +92,28 @@ router.post('/create', function(req, res){
 
     //insert values into vendor table
     function insertVendor() {
+        console.log(req.headers['content-type']);
+
+        // //Set up multer
+        // var storage =   multer.diskStorage({
+        //     destination: function (req, file, callback) {
+        //         callback(null, './uploads/');
+        //     },
+        //     filename: function (req, file, callback) {
+        //         callback(null, req.body.vendor_url + '-feat-img');
+        //     }
+        // });
+        // var upload = multer({ storage : storage}).single('featured_image');
+        //
+        // upload(req,res,function(err) {
+        //     if(err) {
+        //         return res.end(err);
+        //     } else {
+        //         var photoPath = req.file.path;
+        //         var photoPathFixed = photoPath.replace("\\", "/");
+        //         dataCollection['featured_image'] = photoPathFixed;
+        //     }
+        // });
 
         //create array of all values
         var dbValues = [];
@@ -102,8 +124,9 @@ router.post('/create', function(req, res){
         var query1 = Object.keys(dataCollection).join(", ");
         var query2 = "'" + dbValues.join("','") + "'";
         var query = `INSERT INTO vendor (${query1}) VALUES (${query2})`;
+        console.log(req.body);
 
-        //execute the query
+        // execute the query
         connection.query(query, function (err, feedback) {
             if (err)
                 throw err;

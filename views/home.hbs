@@ -54,71 +54,88 @@
     </div>
 </div>
 
-
-<div id="vendor-list-header">
-    <div class="container">
-        <div class="vend-list-title">
-            <h3>VENDOR LIST</h3>
-        </div>
-        <div class="filters">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="filter">
-                        <label for="search">Keyword Search</label>
-                        <input type="text" name="search">
+<div id="vendors-list">
+    <div id="vendor-list-header">
+        <div class="container">
+            <div class="vend-list-title">
+                <h3>VENDOR LIST</h3>
+            </div>
+            <div class="filters">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="filter">
+                            <label for="search">Keyword Search</label>
+                            <input class="search search-filter">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="filter">
-                        <label for="categoryselect">Category</label>
-                        <select name="categoryselect"></select>
+                    <div class="col-sm-3">
+                        <div class="filter">
+                            <label for="categoryselect">Category</label>
+                            <select class="select-filter cat-s" id="category-search" name="categoryselect">
+                                    <option value="All">All</option>
+                                {{#each categories}}
+                                    <option value="{{this.category_name}}">{{this.category_name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="filter">
-                        <label for="location">Location</label>
-                        <input type="text" name="search">
+                    <div class="col-sm-3">
+                        <div class="filter">
+                            <label for="location">Location</label>
+                            <input type="text" name="search">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="filter">
-                        <label for="pricerange">Price</label>
+                    <div class="col-sm-3">
+                        <div class="filter">
+                            <label for="pricerange">Price</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-</div>
-
-<div class="container">
-    <div id="vendor-list">
+    <div class="container">
         <div class="row">
+            <div id="vendor-list" class="list">
 
-            {{#each vendor}}
+                {{#each vendor}}
 
-                <div class="col-sm-6">
-                    <div class="box">
-                        <img class="feat-img" src="{{this.featured_image}}" alt=""/>
-                        <div class="desc-box">
-                            <h2>{{this.vendor_name}}</h2>
-                            <p class="vend-cat">{{this.category}}</p>
-                            <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
-                            <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
-                            <div class="row">
-                                <!--<p class="vend-price">Price: {{this.price}}</p>-->
-                                <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
-                                <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                    <div class="vendor">
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <img class="feat-img" src="{{this.featured_image}}" alt=""/>
+                                <div class="desc-box">
+                                    <h2 class="vendName">{{this.vendor_name}}</h2>
+                                    <p class="vendCat">{{this.category}}</p>
+                                    <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
+                                    <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                    <div class="row">
+                                        <!--<p class="vend-price">Price: {{this.price}}</p>-->
+                                        <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
+                                        <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
-                </div>
+                {{/each}}
 
-            {{/each}}
+            </div>
+
 
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div id="no-vendors">
+                    <h4>We're sorry, but there are no vendors matching your search criteria. Please try another search.</h4>
+                </div>
+            </div>
+        </div>
 
+    </div>
 </div>
+
+
+

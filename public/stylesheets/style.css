@@ -302,7 +302,7 @@ a {
         font-size: 24px;
         text-transform: uppercase;
         color: #282828; }
-      #vendor-list .box .desc-box .vend-cat {
+      #vendor-list .box .desc-box .vendCat {
         font-family: "Lato Light";
         font-size: 14px;
         color: #282828;
@@ -333,6 +333,11 @@ a {
         border: none; }
         #vendor-list .box .desc-box .vend-view:hover {
           background: #424242; }
+
+#no-vendors {
+  display: none; }
+  #no-vendors h4 {
+    font-family: "Lato Light"; }
 
 #vendor-single {
   padding-top: 120px; }
