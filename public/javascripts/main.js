@@ -86,10 +86,9 @@ $(document).ready(function() {
     $('#delete-gallery').validate({
 
         submitHandler: function(form){
+            console.log($('#delete-gallery').serialize());
             $.ajax({
                 type: "POST",
-                processData: false,
-                contentType: false,
                 url: $('#delete-gallery').attr('action'),
                 data: $('#delete-gallery').serialize(),
                 success: function(data){
@@ -114,7 +113,7 @@ $(document).ready(function() {
     $("select#category").chosen();
 
     //Chosen field for category
-    // $("select#category-search").chosen();
+    $("select#price").chosen();
 
     //Prevent delete form button default and open modal
     $( "#delete-modal-button" ).click(function( event ) {
@@ -221,17 +220,35 @@ $(document).ready(function() {
 
     //List.js options
     $(function() {
+        var paginationTopOptions = {
+            name: "paginationTop",
+            paginationClass: "paginationTop",
+            outerWindow: 2
+        };
+        var paginationBottomOptions = {
+            name: "paginationBottom",
+            paginationClass: "paginationBottom",
+            innerWindow: 3,
+            left: 2,
+            right: 4
+        };
         var options = {
-            valueNames: ['vendName', 'vendCat']
+            valueNames: ['vendName', 'vendCat', 'vendPrice'],
+            page: 8,
+            plugins: [
+                ListPagination(paginationTopOptions),
+                ListPagination(paginationBottomOptions)
+            ]
         };
 
         var vendorList = new List('vendors-list', options);
 
-        var updateList = function(){
+        var updateListCat = function(){
             var values_cat = $(".cat-s").val();
 
             vendorList.filter(function(item) {
                 var vendorCategory = item.values().vendCat;
+                console.log(vendorCategory);
                 if(values_cat == 'All')
                     return true;
                 else
@@ -239,10 +256,22 @@ $(document).ready(function() {
             });
         };
 
-        $(function(){
-            updateList();
-            $(".cat-s").change(updateList);
-        });
+        var updateListPrice = function(){
+            var value_price = this.value;
+            console.log(this.value);
+
+            vendorList.filter(function(item) {
+                var vendorPrice = item.values().vendPrice;
+                if(value_price == 'All')
+                    return true;
+                else
+                    return (vendorPrice == value_price);
+            });
+        };
+
+        $(".cat-s").change(updateListCat);
+
+        $("input:radio[name=price]").change(updateListPrice);
     });
 
     //Show #no-vendors if there are no vendors in the filter

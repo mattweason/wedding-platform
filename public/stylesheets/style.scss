@@ -385,6 +385,69 @@ a {
     }
   }
 
+  //----------------Price Filter Styling
+  .price-filter {
+    label {display: block;}
+    input {
+      position: absolute;
+      margin:0;padding:0;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+    }
+
+    .flex-wrapper{display:flex;}
+
+    .no-dollar{
+      order: 1;
+      background-image: url('/images/dollar-none.png');
+      opacity: 0.5;
+      &:hover{
+        background-image: url('/images/dollar-none.png');
+        opacity: 1;
+      }
+    }
+
+    .one-dollar{order:2;}
+    .two-dollar{order:3;}
+    .three-dollar{order:4;}
+    .four-dollar{order:5;}
+
+    #noDollar:checked{
+      & ~ .no-dollar{opacity: 1;}
+    }
+
+    .one-dollar, .two-dollar, .three-dollar, .four-dollar{
+      opacity: 0.5;
+      background-image: url('/images/dollar-sign.png');
+      &:hover{opacity: 1;}
+    }
+
+    #oneDollar:checked{
+      & ~ .one-dollar{opacity: 1;}
+    }
+
+    .two-dollar:hover, #twoDollar:checked{
+      & ~ .one-dollar, & ~ .two-dollar{opacity: 1;}
+    }
+
+    .three-dollar:hover, #threeDollar:checked{
+      & ~ .one-dollar, & ~ .two-dollar, & ~ .three-dollar{opacity: 1;}
+    }
+
+    .four-dollar:hover, #fourDollar:checked{
+      & ~ .one-dollar, & ~ .two-dollar, & ~ .three-dollar, & ~ .four-dollar{opacity: 1;}
+    }
+
+    .price-radio{
+      cursor:pointer;
+      background-size:contain;
+      background-repeat:no-repeat;
+      display:inline-block;
+      width:20px;height:20px;
+    }
+  }
+
   .filters{
     .filter{
       label{
@@ -406,6 +469,39 @@ a {
 }
 #vendor-list{
   padding-top: 40px;
+
+  .paginationBottom, .paginationTop{
+    text-align:center;
+    list-style-type:none;
+    li{
+      margin: 0 5px;
+      position:relative;
+      display:inline-block;
+      height:40px;
+      width:40px;
+      border:1px solid $color-gray;
+
+      &:hover, &.active{
+        background: $color-gray;
+
+        a{color:#fff;}
+      }
+
+      a{
+        font-family: $font-main;
+        font-size: 16px;
+        text-decoration: none;
+        color:$color-gray;
+        line-height: 40px;
+        display:block;
+        height:38px;
+        width:38px;
+
+      }
+    }
+  }
+
+  .paginationBottom{margin-bottom: 20px;}
 
   .box{
     padding: 20px 0;
@@ -625,6 +721,10 @@ a {
       width: 100%;
     }
 
+    .chosen-single, .chosen-drop{
+      border-radius: 0;
+    }
+
     input, .chosen-container {
       width: 100% !important;
       margin: 5px 0;
@@ -746,7 +846,7 @@ a {
         display: block;
         margin: auto;
         max-width: 200px;
-        max-height: 200px;
+        max-height: 140px;
       }
     }
   }

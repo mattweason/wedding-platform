@@ -4,7 +4,7 @@
         <h3>{{vendor.vendor_name}} Gallery</h3>
 
         <div class="row upload-gallery-area">
-            <form id="upload-gallery" enctype="multipart/form-data" action="/api/photo" method="post">
+            <form id="upload-gallery" enctype="multipart/form-data" action="/uploadGallery" method="post">
                 <div class="col-sm-offset-3 col-sm-3">
                     <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
                     <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
@@ -27,15 +27,8 @@
                                 <img src="/{{this.photo_url}}" alt=""><br>
                             </div>
                             <div class="delete-form">
-                                <div class="select-featured">
-                                    <input type="radio" name="set_feat_photo" value="{{this.photo_url}}">
-                                    <label class="form-label" for="set_feat_photo">Select Featured Image.</label>
-                                </div>
-                                <div class="select-delete">
-                                    <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
-                                    <label class="form-label" for="delete_photo">Mark for deletion.</label>
-                                </div>
-
+                                <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
+                                <label class="form-label" for="delete_photo">Mark for deletion.</label>
                             </div>
                         </div>
                     </div>

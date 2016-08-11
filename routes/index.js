@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
+// var formidable = require('formidable');
+var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var functions = require('./../lib/functions'); //bring in the functions.js
 connection = sql.connect(mysql, sql.credentials);
 
-const fs = require('fs');
+const fs = require('fs-extra');
 
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
@@ -77,34 +78,32 @@ router.get('/vendor/:vendorName', function(req,res) {
 });
 
 //Upload photos and post to vendorgallery table
-router.post('/api/photo', function(req,res){
+router.post('/uploadGallery', function(req,res){
 
-    //Set up multer
-    var storage =   multer.diskStorage({
-        destination: function (req, file, callback) {
-            callback(null, './uploads/');
-        },
-        filename: function (req, file, callback) {
-            callback(null, req.body.vendor_url + '-' + Date.now());
-        }
-    });
-    var upload = multer({ storage : storage}).array('upl');
+    //Set up formidable
+    var form = new formidable.IncomingForm();
+    var vendorPhotos = [];
+    var vendorID;
+    var vendorURL;
 
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end(err);
-        } else {
-            var vendorID = req.body.vendor_id;
-            var vendorURL = req.body.vendor_url;
-            var vendorPhotos = [];
-            for (var i = 0; i < req.files.length; i++) {
-                var photoPath = req.files[i].path;
-                var photoPathFixed = photoPath.replace("\\", "/");
-                vendorPhotos.push(photoPathFixed);
-            }
-            functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
-        }
+    form.multiples = true;
+
+    form.uploadDir = __dirname + "/../uploads";
+
+    form.parse(req, function(err, fields) {
+        vendorID = fields.vendor_id;
+        vendorURL = fields.vendor_url;
     });
+
+    form.on('fileBegin', function(field, file) {
+        file.path = path.join(__dirname, '/../uploads/'+file.name);
+        vendorPhotos.push(file.path);
+    });
+
+    form.on('end', function(){
+        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
+    });
+
 });
 
 //Upload photos and post to vendorgallery table
@@ -112,7 +111,7 @@ router.post('/gallerydelete', function(req,res){
 
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
-    // console.log(req.body);
+    console.log(req.body);
 
     if (req.body.delete_photo) {
         functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);

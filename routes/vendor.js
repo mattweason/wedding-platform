@@ -21,6 +21,15 @@ router.get('/add', function(req,res, next){
 router.get('/:vendorName/edit', function(req,res, next){
 
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+        if(vendor[0].price == '$') {
+            vendor[0].onedollar = true;
+        } else if (vendor[0].price == '$$') {
+            vendor[0].twodollar = true;
+        } else if (vendor[0].price == '$$$') {
+            vendor[0].threedollar = true;
+        } else if (vendor[0].price == '$$$$') {
+            vendor[0].fourdollar = true;
+        }
 
         connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, categoryJoin) {
             if (err) {throw err;}

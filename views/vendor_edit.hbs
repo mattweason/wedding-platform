@@ -90,7 +90,12 @@
                             <label class = "form-label" for="price">Price</label>
                         </div>
                         <div class="col-sm-9">
-                            <input type="number" name="price" value="{{vendor.price}}"><br>
+                            <select name="price" id="price">
+                                <option value="$" {{#if vendor.onedollar}}selected{{/if}}>$</option>
+                                <option value="$$" {{#if vendor.twodollar}}selected{{/if}}>$$</option>
+                                <option value="$$$" {{#if vendor.threedollar}}selected{{/if}}>$$$</option>
+                                <option value="$$$$" {{#if vendor.fourdollar}}selected{{/if}}>$$$$</option>
+                            </select>
                         </div>
                     </div>
 

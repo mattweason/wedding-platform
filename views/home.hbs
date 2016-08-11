@@ -86,8 +86,20 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="filter">
-                            <label for="pricerange">Price</label>
+                        <div class="filter price-filter">
+                            <label for="price">Price</label>
+                            <div class="flex-wrapper">
+                                <input type="radio" name="price" id="noDollar" value="All" checked>
+                                <input type="radio" name="price" id="oneDollar" value="$">
+                                <input type="radio" name="price" id="twoDollar" value="$$">
+                                <input type="radio" name="price" id="threeDollar" value="$$$">
+                                <input type="radio" name="price" id="fourDollar" value="$$$$">
+                                <label class="price-radio no-dollar" for="noDollar"></label>
+                                <label class="price-radio four-dollar" for="fourDollar"></label>
+                                <label class="price-radio three-dollar" for="threeDollar"></label>
+                                <label class="price-radio two-dollar" for="twoDollar"></label>
+                                <label class="price-radio one-dollar" for="oneDollar"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,43 +109,40 @@
 
     <div class="container">
         <div class="row">
-            <div id="vendor-list" class="list">
-
-                {{#each vendor}}
-
-                    <div class="vendor">
-                        <div class="col-sm-6">
-                            <div class="box">
-                                <img class="feat-img" src="{{this.featured_image}}" alt=""/>
-                                <div class="desc-box">
-                                    <h2 class="vendName">{{this.vendor_name}}</h2>
-                                    <p class="vendCat">{{this.category}}</p>
-                                    <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
-                                    <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
-                                    <div class="row">
-                                        <!--<p class="vend-price">Price: {{this.price}}</p>-->
-                                        <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
-                                        <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                {{/each}}
-
-            </div>
-
-
-        </div>
-        <div class="row">
             <div class="col-sm-offset-2 col-sm-8">
                 <div id="no-vendors">
                     <h4>We're sorry, but there are no vendors matching your search criteria. Please try another search.</h4>
                 </div>
             </div>
         </div>
-
+            <div id="vendor-list">
+                <ul class="paginationTop"></ul>
+                <div class="row">
+                    <div class="list">
+                        {{#each vendor}}
+                            <div class="vendor">
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <img class="feat-img" src="{{this.featured_image}}" alt=""/>
+                                        <div class="desc-box">
+                                            <h2 class="vendName">{{this.vendor_name}}</h2>
+                                            <p class="vendCat">{{this.category}}</p>
+                                            <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
+                                            <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                            <!--<div class="row">-->
+                                            <p class="vendPrice">{{this.price}}</p>
+                                            <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
+                                            <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <ul class="paginationBottom"></ul>
+        </div>
     </div>
 </div>
 
