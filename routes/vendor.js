@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
+var formidable = require('formidable');
+var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var functions = require('./../lib/functions'); //bring in all custom functions
 connection = sql.connect(mysql, sql.credentials);
 
-const fs = require('fs');
+const fs = require('fs-extra');
 
 //---------------------ADDING NEW VENDOR------------------------
 router.get('/add', function(req,res, next){
@@ -60,33 +61,53 @@ router.get('/:vendorName/edit', function(req,res, next){
 //----------------------STORING NEW VENDOR IN DATABASE-----------------------
 router.post('/create', function(req, res){
 
-    var dataCollection = {};
+    //Set up formidable
+    var form = new formidable.IncomingForm();
 
-    //Get all basic form data (separate category)
-    for (var propName in req.body) {
-        if (req.body.hasOwnProperty(propName)) {
-            if(propName == 'category') {
-                var category = req.body[propName];
-            } else if(propName == 'vendor_name') {
-                dataCollection[propName] = req.body[propName];
-                var str = req.body[propName];
-                str = str.replace(/\s+/g, '_').toLowerCase();
-                dataCollection['vendor_url'] = str;
-            } else {
-                dataCollection[propName] = req.body[propName];
+    var dataCollection = {};
+    var featuredImage;
+    var category;
+
+    form.uploadDir = __dirname + "/../uploads/featuredimage";
+
+    form.parse(req, function(err, fields) {
+        for (var propName in fields) {
+            if (fields.hasOwnProperty(propName)) {
+                if(propName == 'category') {
+                    category = fields[propName];
+                } else if(propName == 'vendor_name') {
+                    dataCollection[propName] = fields[propName];
+                    var str = fields[propName];
+                    str = str.replace(/\s+/g, '_').toLowerCase();
+                    dataCollection['vendor_url'] = str;
+                } else {
+                    dataCollection[propName] = fields[propName];
+                }
             }
         }
-    }
-
-    var result = [];
-    var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}"`;
-    connection.query(query, function(err, result) {
-        if(err) {
-            throw err;
-        } else {
-            checkExists(result);
-        }
     });
+
+    form.on('fileBegin', function(field, file) {
+        file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+        featuredImage = file.path;
+    });
+
+    form.on('end', function(){
+        queryExisting();
+    });
+
+    //Get all basic form data (separate category)
+
+    function queryExisting() {
+        var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}"`;
+        connection.query(query, function(err, result) {
+            if(err) {
+                throw err;
+            } else {
+                checkExists(result);
+            }
+        });
+    }
 
     function checkExists(result) {
         if (result.length) {
@@ -101,28 +122,13 @@ router.post('/create', function(req, res){
 
     //insert values into vendor table
     function insertVendor() {
-        console.log(req.headers['content-type']);
 
-        // //Set up multer
-        // var storage =   multer.diskStorage({
-        //     destination: function (req, file, callback) {
-        //         callback(null, './uploads/');
-        //     },
-        //     filename: function (req, file, callback) {
-        //         callback(null, req.body.vendor_url + '-feat-img');
-        //     }
-        // });
-        // var upload = multer({ storage : storage}).single('featured_image');
-        //
-        // upload(req,res,function(err) {
-        //     if(err) {
-        //         return res.end(err);
-        //     } else {
-        //         var photoPath = req.file.path;
-        //         var photoPathFixed = photoPath.replace("\\", "/");
-        //         dataCollection['featured_image'] = photoPathFixed;
-        //     }
-        // });
+        //Rename file and add path to dataCollection
+        var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image';
+
+        fs.rename(featuredImage, uploadPath);
+
+        dataCollection['featured_image'] = uploadPath;
 
         //create array of all values
         var dbValues = [];
@@ -133,7 +139,6 @@ router.post('/create', function(req, res){
         var query1 = Object.keys(dataCollection).join(", ");
         var query2 = "'" + dbValues.join("','") + "'";
         var query = `INSERT INTO vendor (${query1}) VALUES (${query2})`;
-        console.log(req.body);
 
         // execute the query
         connection.query(query, function (err, feedback) {

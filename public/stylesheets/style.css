@@ -1,26 +1,31 @@
 @font-face {
   font-family: 'Josefin Sans';
-  src: url("./JosefinSans-Light.ttf") format("truetype");
+  src: url("../fonts/JosefinSans-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Josefin Sans Bold';
+  src: url("../fonts/JosefinSans-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Playfair Display';
-  src: url("./PlayfairDisplay-Regular.ttf") format("truetype");
+  src: url("../fonts/PlayfairDisplay-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Lato Light';
-  src: url("./Lato-Light.ttf") format("truetype");
+  src: url("../fonts/Lato-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'Lato Hairline';
-  src: url("./Lato-Hairline.ttf") format("truetype");
+  src: url("../fonts/Lato-Hairline.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: 'socicon';
-  src: url("socicon.ttf") format("truetype");
+  src: url("../fonts/socicon.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 html {
@@ -284,20 +289,18 @@ a {
   #vendor-list-header .price-filter .flex-wrapper {
     display: flex; }
   #vendor-list-header .price-filter .no-dollar {
-    order: 1;
-    background-image: url("/images/dollar-none.png");
+    order: 5;
     opacity: 0.5; }
     #vendor-list-header .price-filter .no-dollar:hover {
-      background-image: url("/images/dollar-none.png");
       opacity: 1; }
   #vendor-list-header .price-filter .one-dollar {
-    order: 2; }
+    order: 1; }
   #vendor-list-header .price-filter .two-dollar {
-    order: 3; }
+    order: 2; }
   #vendor-list-header .price-filter .three-dollar {
-    order: 4; }
+    order: 3; }
   #vendor-list-header .price-filter .four-dollar {
-    order: 5; }
+    order: 4; }
   #vendor-list-header .price-filter #noDollar:checked ~ .no-dollar {
     opacity: 1; }
   #vendor-list-header .price-filter .one-dollar, #vendor-list-header .price-filter .two-dollar, #vendor-list-header .price-filter .three-dollar, #vendor-list-header .price-filter .four-dollar {
@@ -320,15 +323,35 @@ a {
     display: inline-block;
     width: 20px;
     height: 20px; }
+  #vendor-list-header .filters .filter .search {
+    background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
+    border: 1px solid #aaa;
+    height: 24px; }
   #vendor-list-header .filters .filter label {
     font-family: "Josefin Sans";
     font-weight: 100;
     font-size: 18px;
     color: #fff; }
+  #vendor-list-header .filters .filter .no-dollar {
+    font-family: "Josefin Sans Bold";
+    font-size: 19px;
+    margin-top: -1px;
+    margin-left: 5px; }
   #vendor-list-header .filters .filter input {
+    font-family: "Lato Light";
     width: 100%; }
   #vendor-list-header .filters .filter select {
+    padding: 1px;
+    height: 23px;
+    font-family: "Lato Light";
     width: 100%; }
+  #vendor-list-header .filters .filter .chosen-single {
+    height: 24px;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none; }
+  #vendor-list-header .filters .filter .chosen-drop {
+    border-radius: 0; }
 
 #vendor-list {
   padding-top: 40px; }

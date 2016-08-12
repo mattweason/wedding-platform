@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// var formidable = require('formidable');
+var formidable = require('formidable');
 var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
@@ -93,6 +93,7 @@ router.post('/uploadGallery', function(req,res){
     form.parse(req, function(err, fields) {
         vendorID = fields.vendor_id;
         vendorURL = fields.vendor_url;
+        console.log(fields);
     });
 
     form.on('fileBegin', function(field, file) {

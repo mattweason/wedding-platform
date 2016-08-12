@@ -14701,15 +14701,19 @@ require('bootstrap'); //bootstrap JS
 require('jquery-validation'); //form validation
 
 $(document).ready(function() {
+    
 
     //--------------------CREATING NEW VENDOR---------------------
     $('#add-form').validate({
-    
+
         submitHandler: function(form){
+            var formData = new FormData($('form')[0]);
             $.ajax({
                 type: "POST",
+                processData: false,
+                contentType: false,
                 url: $('#add-form').attr('action'),
-                data: $('#add-form').serialize(), // serializes the form's elements.
+                data: formData, // serializes the form's elements.
                 success: function(data){
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
@@ -14811,6 +14815,9 @@ $(document).ready(function() {
 
     //Chosen field for category
     $("select#price").chosen();
+
+    //Chosen field for category
+    $("select#category-search").chosen();
 
     //Prevent delete form button default and open modal
     $( "#delete-modal-button" ).click(function( event ) {

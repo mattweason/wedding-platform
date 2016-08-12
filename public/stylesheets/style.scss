@@ -1,35 +1,42 @@
 //Fonts
 @font-face {
   font-family: 'Josefin Sans';
-  src: url('./JosefinSans-Light.ttf') format('truetype');
+  src: url('../fonts/JosefinSans-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Josefin Sans Bold';
+  src: url('../fonts/JosefinSans-Bold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Playfair Display';
-  src: url('./PlayfairDisplay-Regular.ttf') format('truetype');
+  src: url('../fonts/PlayfairDisplay-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lato Light';
-  src: url('./Lato-Light.ttf') format('truetype');
+  src: url('../fonts/Lato-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lato Hairline';
-  src: url('./Lato-Hairline.ttf') format('truetype');
+  src: url('../fonts/Lato-Hairline.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'socicon';
-  src: url('socicon.ttf') format('truetype');
+  src: url('../fonts/socicon.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -40,6 +47,7 @@ $footer-height:180px;
 $color-gray:#282828;
 $color-lgray:#828282;
 $font-header: 'Josefin Sans';
+$font-header-bold: 'Josefin Sans Bold';
 $font-title: 'Playfair Display';
 $font-main: 'Lato Light';
 $font-mainlight: 'Lato Hairline';
@@ -399,22 +407,24 @@ a {
     .flex-wrapper{display:flex;}
 
     .no-dollar{
-      order: 1;
-      background-image: url('/images/dollar-none.png');
+      order: 5;
+      //background-image: url('/images/dollar-none.png');
       opacity: 0.5;
       &:hover{
-        background-image: url('/images/dollar-none.png');
+        //background-image: url('/images/dollar-none.png');
         opacity: 1;
       }
     }
 
-    .one-dollar{order:2;}
-    .two-dollar{order:3;}
-    .three-dollar{order:4;}
-    .four-dollar{order:5;}
+    .one-dollar{order:1;}
+    .two-dollar{order:2;}
+    .three-dollar{order:3;}
+    .four-dollar{order:4;}
 
     #noDollar:checked{
-      & ~ .no-dollar{opacity: 1;}
+      & ~ .no-dollar{
+        opacity: 1;
+      }
     }
 
     .one-dollar, .two-dollar, .three-dollar, .four-dollar{
@@ -450,18 +460,40 @@ a {
 
   .filters{
     .filter{
+      .search{
+        background:#fff url('chosen-sprite.png') no-repeat 100% -20px;
+        border: 1px solid #aaa;
+        height: 24px;
+      }
       label{
         font-family: $font-header;
         font-weight: 100;
         font-size: 18px;
         color: #fff;
       }
+      .no-dollar{
+        font-family: $font-header-bold;
+        font-size: 19px;
+        margin-top: -1px;
+        margin-left: 5px;
+      }
       input{
+        font-family: $font-main;
         width: 100%;
       }
       select{
+        padding: 1px;
+        height: 23px;
+        font-family: $font-main;
         width: 100%;
       }
+      .chosen-single{
+        height: 24px;
+        border-radius:0;
+        background: #fff;
+        box-shadow: none;
+      }
+      .chosen-drop{border-radius:0;}
     }
   }
 
