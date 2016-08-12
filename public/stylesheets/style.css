@@ -346,12 +346,15 @@ a {
     font-family: "Lato Light";
     width: 100%; }
   #vendor-list-header .filters .filter .chosen-single {
+    font-family: "Lato Light";
     height: 24px;
     border-radius: 0;
     background: #fff;
     box-shadow: none; }
   #vendor-list-header .filters .filter .chosen-drop {
     border-radius: 0; }
+  #vendor-list-header .filters .filter .chosen-results {
+    font-family: "Lato Light"; }
 
 #vendor-list {
   padding-top: 40px; }

@@ -157,30 +157,52 @@ router.post('/create', function(req, res){
 //----------------------UPDATING VENDOR IN DATABASE-----------------------
 router.post('/update', function(req, res){
 
-    var dataCollection = {};
+    //Set up formidable
+    var form = new formidable.IncomingForm();
 
-    //Get all basic form data (separate category)
-    for (var propName in req.body) {
-        if (req.body.hasOwnProperty(propName)) {
-            if(propName == 'category') {
-                var category = req.body[propName];
-            }
-            else if(propName == 'vendor_name') {
-                dataCollection[propName] = req.body[propName];
-                var str = req.body[propName];
-                str = str.replace(/\s+/g, '_').toLowerCase();
-                dataCollection['vendor_url'] = str;
-            } else {
-                dataCollection[propName] = req.body[propName];
+    var dataCollection = {};
+    var featuredImage;
+    var category;
+
+    form.uploadDir = __dirname + "/../uploads/featuredimage";
+
+    form.parse(req, function(err, fields) {
+        for (var propName in fields) {
+            if (fields.hasOwnProperty(propName)) {
+                if(propName == 'category') {
+                    category = fields[propName];
+                } else if(propName == 'vendor_name') {
+                    dataCollection[propName] = fields[propName];
+                    var str = fields[propName];
+                    str = str.replace(/\s+/g, '_').toLowerCase();
+                    dataCollection['vendor_url'] = str;
+                } else {
+                    dataCollection[propName] = fields[propName];
+                }
             }
         }
-    }
+    });
 
-    insertVendor();
+    form.on('fileBegin', function(field, file) {
+        file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+        featuredImage = file.path;
+    });
+
+    form.on('end', function(){
+        insertVendor();
+    });
 
     //insert values into vendor table
     function insertVendor() {
 
+        //Rename file and add path to dataCollection
+        var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image';
+
+        if(typeof featuredImage !== "undefined") {
+            fs.rename(featuredImage, uploadPath); //Rename file in uploads/featuredimage folder
+            dataCollection['featured_image'] = uploadPath; //Add featured_image key and value to dataCollection
+        }
+        
         //create array of all values
         var vendorValues = [];
         for(var key in dataCollection) {

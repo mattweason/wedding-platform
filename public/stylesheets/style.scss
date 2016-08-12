@@ -488,12 +488,14 @@ a {
         width: 100%;
       }
       .chosen-single{
+        font-family: $font-main;
         height: 24px;
         border-radius:0;
         background: #fff;
         box-shadow: none;
       }
       .chosen-drop{border-radius:0;}
+      .chosen-results{font-family: $font-main;}
     }
   }
 

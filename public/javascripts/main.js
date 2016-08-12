@@ -9,7 +9,11 @@ $(document).ready(function() {
     $('#add-form').validate({
 
         submitHandler: function(form){
-            var formData = new FormData($('form')[0]);
+            if (!$('.is-file').hasClass('valid')) {
+                $(form).find('.is-file').attr('name', '');
+            }
+            console.log(form);
+            var formData = new FormData(form);
             $.ajax({
                 type: "POST",
                 processData: false,
