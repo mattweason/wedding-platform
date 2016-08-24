@@ -99,6 +99,7 @@ router.post('/uploadGallery', function(req,res){
     form.on('fileBegin', function(field, file) {
         file.path = path.join(__dirname, '/../uploads/'+file.name);
         vendorPhotos.push(file.path);
+        console.log(vendorPhotos);
     });
 
     form.on('end', function(){
@@ -112,7 +113,6 @@ router.post('/gallerydelete', function(req,res){
 
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
-    console.log(req.body);
 
     if (req.body.delete_photo) {
         functions.photoDelete(path, 'Photo(s) successfully deleted.', vendorURL, res);

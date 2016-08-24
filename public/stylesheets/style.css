@@ -157,12 +157,12 @@ a {
     position: absolute;
     z-index: 1;
     top: 150px;
-    left: 340px; }
+    left: 120px; }
   #featured-vendor .slick-next {
     position: absolute;
     z-index: 1;
     top: 150px;
-    right: 340px; }
+    right: 120px; }
   #featured-vendor .slick-dots {
     text-align: center;
     padding-left: 0;
@@ -212,7 +212,7 @@ a {
       height: 280px;
       position: absolute;
       padding: 10px 20px;
-      top: 50px;
+      top: 30px;
       right: 40px; }
       #featured-vendor .featured-box .desc-box h2 {
         font-family: "Playfair Display";

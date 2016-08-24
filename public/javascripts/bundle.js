@@ -14704,7 +14704,7 @@ $(document).ready(function() {
 
     //--------------------CREATING NEW VENDOR---------------------
     $('#add-form').validate({
-        
+
         submitHandler: function(form){
             if (!$('.is-file').hasClass('valid')) {
                 $(form).find('.is-file').attr('name', '');
@@ -14901,7 +14901,7 @@ $(document).ready(function() {
         },
         dots: true,
         centerMode: true,
-        centerPadding: '380px',
+        centerPadding: '160px',
         slidesToShow: 1,
         responsive: [
             {

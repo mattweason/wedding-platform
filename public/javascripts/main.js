@@ -204,7 +204,7 @@ $(document).ready(function() {
         },
         dots: true,
         centerMode: true,
-        centerPadding: '380px',
+        centerPadding: '160px',
         slidesToShow: 1,
         responsive: [
             {
