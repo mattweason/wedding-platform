@@ -23,17 +23,21 @@ router.get('/', function(req, res, next) {
 
                 connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
 
-                    // Append categories as strings onto vendor object
-                    var vendorCategory = functions.vendorJoin(vendor, category);
-                    console.log(vendorCategory);
+                    connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {
 
-                    res.render('home', {
-                        home: 1,
-                        title: 'Vendors on a Dime',
-                        vendor: vendorCategory,
-                        featured: featured,
-                        category: category,
-                        categories: allCategories
+                        // Append categories as strings onto vendor object
+                        var vendorCategory = functions.vendorJoin(vendor, category);
+                        console.log(vendorCategory);
+
+                        res.render('home', {
+                            home: 1,
+                            title: 'Vendors on a Dime',
+                            vendor: vendorCategory,
+                            featured: featured,
+                            category: category,
+                            city: cities,
+                            categories: allCategories
+                        });
                     });
                 });
             });

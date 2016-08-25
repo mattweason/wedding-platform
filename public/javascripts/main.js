@@ -120,10 +120,13 @@ $(document).ready(function() {
     $("select#category").chosen();
 
     //Chosen field for category
+    $("select#city").chosen();
+
+    //Chosen field for category
     $("select#price").chosen();
 
     //Chosen field for category
-    $("select#category-search").chosen();
+    $(".chosen").chosen();
 
     //Prevent delete form button default and open modal
     $( "#delete-modal-button" ).click(function( event ) {
@@ -243,7 +246,7 @@ $(document).ready(function() {
             right: 4
         };
         var options = {
-            valueNames: ['vendName', 'vendCat', 'vendPrice'],
+            valueNames: ['vendName', 'vendCat', 'vendPrice', 'vendCity'],
             page: 8,
             plugins: [
                 ListPagination(paginationTopOptions),
@@ -252,13 +255,13 @@ $(document).ready(function() {
         };
 
         var vendorList = new List('vendors-list', options);
+        var activeFilters = [];
 
         var updateListCat = function(){
             var values_cat = $(".cat-s").val();
 
             vendorList.filter(function(item) {
                 var vendorCategory = item.values().vendCat;
-                console.log(vendorCategory);
                 if(values_cat == 'All')
                     return true;
                 else
@@ -266,22 +269,46 @@ $(document).ready(function() {
             });
         };
 
-        var updateListPrice = function(){
-            var value_price = this.value;
-            console.log(this.value);
+        var updateListCity = function(){
+            var values_city = $(".city-s").val();
 
             vendorList.filter(function(item) {
-                var vendorPrice = item.values().vendPrice;
-                if(value_price == 'All')
+                var vendorCity = item.values().vendCity;
+                if(values_city == 'All')
                     return true;
                 else
-                    return (vendorPrice == value_price);
+                    return (vendorCity.indexOf(values_city) !== -1);
+            });
+        };
+
+        var updateListPrice = function(){
+            var isChecked = this.checked;
+            var value_price = $(this).data("value");
+
+            if(isChecked){
+                //  add to list of active filters
+                activeFilters.push(value_price);
+            }
+            else
+            {
+                // remove from active filters
+                activeFilters.splice(activeFilters.indexOf(value_price), 1);
+            }
+
+            vendorList.filter(function (item) {
+                if(activeFilters.length > 0)
+                {
+                    return(activeFilters.indexOf(item.values().vendPrice)) > -1;
+                }
+                return true;
             });
         };
 
         $(".cat-s").change(updateListCat);
 
-        $("input:radio[name=price]").change(updateListPrice);
+        $(".city-s").change(updateListCity);
+
+        $("input:checkbox[name=price]").change(updateListPrice);
     });
 
     //Show #no-vendors if there are no vendors in the filter
@@ -291,6 +318,5 @@ $(document).ready(function() {
             console.log($('#vendor-list').find('.vendor').length);
         }
     });
-
     
 }); //end of document ready

@@ -54,7 +54,11 @@
                             <label class = "form-label" for="city">City</label>
                         </div>
                         <div class="col-sm-9">
-                            <input type="text" name="city" class = "datePicker" value="{{vendor.city}}" required><br>
+                            <select name="city" id = "city" data-placeholder="Choose a City" required>
+                                {{#each city}}
+                                    <option value="{{this.city}}" {{#if this.selected}}selected{{/if}}>{{this.city}}</option>
+                                {{/each}}
+                            </select><br>
                         </div>
                     </div>
 

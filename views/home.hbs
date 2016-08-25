@@ -71,7 +71,7 @@
                     <div class="col-sm-3">
                         <div class="filter">
                             <label for="categoryselect">Category</label>
-                            <select class="select-filter cat-s" id="category-search" name="categoryselect">
+                            <select class="select-filter cat-s chosen" id="category-search" name="categoryselect">
                                     <option value="All">All</option>
                                 {{#each categories}}
                                     <option value="{{this.category_name}}">{{this.category_name}}</option>
@@ -81,24 +81,28 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="filter">
-                            <label for="location">Location</label>
-                            <input type="text" name="search">
+                            <label for="cityselect">Location</label>
+                            <select class="select-filter city-s chosen" id="city-search" name="cityselect">
+                                <option value="All">All</option>
+                                {{#each city}}
+                                    <option value="{{this.city}}">{{this.city}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="filter price-filter">
                             <label for="price">Price</label>
-                            <div class="flex-wrapper">
-                                <input type="radio" name="price" id="noDollar" value="All" checked>
-                                <input type="radio" name="price" id="oneDollar" value="$">
-                                <input type="radio" name="price" id="twoDollar" value="$$">
-                                <input type="radio" name="price" id="threeDollar" value="$$$">
-                                <input type="radio" name="price" id="fourDollar" value="$$$$">
-                                <label class="price-radio no-dollar" for="noDollar">All</label>
-                                <label class="price-radio four-dollar" for="fourDollar"></label>
-                                <label class="price-radio three-dollar" for="threeDollar"></label>
-                                <label class="price-radio two-dollar" for="twoDollar"></label>
-                                <label class="price-radio one-dollar" for="oneDollar"></label>
+                            <div class="price-checkboxes">
+                                <input class="price-checkbox" type="checkbox" name="price" id="oneDollar" data-value="$">
+                                <label class="price-label one-dollar" for="oneDollar">$</label>
+                                <input class="price-checkbox" type="checkbox" name="price" id="twoDollar" data-value="$$">
+                                <label class="price-label two-dollar" for="twoDollar">$$</label>
+                                <input class="price-checkbox" type="checkbox" name="price" id="threeDollar" data-value="$$$">
+                                <label class="price-label three-dollar" for="threeDollar">$$$</label>
+                                <input class="price-checkbox" type="checkbox" name="price" id="fourDollar" data-value="$$$$">
+                                <label class="price-label four-dollar" for="fourDollar">$$$$</label>
+                                <button class="sort" data-sort="vendPrice">Sort</button>
                             </div>
                         </div>
                     </div>
@@ -127,8 +131,9 @@
                                         <div class="desc-box">
                                             <h2 class="vendName">{{this.vendor_name}}</h2>
                                             <p class="vendCat">{{this.category}}</p>
-                                            <p class="vend-add">{{this.address}}, {{this.address_2}}</p>
-                                            <p class="vend-add" >{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                            <p class="vendAdd">{{this.address}}, {{this.address_2}}</p>
+                                            <p class="vendCity">{{this.city}},</p>
+                                            <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
                                             <!--<div class="row">-->
                                             <p class="vendPrice">{{this.price}}</p>
                                             <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->

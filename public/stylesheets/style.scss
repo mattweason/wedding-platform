@@ -404,57 +404,69 @@ a {
       appearance:none;
     }
 
-    .flex-wrapper{display:flex;}
+    .price-checkboxes {
+      .price-label{
+        text-align: center;
+        font-size: 15px;
+        border: 1px solid #fff;
+        opacity:0.5;
+        cursor:pointer;
+        background-size:contain;
+        background-repeat:no-repeat;
+        display:inline-block;
+        padding: 2px;
+        width:40px;height:23px;
 
-    .no-dollar{
-      order: 5;
-      //background-image: url('/images/dollar-none.png');
-      opacity: 0.5;
-      &:hover{
-        //background-image: url('/images/dollar-none.png');
-        opacity: 1;
+        &:hover{
+          opacity:1;
+          background: #fff;
+          color: $color-gray;
+          border: 1px solid #fff;
+        }
       }
-    }
 
-    .one-dollar{order:1;}
-    .two-dollar{order:2;}
-    .three-dollar{order:3;}
-    .four-dollar{order:4;}
+      .price-checkbox:checked{
+        & + .price-label {
+          opacity: 1;
+          background: #fff;
+          color: $color-gray;
+          border: 1px solid $color-gray;
 
-    #noDollar:checked{
-      & ~ .no-dollar{
-        opacity: 1;
+          &:hover{opacity:0.8;}
+        }
       }
-    }
-
-    .one-dollar, .two-dollar, .three-dollar, .four-dollar{
-      opacity: 0.5;
-      background-image: url('/images/dollar-sign.png');
-      &:hover{opacity: 1;}
-    }
-
-    #oneDollar:checked{
-      & ~ .one-dollar{opacity: 1;}
-    }
-
-    .two-dollar:hover, #twoDollar:checked{
-      & ~ .one-dollar, & ~ .two-dollar{opacity: 1;}
-    }
-
-    .three-dollar:hover, #threeDollar:checked{
-      & ~ .one-dollar, & ~ .two-dollar, & ~ .three-dollar{opacity: 1;}
-    }
-
-    .four-dollar:hover, #fourDollar:checked{
-      & ~ .one-dollar, & ~ .two-dollar, & ~ .three-dollar, & ~ .four-dollar{opacity: 1;}
-    }
-
-    .price-radio{
-      cursor:pointer;
-      background-size:contain;
-      background-repeat:no-repeat;
-      display:inline-block;
-      width:20px;height:20px;
+      .sort{
+        color: #fff;
+        border:none;
+        background:none;
+        outline: none;
+      }
+      .asc{
+        &:after{
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 5px solid #fff;
+          content: "";
+          position: relative;
+          top: 13px;
+          right: -5px;
+        }
+      }
+      .desc{
+        &:after{
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 5px solid #fff;
+          content: "";
+          position: relative;
+          top: -10px;
+          right: -5px;
+        }
+      }
     }
   }
 
@@ -568,11 +580,15 @@ a {
         border-bottom: 1px solid $color-gray;
       }
 
-      .vend-add{
+      .vendAdd, .vendAdd2, .vendCity{
         font-family: $font-main;
         color: $color-lgray;
         font-size: 14px;
         margin-bottom: 0px;
+      }
+
+      .vendAdd2, .vendCity{
+        display: inline-block;
       }
 
       .vend-view{

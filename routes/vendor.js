@@ -13,7 +13,13 @@ const fs = require('fs-extra');
 router.get('/add', function(req,res, next){
 
     connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
-        res.render('vendor_add', { title: 'Add New Vendor', category: category});
+        connection.query("SELECT * FROM ontariomunicipalities ORDER BY city", function(err, cities){
+            res.render('vendor_add', { 
+                title: 'Add New Vendor', 
+                category: category,
+                city: cities
+            });
+        });
     });
 
 });
@@ -50,7 +56,20 @@ router.get('/:vendorName/edit', function(req,res, next){
                         }
                     }
 
-                    res.render('vendor_edit', { title: 'Update Vendor', vendor: vendor[0], category: category});
+                    connection.query("SELECT city FROM ontariomunicipalities ORDER BY city", function(err, cities){
+                        for (var i = 0; i < cities.length; i++) {
+                            if (cities[i].city == vendor[0].city){
+                                cities[i].selected = true;
+                            }
+                        }
+
+                        res.render('vendor_edit', {
+                            title: 'Update Vendor',
+                            vendor: vendor[0],
+                            category: category,
+                            city: cities
+                        });
+                    });
                 });
             }
         });

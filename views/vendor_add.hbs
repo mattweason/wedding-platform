@@ -49,7 +49,12 @@
                             <label class = "form-label" for="city">City</label>
                         </div>
                         <div class="col-sm-9">
-                            <input type="text" name="city" class = "datePicker" required><br>
+                            <select name="city" id = "city" data-placeholder="Choose a City" required>
+                                <option value=""></option>
+                                {{#each city}}
+                                    <option value="{{this.city}}">{{this.city}}</option>
+                                {{/each}}
+                            </select><br>
                         </div>
                     </div>
 
@@ -85,7 +90,8 @@
                             <label class = "form-label" for="price">Price</label>
                         </div>
                         <div class="col-sm-9">
-                            <select name="price" id="price">
+                            <select name="price" id="price" data-placeholder="Choose a Price">
+                                <option value=""></option>
                                 <option value="$">$</option>
                                 <option value="$$">$$</option>
                                 <option value="$$$">$$$</option>

@@ -286,43 +286,55 @@ a {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none; }
-  #vendor-list-header .price-filter .flex-wrapper {
-    display: flex; }
-  #vendor-list-header .price-filter .no-dollar {
-    order: 5;
-    opacity: 0.5; }
-    #vendor-list-header .price-filter .no-dollar:hover {
-      opacity: 1; }
-  #vendor-list-header .price-filter .one-dollar {
-    order: 1; }
-  #vendor-list-header .price-filter .two-dollar {
-    order: 2; }
-  #vendor-list-header .price-filter .three-dollar {
-    order: 3; }
-  #vendor-list-header .price-filter .four-dollar {
-    order: 4; }
-  #vendor-list-header .price-filter #noDollar:checked ~ .no-dollar {
-    opacity: 1; }
-  #vendor-list-header .price-filter .one-dollar, #vendor-list-header .price-filter .two-dollar, #vendor-list-header .price-filter .three-dollar, #vendor-list-header .price-filter .four-dollar {
+  #vendor-list-header .price-filter .price-checkboxes .price-label {
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid #fff;
     opacity: 0.5;
-    background-image: url("/images/dollar-sign.png"); }
-    #vendor-list-header .price-filter .one-dollar:hover, #vendor-list-header .price-filter .two-dollar:hover, #vendor-list-header .price-filter .three-dollar:hover, #vendor-list-header .price-filter .four-dollar:hover {
-      opacity: 1; }
-  #vendor-list-header .price-filter #oneDollar:checked ~ .one-dollar {
-    opacity: 1; }
-  #vendor-list-header .price-filter .two-dollar:hover ~ .one-dollar, #vendor-list-header .price-filter .two-dollar:hover ~ .two-dollar, #vendor-list-header .price-filter #twoDollar:checked ~ .one-dollar, #vendor-list-header .price-filter #twoDollar:checked ~ .two-dollar {
-    opacity: 1; }
-  #vendor-list-header .price-filter .three-dollar:hover ~ .one-dollar, #vendor-list-header .price-filter .three-dollar:hover ~ .two-dollar, #vendor-list-header .price-filter .three-dollar:hover ~ .three-dollar, #vendor-list-header .price-filter #threeDollar:checked ~ .one-dollar, #vendor-list-header .price-filter #threeDollar:checked ~ .two-dollar, #vendor-list-header .price-filter #threeDollar:checked ~ .three-dollar {
-    opacity: 1; }
-  #vendor-list-header .price-filter .four-dollar:hover ~ .one-dollar, #vendor-list-header .price-filter .four-dollar:hover ~ .two-dollar, #vendor-list-header .price-filter .four-dollar:hover ~ .three-dollar, #vendor-list-header .price-filter .four-dollar:hover ~ .four-dollar, #vendor-list-header .price-filter #fourDollar:checked ~ .one-dollar, #vendor-list-header .price-filter #fourDollar:checked ~ .two-dollar, #vendor-list-header .price-filter #fourDollar:checked ~ .three-dollar, #vendor-list-header .price-filter #fourDollar:checked ~ .four-dollar {
-    opacity: 1; }
-  #vendor-list-header .price-filter .price-radio {
     cursor: pointer;
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 20px;
-    height: 20px; }
+    padding: 2px;
+    width: 40px;
+    height: 23px; }
+    #vendor-list-header .price-filter .price-checkboxes .price-label:hover {
+      opacity: 1;
+      background: #fff;
+      color: #282828;
+      border: 1px solid #fff; }
+  #vendor-list-header .price-filter .price-checkboxes .price-checkbox:checked + .price-label {
+    opacity: 1;
+    background: #fff;
+    color: #282828;
+    border: 1px solid #282828; }
+    #vendor-list-header .price-filter .price-checkboxes .price-checkbox:checked + .price-label:hover {
+      opacity: 0.8; }
+  #vendor-list-header .price-filter .price-checkboxes .sort {
+    color: #fff;
+    border: none;
+    background: none;
+    outline: none; }
+  #vendor-list-header .price-filter .price-checkboxes .asc:after {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    content: "";
+    position: relative;
+    top: 13px;
+    right: -5px; }
+  #vendor-list-header .price-filter .price-checkboxes .desc:after {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fff;
+    content: "";
+    position: relative;
+    top: -10px;
+    right: -5px; }
   #vendor-list-header .filters .filter .search {
     background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
     border: 1px solid #aaa;
@@ -408,11 +420,13 @@ a {
         padding-bottom: 5px;
         margin-bottom: 2px;
         border-bottom: 1px solid #282828; }
-      #vendor-list .box .desc-box .vend-add {
+      #vendor-list .box .desc-box .vendAdd, #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
         font-family: "Lato Light";
         color: #828282;
         font-size: 14px;
         margin-bottom: 0px; }
+      #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
+        display: inline-block; }
       #vendor-list .box .desc-box .vend-view {
         position: absolute;
         bottom: 10px;
