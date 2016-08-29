@@ -108,15 +108,34 @@
                             <input type="text" name="url"><br>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-sm-6">
-                    <label class="form-label" for="featured_image">Featured Image</label>
-                    <input type="file" name="featured_image" id="featured_image"/>
-
+                    <div class="featured-select">
+                        <label class="form-label">Featured Vendor</label>
+                        <input id="yes-featured" class="is-featured-radio" type="radio" name="is_featured" value="1">
+                        <label class="featured-radio-label" for="yes-featured">Yes</label>
+                        <input id="not-featured" class="is-featured-radio" type="radio" name="is_featured" value="0" checked>
+                        <label class="featured-radio-label" for="not-featured">No</label>
+                    </div>
                     <label class = "form-label" for="description">Description</label>
                     <textarea name="description" placeholder="Vendor Description" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="featured-image-area">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <label class="form-label">Featured Image</label>
+                    </div>
+                    <div class="col-sm-offset-4 col-sm-2">
+                        <input type="file" name="featured_image" class="inputfile" id="featured_image"/>
+                        <label class="button-light featured-image-button" for="featured_image"><span>Choose Image</span></label>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="thumbnail-wrapper">
+                            <img id="featured-thumbnail" />
+                        </div>
+                    </div>
                 </div>
             </div>
 

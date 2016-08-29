@@ -154,7 +154,7 @@ $(document).ready(function() {
     });
 
     //Change text in label for add to gallery button
-    var inputs = document.querySelectorAll( '#upl' );
+    var inputs = document.querySelectorAll( '.inputfile' );
     Array.prototype.forEach.call( inputs, function( input )
     {
         var label	 = input.nextElementSibling,
@@ -162,6 +162,16 @@ $(document).ready(function() {
 
         input.addEventListener( 'change', function( e )
         {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("featured-thumbnail").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
             var fileName = '';
             if( this.files && this.files.length > 1 )
                 fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
@@ -231,6 +241,26 @@ $(document).ready(function() {
         ]
     });
 
+    //----------------------------------------MASONRY GALLERY------------------------------------------//
+    $('.grid-item').imagesLoaded()
+        .done( function( instance ) {
+            $('.grid').masonry({
+                // options
+                itemSelector: '.grid-item',
+                gutter: 10
+            });
+        });
+
+    //Enable lightbox modal for Masonry gallery
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+            left_arrow_class: '.glyphicon .glyphicon-left',
+            right_arrow_class: '.glyphicon .glyphicon-right'
+        });
+    });
+
+    //----------------------------------------LIST.JS------------------------------------------//
     //List.js options
     $(function() {
         var paginationTopOptions = {

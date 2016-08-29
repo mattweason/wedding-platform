@@ -38,6 +38,12 @@ router.get('/:vendorName/edit', function(req,res, next){
             vendor[0].fourdollar = true;
         }
 
+        if(vendor[0].is_featured == 1) {
+            vendor[0].featured = true;
+        } else {
+            vendor[0].notfeatured = true;
+        }
+
         connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, categoryJoin) {
             if (err) {throw err;}
 
@@ -183,8 +189,6 @@ router.post('/update', function(req, res){
     var featuredImage;
     var category;
 
-    form.uploadDir = __dirname + "/../uploads/featuredimage";
-
     form.parse(req, function(err, fields) {
         for (var propName in fields) {
             if (fields.hasOwnProperty(propName)) {
@@ -204,6 +208,10 @@ router.post('/update', function(req, res){
 
     form.on('fileBegin', function(field, file) {
         file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+    });
+
+    form.on('file', function (name, file) {
+        console.log(file.name);
         featuredImage = file.path;
     });
 

@@ -86,9 +86,11 @@ router.post('/uploadGallery', function(req,res){
 
     //Set up formidable
     var form = new formidable.IncomingForm();
+    form.keepExtensions = true;
     var vendorPhotos = [];
     var vendorID;
     var vendorURL;
+    var vendorEXT;
 
     form.multiples = true;
 
@@ -97,17 +99,19 @@ router.post('/uploadGallery', function(req,res){
     form.parse(req, function(err, fields) {
         vendorID = fields.vendor_id;
         vendorURL = fields.vendor_url;
-        console.log(fields);
     });
 
     form.on('fileBegin', function(field, file) {
+        console.log(file.name);
+        vendorEXT = path.extname(file.name);
+        console.log(vendorEXT);
         file.path = path.join(__dirname, '/../uploads/'+file.name);
         vendorPhotos.push(file.path);
         console.log(vendorPhotos);
     });
 
     form.on('end', function(){
-        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
+        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, vendorEXT, res);
     });
 
 });

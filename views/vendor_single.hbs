@@ -49,9 +49,11 @@
 
             <div class="grid">
 
-                <!--{{#each gallery}}-->
-                    <!--<div class="grid-item"><img src="/{{this.photo_url}}" alt=""></div>-->
-                <!--{{/each}}-->
+                {{#each gallery}}
+                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="grid-item" >
+                        <img src="/{{this.photo_url}}" alt="">
+                    </a>
+                {{/each}}
 
             </div>
         </div>

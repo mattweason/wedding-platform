@@ -70,6 +70,18 @@ a {
   .button-light:hover {
     background: #f2f2f2; }
 
+.form-label {
+  font-family: "Lato Light";
+  font-weight: 700;
+  font-size: 16px; }
+
+input, textarea {
+  font-family: "Lato Light";
+  padding-left: 5px; }
+
+.chosen-container span, .chosen-container li {
+  font-family: "Lato Light"; }
+
 .landing-video iframe {
   width: 100%;
   height: calc(100vh - 120px); }
@@ -523,7 +535,7 @@ a {
       color: #fff;
       text-align: center;
       text-transform: uppercase;
-      margin: 15px 20px 5px 0;
+      margin: 15px 15px 5px 0;
       font-size: 18px;
       line-height: 40px;
       display: block;
@@ -539,9 +551,60 @@ a {
     font-family: "Josefin Sans";
     font-weight: 100;
     color: #282828; }
-  #vendor-single #vendor-gallery .grid-item img {
-    max-width: 200px;
-    margin: 10px; }
+  #vendor-single #vendor-gallery .grid-sizer {
+    width: 25%; }
+  #vendor-single #vendor-gallery .grid-item {
+    position: relative;
+    width: 24%;
+    margin-bottom: 10px; }
+    #vendor-single #vendor-gallery .grid-item img {
+      width: 100%; }
+
+.ekko-lightbox {
+  text-align: center;
+  display: flex;
+  justify-content: center; }
+  .ekko-lightbox .modal-dialog {
+    width: auto;
+    max-width: 800px;
+    align-self: center;
+    display: inline-block; }
+    .ekko-lightbox .modal-dialog .modal-content {
+      border-radius: 0; }
+      .ekko-lightbox .modal-dialog .modal-content .modal-header {
+        height: 0;
+        padding: 0; }
+        .ekko-lightbox .modal-dialog .modal-content .modal-header .close {
+          font-family: "Lato Light";
+          font-size: 32px;
+          position: absolute;
+          margin-top: 0;
+          top: -9px;
+          right: -40px;
+          color: #fff;
+          opacity: 0.8; }
+          .ekko-lightbox .modal-dialog .modal-content .modal-header .close:hover {
+            opacity: 1; }
+      .ekko-lightbox .modal-dialog .modal-content .modal-body img {
+        max-height: 80vh; }
+      .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container {
+        position: relative; }
+        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%); }
+        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-right {
+          right: -55px;
+          width: 80px;
+          height: 80px;
+          background-color: #282828;
+          background-image: url("/images/right-arrow.png"); }
+        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-left {
+          left: -55px;
+          width: 80px;
+          height: 80px;
+          background-color: #282828;
+          background-image: url("/images/left-arrow.png"); }
 
 #vendor-add, #vendor-edit {
   padding-top: 120px; }
@@ -551,15 +614,90 @@ a {
   #vendor-add #add-form, #vendor-edit #add-form {
     padding: 40px 0; }
     #vendor-add #add-form textarea, #vendor-edit #add-form textarea {
-      height: 300px;
+      height: 294px;
       width: 100%; }
     #vendor-add #add-form .chosen-single, #vendor-add #add-form .chosen-drop, #vendor-edit #add-form .chosen-single, #vendor-edit #add-form .chosen-drop {
       border-radius: 0; }
     #vendor-add #add-form input, #vendor-add #add-form .chosen-container, #vendor-edit #add-form input, #vendor-edit #add-form .chosen-container {
       width: 100% !important;
       margin: 5px 0; }
+    #vendor-add #add-form input, #vendor-edit #add-form input {
+      height: 25px; }
     #vendor-add #add-form label, #vendor-edit #add-form label {
       margin: 5px 0; }
+    #vendor-add #add-form .featured-select .form-label, #vendor-edit #add-form .featured-select .form-label {
+      margin-right: 10px; }
+    #vendor-add #add-form .featured-select input, #vendor-edit #add-form .featured-select input {
+      position: absolute;
+      width: 0 !important;
+      margin: 0;
+      padding: 0;
+      opacity: 0; }
+    #vendor-add #add-form .featured-select .featured-radio-label, #vendor-edit #add-form .featured-select .featured-radio-label {
+      font-family: "Lato Light";
+      text-align: center;
+      font-size: 15px;
+      border: 1px solid #282828;
+      opacity: 0.5;
+      cursor: pointer;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      padding: 2px;
+      width: 40px; }
+      #vendor-add #add-form .featured-select .featured-radio-label:hover, #vendor-edit #add-form .featured-select .featured-radio-label:hover {
+        opacity: 1;
+        background: #fff;
+        color: #282828;
+        border: 1px solid #282828; }
+    #vendor-add #add-form .featured-select .is-featured-radio:checked + .featured-radio-label, #vendor-edit #add-form .featured-select .is-featured-radio:checked + .featured-radio-label {
+      opacity: 1;
+      background: #282828;
+      color: #fff;
+      border: 1px solid #fff; }
+      #vendor-add #add-form .featured-select .is-featured-radio:checked + .featured-radio-label:hover, #vendor-edit #add-form .featured-select .is-featured-radio:checked + .featured-radio-label:hover {
+        opacity: 0.8; }
+    #vendor-add #add-form .featured-image-area .form-label, #vendor-edit #add-form .featured-image-area .form-label {
+      margin-top: 20px;
+      height: auto;
+      width: 100%;
+      text-align: center;
+      cursor: default; }
+    #vendor-add #add-form .featured-image-area #featured_image, #vendor-edit #add-form .featured-image-area #featured_image {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1; }
+      #vendor-add #add-form .featured-image-area #featured_image:focus + .featured-image-button, #vendor-edit #add-form .featured-image-area #featured_image:focus + .featured-image-button {
+        outline: 1px dotted #000;
+        outline: -webkit-focus-ring-color auto 5px; }
+    #vendor-add #add-form .featured-image-area .featured-image-button, #vendor-edit #add-form .featured-image-area .featured-image-button {
+      margin-top: 10px;
+      width: 100%;
+      height: 140px;
+      cursor: pointer;
+      font-weight: 300; }
+      #vendor-add #add-form .featured-image-area .featured-image-button span, #vendor-edit #add-form .featured-image-area .featured-image-button span {
+        line-height: 140px; }
+    #vendor-add #add-form .featured-image-area #featured_image + .featured-image-button *, #vendor-edit #add-form .featured-image-area #featured_image + .featured-image-button * {
+      pointer-events: none; }
+    #vendor-add #add-form .featured-image-area .thumbnail-wrapper, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper {
+      height: 140px; }
+      #vendor-add #add-form .featured-image-area .thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      #vendor-add #add-form .featured-image-area .thumbnail-wrapper #featured-thumbnail, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper #featured-thumbnail {
+        vertical-align: middle;
+        margin-top: 10px;
+        max-width: 100%;
+        max-height: 140px; }
+    #vendor-add #add-form .featured-image-area p, #vendor-edit #add-form .featured-image-area p {
+      margin: 5px 0;
+      font-family: "Lato Light";
+      font-weight: 700; }
     #vendor-add #add-form .submit-area, #vendor-edit #add-form .submit-area {
       margin-top: 10px; }
       #vendor-add #add-form .submit-area .add-submit, #vendor-edit #add-form .submit-area .add-submit {
