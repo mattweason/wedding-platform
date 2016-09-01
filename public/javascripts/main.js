@@ -114,6 +114,39 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //--------------------REGISTERING NEW USER TO PLATFORM---------------------
+    $('#register').validate({
+
+        submitHandler: function(form){
+            console.log($('#register').serialize());
+            $.ajax({
+                type: "POST",
+                url: $('#register').attr('action'),
+                data: $('#register').serialize(),
+                success: function(data){
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#dismiss-button').addClass('notdisplay'); //Make dismiss button visible
+                        $('.view-button').removeClass('notdisplay'); //Make variable modal button invisible
+                        $('#message-modal').find('.form-response').html(data.message);
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('.view-button').attr('href', data.url);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    } else if (data.status == 'usernameTaken') {
+                        $('#message-modal').find('.form-response').html(data.message);
+                        $('#dismiss-button').removeClass('notdisplay'); //Make dismiss button visible
+                        $('.view-button').addClass('notdisplay'); //Make variable modal button invisible
+                    } else if (data.status == 'emailTaken') {
+                        $('#message-modal').find('.form-response').html(data.message);
+                        $('#dismiss-button').removeClass('notdisplay'); //Make dismiss button visible
+                        $('.view-button').addClass('notdisplay'); //Make variable modal button invisible
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    }); //end of validate
+
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
     //Chosen field for category

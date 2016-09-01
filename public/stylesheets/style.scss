@@ -66,6 +66,9 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none !important;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 //General Styling-------------------------------------------------General Styling//
@@ -104,6 +107,23 @@ a {
   &:hover {
     background: darken(#fff, 5%);
   }
+}
+
+.back-button{
+  text-decoration: none;
+  width: 45px;
+  display: inline-block;
+  img{
+    height: 30px;
+    margin-top: -7px;
+    text-decoration: none;
+  }
+}
+.back-text{
+  display: inline-block;
+  font-family:$font-main;
+  font-size:18px;
+  margin-left: 5px;
 }
 
 .form-label{
@@ -180,8 +200,8 @@ input, textarea{
     h3 {
       float: left;
       margin-top: 10px;
-      -webkit-transition: all 0.1s; /* Safari */
-      transition: all 0.1s;
+      -webkit-transition: all 0.2s; /* Safari */
+      transition: all 0.2s;
     }
   }
 
@@ -217,8 +237,8 @@ input, textarea{
       width: 80px;
       background: $color-gray;
       border: none;
-      -webkit-transition: all 0.1s; /* Safari */
-      transition: all 0.1s;
+      -webkit-transition: all 0.2s; /* Safari */
+      transition: all 0.2s;
 
       &:hover {
         background: lighten($color-gray, 10%);
@@ -228,12 +248,14 @@ input, textarea{
 }
 //Home Page Styling---------------------------------------------------Home Page Styling//
 #featured-vendor{
-  margin-top: $header-height;
+  margin-top: 160px;
   margin-bottom: 40px;
 
   .slick-arrow {
     background-color: $color-gray;
     cursor: pointer;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
 
     &:hover {background-color: lighten($color-gray, 10%);}
   }
@@ -309,6 +331,10 @@ input, textarea{
     }
     .feat-img{
       height: 340px;
+      width: 100%;
+      background-size:cover;
+      background-position:center center;
+      background-repeat:no-repeat;
     }
     .desc-box{
       background-color: #fff;
@@ -431,6 +457,8 @@ input, textarea{
         display:inline-block;
         padding: 2px;
         width:40px;height:23px;
+        -webkit-transition: all 0.1s;
+        transition: all 0.1s;
 
         &:hover{
           opacity:1;
@@ -446,6 +474,8 @@ input, textarea{
           background: #fff;
           color: $color-gray;
           border: 1px solid $color-gray;
+          -webkit-transition: all 0.1s;
+          transition: all 0.1s;
 
           &:hover{opacity:0.8;}
         }
@@ -541,6 +571,8 @@ input, textarea{
       height:40px;
       width:40px;
       border:1px solid $color-gray;
+      -webkit-transition: all 0.1s;
+      transition: all 0.1s;
 
       &:hover, &.active{
         background: $color-gray;
@@ -557,17 +589,22 @@ input, textarea{
         display:block;
         height:38px;
         width:38px;
-
+        -webkit-transition: all 0.1s;
+        transition: all 0.1s;
       }
     }
   }
 
-  .paginationBottom{margin-bottom: 20px;}
+  .paginationBottom{margin-bottom: 40px;}
 
   .box{
     padding: 20px 0;
     .feat-img{
       height: 220px;
+      width: 330px;
+      background-size:cover;
+      background-position:center center;
+      background-repeat:no-repeat;
     }
     .desc-box{
       background-color: #fff;
@@ -647,7 +684,11 @@ input, textarea{
     padding: 40px 0 140px 0;
 
     .feat-img {
+      height: 300px;
       width: 100%;
+      background-size:cover;
+      background-position:center center;
+      background-repeat:no-repeat;
     }
 
     .info-box{
@@ -765,7 +806,18 @@ input, textarea{
       position: relative;
       width:24%;
       margin-bottom: 10px;
-      img{width: 100%;}
+      img{
+        width: 100%;
+        box-shadow: none;
+        -webkit-transition: all 0.2s; /* Safari */
+        transition: all 0.2s;
+        &:hover{
+          margin-left: -2px;
+          margin-top: -2px;
+          width: calc(100% + 4px);
+          box-shadow: 0px 0px 10px $color-gray;
+        }
+      }
     }
   }
 }
@@ -815,6 +867,11 @@ input, textarea{
               height:80px;
               background-color: $color-gray;
               background-image: url("/images/right-arrow.png");
+              -webkit-transition: all 0.2s; /* Safari */
+              transition: all 0.2s;
+              &:hover{
+                background-color: lighten($color-gray, 10%);
+              }
             }
             .glyphicon-left{
               left: -55px;
@@ -822,6 +879,12 @@ input, textarea{
               height:80px;
               background-color: $color-gray;
               background-image: url("/images/left-arrow.png");
+              -webkit-transition: all 0.2s; /* Safari */
+              transition: all 0.2s;
+
+              &:hover{
+                background-color: lighten($color-gray, 10%);
+              }
             }
           }
         }
@@ -1172,12 +1235,24 @@ input, textarea{
           text-decoration: none;
         }
 
-        .socicon-facebook:hover{color: #3e5b98;}
-        .socicon-twitter:hover{color: #4da7de;}
-        .socicon-instagram:hover{
+        .socicon-instagram{
           background: -webkit-linear-gradient(-110deg, #8a3ab9, #4c68d7, #cd486b, #fbad50, #fbad50);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          &.ghost{
+            position: absolute;
+            background: #fff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-transition: all 0.2s;
+            transition: all 0.2s;
+          }
+        }
+
+        .socicon-facebook:hover{color: #3e5b98;}
+        .socicon-twitter:hover{color: #4da7de;}
+        .ghost:hover{
+          opacity:0;
         }
         .socicon-pinterest:hover{color: #c92619;}
       }
@@ -1199,4 +1274,9 @@ input, textarea{
       }
     }
   }
+}
+
+//Login and Register Page Styling-----------------------------------------------Login and Register Page Styling//
+#login-page, #register-page {
+  padding-top: $header-height;
 }

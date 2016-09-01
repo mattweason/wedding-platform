@@ -10,7 +10,7 @@ connection = sql.connect(mysql, sql.credentials);
 const fs = require('fs-extra');
 
 //---------------------ADDING NEW VENDOR------------------------
-router.get('/add', function(req,res, next){
+router.get('/add', functions.ensureAuthenticated, function(req,res, next){
 
     connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
         connection.query("SELECT * FROM ontariomunicipalities ORDER BY city", function(err, cities){
@@ -25,7 +25,7 @@ router.get('/add', function(req,res, next){
 });
 
 //---------------------EDITING VENDOR------------------------
-router.get('/:vendorName/edit', function(req,res, next){
+router.get('/:vendorName/edit', functions.ensureAuthenticated, function(req,res, next){
 
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
         if(vendor[0].price == '$') {

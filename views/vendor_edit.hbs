@@ -1,7 +1,15 @@
 <div id="vendor-edit">
     <div class="container">
 
-        <h3>{{vendor.vendor_name}} Edit Page</h3>
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="/vendor/{{vendor.vendor_url}}" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
+                <p class="back-text">Back to Vendor</p>
+            </div>
+            <div class="col-sm-6">
+                <h3>{{vendor.vendor_name}} Edit Page</h3>
+            </div>
+        </div>
 
         <form id="add-form" class="add-vendor" enctype="multipart/form-data" action="/vendor/update" method = "post">
             <div class="row">

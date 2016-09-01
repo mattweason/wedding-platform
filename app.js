@@ -4,8 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var multer = require('multer');
 var hbs = require('hbs');
+
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mysql = require('mysql');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -34,6 +39,27 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 //Make uploads folder accessible to front end
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+//session settings
+app.use(session({
+  secret:'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+
+//all routes have res objects that are set to connect-flash message (essentially global variables)
+app.use(function(req,res,next){
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);

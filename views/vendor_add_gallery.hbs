@@ -1,7 +1,15 @@
 <div id="gallery-delete-page">
     <div class="container">
 
-        <h3>{{vendor.vendor_name}} Gallery</h3>
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="/vendor/{{vendor.vendor_url}}" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
+                <p class="back-text">Back to Vendor</p>
+            </div>
+            <div class="col-sm-6">
+                <h3>{{vendor.vendor_name}} Gallery</h3>
+            </div>
+        </div>
 
         <div class="row upload-gallery-area">
             <form id="upload-gallery" enctype="multipart/form-data" action="/uploadGallery" method="post">

@@ -46,7 +46,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* Get add gallery page */
-router.get('/vendor/:vendorName/gallery', function(req, res) {
+router.get('/vendor/:vendorName/gallery', functions.ensureAuthenticated, function(req, res) {
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
 
         connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {

@@ -48,8 +48,14 @@
                       </div>
                       <div class="col-sm-3">
                           <div class="user-area">
-                              <a href="" class="sign-in">Sign In</a>
-                              <a href="" class="sign-up">Sign Up</a>
+                              {{#if user}}
+                                  <a href="" class="my-profile">My Profile</a>
+                                  <a href="/users/logout" class="log-out">Log Out</a>
+                              {{else}}
+                                  <a href="/users/login" class="sign-in">Sign In</a>
+                                  <a href="/users/register" class="sign-up">Sign Up</a>
+                              {{/if}}
+
                           </div>
                       </div>
 
@@ -95,6 +101,7 @@
                                   <a class="socicon-twitter" href=""></a>
                               </div>
                               <div class="social-button">
+                                  <a class="socicon-instagram ghost" href=""></a>
                                   <a class="socicon-instagram" href=""></a>
                               </div>
                               <div class="social-button">
