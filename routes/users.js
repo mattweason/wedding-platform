@@ -67,7 +67,7 @@ passport.use(new LocalStrategy(
             if(err) {return done(err)}
             //if username doesn't exist
             if(!result.length){
-                return done(null, false, { message: 'Incorrect username.' });
+                return done(null, false, { message: 'No user found with this username.' });
             }
             bcrypt.compare(password, result[0].password, function(err, isMatch) {
                 if(err) throw err;
@@ -82,13 +82,13 @@ passport.use(new LocalStrategy(
 
 //serialize and deserialize (something about cookies and sessions)
 passport.serializeUser(function(user, done) {
-    done(null, user.user_id);
+    done(null, {user_id: user.user_id});
 });
 
 passport.deserializeUser(function(id, done) {
-    connection.query('SELECT * FROM user WHERE user_id = ?',id, function(err, result){
+    connection.query('SELECT * FROM user WHERE user_id = ?',id.user_id, function(err, user){
         if(err) throw err;
-        done(err, result);
+        done(err, user);
     });
 });
 

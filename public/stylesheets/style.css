@@ -155,6 +155,8 @@ input, textarea {
     -webkit-transition: all 0.2s;
     /* Safari */
     transition: all 0.2s; }
+  #masthead .user-area .my-profile {
+    width: 100px; }
   #masthead .user-area a {
     font-family: "Josefin Sans";
     text-decoration: none;
@@ -673,7 +675,7 @@ input, textarea {
   #vendor-add #add-form, #vendor-edit #add-form {
     padding: 40px 0; }
     #vendor-add #add-form textarea, #vendor-edit #add-form textarea {
-      height: 294px;
+      height: 329px;
       width: 100%; }
     #vendor-add #add-form .chosen-single, #vendor-add #add-form .chosen-drop, #vendor-edit #add-form .chosen-single, #vendor-edit #add-form .chosen-drop {
       border-radius: 0; }
@@ -684,38 +686,45 @@ input, textarea {
       height: 25px; }
     #vendor-add #add-form label, #vendor-edit #add-form label {
       margin: 5px 0; }
-    #vendor-add #add-form .featured-select .form-label, #vendor-edit #add-form .featured-select .form-label {
-      margin-right: 10px; }
-    #vendor-add #add-form .featured-select input, #vendor-edit #add-form .featured-select input {
-      position: absolute;
-      width: 0 !important;
-      margin: 0;
-      padding: 0;
-      opacity: 0; }
-    #vendor-add #add-form .featured-select .featured-radio-label, #vendor-edit #add-form .featured-select .featured-radio-label {
-      font-family: "Lato Light";
-      text-align: center;
-      font-size: 15px;
-      border: 1px solid #282828;
-      opacity: 0.5;
-      cursor: pointer;
-      background-size: contain;
-      background-repeat: no-repeat;
-      display: inline-block;
-      padding: 2px;
-      width: 40px; }
-      #vendor-add #add-form .featured-select .featured-radio-label:hover, #vendor-edit #add-form .featured-select .featured-radio-label:hover {
-        opacity: 1;
-        background: #fff;
-        color: #282828;
-        border: 1px solid #282828; }
-    #vendor-add #add-form .featured-select .is-featured-radio:checked + .featured-radio-label, #vendor-edit #add-form .featured-select .is-featured-radio:checked + .featured-radio-label {
-      opacity: 1;
-      background: #282828;
-      color: #fff;
-      border: 1px solid #fff; }
-      #vendor-add #add-form .featured-select .is-featured-radio:checked + .featured-radio-label:hover, #vendor-edit #add-form .featured-select .is-featured-radio:checked + .featured-radio-label:hover {
-        opacity: 0.8; }
+    #vendor-add #add-form .featured-select, #vendor-edit #add-form .featured-select {
+      text-align: center; }
+      #vendor-add #add-form .featured-select .wrapper, #vendor-edit #add-form .featured-select .wrapper {
+        display: inline-block;
+        border: 1px solid #4d4d4d;
+        padding: 20px;
+        margin-bottom: 20px; }
+        #vendor-add #add-form .featured-select .wrapper .form-label, #vendor-edit #add-form .featured-select .wrapper .form-label {
+          margin-right: 10px; }
+        #vendor-add #add-form .featured-select .wrapper input, #vendor-edit #add-form .featured-select .wrapper input {
+          position: absolute;
+          width: 0 !important;
+          margin: 0;
+          padding: 0;
+          opacity: 0; }
+        #vendor-add #add-form .featured-select .wrapper .featured-radio-label, #vendor-edit #add-form .featured-select .wrapper .featured-radio-label {
+          font-family: "Lato Light";
+          text-align: center;
+          font-size: 15px;
+          border: 1px solid #282828;
+          opacity: 0.5;
+          cursor: pointer;
+          background-size: contain;
+          background-repeat: no-repeat;
+          display: inline-block;
+          padding: 2px;
+          width: 40px; }
+          #vendor-add #add-form .featured-select .wrapper .featured-radio-label:hover, #vendor-edit #add-form .featured-select .wrapper .featured-radio-label:hover {
+            opacity: 1;
+            background: #fff;
+            color: #282828;
+            border: 1px solid #282828; }
+        #vendor-add #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label, #vendor-edit #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label {
+          opacity: 1;
+          background: #282828;
+          color: #fff;
+          border: 1px solid #fff; }
+          #vendor-add #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover, #vendor-edit #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover {
+            opacity: 0.8; }
     #vendor-add #add-form .featured-image-area .form-label, #vendor-edit #add-form .featured-image-area .form-label {
       margin-top: 20px;
       height: auto;

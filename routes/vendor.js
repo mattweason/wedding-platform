@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
+var async = require('async');
 var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
@@ -23,64 +24,90 @@ router.get('/add', functions.ensureAuthenticated, function(req,res, next){
     });
 
 });
-
+// functions.ensureAuthenticated,
 //---------------------EDITING VENDOR------------------------
-router.get('/:vendorName/edit', functions.ensureAuthenticated, function(req,res, next){
+router.get('/:vendorName/edit', function(req,res, next){
 
-    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
-        if(vendor[0].price == '$') {
-            vendor[0].onedollar = true;
-        } else if (vendor[0].price == '$$') {
-            vendor[0].twodollar = true;
-        } else if (vendor[0].price == '$$$') {
-            vendor[0].threedollar = true;
-        } else if (vendor[0].price == '$$$$') {
-            vendor[0].fourdollar = true;
-        }
+    async.waterfall([
+        getVendor,
+        joinCategory,
+        getCategory,
+        getCities,
+        checkAccess
+    ], function (err, vendor, category, cities, access) {
+        res.render('vendor_edit', {
+            title: 'Update Vendor',
+            vendor: vendor,
+            category: category,
+            city: cities,
+            access: access
+        });
+    });
 
-        if(vendor[0].is_featured == 1) {
-            vendor[0].featured = true;
-        } else {
-            vendor[0].notfeatured = true;
-        }
+    function getVendor (callback) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+            if(vendor[0].price == '$') {
+                vendor[0].onedollar = true;
+            } else if (vendor[0].price == '$$') {
+                vendor[0].twodollar = true;
+            } else if (vendor[0].price == '$$$') {
+                vendor[0].threedollar = true;
+            } else if (vendor[0].price == '$$$$') {
+                vendor[0].fourdollar = true;
+            }
 
-        connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, categoryJoin) {
+            if(vendor[0].is_featured == 1) {
+                vendor[0].featured = true;
+            } else {
+                vendor[0].notfeatured = true;
+            }
+            callback(null, vendor[0]);
+        });
+    }
+    function joinCategory (vendor, callback) {
+        connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor.vendor_id, function (err, categoryJoin) {
             if (err) {throw err;}
 
             else {
 
                 //Take categories belonging to vendor and add the selected property
-                var selectedCategoryArray = [];
+                var categorySelect = [];
                 for (var i = 0; i < categoryJoin.length; i++) {
-                    selectedCategoryArray.push(categoryJoin[i].category_fid);
+                    categorySelect.push(categoryJoin[i].category_fid);
                 }
-
-                connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
-                    for (var i = 0; i < category.length; i++) {
-                        if (selectedCategoryArray.indexOf(category[i].category_id) > -1){
-                            category[i].selected = true;
-                        }
-                    }
-
-                    connection.query("SELECT city FROM ontariomunicipalities ORDER BY city", function(err, cities){
-                        for (var i = 0; i < cities.length; i++) {
-                            if (cities[i].city == vendor[0].city){
-                                cities[i].selected = true;
-                            }
-                        }
-
-                        res.render('vendor_edit', {
-                            title: 'Update Vendor',
-                            vendor: vendor[0],
-                            category: category,
-                            city: cities
-                        });
-                    });
-                });
             }
+            callback(null, vendor, categorySelect);
         });
-    });
-
+    }
+    function getCategory (vendor, categorySelect, callback) {
+        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category) {
+            for (var i = 0; i < category.length; i++) {
+                if (categorySelect.indexOf(category[i].category_id) > -1) {
+                    category[i].selected = true;
+                }
+            }
+            callback(null, vendor, category);
+        });
+    }
+    function getCities (vendor, category, callback) {
+        connection.query("SELECT city FROM ontariomunicipalities ORDER BY city", function(err, cities) {
+            for (var i = 0; i < cities.length; i++) {
+                if (cities[i].city == vendor.city) {
+                    cities[i].selected = true;
+                }
+            }
+            callback(null, vendor, category, cities);
+        });
+    }
+    function checkAccess (vendor, category, cities, callback) {
+        var access = false;
+        if (req.user) {
+            var userLog = req.user[0];
+            if (userLog.admin)
+                access = true;
+        }
+        callback(null, vendor, category, cities, access);
+    }
 });
 
 //----------------------STORING NEW VENDOR IN DATABASE-----------------------

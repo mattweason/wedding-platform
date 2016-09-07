@@ -223,6 +223,9 @@ input, textarea{
   }
 
   .user-area {
+    .my-profile{
+      width: 100px;
+    }
     a {
       font-family: $font-header;
       text-decoration: none;
@@ -904,7 +907,7 @@ input, textarea{
     padding: 40px 0;
 
     textarea {
-      height: 294px;
+      height: 329px;
       width: 100%;
     }
 
@@ -926,48 +929,56 @@ input, textarea{
     }
 
     .featured-select{
-      .form-label{margin-right: 10px;}
-      input {
-        position: absolute;
-        width: 0 !important;
-        margin  : 0;
-        padding : 0;
-        opacity : 0;
-      }
-
-      .featured-radio-label {
-        font-family:$font-main;
-        text-align: center;
-        font-size: 15px;
-        border: 1px solid $color-gray;
-        opacity: 0.5;
-        cursor: pointer;
-        background-size: contain;
-        background-repeat: no-repeat;
+      text-align: center;
+      .wrapper{
         display: inline-block;
-        padding: 2px;
-        width: 40px;
-
-        &:hover {
-          opacity: 1;
-          background: #fff;
-          color: $color-gray;
-          border: 1px solid $color-gray;
+        border: 1px solid #4d4d4d;
+        padding: 20px;
+        margin-bottom: 20px;
+        .form-label{margin-right: 10px;}
+        input {
+          position: absolute;
+          width: 0 !important;
+          margin  : 0;
+          padding : 0;
+          opacity : 0;
         }
-      }
 
-      .is-featured-radio:checked {
-        & + .featured-radio-label {
-          opacity: 1;
-          background: $color-gray;
-          color: #fff;
-          border: 1px solid #fff;
+        .featured-radio-label {
+          font-family:$font-main;
+          text-align: center;
+          font-size: 15px;
+          border: 1px solid $color-gray;
+          opacity: 0.5;
+          cursor: pointer;
+          background-size: contain;
+          background-repeat: no-repeat;
+          display: inline-block;
+          padding: 2px;
+          width: 40px;
 
           &:hover {
-            opacity: 0.8;
+            opacity: 1;
+            background: #fff;
+            color: $color-gray;
+            border: 1px solid $color-gray;
+          }
+        }
+
+        .is-featured-radio:checked {
+          & + .featured-radio-label {
+            opacity: 1;
+            background: $color-gray;
+            color: #fff;
+            border: 1px solid #fff;
+
+            &:hover {
+              opacity: 0.8;
+            }
           }
         }
       }
+
     }
 
     .featured-image-area{

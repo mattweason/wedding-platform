@@ -36,7 +36,9 @@
                         <h2>{{this.vendor_name}}</h2>
                         <p class="vend-cat">{{this.category}}</p>
                         <p class="vend-desc">{{this.description}}</p>
-                        <a class="vend-edit-link" href="/vendor/{{this.vendor_url}}/edit">Edit Vendor</a>
+                        {{#if ../access}}
+                            <a class="vend-edit-link" href="/vendor/{{this.vendor_url}}/edit">Edit Vendor</a>
+                        {{/if}}
                     </div>
                 </div>
 

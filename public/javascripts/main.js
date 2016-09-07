@@ -233,7 +233,7 @@ $(document).ready(function() {
         } else if ( $('#masthead').hasClass('catch-header') && $window.scrollTop() <= distance ) {
             $('#masthead').removeClass('catch-header');
         }
-    })
+    });
 
     //Initialize dotdotdot function
     $(".overflow-box").dotdotdot({
