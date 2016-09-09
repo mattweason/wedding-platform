@@ -53,7 +53,7 @@ $font-main: 'Lato Light';
 $font-mainlight: 'Lato Hairline';
 
 
-//Styling-------------------------------------Styling//
+//Basic-------------------------------------Basic//
 html {
   position: relative;
   min-height: 100%;
@@ -71,7 +71,12 @@ a {
   transition: all 0.2s;
 }
 
-//General Styling-------------------------------------------------General Styling//
+.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+//General-------------------------------------------------General//
 .button-dark {
   text-decoration: none;
   color: #fff;
@@ -141,7 +146,7 @@ input, textarea{
   span, li{font-family: $font-main;}
 }
 
-//Header Styling-------------------------------------------------Header Styling//
+//Header-------------------------------------------------Header//
 .landing-video {
   iframe {
     width: 100%;
@@ -249,7 +254,7 @@ input, textarea{
     }
   }
 }
-//Home Page Styling---------------------------------------------------Home Page Styling//
+//Home Page---------------------------------------------------Home Page//
 #featured-vendor{
   margin-top: 160px;
   margin-bottom: 40px;
@@ -437,7 +442,7 @@ input, textarea{
     }
   }
 
-  //----------------Price Filter Styling
+  //----------------Price Filter
   .price-filter {
     label {display: block;}
     input {
@@ -558,9 +563,10 @@ input, textarea{
       .chosen-results{font-family: $font-main;}
     }
   }
-
-
 }
+
+.admin-vendors-list{padding-top: 120px;}
+
 #vendor-list{
   padding-top: 40px;
 
@@ -646,10 +652,9 @@ input, textarea{
         display: inline-block;
       }
 
-      .vend-view{
+      .vend-view, .vend-edit {
         position: absolute;
         bottom: 10px;
-        right: 0;
         font-family: $font-header;
         text-decoration: none;
         color: #fff;
@@ -668,6 +673,12 @@ input, textarea{
           background: lighten($color-gray, 10%);
         }
       }
+      .vend-edit{
+        right: 0;
+      }
+      .vend-view{
+        left: 20px;
+      }
     }
   }
 }
@@ -679,7 +690,7 @@ input, textarea{
   }
 }
 
-//Single Vendor Page Styling-----------------------------------------------Single Vendor Page Styling//
+//Single Vendor Page-----------------------------------------------Single Vendor Page//
 #vendor-single{
   padding-top: $header-height;
 
@@ -825,7 +836,7 @@ input, textarea{
   }
 }
 
-//Add and Edit Vendor Page Styling----------------------------------------------------Add and Edit Vendor Page Styling//
+//Add and Edit Vendor Page----------------------------------------------------Add and Edit Vendor Page//
 .ekko-lightbox{
   text-align: center;
   display: flex;
@@ -978,7 +989,6 @@ input, textarea{
           }
         }
       }
-
     }
 
     .featured-image-area{
@@ -1089,7 +1099,7 @@ input, textarea{
 }
 
 
-//Gallery Delete Page Styling-----------------------------------------------Gallery Delete Page Styling
+//Gallery Delete Page-----------------------------------------------Gallery Delete Page//
 #gallery-delete-page {
   padding-top: $header-height;
   padding-bottom:40px;
@@ -1155,8 +1165,74 @@ input, textarea{
   }
 }
 
+//Login and Register Page-----------------------------------------------Login and Register Page//
+#login-page, #register-page {
+  padding-top: $header-height;
+}
 
-//Modal styling
+//Admin Page--------------------------------------------------------------Admin Page//
+#admin{
+  padding-top: $header-height;
+  height: calc(100vh - 280px);
+  display: flex;
+  justify-content: center;
+
+  .adminArea{
+    align-self: center;
+  }
+
+  h3 {
+    text-align: center;
+    font-family: $font-header;
+    margin-bottom: 40px;
+  }
+
+  .addVendor{
+    border-right: 1px solid $color-gray;
+    border-bottom: 1px solid $color-gray;
+    padding: 0 10px 10px 0;
+  }
+
+  .vendorList{
+    border-bottom: 1px solid $color-gray;
+    padding: 0 0 10px 10px;
+  }
+
+  .pendingVendors{
+    border-right: 1px solid $color-gray;
+    padding: 10px 10px 0 0;
+  }
+
+  .userList{
+    padding: 10px 0 0 10px;
+  }
+
+  .adminButton {
+    font-family: $font-main;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 80px;
+    display: block;
+    height: 80px;
+    background: $color-gray;
+    width: 100%;
+    border: none;
+
+    &:hover {
+      background: lighten($color-gray, 10%);
+    }
+  }
+}
+
+//Admin User List-------------------------------------------------------------Admin User List//
+#users-list{
+  padding-top: 160px;
+}
+
+//Modal----------------------------------------------------------------------Modal//
 #message-modal, #delete-modal{
 
   .modal-content {
@@ -1202,9 +1278,7 @@ input, textarea{
   }
 }
 
-
-
-//Footer Styling------------------------------------------------------Footer Styling//
+//Footer------------------------------------------------------Footer//
 #mastfooter{
   position: absolute;
   left: 0;
@@ -1285,9 +1359,4 @@ input, textarea{
       }
     }
   }
-}
-
-//Login and Register Page Styling-----------------------------------------------Login and Register Page Styling//
-#login-page, #register-page {
-  padding-top: $header-height;
 }

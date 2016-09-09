@@ -93,10 +93,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 router.post('/login',
-    passport.authenticate('local', {successRedirect: '/', failureRedirect:'/users/login', failureFlash: true}),
-    function(req, res) {
-        //res.redirect('/');
-    });
+    passport.authenticate('local', {successReturnToOrRedirect: '/', failureRedirect:'/users/login', failureFlash: true}));
 
 //logout with a redirect and a flash msg
 router.get('/logout', function(req,res){

@@ -10,13 +10,13 @@ connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs-extra');
 
-//---------------------ADDING NEW VENDOR------------------------
+//---------------------ADDING NEW VENDOR------------------------//
 router.get('/add', functions.ensureAuthenticated, function(req,res, next){
 
     connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
         connection.query("SELECT * FROM ontariomunicipalities ORDER BY city", function(err, cities){
-            res.render('vendor_add', { 
-                title: 'Add New Vendor', 
+            res.render('vendor_add', {
+                title: 'Add New Vendor',
                 category: category,
                 city: cities
             });
@@ -24,9 +24,24 @@ router.get('/add', functions.ensureAuthenticated, function(req,res, next){
     });
 
 });
-// functions.ensureAuthenticated,
-//---------------------EDITING VENDOR------------------------
-router.get('/:vendorName/edit', function(req,res, next){
+
+//---------------------VENDOR GALLERY EDIT-----------------------//
+router.get('/:vendorName/gallery', functions.ensureAuthenticated, function(req, res) {
+    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+
+        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {
+
+            res.render('vendor_add_gallery', {
+                title: vendor[0].vendor_name + ' Gallery Add',
+                vendor: vendor[0],
+                photos: photos
+            });
+        });
+    });
+});
+
+//---------------------EDITING VENDOR------------------------//
+router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUser, function(req,res, next){
 
     async.waterfall([
         getVendor,
@@ -110,7 +125,63 @@ router.get('/:vendorName/edit', function(req,res, next){
     }
 });
 
-//----------------------STORING NEW VENDOR IN DATABASE-----------------------
+//---------------------VENDOR PAGE-----------------------------//
+router.get('/:vendorName', function(req,res) {
+
+    async.waterfall([
+        getVendor,
+        getCategory,
+        getGallery,
+        checkAccess
+    ], function (err, vendorCategory, gallery, access) {
+        res.render('vendor_single', {
+            access: access,
+            title: vendorCategory[0].vendor_name,
+            vendor: vendorCategory,
+            gallery: gallery
+        });
+    });
+
+    function getVendor (callback) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+            callback(null, vendor);
+        });
+    }
+    function getCategory (vendor, callback) {
+        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
+            var vendorCategory = functions.vendorJoin(vendor, category);
+            callback(null, vendorCategory);
+        });
+    }
+    function getGallery (vendorCategory, callback) {
+        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, gallery) {
+            callback(null, vendorCategory, gallery);
+        });
+    }
+    function checkAccess (vendorCategory, gallery, callback) {
+        var access = false;
+        if (req.user) {
+            var userLog = req.user[0];
+            if (userLog.admin) {
+                access = true;
+                callback(null, vendorCategory, gallery, access);
+            }
+            else
+                connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
+                    if (userAccess.length) {
+                        access = true;
+                        callback(null, vendorCategory, gallery, access);
+                    }
+                    else
+                        callback(null, vendorCategory, gallery, access);
+                });
+        }
+        else
+            callback(null, vendorCategory, gallery, access);
+    }
+});
+
+//----------------------STORING NEW VENDOR IN DATABASE-----------------------//
 router.post('/create', function(req, res){
 
     //Set up formidable
@@ -206,7 +277,7 @@ router.post('/create', function(req, res){
 
 });
 
-//----------------------UPDATING VENDOR IN DATABASE-----------------------
+//----------------------UPDATING VENDOR IN DATABASE-----------------------//
 router.post('/update', function(req, res){
 
     //Set up formidable
@@ -286,7 +357,7 @@ router.post('/update', function(req, res){
     }
 });
 
-//-------------------------------------DELETING VENDOR FROM DATABASE--------------------------------------------------//
+//-------------------------------------DELETING VENDOR FROM DATABASE--------------------------------------------------////
 router.post('/delete', function(req, res){
     var vendorID;
 

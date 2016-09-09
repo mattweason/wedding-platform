@@ -49,13 +49,17 @@
                       <div class="col-sm-3">
                           <div class="user-area">
                               {{#if user}}
-                                  <a href="" class="my-profile">My Profile</a>
-                                  <a href="/users/logout" class="log-out">Log Out</a>
+                                  {{#if admin}}
+                                      <a href="/admin" class="admin-dashboard">Admin</a>
+                                      <a href="/users/logout" class="log-out">Log Out</a>
+                                  {{else}}
+                                      <a href="" class="my-profile">My Profile</a>
+                                      <a href="/users/logout" class="log-out">Log Out</a>
+                                  {{/if}}
                               {{else}}
                                   <a href="/users/login" class="sign-in">Sign In</a>
                                   <a href="/users/register" class="sign-up">Sign Up</a>
                               {{/if}}
-
                           </div>
                       </div>
 

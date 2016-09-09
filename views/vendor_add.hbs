@@ -1,7 +1,31 @@
 <div id="vendor-add">
-    <form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
-
         <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="/admin/dashboard" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
+                    <p class="back-text">Back to Admin Dashboard</p>
+                </div>
+                <div class="col-sm-6">
+                    <h3>ADD VENDOR</h3>
+                </div>
+            </div>
+
+            <form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
+                {{#if access}}
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <div class="featured-select">
+                                <div class="wrapper">
+                                    <label class="form-label">Featured Vendor</label>
+                                    <input id="yes-featured" class="is-featured-radio" type="radio" name="is_featured" value="1">
+                                    <label class="featured-radio-label" for="yes-featured">Yes</label>
+                                    <input id="not-featured" class="is-featured-radio" type="radio" name="is_featured" value="0" checked>
+                                    <label class="featured-radio-label" for="not-featured">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
             <div class="row">
                 <div class="col-sm-6">
                     <div class="row">
@@ -111,13 +135,6 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <div class="featured-select">
-                        <label class="form-label">Featured Vendor</label>
-                        <input id="yes-featured" class="is-featured-radio" type="radio" name="is_featured" value="1">
-                        <label class="featured-radio-label" for="yes-featured">Yes</label>
-                        <input id="not-featured" class="is-featured-radio" type="radio" name="is_featured" value="0" checked>
-                        <label class="featured-radio-label" for="not-featured">No</label>
-                    </div>
                     <label class = "form-label" for="description">Description</label>
                     <textarea name="description" placeholder="Vendor Description" required></textarea>
                 </div>
@@ -144,7 +161,6 @@
                     <input class="add-submit button-light" type="submit" value="Add Vendor">
                 </div>
             </div>
-        </div>
-
-    </form>
+        </form>
+    </div>
 </div>

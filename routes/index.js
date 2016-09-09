@@ -12,102 +12,71 @@ const fs = require('fs-extra');
 
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
+router.use('/admin', require('./admin'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    connection.query('SELECT * FROM vendor ORDER BY vendor_name ASC', function(err, vendor) {
-
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, allCategories) {
-
-            connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
-
-                connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
-
-                    connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {
-
-                        // Append categories as strings onto vendor object
-                        var vendorCategory = functions.vendorJoin(vendor, category);
-
-                        res.render('home', {
-                            home: 1,
-                            title: 'Vendors on a Dime',
-                            vendor: vendorCategory,
-                            featured: featured,
-                            category: category,
-                            city: cities,
-                            categories: allCategories
-                        });
-                    });
-                });
-            });
-        });
-    });
-});
-
-/* Get add gallery page */
-router.get('/vendor/:vendorName/gallery', functions.ensureAuthenticated, function(req, res) {
-    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
-
-        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {
-
-            res.render('vendor_add_gallery', {
-                title: vendor[0].vendor_name + ' Gallery Add',
-                vendor: vendor[0],
-                photos: photos
-            });
-        });
-    });
-});
-
-//Vendor Page
-router.get('/vendor/:vendorName', function(req,res) {
-    
     async.waterfall([
         getVendor,
+        allCategories,
         getCategory,
-        getGallery,
-        checkAccess
-    ], function (err, vendorCategory, gallery, access) {
-        res.render('vendor_single', {
-            access: access,
-            title: vendorCategory[0].vendor_name,
-            vendor: vendorCategory,
-            gallery: gallery
+        getFeatured,
+        getCities,
+        checkAdmin
+    ], function (err, vendorFull, featured, cities, categories, admin) {
+        res.render('home', {
+            home: 1,
+            admin: admin,
+            title: 'Vendors on a Dime',
+            vendor: vendorFull,
+            featured: featured,
+            city: cities,
+            categories: categories
         });
     });
-    
+
     function getVendor (callback) {
-        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
-            callback(null, vendor);
+        connection.query('SELECT * FROM vendor ORDER BY vendor_name ASC', function(err, vendor) {
+           callback(null, vendor);
         });
     }
-    function getCategory (vendor, callback) {
+    function allCategories (vendor, callback) {
+        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
+            callback(null, vendor, categories);
+        });
+    }
+    function getCategory (vendor, categories, callback) {
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
-            var vendorCategory = functions.vendorJoin(vendor, category);
-            callback(null, vendorCategory);
+
+            // Append categories as strings onto vendor object
+            var vendorFull = functions.vendorJoin(vendor, category);
+
+            callback(null, vendorFull, categories, category);
         });
     }
-    function getGallery (vendorCategory, callback) {
-        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, gallery) {
-            callback(null, vendorCategory, gallery);
+    function getFeatured (vendor, categories, category, callback) {
+        connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
+
+            // Append categories as strings onto vendor object
+            var featuredFull = functions.vendorJoin(featured, category);
+
+            callback(null, vendor, featuredFull, categories);
         });
     }
-    function checkAccess (vendorCategory, gallery, callback) {
-        var access = false;
+    function getCities (vendor, featured, categories, callback) {
+        connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {
+            callback(null, vendor, featured, cities, categories);
+        });
+    }
+    function checkAdmin (vendor, featured, cities, categories, callback) {
+        var admin = false;
         if (req.user) {
             var userLog = req.user[0];
             if (userLog.admin)
-                access = true;
-            else
-                connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory.vendor_id], function (err, userAccess) {
-                    if (userAccess.length)
-                        access = true;
-                });
-            callback(null, vendorCategory, gallery, access);
+                admin = true;
         }
-        else
-            callback(null, vendorCategory, gallery, access);
+        callback(null, vendor, featured, cities, categories, admin);
     }
 });
 

@@ -42,6 +42,10 @@ a {
   -webkit-transition: all 0.2s;
   transition: all 0.2s; }
 
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0; }
+
 .button-dark {
   text-decoration: none;
   color: #fff;
@@ -410,6 +414,9 @@ input, textarea {
   #vendor-list-header .filters .filter .chosen-results {
     font-family: "Lato Light"; }
 
+.admin-vendors-list {
+  padding-top: 120px; }
+
 #vendor-list {
   padding-top: 40px; }
   #vendor-list .paginationBottom, #vendor-list .paginationTop {
@@ -477,10 +484,9 @@ input, textarea {
         margin-bottom: 0px; }
       #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
         display: inline-block; }
-      #vendor-list .box .desc-box .vend-view {
+      #vendor-list .box .desc-box .vend-view, #vendor-list .box .desc-box .vend-edit {
         position: absolute;
         bottom: 10px;
-        right: 0;
         font-family: "Josefin Sans";
         text-decoration: none;
         color: #fff;
@@ -494,8 +500,12 @@ input, textarea {
         width: 120px;
         background: #282828;
         border: none; }
-        #vendor-list .box .desc-box .vend-view:hover {
+        #vendor-list .box .desc-box .vend-view:hover, #vendor-list .box .desc-box .vend-edit:hover {
           background: #424242; }
+      #vendor-list .box .desc-box .vend-edit {
+        right: 0; }
+      #vendor-list .box .desc-box .vend-view {
+        left: 20px; }
 
 #no-vendors {
   display: none; }
@@ -843,6 +853,51 @@ input, textarea {
         max-width: 200px;
         max-height: 140px; }
 
+#login-page, #register-page {
+  padding-top: 120px; }
+
+#admin {
+  padding-top: 120px;
+  height: calc(100vh - 280px);
+  display: flex;
+  justify-content: center; }
+  #admin .adminArea {
+    align-self: center; }
+  #admin h3 {
+    text-align: center;
+    font-family: "Josefin Sans";
+    margin-bottom: 40px; }
+  #admin .addVendor {
+    border-right: 1px solid #282828;
+    border-bottom: 1px solid #282828;
+    padding: 0 10px 10px 0; }
+  #admin .vendorList {
+    border-bottom: 1px solid #282828;
+    padding: 0 0 10px 10px; }
+  #admin .pendingVendors {
+    border-right: 1px solid #282828;
+    padding: 10px 10px 0 0; }
+  #admin .userList {
+    padding: 10px 0 0 10px; }
+  #admin .adminButton {
+    font-family: "Lato Light";
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 80px;
+    display: block;
+    height: 80px;
+    background: #282828;
+    width: 100%;
+    border: none; }
+    #admin .adminButton:hover {
+      background: #424242; }
+
+#users-list {
+  padding-top: 160px; }
+
 #message-modal .modal-content, #delete-modal .modal-content {
   margin: 0 100px;
   padding: 20px;
@@ -938,8 +993,5 @@ input, textarea {
       #mastfooter .sub-footer a:hover {
         text-decoration: none;
         border-bottom: 1px solid #282828; }
-
-#login-page, #register-page {
-  padding-top: 120px; }
 
 /*# sourceMappingURL=style.css.map */
