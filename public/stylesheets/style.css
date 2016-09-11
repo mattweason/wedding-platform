@@ -812,6 +812,14 @@ input, textarea {
         #vendor-add #add-form .submit-area .delete-submit:hover, #vendor-edit #add-form .submit-area .delete-submit:hover {
           background: #424242; }
 
+#review-vendor {
+  padding-top: 160px; }
+  #review-vendor h3 {
+    text-align: center;
+    font-family: "Josefin Sans"; }
+  #review-vendor #reviewText, #review-vendor #reviewTitle {
+    width: 100%; }
+
 #gallery-delete-page {
   padding-top: 120px;
   padding-bottom: 40px; }

@@ -26,6 +26,17 @@ router.get('/add', functions.ensureAuthenticated, function(req,res, next){
 });
 
 //---------------------VENDOR GALLERY EDIT-----------------------//
+router.get('/:vendorName/review', functions.ensureAuthenticated, function(req, res) {
+    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+
+        res.render('review', {
+            title: vendor[0].vendor_name + ' Review',
+            vendor: vendor[0]
+        });
+    });
+});
+
+//---------------------VENDOR GALLERY EDIT-----------------------//
 router.get('/:vendorName/gallery', functions.ensureAuthenticated, function(req, res) {
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
 
@@ -179,6 +190,33 @@ router.get('/:vendorName', function(req,res) {
         else
             callback(null, vendorCategory, gallery, access);
     }
+});
+
+//----------------------STORING NEW REVIEW IN DATABASE-----------------------//
+router.post('/leavereview', function(req, res){
+    console.log(req.body);
+    var userID = req.user[0].user_id;
+    var vendorID = req.body.vendorID;
+    var vendorName = req.body.vendorName;
+    var rating = req.body.rating;
+    var reviewTitle = req.body.reviewTitle;
+    var reviewText = req.body.reviewText;
+
+    var query = `INSERT INTO reviews (user_fid, vendor_fid, rating, title, review) VALUES (${userID}, ${vendorID}, ${rating}, '${reviewTitle}', '${reviewText}')`;
+
+    // execute the query
+    connection.query(query, function (err) {
+        if (err)
+            throw err;
+    });
+
+    res.send({
+        message: 'Review Submitted',
+        buttontext: 'Back to Vendor',
+        url: '/vendor/' + vendorName,
+        status: "success"
+    })
+
 });
 
 //----------------------STORING NEW VENDOR IN DATABASE-----------------------//

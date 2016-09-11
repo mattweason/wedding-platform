@@ -14759,6 +14759,28 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //--------------------ADDING REVIEW TO VENDOR---------------------
+    $('#review-form').validate({
+        
+        submitHandler: function(form){
+            $.ajax({
+                type: "POST",
+                url: $('#review-form').attr('action'),
+                data: $('#review-form').serialize(), // serializes the form's elements.
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('.view-button').attr('href', data.url);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    }); //end of validate
+
     //--------------------ADDING GALLERY TO VENDOR---------------------
     $('#upload-gallery').validate({
 
@@ -14930,7 +14952,7 @@ $(document).ready(function() {
         } else if ( $('#masthead').hasClass('catch-header') && $window.scrollTop() <= distance ) {
             $('#masthead').removeClass('catch-header');
         }
-    })
+    });
 
     //Initialize dotdotdot function
     $(".overflow-box").dotdotdot({
