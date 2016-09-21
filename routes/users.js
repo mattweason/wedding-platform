@@ -5,6 +5,7 @@ var mysql = require('mysql');
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 connection = sql.connect(mysql, sql.credentials);
 
 /* GET users listing. */
@@ -60,7 +61,7 @@ router.post('/register', function(req,res){
     });
 });
 
-//validation process for user
+//local validation process for user
 passport.use(new LocalStrategy(
     function(username, password, done) {
         connection.query("SELECT * FROM user WHERE username = ?",username, function(err, result){
@@ -80,6 +81,32 @@ passport.use(new LocalStrategy(
     }
 ));
 
+//facebook validation process for user
+passport.use(new FacebookStrategy({
+    clientID: '1782792395331151',
+    clientSecret: '5d416dcc01a0fca03860cc0944803214',
+    callbackURL: "http://localhost:3000/users/auth/facebook/callback",
+    profileFields: ["emails", "displayName"]
+},
+    function(token, refreshToken, profile, done) {
+        var fbID = profile.id,
+            fbToken = token,
+            fbName = profile.displayName,
+            fbEmail = profile.emails[0].value;
+        connection.query("SELECT * FROM user WHERE username = ?",fbID, function(err, result){
+            if(err) {return done(err)}
+            //if username doesn't exist
+            if(result.length){
+                return done(null, result);
+            }
+            else
+                connection.query('INSERT INTO `user`(`username`, `facebook_token`, `email`, `name`) VALUES (?,?,?,?)',[fbID,fbToken,fbEmail,fbName],function(err, result){
+                    return done(null, result);
+                });
+        });
+    }
+));
+
 //serialize and deserialize (something about cookies and sessions)
 passport.serializeUser(function(user, done) {
     done(null, {user_id: user.user_id});
@@ -94,6 +121,17 @@ passport.deserializeUser(function(id, done) {
 
 router.post('/login',
     passport.authenticate('local', {successReturnToOrRedirect: '/', failureRedirect:'/users/login', failureFlash: true}));
+
+//Facebook routes
+// route for facebook authentication and login
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+// handle the callback after facebook has authenticated the user
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect : '/',
+        failureRedirect : '/users/login'
+    }));
 
 //logout with a redirect and a flash msg
 router.get('/logout', function(req,res){

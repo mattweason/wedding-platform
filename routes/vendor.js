@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
 var async = require('async');
+var _ = require('underscore');
 var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
@@ -18,20 +19,22 @@ router.get('/add', functions.ensureAuthenticated, function(req,res, next){
             res.render('vendor_add', {
                 title: 'Add New Vendor',
                 category: category,
-                city: cities
+                city: cities,
+                admin: req.admin
             });
         });
     });
 
 });
 
-//---------------------VENDOR GALLERY EDIT-----------------------//
+//---------------------VENDOR REVIEW FORM-----------------------//
 router.get('/:vendorName/review', functions.ensureAuthenticated, function(req, res) {
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
 
         res.render('review', {
             title: vendor[0].vendor_name + ' Review',
-            vendor: vendor[0]
+            vendor: vendor[0],
+            admin: req.admin
         });
     });
 });
@@ -45,7 +48,8 @@ router.get('/:vendorName/gallery', functions.ensureAuthenticated, function(req, 
             res.render('vendor_add_gallery', {
                 title: vendor[0].vendor_name + ' Gallery Add',
                 vendor: vendor[0],
-                photos: photos
+                photos: photos,
+                admin: req.admin
             });
         });
     });
@@ -66,7 +70,8 @@ router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUs
             vendor: vendor,
             category: category,
             city: cities,
-            access: access
+            access: access,
+            admin: req.admin
         });
     });
 
@@ -143,13 +148,17 @@ router.get('/:vendorName', function(req,res) {
         getVendor,
         getCategory,
         getGallery,
+        getReviews,
         checkAccess
-    ], function (err, vendorCategory, gallery, access) {
+    ], function (err, vendorCategory, gallery, reviews, rating, access) {
         res.render('vendor_single', {
             access: access,
             title: vendorCategory[0].vendor_name,
-            vendor: vendorCategory,
-            gallery: gallery
+            vendor: vendorCategory[0],
+            review: reviews,
+            rating: rating,
+            gallery: gallery,
+            admin: req.admin
         });
     });
 
@@ -169,53 +178,118 @@ router.get('/:vendorName', function(req,res) {
             callback(null, vendorCategory, gallery);
         });
     }
-    function checkAccess (vendorCategory, gallery, callback) {
+    function getReviews (vendorCategory, gallery, callback) {
+        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ?', vendorCategory[0].vendor_id, function (err, reviews) {
+            var ratingCounter = 0;
+            var ratingTotal = 0;
+            for (var i = 0; i < reviews.length; i++) {
+                var mysqlTime = reviews[0].timestamp.toString();
+                var time = mysqlTime.split(/[- :]/);
+                var date = time[1] + ' ' + time[2] + ', ' + time[3];
+                ratingTotal += reviews[i].rating;
+                reviews[i].date = date;
+                ratingCounter++;
+            }
+            function round(value, precision) {
+                var multiplier = Math.pow(10, precision || 1);
+                return Math.round(value * multiplier) / multiplier;
+            }
+            var rating = round(ratingTotal / ratingCounter);
+            callback(null, vendorCategory, gallery, reviews, rating);
+        });
+    }
+    function checkAccess (vendorCategory, gallery, reviews, rating, callback) {
         var access = false;
         if (req.user) {
             var userLog = req.user[0];
             if (userLog.admin) {
                 access = true;
-                callback(null, vendorCategory, gallery, access);
+                console.log(access);
+                callback(null, vendorCategory, gallery, reviews, rating, access);
             }
             else
                 connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
                     if (userAccess.length) {
                         access = true;
-                        callback(null, vendorCategory, gallery, access);
+                        callback(null, vendorCategory, gallery, reviews, rating, access);
                     }
                     else
-                        callback(null, vendorCategory, gallery, access);
+                        callback(null, vendorCategory, gallery, reviews, rating, access);
                 });
         }
         else
-            callback(null, vendorCategory, gallery, access);
+            callback(null, vendorCategory, gallery, reviews, rating, access);
     }
 });
 
 //----------------------STORING NEW REVIEW IN DATABASE-----------------------//
 router.post('/leavereview', function(req, res){
-    console.log(req.body);
-    var userID = req.user[0].user_id;
-    var vendorID = req.body.vendorID;
-    var vendorName = req.body.vendorName;
-    var rating = req.body.rating;
-    var reviewTitle = req.body.reviewTitle;
-    var reviewText = req.body.reviewText;
+    //Set up formidable
+    var form = new formidable.IncomingForm();
+    var dataCollection = {userID: req.user[0].user_id};
+    var userPhotos = [];
+    var vendorName;
 
-    var query = `INSERT INTO reviews (user_fid, vendor_fid, rating, title, review) VALUES (${userID}, ${vendorID}, ${rating}, '${reviewTitle}', '${reviewText}')`;
-
-    // execute the query
-    connection.query(query, function (err) {
-        if (err)
-            throw err;
+    async.waterfall([
+        uploadImages,
+        renameImages,
+        insertPhotos,
+        insertReview
+    ], function(err) {
+        res.send({
+            message: 'Review Submitted',
+            buttontext: 'Back to Vendor',
+            url: '/vendor/' + vendorName,
+            status: "success"
+        })
     });
 
-    res.send({
-        message: 'Review Submitted',
-        buttontext: 'Back to Vendor',
-        url: '/vendor/' + vendorName,
-        status: "success"
-    })
+    function uploadImages (callback) {
+        form.multiples = true;
+
+        form.uploadDir = __dirname + "/../uploads/useruploads";
+
+        form.parse(req, function(err, fields) {
+            for (var propName in fields) {
+                if (fields.hasOwnProperty(propName)) {
+                    if(propName == 'vendorName') {
+                        vendorName = fields[propName];
+                    } else {
+                        dataCollection[propName] = fields[propName];
+                    }
+                }
+            }
+        });
+
+        form.on('fileBegin', function(field, file) {
+            file.path = path.join(__dirname, '/../uploads/useruploads/'+file.name);
+            userPhotos.push(file.path);
+        });
+
+        form.on('end', function(){
+            callback(null, userPhotos, dataCollection);
+        });
+    }
+    function renameImages (userPhotos, fields, callback) {
+        for (var i = 0; i < userPhotos.length; i++) {
+            var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i;
+
+            fs.rename(userPhotos[i], uploadPath);
+        }
+        callback(null, fields)
+    }
+    function insertPhotos (fields, callback) {}
+    function insertReview (callback) {
+        var query = `INSERT INTO reviews (user_fid, vendor_fid, rating, title, review) VALUES (?, ?, ?, ?, ?)`;
+
+        // execute the query
+        connection.query(query, dataCollection, function (err) {
+            if (err)
+                throw err;
+            else
+                callback(null);
+        });
+    }
 
 });
 
@@ -247,6 +321,15 @@ router.post('/create', function(req, res){
             }
         }
     });
+
+    // form.onPart = function (part) {
+    //     if(!part.filename || part.filename.match(/\.(jpg|jpeg|png)$/i)) {
+    //         this.handlePart(part);
+    //     }
+    //     else {
+    //         console.log(part.filename + ' is not allowed');
+    //     }
+    // };
 
     form.on('fileBegin', function(field, file) {
         file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);

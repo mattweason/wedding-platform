@@ -165,7 +165,7 @@ input, textarea{
   &.catch-header{
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 15;
     height: 80px;
     box-shadow: 0px 2px 10px $color-gray;
 
@@ -673,10 +673,10 @@ input, textarea{
           background: lighten($color-gray, 10%);
         }
       }
-      .vend-edit{
+      .vend-view{
         right: 0;
       }
-      .vend-view{
+      .vend-edit{
         left: 20px;
       }
     }
@@ -693,6 +693,7 @@ input, textarea{
 //Single Vendor Page-----------------------------------------------Single Vendor Page//
 #vendor-single{
   padding-top: $header-height;
+  padding-bottom: 40px;
 
   #vendor-description {
     padding: 40px 0 140px 0;
@@ -729,14 +730,30 @@ input, textarea{
           margin-bottom: 5px;
         }
       }
+      .rate-price-box{
+        width: 100%;
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid $color-gray;
+        .reviewRating{
+          padding-left: 0;
+          display: inline-block;
+        }
+        .ratingNumber{
+          display: inline-block;
+          font-family: $font-main;
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0;
+        }
+      }
 
       .vend-link{
         width: 100%;
         margin-top: 5px;
-        border-top: 1px solid $color-gray;
+        text-align:right;
 
         .vend-web{
-          position: absolute;
           bottom: 10px;
           right: 0;
           font-family: $font-header;
@@ -744,10 +761,10 @@ input, textarea{
           color: #fff;
           text-align: center;
           text-transform: uppercase;
-          margin: 15px 20px 5px 0;
+          margin: 15px 0 5px 0;
           font-size: 18px;
           line-height: 40px;
-          display: block;
+          display: inline-block;
           height: 40px;
           width: 160px;
           background: $color-gray;
@@ -834,6 +851,79 @@ input, textarea{
       }
     }
   }
+
+  #vendor-reviews{
+    h3{
+      text-align: center;
+      margin: 35px auto 35px auto;
+      font-family: $font-header;
+      font-weight: 100;
+      color: $color-gray;
+    }
+    h4{
+      text-align: center;
+      font-family: $font-main;
+      font-weight: 100;
+      color: $color-gray;
+    }
+    p{
+      font-family: $font-main;
+      font-size: 16px;
+    }
+    .review-link{
+      text-align: right;
+
+      .review-button{
+        font-family: $font-header;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 20px 5px 0;
+        font-size: 18px;
+        line-height: 40px;
+        display: inline-block;
+        height: 40px;
+        width: 240px;
+        background: $color-gray;
+
+        &:hover {
+          background: lighten($color-gray, 10%);
+        }
+      }
+    }
+    .review-head{
+      text-align: right;
+      .reviewUser{
+        color: $color-gray;
+        font-weight: 700;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+        border: 1px solid #fff;
+        display: inline-block;
+
+        &:hover{border-bottom: 1px solid $color-gray;}
+      }
+    }
+    .reviewDate{
+      color: #828282;
+      font-size:14px;
+    }
+    .review-body{
+      border-bottom: 1px solid $color-gray;
+      margin-bottom: 40px;
+      .reviewRating{
+        padding-left: 0;
+      }
+      .reviewTitle{
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .reviewText{
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
 
 //Add and Edit Vendor Page----------------------------------------------------Add and Edit Vendor Page//
@@ -880,7 +970,7 @@ input, textarea{
               width:80px;
               height:80px;
               background-color: $color-gray;
-              background-image: url("/images/right-arrow.png");
+              background-image: url("../images/right-arrow.png");
               -webkit-transition: all 0.2s; /* Safari */
               transition: all 0.2s;
               &:hover{
@@ -892,7 +982,7 @@ input, textarea{
               width:80px;
               height:80px;
               background-color: $color-gray;
-              background-image: url("/images/left-arrow.png");
+              background-image: url("../images/left-arrow.png");
               -webkit-transition: all 0.2s; /* Safari */
               transition: all 0.2s;
 
@@ -1099,27 +1189,27 @@ input, textarea{
 }
 
 //Vendor Review Page-----------------------------------------------Vendor Review Page//
-#review-vendor{
+#review-vendor {
   padding-top: 160px;
 
-  h3{
+  h3 {
     text-align: center;
     font-family: $font-header;
   }
 
-  .ratingWrapper{
-    input[type="checkbox"] {
-      display:none;
-    }
-    input[type="checkbox"] + label span {
-      display:inline-block;
-      width:19px;
-      height:19px;
-      margin:-1px 4px 0 0;
-      vertical-align:middle;
-    }
-
-  #reviewText, #reviewTitle{
+  .ratingWrapper {
+    //input[type="checkbox"] {
+    //  display: none;
+    //}
+    //input[type="checkbox"] + label span {
+    //  display: inline-block;
+    //  width: 19px;
+    //  height: 19px;
+    //  margin: -1px 4px 0 0;
+    //  vertical-align: middle;
+    //}
+  }
+  #reviewText, #reviewTitle {
     width: 100%;
   }
 }
@@ -1127,7 +1217,7 @@ input, textarea{
 //Gallery Delete Page-----------------------------------------------Gallery Delete Page//
 #gallery-delete-page {
   padding-top: $header-height;
-  padding-bottom:40px;
+  padding-bottom: 40px;
 
   h3 {
     text-align: center;
@@ -1138,8 +1228,8 @@ input, textarea{
     margin: 20px 0;
   }
 
-  #upload-gallery{
-    #upl{
+  #upload-gallery {
+    #upl {
       width: 0.1px;
       height: 0.1px;
       opacity: 0;
@@ -1147,7 +1237,7 @@ input, textarea{
       position: absolute;
       z-index: -1;
 
-      &:focus + label{
+      &:focus + label {
         outline: 1px dotted #000;
         outline: -webkit-focus-ring-color auto 5px;
       }
@@ -1180,7 +1270,7 @@ input, textarea{
     .delete-photo {
       height: 150px;
 
-      img{
+      img {
         display: block;
         margin: auto;
         max-width: 200px;
@@ -1193,16 +1283,43 @@ input, textarea{
 //Login and Register Page-----------------------------------------------Login and Register Page//
 #login-page, #register-page {
   padding-top: $header-height;
+
+  h3 {
+    text-align: center;
+    font-family: $font-header;
+    margin-bottom: 40px;
+    border-bottom: none;
+  }
+  .right{margin-left: 7.5px;}
+  .left{margin-right: 7.5px;}
+  .submit{
+    font-family: $font-main;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 45px;
+    display: block;
+    height: 45px;
+    background: $color-gray;
+    width: 100%;
+    border: none;
+
+    &:hover {
+      background: lighten($color-gray, 10%);
+    }
+  }
 }
 
 //Admin Page--------------------------------------------------------------Admin Page//
-#admin{
+#admin {
   padding-top: $header-height;
   height: calc(100vh - 280px);
   display: flex;
   justify-content: center;
 
-  .adminArea{
+  .adminArea {
     align-self: center;
   }
 
@@ -1212,23 +1329,23 @@ input, textarea{
     margin-bottom: 40px;
   }
 
-  .addVendor{
+  .addVendor {
     border-right: 1px solid $color-gray;
     border-bottom: 1px solid $color-gray;
     padding: 0 10px 10px 0;
   }
 
-  .vendorList{
+  .vendorList {
     border-bottom: 1px solid $color-gray;
     padding: 0 0 10px 10px;
   }
 
-  .pendingVendors{
+  .pendingVendors {
     border-right: 1px solid $color-gray;
     padding: 10px 10px 0 0;
   }
 
-  .userList{
+  .userList {
     padding: 10px 0 0 10px;
   }
 
@@ -1253,12 +1370,12 @@ input, textarea{
 }
 
 //Admin User List-------------------------------------------------------------Admin User List//
-#users-list{
+#users-list {
   padding-top: 160px;
 }
 
 //Modal----------------------------------------------------------------------Modal//
-#message-modal, #delete-modal{
+#message-modal, #delete-modal {
 
   .modal-content {
     margin: 0 100px;
@@ -1281,9 +1398,11 @@ input, textarea{
       }
     }
 
-    .notdisplay{display:none;}
+    .notdisplay {
+      display: none;
+    }
 
-    #delete-modal-confirm, #dismiss-button{
+    #delete-modal-confirm, #dismiss-button {
       text-decoration: none;
       color: #fff;
       text-align: center;
@@ -1298,13 +1417,15 @@ input, textarea{
         background: lighten($color-gray, 10%);
       }
 
-      &.notdisplay{display:none;}
+      &.notdisplay {
+        display: none;
+      }
     }
   }
 }
 
 //Footer------------------------------------------------------Footer//
-#mastfooter{
+#mastfooter {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1315,25 +1436,25 @@ input, textarea{
     height: $footer-height;
     background-color: $color-gray;
 
-    .footer-logo{
+    .footer-logo {
       position: relative;
       top: 50%;
       transform: translateY(50%);
-      img{
+      img {
         height: 90px;
       }
     }
 
-    .social-media{
+    .social-media {
       height: 40px;
       position: relative;
       top: 50%;
       transform: translateY(180%);
 
-      .social-button{
+      .social-button {
         display: inline-block;
         vertical-align: middle;
-        a{
+        a {
           margin: 0 10px;
           display: block;
           height: 40px;
@@ -1345,11 +1466,11 @@ input, textarea{
           text-decoration: none;
         }
 
-        .socicon-instagram{
+        .socicon-instagram {
           background: -webkit-linear-gradient(-110deg, #8a3ab9, #4c68d7, #cd486b, #fbad50, #fbad50);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          &.ghost{
+          &.ghost {
             position: absolute;
             background: #fff;
             -webkit-background-clip: text;
@@ -1359,18 +1480,23 @@ input, textarea{
           }
         }
 
-        .socicon-facebook:hover{color: #3e5b98;}
-        .socicon-twitter:hover{color: #4da7de;}
-        .ghost:hover{
-          opacity:0;
+        .socicon-facebook:hover {
+          color: #3e5b98;
         }
-        .socicon-pinterest:hover{color: #c92619;}
+        .socicon-twitter:hover {
+          color: #4da7de;
+        }
+        .ghost:hover {
+          opacity: 0;
+        }
+        .socicon-pinterest:hover {
+          color: #c92619;
+        }
       }
-
 
     }
   }
-  .sub-footer{
+  .sub-footer {
     height: 50px;
     line-height: 50px;
     text-align: center;
@@ -1378,7 +1504,7 @@ input, textarea{
       font-family: $font-header;
       color: $color-gray;
 
-      &:hover{
+      &:hover {
         text-decoration: none;
         border-bottom: 1px solid $color-gray;
       }

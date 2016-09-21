@@ -14993,6 +14993,21 @@ $(document).ready(function() {
         ]
     });
 
+    //----------------------------------------RATEYO INIT------------------------------------------//
+    $(".reviewRating").each(function(){
+        var rating = $(this).html();
+        if($.isNumeric(rating)) {
+            $(this).rateYo({
+                rating: rating,
+                starWidth: "20px",
+                normalFill: "#bcbcbc",
+                ratedFill: "#282828",
+                readOnly: true
+            });  
+        }
+        
+    });
+
     //----------------------------------------MASONRY GALLERY------------------------------------------//
     $('.grid-item').imagesLoaded()
         .done( function( instance ) {

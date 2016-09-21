@@ -120,7 +120,7 @@ input, textarea {
   #masthead.catch-header {
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 15;
     height: 80px;
     box-shadow: 0px 2px 10px #282828; }
     #masthead.catch-header .logo-area img {
@@ -502,9 +502,9 @@ input, textarea {
         border: none; }
         #vendor-list .box .desc-box .vend-view:hover, #vendor-list .box .desc-box .vend-edit:hover {
           background: #424242; }
-      #vendor-list .box .desc-box .vend-edit {
-        right: 0; }
       #vendor-list .box .desc-box .vend-view {
+        right: 0; }
+      #vendor-list .box .desc-box .vend-edit {
         left: 20px; }
 
 #no-vendors {
@@ -513,7 +513,8 @@ input, textarea {
     font-family: "Lato Light"; }
 
 #vendor-single {
-  padding-top: 120px; }
+  padding-top: 120px;
+  padding-bottom: 40px; }
   #vendor-single #vendor-description {
     padding: 40px 0 140px 0; }
     #vendor-single #vendor-description .feat-img {
@@ -540,12 +541,25 @@ input, textarea {
         color: #828282;
         font-size: 14px;
         margin-bottom: 5px; }
+      #vendor-single #vendor-description .info-box .rate-price-box {
+        width: 100%;
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid #282828; }
+        #vendor-single #vendor-description .info-box .rate-price-box .reviewRating {
+          padding-left: 0;
+          display: inline-block; }
+        #vendor-single #vendor-description .info-box .rate-price-box .ratingNumber {
+          display: inline-block;
+          font-family: "Lato Light";
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0; }
       #vendor-single #vendor-description .info-box .vend-link {
         width: 100%;
         margin-top: 5px;
-        border-top: 1px solid #282828; }
+        text-align: right; }
         #vendor-single #vendor-description .info-box .vend-link .vend-web {
-          position: absolute;
           bottom: 10px;
           right: 0;
           font-family: "Josefin Sans";
@@ -553,10 +567,10 @@ input, textarea {
           color: #fff;
           text-align: center;
           text-transform: uppercase;
-          margin: 15px 20px 5px 0;
+          margin: 15px 0 5px 0;
           font-size: 18px;
           line-height: 40px;
-          display: block;
+          display: inline-block;
           height: 40px;
           width: 160px;
           background: #282828;
@@ -620,6 +634,61 @@ input, textarea {
         margin-top: -2px;
         width: calc(100% + 4px);
         box-shadow: 0px 0px 10px #282828; }
+  #vendor-single #vendor-reviews h3 {
+    text-align: center;
+    margin: 35px auto 35px auto;
+    font-family: "Josefin Sans";
+    font-weight: 100;
+    color: #282828; }
+  #vendor-single #vendor-reviews h4 {
+    text-align: center;
+    font-family: "Lato Light";
+    font-weight: 100;
+    color: #282828; }
+  #vendor-single #vendor-reviews p {
+    font-family: "Lato Light";
+    font-size: 16px; }
+  #vendor-single #vendor-reviews .review-link {
+    text-align: right; }
+    #vendor-single #vendor-reviews .review-link .review-button {
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 15px 20px 5px 0;
+      font-size: 18px;
+      line-height: 40px;
+      display: inline-block;
+      height: 40px;
+      width: 240px;
+      background: #282828; }
+      #vendor-single #vendor-reviews .review-link .review-button:hover {
+        background: #424242; }
+  #vendor-single #vendor-reviews .review-head {
+    text-align: right; }
+    #vendor-single #vendor-reviews .review-head .reviewUser {
+      color: #282828;
+      font-weight: 700;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+      border: 1px solid #fff;
+      display: inline-block; }
+      #vendor-single #vendor-reviews .review-head .reviewUser:hover {
+        border-bottom: 1px solid #282828; }
+  #vendor-single #vendor-reviews .reviewDate {
+    color: #828282;
+    font-size: 14px; }
+  #vendor-single #vendor-reviews .review-body {
+    border-bottom: 1px solid #282828;
+    margin-bottom: 40px; }
+    #vendor-single #vendor-reviews .review-body .reviewRating {
+      padding-left: 0; }
+    #vendor-single #vendor-reviews .review-body .reviewTitle {
+      font-weight: 700;
+      font-size: 16px; }
+    #vendor-single #vendor-reviews .review-body .reviewText {
+      margin-bottom: 20px; }
 
 .ekko-lightbox {
   text-align: center;
@@ -659,7 +728,7 @@ input, textarea {
           width: 80px;
           height: 80px;
           background-color: #282828;
-          background-image: url("/images/right-arrow.png");
+          background-image: url("../images/right-arrow.png");
           -webkit-transition: all 0.2s;
           /* Safari */
           transition: all 0.2s; }
@@ -670,7 +739,7 @@ input, textarea {
           width: 80px;
           height: 80px;
           background-color: #282828;
-          background-image: url("/images/left-arrow.png");
+          background-image: url("../images/left-arrow.png");
           -webkit-transition: all 0.2s;
           /* Safari */
           transition: all 0.2s; }
@@ -863,6 +932,30 @@ input, textarea {
 
 #login-page, #register-page {
   padding-top: 120px; }
+  #login-page h3, #register-page h3 {
+    text-align: center;
+    font-family: "Josefin Sans";
+    margin-bottom: 40px;
+    border-bottom: none; }
+  #login-page .right, #register-page .right {
+    margin-left: 7.5px; }
+  #login-page .left, #register-page .left {
+    margin-right: 7.5px; }
+  #login-page .submit, #register-page .submit {
+    font-family: "Lato Light";
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 45px;
+    display: block;
+    height: 45px;
+    background: #282828;
+    width: 100%;
+    border: none; }
+    #login-page .submit:hover, #register-page .submit:hover {
+      background: #424242; }
 
 #admin {
   padding-top: 120px;

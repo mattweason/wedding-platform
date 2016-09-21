@@ -24,7 +24,7 @@
                     <label for="reviewTitle">Title</label>
                     <input name="reviewTitle" id="reviewTitle" type="text">
                     <label for="reviewText">Review</label>
-                    <textarea name="reviewText" id="reviewText" cols="30" rows="10"></textarea>
+                    <textarea name="reviewText" id="reviewText" cols="30" rows="10" maxlength="5000"></textarea>
                     <input type="hidden" name="vendorID" value="{{vendor.vendor_id}}">
                     <input type="hidden" name="vendorName" value="{{vendor.vendor_url}}">
                     <input id="vendor-review-submit" class="button-dark" type="submit" value="Leave Review" name="submit">

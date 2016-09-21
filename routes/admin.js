@@ -7,18 +7,20 @@ var functions = require('./../lib/functions'); //bring in all custom functions
 connection = sql.connect(mysql, sql.credentials);
 
 //----------------------------------ADMIN PAGE-----------------------------//
-router.get('/', functions.ensureAuthenticated, functions.checkAdmin, function(req, res, next) {
+router.get('/', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
     
     res.redirect('/admin/dashboard');
 });
 
-router.get('/dashboard', functions.ensureAuthenticated, functions.checkAdmin, function(req, res, next) {
+router.get('/dashboard', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
-    res.render('admin');
+    res.render('admin', {
+        admin: req.admin
+    });
 });
 
 //----------------------------------ADMIN VENDOR LIST-----------------------------//
-router.get('/vendors', functions.ensureAuthenticated, functions.checkAdmin, function(req, res, next) {
+router.get('/vendors', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
     async.waterfall([
         getVendor,
@@ -30,7 +32,8 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdmin, func
             title: 'Admin Vendor List',
             vendor: vendor,
             city: cities,
-            categories: categories
+            categories: categories,
+            admin: req.admin
         });
     });
 
@@ -61,9 +64,11 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdmin, func
 });
 
 //----------------------------------ADMIN USER LIST-----------------------------//
-router.get('/users', functions.ensureAuthenticated, functions.checkAdmin, function(req, res, next) {
+router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
-    res.render('admin_user_list');
+    res.render('admin_user_list', {
+        admin: req.admin
+    });
 });
 
 module.exports = router;

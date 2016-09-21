@@ -2,11 +2,9 @@
     <div class="container">
         <div id="vendor-description">
 
-            {{#each vendor}}
-
                 <div class="row">
                     <div class="col-sm-5">
-                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})"></div>
+                        <div class="feat-img" style="background-image: url(/{{vendor.featured_image}})"></div>
                         <div class="info-box">
                             <div class="row">
                                 <div class="vend-info">
@@ -14,35 +12,41 @@
                                         <span>Address: </span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="vend-add">{{this.address}}, {{this.address_2}}
-                                            <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                        <p class="vend-add">{{vendor.address}}, {{vendor.address_2}}
+                                            <br>{{vendor.city}}, {{vendor.province}} {{vendor.postal_code}}</p>
                                     </div>
                                     <div class="col-sm-3">
                                         <span>Phone: </span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="vend-phone">Price: {{this.phone_number}}</p>
+                                        <p class="vend-phone">Price: {{vendor.phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
+                            <div class="rate-price-box">
+                                <div class="reviewRating">{{#if rating}}
+                                    {{rating}}
+                                {{else}}
+                                    Not rated.
+                                {{/if}}</div>
+                            </div>
+
                             <div class="vend-link">
-                                <a class="vend-web" href="{{this.url}}" target="_blank">VISIT WEBSITE</a>
+                                <a class="vend-web" href="{{vendor.url}}" target="_blank">VISIT WEBSITE</a>
                             </div>
 
                         </div>
 
                     </div>
                     <div class="col-sm-7">
-                        <h2>{{this.vendor_name}}</h2>
-                        <p class="vend-cat">{{this.category}}</p>
-                        <p class="vend-desc">{{this.description}}</p>
-                        {{#if ../access}}
-                            <a class="vend-edit-link" href="/vendor/{{this.vendor_url}}/edit">Edit Vendor</a>
+                        <h2>{{vendor.vendor_name}}</h2>
+                        <p class="vend-cat">{{vendor.category}}</p>
+                        <p class="vend-desc">{{vendor.description}}</p>
+                        {{#if access}}
+                            <a class="vend-edit-link" href="/vendor/{{vendor.vendor_url}}/edit">Edit Vendor</a>
                         {{/if}}
                     </div>
                 </div>
-
-            {{/each}}
 
         </div>
 
@@ -58,6 +62,38 @@
                 {{/each}}
 
             </div>
+        </div>
+
+        <div id="vendor-reviews">
+            <h3>REVIEWS</h3>
+            <div class="row">
+                {{#if review}}
+                    {{#each review}}
+
+                        <div class="col-sm-2">
+                            <div class="review-head">
+                                <a class="reviewUser" href="">{{this.username}}</a>
+                                <p class="reviewDate">{{this.date}}</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="review-body">
+                                <p class="reviewRating">{{this.rating}}</p>
+                                <p class="reviewTitle">{{this.title}}</p>
+                                <p class="reviewText">{{this.review}}</p>
+                            </div>
+                        </div>
+
+                    {{/each}}
+                {{else}}
+                    <h4>There are no reviews for this vendor yet. Be the first!</h4>
+                {{/if}}
+
+            </div>
+            <div class="review-link">
+                <a href="/vendor/{{vendor.vendor_url}}/review" class="review-button">Leave a Review</a>
+            </div>
+
         </div>
 
     </div>

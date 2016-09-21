@@ -28,10 +28,12 @@
     "mysql": "^2.11.1",
     "node-sass-middleware": "0.8.0",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3",
     "watchify": "^3.7.0"
   }
 }

@@ -10,6 +10,8 @@ connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs-extra');
 
+router.use(functions.checkAdmin);
+
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
 router.use('/admin', require('./admin'));
@@ -22,12 +24,11 @@ router.get('/', function(req, res, next) {
         allCategories,
         getCategory,
         getFeatured,
-        getCities,
-        checkAdmin
-    ], function (err, vendorFull, featured, cities, categories, admin) {
+        getCities
+    ], function (err, vendorFull, featured, cities, categories) {
         res.render('home', {
             home: 1,
-            admin: admin,
+            admin: req.admin,
             title: 'Vendors on a Dime',
             vendor: vendorFull,
             featured: featured,
@@ -69,15 +70,6 @@ router.get('/', function(req, res, next) {
             callback(null, vendor, featured, cities, categories);
         });
     }
-    function checkAdmin (vendor, featured, cities, categories, callback) {
-        var admin = false;
-        if (req.user) {
-            var userLog = req.user[0];
-            if (userLog.admin)
-                admin = true;
-        }
-        callback(null, vendor, featured, cities, categories, admin);
-    }
 });
 
 //Upload photos and post to vendorgallery table
@@ -101,12 +93,9 @@ router.post('/uploadGallery', function(req,res){
     });
 
     form.on('fileBegin', function(field, file) {
-        console.log(file.name);
         vendorEXT = path.extname(file.name);
-        console.log(vendorEXT);
         file.path = path.join(__dirname, '/../uploads/'+file.name);
         vendorPhotos.push(file.path);
-        console.log(vendorPhotos);
     });
 
     form.on('end', function(){
