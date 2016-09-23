@@ -148,9 +148,11 @@ router.get('/:vendorName', function(req,res) {
         getVendor,
         getCategory,
         getGallery,
+        getUserGallery,
         getReviews,
+        getReviewPhotos,
         checkAccess
-    ], function (err, vendorCategory, gallery, reviews, rating, access) {
+    ], function (err, vendorCategory, gallery, userGallery, reviews, rating, access) {
         res.render('vendor_single', {
             access: access,
             title: vendorCategory[0].vendor_name,
@@ -158,6 +160,7 @@ router.get('/:vendorName', function(req,res) {
             review: reviews,
             rating: rating,
             gallery: gallery,
+            userGallery: userGallery,
             admin: req.admin
         });
     });
@@ -178,8 +181,13 @@ router.get('/:vendorName', function(req,res) {
             callback(null, vendorCategory, gallery);
         });
     }
-    function getReviews (vendorCategory, gallery, callback) {
-        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ?', vendorCategory[0].vendor_id, function (err, reviews) {
+    function getUserGallery (vendorCategory, gallery, callback) {
+        connection.query('SELECT * FROM usergallery WHERE usergallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, userGallery) {
+            callback(null, vendorCategory, gallery, userGallery);
+        });
+    }
+    function getReviews (vendorCategory, gallery, userGallery, callback) {
+        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendorCategory[0].vendor_id, function (err, reviews) {
             var ratingCounter = 0;
             var ratingTotal = 0;
             for (var i = 0; i < reviews.length; i++) {
@@ -195,30 +203,43 @@ router.get('/:vendorName', function(req,res) {
                 return Math.round(value * multiplier) / multiplier;
             }
             var rating = round(ratingTotal / ratingCounter);
-            callback(null, vendorCategory, gallery, reviews, rating);
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
         });
     }
-    function checkAccess (vendorCategory, gallery, reviews, rating, callback) {
+    function getReviewPhotos (vendorCategory, gallery, userGallery, reviews, rating, callback) {
+        connection.query('SELECT * FROM `usergallery` WHERE vendor_fid = ?', vendorCategory[0].vendor_id, function (err, photos) {
+           for (var i = 0; i < reviews.length; i++) {
+               for (var x = 0; x < photos.length; x++) {
+                   if (reviews[i].id == photos[x].review_fid) {
+                       if (reviews[i].photos == null)
+                           reviews[i].photos = [];
+                       reviews[i].photos.push(photos[x].photo_url);
+                   }
+               }
+           }
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
+        });
+    }
+    function checkAccess (vendorCategory, gallery, userGallery, reviews, rating, callback) {
         var access = false;
         if (req.user) {
             var userLog = req.user[0];
             if (userLog.admin) {
                 access = true;
-                console.log(access);
-                callback(null, vendorCategory, gallery, reviews, rating, access);
+                callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
             }
             else
                 connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
                     if (userAccess.length) {
                         access = true;
-                        callback(null, vendorCategory, gallery, reviews, rating, access);
+                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
                     }
                     else
-                        callback(null, vendorCategory, gallery, reviews, rating, access);
+                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
                 });
         }
         else
-            callback(null, vendorCategory, gallery, reviews, rating, access);
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
     }
 });
 
@@ -227,19 +248,20 @@ router.post('/leavereview', function(req, res){
     //Set up formidable
     var form = new formidable.IncomingForm();
     var dataCollection = {userID: req.user[0].user_id};
-    var userPhotos = [];
-    var vendorName;
+    var userPhotos = {};
+        userPhotos.path = [];
+        userPhotos.ext = [];
+    var vendorEXT;
 
     async.waterfall([
         uploadImages,
-        renameImages,
-        insertPhotos,
-        insertReview
-    ], function(err) {
+        insertReview,
+        insertImages
+    ], function(err, fields) {
         res.send({
             message: 'Review Submitted',
             buttontext: 'Back to Vendor',
-            url: '/vendor/' + vendorName,
+            url: '/vendor/' + fields.vendorName,
             status: "success"
         })
     });
@@ -252,45 +274,55 @@ router.post('/leavereview', function(req, res){
         form.parse(req, function(err, fields) {
             for (var propName in fields) {
                 if (fields.hasOwnProperty(propName)) {
-                    if(propName == 'vendorName') {
-                        vendorName = fields[propName];
-                    } else {
-                        dataCollection[propName] = fields[propName];
-                    }
+                    dataCollection[propName] = fields[propName];
                 }
             }
         });
 
         form.on('fileBegin', function(field, file) {
+            userPhotos.ext.push(path.extname(file.name));
             file.path = path.join(__dirname, '/../uploads/useruploads/'+file.name);
-            userPhotos.push(file.path);
+            userPhotos.path.push(file.path);
         });
 
         form.on('end', function(){
             callback(null, userPhotos, dataCollection);
         });
     }
-    function renameImages (userPhotos, fields, callback) {
-        for (var i = 0; i < userPhotos.length; i++) {
-            var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i;
-
-            fs.rename(userPhotos[i], uploadPath);
-        }
-        callback(null, fields)
-    }
-    function insertPhotos (fields, callback) {}
-    function insertReview (callback) {
+    function insertReview (userPhotos, fields, callback) {
         var query = `INSERT INTO reviews (user_fid, vendor_fid, rating, title, review) VALUES (?, ?, ?, ?, ?)`;
 
         // execute the query
-        connection.query(query, dataCollection, function (err) {
+        connection.query(query, [fields.userID, fields.vendorID, fields.rating, fields.reviewTitle, fields.reviewText], function (err, result) {
             if (err)
                 throw err;
-            else
-                callback(null);
+            else {
+                var reviewID = result.insertId;
+                callback(null, userPhotos, fields, reviewID);
+            }
         });
     }
+    function insertImages (userPhotos, fields, reviewID, callback) {
+        var counter = 0;
+        for (var i = 0; i < userPhotos.path.length; i++) {
+            var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i + userPhotos.ext[i];
 
+            fs.rename(userPhotos.path[i], uploadPath);
+
+            connection.query(`INSERT INTO usergallery(review_fid, user_fid, vendor_fid, photo_url) VALUES ( ?, ?, ?, ?)`, [reviewID, fields.userID, fields.vendorID, uploadPath], function (err) {
+                if (err) {
+                    throw err
+                }
+                else {
+                    counter++;
+                    if (counter == userPhotos.path.length) {
+                        //update vendor category
+                        callback(null, fields)
+                    }
+                }
+            });
+        }
+    }
 });
 
 //----------------------STORING NEW VENDOR IN DATABASE-----------------------//
@@ -430,7 +462,6 @@ router.post('/update', function(req, res){
     });
 
     form.on('file', function (name, file) {
-        console.log(file.name);
         featuredImage = file.path;
     });
 

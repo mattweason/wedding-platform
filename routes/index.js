@@ -74,14 +74,14 @@ router.get('/', function(req, res, next) {
 
 //Upload photos and post to vendorgallery table
 router.post('/uploadGallery', function(req,res){
-
     //Set up formidable
     var form = new formidable.IncomingForm();
     form.keepExtensions = true;
-    var vendorPhotos = [];
+    var vendorPhotos = {};
+        vendorPhotos.path = [];
+        vendorPhotos.ext = [];
     var vendorID;
     var vendorURL;
-    var vendorEXT;
 
     form.multiples = true;
 
@@ -93,13 +93,13 @@ router.post('/uploadGallery', function(req,res){
     });
 
     form.on('fileBegin', function(field, file) {
-        vendorEXT = path.extname(file.name);
+        vendorPhotos.ext.push(path.extname(file.name));
         file.path = path.join(__dirname, '/../uploads/'+file.name);
-        vendorPhotos.push(file.path);
+        vendorPhotos.path.push(file.path);
     });
 
     form.on('end', function(){
-        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, vendorEXT, res);
+        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
     });
 
 });

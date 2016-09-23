@@ -27,6 +27,8 @@
                     <textarea name="reviewText" id="reviewText" cols="30" rows="10" maxlength="5000"></textarea>
                     <input type="hidden" name="vendorID" value="{{vendor.vendor_id}}">
                     <input type="hidden" name="vendorName" value="{{vendor.vendor_url}}">
+                    <input type="file" name="upl" class="inputfiles" id="upl" data-multiple-caption="{count} photos selected" multiple accept='image/*' required>
+                    <label class="button-light" for="upl"><span>Choose Photos</span></label>
                     <input id="vendor-review-submit" class="button-dark" type="submit" value="Leave Review" name="submit">
                 </form>
             </div>

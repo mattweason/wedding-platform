@@ -53,16 +53,33 @@
         <div id="vendor-gallery">
             <h3>GALLERY</h3>
 
-            <div class="grid">
+            <div class="vendor-grid">
 
                 {{#each gallery}}
-                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="grid-item" >
+                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="vendor-item" >
                         <img src="/{{this.photo_url}}" alt="">
                     </a>
                 {{/each}}
 
             </div>
         </div>
+
+        {{#if userGallery}}
+            <div id="user-gallery">
+                <h3>USER GALLERY</h3>
+
+                <div class="user-grid">
+
+                    {{#each userGallery}}
+                        <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="user-item" >
+                            <img src="/{{this.photo_url}}" alt="">
+                        </a>
+                    {{/each}}
+
+                </div>
+            </div>
+        {{/if}}
+
 
         <div id="vendor-reviews">
             <h3>REVIEWS</h3>
@@ -81,9 +98,15 @@
                                 <p class="reviewRating">{{this.rating}}</p>
                                 <p class="reviewTitle">{{this.title}}</p>
                                 <p class="reviewText">{{this.review}}</p>
+                                <div class="row">
+                                    {{#each this.photos}}
+                                        <div class="col-sm-3">
+                                            <div class="review-photo" style="background-image: url(/{{this}})"></div>
+                                        </div>
+                                    {{/each}}
+                                </div>
                             </div>
                         </div>
-
                     {{/each}}
                 {{else}}
                     <h4>There are no reviews for this vendor yet. Be the first!</h4>

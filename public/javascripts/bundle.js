@@ -14763,10 +14763,13 @@ $(document).ready(function() {
     $('#review-form').validate({
         
         submitHandler: function(form){
+            var formData = new FormData($('form')[0]);
             $.ajax({
                 type: "POST",
+                processData: false,
+                contentType: false,
                 url: $('#review-form').attr('action'),
-                data: $('#review-form').serialize(), // serializes the form's elements.
+                data: formData, // serializes the form's elements.
                 success: function(data){
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
@@ -14793,6 +14796,7 @@ $(document).ready(function() {
                 url: $('#upload-gallery').attr('action'),
                 data: formData, // serializes the form's elements.
                 success: function(data){
+                    console.log('success');
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
@@ -14907,35 +14911,38 @@ $(document).ready(function() {
 
     //Change text in label for add to gallery button
     var inputs = document.querySelectorAll( '.inputfile' );
-    Array.prototype.forEach.call( inputs, function( input )
-    {
-        var label	 = input.nextElementSibling,
-            labelVal = label.innerHTML;
-
-        input.addEventListener( 'change', function( e )
+    if ($('#featured-thumbnail').length) {
+        Array.prototype.forEach.call( inputs, function( input )
         {
-            var reader = new FileReader();
+            var label	 = input.nextElementSibling,
+                labelVal = label.innerHTML;
 
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.getElementById("featured-thumbnail").src = e.target.result;
-            };
+            input.addEventListener( 'change', function( e )
+            {
+                var reader = new FileReader();
 
-            // read the image file as a data URL.
-            reader.readAsDataURL(this.files[0]);
+                reader.onload = function (e) {
+                    // get loaded data and render thumbnail.
+                    document.getElementById("featured-thumbnail").src = e.target.result;
+                };
 
-            var fileName = '';
-            if( this.files && this.files.length > 1 )
-                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-            else
-                fileName = e.target.value.split( '\\' ).pop();
+                // read the image file as a data URL.
+                reader.readAsDataURL(this.files[0]);
 
-            if( fileName )
-                label.querySelector( 'span' ).innerHTML = fileName;
-            else
-                label.innerHTML = labelVal;
+                var fileName = '';
+                if( this.files && this.files.length > 1 )
+                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                else
+                    fileName = e.target.value.split( '\\' ).pop();
+
+                if( fileName )
+                    label.querySelector( 'span' ).innerHTML = fileName;
+                else
+                    label.innerHTML = labelVal;
+            });
         });
-    });
+    }
+
 
     //If no images in gallery, delete button not shown.
     if ($('.delete-box').length < 1) {
@@ -15009,11 +15016,20 @@ $(document).ready(function() {
     });
 
     //----------------------------------------MASONRY GALLERY------------------------------------------//
-    $('.grid-item').imagesLoaded()
+    $('.vendor-item').imagesLoaded()
         .done( function( instance ) {
-            $('.grid').masonry({
+            $('.vendor-grid').masonry({
                 // options
-                itemSelector: '.grid-item',
+                itemSelector: '.vendor-item',
+                gutter: 10
+            });
+        });
+
+    $('.user-item').imagesLoaded()
+        .done( function( instance ) {
+            $('.user-grid').masonry({
+                // options
+                itemSelector: '.user-item',
                 gutter: 10
             });
         });
