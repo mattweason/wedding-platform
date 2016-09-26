@@ -14784,6 +14784,29 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //--------------------DELETING GALLERY FROM VENDOR---------------------
+    $('#review-delete-form').validate({
+
+        submitHandler: function(form){
+            console.log($('#review-delete-form').serialize());
+            $.ajax({
+                type: "POST",
+                url: $('#review-delete-form').attr('action'),
+                data: $('#review-delete-form').serialize(),
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('.view-button').attr('href', data.url);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    }); //end of validate
+
     //--------------------ADDING GALLERY TO VENDOR---------------------
     $('#upload-gallery').validate({
 
@@ -14796,10 +14819,10 @@ $(document).ready(function() {
                 url: $('#upload-gallery').attr('action'),
                 data: formData, // serializes the form's elements.
                 success: function(data){
-                    console.log('success');
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
+                        console.log(data.status);
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
                         $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
                         $('.view-button').attr('href', data.url);
@@ -14911,38 +14934,36 @@ $(document).ready(function() {
 
     //Change text in label for add to gallery button
     var inputs = document.querySelectorAll( '.inputfile' );
-    if ($('#featured-thumbnail').length) {
-        Array.prototype.forEach.call( inputs, function( input )
+    Array.prototype.forEach.call( inputs, function( input ) {
+        var label	 = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+        input.addEventListener( 'change', function( e )
         {
-            var label	 = input.nextElementSibling,
-                labelVal = label.innerHTML;
+            var reader = new FileReader();
 
-            input.addEventListener( 'change', function( e )
-            {
-                var reader = new FileReader();
-
+            if ($('#featured-thumbnail').length) {
                 reader.onload = function (e) {
                     // get loaded data and render thumbnail.
                     document.getElementById("featured-thumbnail").src = e.target.result;
                 };
+            }
 
-                // read the image file as a data URL.
-                reader.readAsDataURL(this.files[0]);
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
 
-                var fileName = '';
-                if( this.files && this.files.length > 1 )
-                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-                else
-                    fileName = e.target.value.split( '\\' ).pop();
+            var fileName = '';
+            if( this.files && this.files.length >= 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = ( this.getAttribute( 'data-single-caption' ) || '' ).replace( '{count}', this.files.length );
 
-                if( fileName )
-                    label.querySelector( 'span' ).innerHTML = fileName;
-                else
-                    label.innerHTML = labelVal;
-            });
+            if( fileName )
+                label.querySelector( 'span' ).innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
         });
-    }
-
+    });
 
     //If no images in gallery, delete button not shown.
     if ($('.delete-box').length < 1) {

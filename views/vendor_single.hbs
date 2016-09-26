@@ -50,32 +50,39 @@
 
         </div>
 
-        <div id="vendor-gallery">
-            <h3>GALLERY</h3>
+        {{#if gallery}}
+            <div id="vendor-gallery">
+                <div class="row">
+                    <h3>GALLERY</h3>
 
-            <div class="vendor-grid">
+                    <div class="vendor-grid">
 
-                {{#each gallery}}
-                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="vendor-item" >
-                        <img src="/{{this.photo_url}}" alt="">
-                    </a>
-                {{/each}}
+                        {{#each gallery}}
+                            <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="vendorGallery" class="vendor-item" >
+                                <img src="/{{this.photo_url}}" alt="">
+                            </a>
+                        {{/each}}
 
+                    </div>
+                </div>
             </div>
-        </div>
+        {{/if}}
+
 
         {{#if userGallery}}
             <div id="user-gallery">
-                <h3>USER GALLERY</h3>
+                <div class="row">
+                    <h3>USER GALLERY</h3>
 
-                <div class="user-grid">
+                    <div class="user-grid">
 
-                    {{#each userGallery}}
-                        <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="multiimages" class="user-item" >
-                            <img src="/{{this.photo_url}}" alt="">
-                        </a>
-                    {{/each}}
+                        {{#each userGallery}}
+                            <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="userGallery" class="user-item" >
+                                <img src="/{{this.photo_url}}" alt="">
+                            </a>
+                        {{/each}}
 
+                    </div>
                 </div>
             </div>
         {{/if}}
@@ -88,9 +95,14 @@
                     {{#each review}}
 
                         <div class="col-sm-2">
-                            <div class="review-head">
+                            <div class="reviewHead">
                                 <a class="reviewUser" href="">{{this.username}}</a>
                                 <p class="reviewDate">{{this.date}}</p>
+                                <form action="/vendor/deletereview" id="review-delete-form" method="post">
+                                    <input type="hidden" name="review" value="{{this.id}}">
+                                    <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
+                                    <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
+                                </form>
                             </div>
                         </div>
                         <div class="col-sm-10">
@@ -98,12 +110,16 @@
                                 <p class="reviewRating">{{this.rating}}</p>
                                 <p class="reviewTitle">{{this.title}}</p>
                                 <p class="reviewText">{{this.review}}</p>
-                                <div class="row">
-                                    {{#each this.photos}}
-                                        <div class="col-sm-3">
-                                            <div class="review-photo" style="background-image: url(/{{this}})"></div>
-                                        </div>
-                                    {{/each}}
+                                <div class="reviewGallery">
+                                    <div class="row small-gutter">
+                                        {{#each this.photos}}
+                                            <div class="col-sm-2">
+                                                <a href="/{{this}}" data-toggle="lightbox" data-gallery="{{../this.username}}Gallery" class="vendor-item reviewPhotoWrapper">
+                                                    <div class="reviewPhoto" style="background-image: url(/{{this}})"></div>
+                                                </a>
+                                            </div>
+                                        {{/each}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

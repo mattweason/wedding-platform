@@ -119,6 +119,7 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+//Login Route
 router.post('/login',
     passport.authenticate('local', {successReturnToOrRedirect: '/', failureRedirect:'/users/login', failureFlash: true}));
 

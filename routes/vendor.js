@@ -251,7 +251,6 @@ router.post('/leavereview', function(req, res){
     var userPhotos = {};
         userPhotos.path = [];
         userPhotos.ext = [];
-    var vendorEXT;
 
     async.waterfall([
         uploadImages,
@@ -280,12 +279,15 @@ router.post('/leavereview', function(req, res){
         });
 
         form.on('fileBegin', function(field, file) {
-            userPhotos.ext.push(path.extname(file.name));
-            file.path = path.join(__dirname, '/../uploads/useruploads/'+file.name);
-            userPhotos.path.push(file.path);
+            if (file.size > 0) {
+                userPhotos.ext.push(path.extname(file.name));
+                file.path = path.join(__dirname, '/../uploads/useruploads/'+file.name);
+                userPhotos.path.push(file.path);
+            }
         });
 
         form.on('end', function(){
+            console.log(userPhotos.length);
             callback(null, userPhotos, dataCollection);
         });
     }
@@ -303,25 +305,89 @@ router.post('/leavereview', function(req, res){
         });
     }
     function insertImages (userPhotos, fields, reviewID, callback) {
-        var counter = 0;
-        for (var i = 0; i < userPhotos.path.length; i++) {
-            var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i + userPhotos.ext[i];
+        if (userPhotos.length) {
+            var counter = 0;
+            for (var i = 0; i < userPhotos.path.length; i++) {
+                var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i + userPhotos.ext[i];
 
-            fs.rename(userPhotos.path[i], uploadPath);
+                fs.rename(userPhotos.path[i], uploadPath);
 
-            connection.query(`INSERT INTO usergallery(review_fid, user_fid, vendor_fid, photo_url) VALUES ( ?, ?, ?, ?)`, [reviewID, fields.userID, fields.vendorID, uploadPath], function (err) {
-                if (err) {
-                    throw err
-                }
-                else {
-                    counter++;
-                    if (counter == userPhotos.path.length) {
-                        //update vendor category
-                        callback(null, fields)
+                connection.query(`INSERT INTO usergallery(review_fid, user_fid, vendor_fid, photo_url) VALUES ( ?, ?, ?, ?)`, [reviewID, fields.userID, fields.vendorID, uploadPath], function (err) {
+                    if (err) {
+                        throw err
                     }
+                    else {
+                        counter++;
+                        if (counter == userPhotos.path.length) {
+                            //update vendor category
+                            callback(null, fields);
+                        }
+                    }
+                });
+            }
+        }
+        else
+            callback(null, fields);
+    }
+});
+
+//----------------------STORING NEW REVIEW IN DATABASE-----------------------//
+router.post('/deletereview', function(req, res){
+
+    var reviewID = req.body.review;
+    var vendorName = req.body.vendorName;
+
+    async.waterfall([
+        deleteReviewDB,
+        selectPhotos,
+        deletePhotosDB,
+        deletePhotos
+    ], function(err) {
+        res.send({
+            message: 'Review Deleted',
+            buttontext: 'Keep Viewing Vendor',
+            url: '/vendor/' + vendorName,
+            status: "success"
+        })
+    });
+
+    function deleteReviewDB (callback) {
+        connection.query('DELETE FROM `reviews` WHERE `id` = ?', reviewID, function (err) {
+            if (err)
+                throw err;
+            else {
+                callback(null);
+            }
+        });
+    }
+    function selectPhotos (callback) {
+        connection.query('SELECT photo_url FROM `usergallery` WHERE `review_fid` = ?', reviewID, function (err, allPhotos) {
+            if (err)
+                throw err;
+            else {
+                callback(null, allPhotos);
+            }
+        });
+    }
+    function deletePhotosDB (allPhotos, callback) {
+        if (allPhotos.length)
+            connection.query('DELETE FROM `usergallery` WHERE `review_fid` = ?', reviewID, function (err) {
+                if (err)
+                    throw err;
+                else {
+                    callback(null, allPhotos);
                 }
             });
-        }
+        else
+            callback(null, allPhotos);
+
+    }
+    function deletePhotos (allPhotos, callback) {
+        if (allPhotos.length)
+            for (var i=0; i < allPhotos.length; i++) {
+                fs.unlinkSync(allPhotos[i].photo_url);
+            }
+        callback(null);
     }
 });
 

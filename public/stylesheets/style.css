@@ -46,6 +46,10 @@ a {
   padding-right: 0;
   padding-left: 0; }
 
+.small-gutter > [class*='col-'] {
+  padding-right: 5px;
+  padding-left: 5px; }
+
 .button-dark {
   text-decoration: none;
   color: #fff;
@@ -630,9 +634,7 @@ input, textarea {
       /* Safari */
       transition: all 0.2s; }
       #vendor-single #vendor-gallery .vendor-item img:hover {
-        margin-left: -2px;
-        margin-top: -2px;
-        width: calc(100% + 4px);
+        transform: scale(1.02);
         box-shadow: 0px 0px 10px #282828; }
   #vendor-single #user-gallery h3 {
     text-align: center;
@@ -653,10 +655,8 @@ input, textarea {
       /* Safari */
       transition: all 0.2s; }
       #vendor-single #user-gallery .user-item img:hover {
-        margin-left: -2px;
-        margin-top: -2px;
-        width: calc(100% + 4px);
-        box-shadow: 0px 0px 10px #282828; }
+        transform: scale(1.02);
+        box-shadow: 0 0 10px #282828; }
   #vendor-single #vendor-reviews h3 {
     text-align: center;
     margin: 35px auto 35px auto;
@@ -679,7 +679,7 @@ input, textarea {
       color: #fff;
       text-align: center;
       text-transform: uppercase;
-      margin: 15px 20px 5px 0;
+      margin: 15px 0 5px 0;
       font-size: 18px;
       line-height: 40px;
       display: inline-block;
@@ -688,17 +688,35 @@ input, textarea {
       background: #282828; }
       #vendor-single #vendor-reviews .review-link .review-button:hover {
         background: #424242; }
-  #vendor-single #vendor-reviews .review-head {
+  #vendor-single #vendor-reviews .reviewHead {
     text-align: right; }
-    #vendor-single #vendor-reviews .review-head .reviewUser {
+    #vendor-single #vendor-reviews .reviewHead .reviewUser {
       color: #282828;
       font-weight: 700;
       transition: all 0.2s;
       margin-bottom: 10px;
       border: 1px solid #fff;
       display: inline-block; }
-      #vendor-single #vendor-reviews .review-head .reviewUser:hover {
+      #vendor-single #vendor-reviews .reviewHead .reviewUser:hover {
         border-bottom: 1px solid #282828; }
+    #vendor-single #vendor-reviews .reviewHead .reviewDelete {
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 30px;
+      display: inline-block;
+      height: 30px;
+      width: 80px;
+      background: #282828;
+      border: none;
+      -webkit-transition: all 0.2s;
+      transition: all 0.2s; }
+      #vendor-single #vendor-reviews .reviewHead .reviewDelete:hover {
+        background: #424242; }
   #vendor-single #vendor-reviews .reviewDate {
     color: #828282;
     font-size: 14px; }
@@ -712,6 +730,20 @@ input, textarea {
       font-size: 16px; }
     #vendor-single #vendor-reviews .review-body .reviewText {
       margin-bottom: 20px; }
+    #vendor-single #vendor-reviews .review-body .reviewGallery {
+      padding: 0 10px; }
+      #vendor-single #vendor-reviews .review-body .reviewGallery .reviewPhoto {
+        height: 100px;
+        width: 100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        box-shadow: none;
+        margin: 0 0 10px 0;
+        transition: 0.2s all; }
+        #vendor-single #vendor-reviews .review-body .reviewGallery .reviewPhoto:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px #282828; }
 
 .ekko-lightbox {
   text-align: center;
@@ -1077,6 +1109,7 @@ input, textarea {
       #mastfooter .main-footer .footer-logo img {
         height: 90px; }
     #mastfooter .main-footer .social-media {
+      text-align: right;
       height: 40px;
       position: relative;
       top: 50%;

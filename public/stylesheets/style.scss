@@ -76,6 +76,11 @@ a {
   padding-left:0;
 }
 
+.small-gutter > [class*='col-'] {
+  padding-right:5px;
+  padding-left:5px;
+}
+
 //General-------------------------------------------------General//
 .button-dark {
   text-decoration: none;
@@ -845,9 +850,7 @@ input, textarea{
         -webkit-transition: all 0.2s; /* Safari */
         transition: all 0.2s;
         &:hover {
-          margin-left: -2px;
-          margin-top: -2px;
-          width: calc(100% + 4px);
+          transform: scale(1.02);
           box-shadow: 0px 0px 10px $color-gray;
         }
       }
@@ -877,10 +880,8 @@ input, textarea{
         -webkit-transition: all 0.2s; /* Safari */
         transition: all 0.2s;
         &:hover {
-          margin-left: -2px;
-          margin-top: -2px;
-          width: calc(100% + 4px);
-          box-shadow: 0px 0px 10px $color-gray;
+          transform: scale(1.02);
+          box-shadow: 0 0 10px $color-gray;
         }
       }
     }
@@ -913,7 +914,7 @@ input, textarea{
         color: #fff;
         text-align: center;
         text-transform: uppercase;
-        margin: 15px 20px 5px 0;
+        margin: 15px 0 5px 0;
         font-size: 18px;
         line-height: 40px;
         display: inline-block;
@@ -926,9 +927,9 @@ input, textarea{
         }
       }
     }
-    .review-head{
+    .reviewHead {
       text-align: right;
-      .reviewUser{
+      .reviewUser {
         color: $color-gray;
         font-weight: 700;
         transition: all 0.2s;
@@ -936,7 +937,30 @@ input, textarea{
         border: 1px solid #fff;
         display: inline-block;
 
-        &:hover{border-bottom: 1px solid $color-gray;}
+        &:hover {
+          border-bottom: 1px solid $color-gray;
+        }
+      }
+      .reviewDelete {
+        font-family: "Josefin Sans";
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 30px;
+        display: inline-block;
+        height: 30px;
+        width: 80px;
+        background: #282828;
+        border: none;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+
+        &:hover{
+          background: #424242;
+        }
       }
     }
     .reviewDate{
@@ -955,6 +979,23 @@ input, textarea{
       }
       .reviewText{
         margin-bottom: 20px;
+      }
+      .reviewGallery{
+        padding: 0 10px;
+        .reviewPhoto{
+          height: 100px;
+          width: 100%;
+          background-size: cover;
+          background-position: center center;
+          background-repeat: no-repeat;
+          box-shadow: none;
+          margin: 0 0 10px 0;
+          transition: 0.2s all;
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px $color-gray;
+          }
+        }
       }
     }
   }
@@ -1490,6 +1531,7 @@ input, textarea{
     }
 
     .social-media {
+      text-align: right;
       height: 40px;
       position: relative;
       top: 50%;
