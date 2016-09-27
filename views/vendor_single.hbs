@@ -19,21 +19,31 @@
                                         <span>Phone: </span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="vend-phone">Price: {{vendor.phone_number}}</p>
+                                        <p class="vend-phone">{{vendor.phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="rate-price-box">
-                                <div class="reviewRating">{{#if rating}}
-                                    {{rating}}
-                                {{else}}
-                                    Not rated.
-                                {{/if}}</div>
+                            <div class="row">
+                                <div class="col-sm-12"><div class="line"></div></div>
+                                <div class="col-sm-6">
+                                    <div class="rate-price-box">
+                                        <div class="vendorPrice">{{vendor.price}}</div>
+                                        <div class="reviewRating">{{#if rating}}
+                                            {{rating}}
+                                        {{else}}
+                                            Not rated.
+                                        {{/if}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="vend-link">
+                                        <a class="vend-web" href="{{vendor.url}}" target="_blank">WEBSITE</a>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="vend-link">
-                                <a class="vend-web" href="{{vendor.url}}" target="_blank">VISIT WEBSITE</a>
-                            </div>
+
+
 
                         </div>
 

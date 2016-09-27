@@ -279,15 +279,15 @@ router.post('/leavereview', function(req, res){
         });
 
         form.on('fileBegin', function(field, file) {
-            if (file.size > 0) {
+            if (file.name) {
                 userPhotos.ext.push(path.extname(file.name));
                 file.path = path.join(__dirname, '/../uploads/useruploads/'+file.name);
                 userPhotos.path.push(file.path);
             }
+
         });
 
         form.on('end', function(){
-            console.log(userPhotos.length);
             callback(null, userPhotos, dataCollection);
         });
     }
@@ -305,7 +305,7 @@ router.post('/leavereview', function(req, res){
         });
     }
     function insertImages (userPhotos, fields, reviewID, callback) {
-        if (userPhotos.length) {
+        if (userPhotos.ext.length) {
             var counter = 0;
             for (var i = 0; i < userPhotos.path.length; i++) {
                 var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i + userPhotos.ext[i];
@@ -343,12 +343,15 @@ router.post('/deletereview', function(req, res){
         deletePhotosDB,
         deletePhotos
     ], function(err) {
-        res.send({
-            message: 'Review Deleted',
-            buttontext: 'Keep Viewing Vendor',
-            url: '/vendor/' + vendorName,
-            status: "success"
-        })
+        if (err)
+            console.log(err);
+        else
+            res.send({
+                message: 'Review Deleted',
+                buttontext: 'Keep Viewing Vendor',
+                url: '/vendor/' + vendorName,
+                status: "success"
+            })
     });
 
     function deleteReviewDB (callback) {
@@ -383,11 +386,15 @@ router.post('/deletereview', function(req, res){
 
     }
     function deletePhotos (allPhotos, callback) {
-        if (allPhotos.length)
+        if (allPhotos.length) {
             for (var i=0; i < allPhotos.length; i++) {
                 fs.unlinkSync(allPhotos[i].photo_url);
             }
-        callback(null);
+            callback(null);
+        }
+        else
+            callback(null);
+
     }
 });
 

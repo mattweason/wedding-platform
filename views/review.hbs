@@ -2,37 +2,41 @@
     <div class="container">
         <h3>Leave a Review for {{vendor.vendor_name}}</h3>
         <div class="row">
-            <div class="col-sm-offset-3 col-sm-6">
-                <form action="/vendor/leavereview" id="review-form" method="post">
-                    <label for="rating">Rating</label>
+            <form action="/vendor/leavereview" id="review-form" method="post">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <label class="main-label">Rating</label>
                     <div class="ratingWrapper">
-                        <input class="starRating" name="rating" id="fiveStar" type="checkbox" value="5">
+                        <input class="starRating" name="rating" id="fiveStar" type="radio" value="5">
                         <label class="ratingLabel five-star" for="fiveStar" ></label>
 
-                        <input class="starRating" name="rating" id="fourStar" type="checkbox" value="4">
+                        <input class="starRating" name="rating" id="fourStar" type="radio" value="4">
                         <label class="ratingLabel four-star" for="fourStar" ></label>
 
-                        <input class="starRating" name="rating" id="threeStar" type="checkbox" value="3">
+                        <input class="starRating" name="rating" id="threeStar" type="radio" value="3">
                         <label class="ratingLabel three-star" for="threeStar" ></label>
 
-                        <input class="starRating" name="rating" id="twoStar" type="checkbox" value="2">
+                        <input class="starRating" name="rating" id="twoStar" type="radio" value="2">
                         <label class="ratingLabel two-star" for="twoStar" ></label>
 
-                        <input class="starRating" name="rating" id="oneStar" type="checkbox" value="1">
+                        <input class="starRating" name="rating" id="oneStar" type="radio" value="1" checked>
                         <label class="ratingLabel one-star" for="oneStar" ></label>
                     </div>
-                    <label for="reviewTitle">Title</label>
-                    <input name="reviewTitle" id="reviewTitle" type="text">
-                    <label for="reviewText">Review</label>
-                    <textarea name="reviewText" id="reviewText" cols="30" rows="10" maxlength="5000"></textarea>
+                    <label for="reviewTitle" class="main-label">Title</label>
+                    <input name="reviewTitle" id="reviewTitle" type="text" required>
+                    <label for="reviewText" class="main-label">Review</label>
+                    <textarea name="reviewText" id="reviewText" cols="30" rows="10" maxlength="5000" required></textarea>
                     <input type="hidden" name="vendorID" value="{{vendor.vendor_id}}">
                     <input type="hidden" name="vendorName" value="{{vendor.vendor_url}}">
-                    <input type="file" name="upl" class="inputfiles" id="upl" data-multiple-caption="{count} photos selected" multiple accept='image/*' required>
-                    <label class="button-light" for="upl"><span>Choose Photos</span></label>
+                    <input type="file" name="userupl" class="inputfiles" id="userupl" data-multiple-caption="{count} photos selected" multiple accept='image/*' required>
+                    <label class="button-light" for="userupl"><span>Add Photos</span></label>
+                </div>
+                <div class="col-sm-offset-1 col-sm-10">
+                    <div id="imagePreview" class="row"></div>
+                </div>
+                <div class="col-sm-offset-3 col-sm-6">
                     <input id="vendor-review-submit" class="button-dark" type="submit" value="Leave Review" name="submit">
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-
     </div>
 </div>

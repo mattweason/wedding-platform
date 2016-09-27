@@ -553,12 +553,10 @@ input, textarea {
         #vendor-single #vendor-description .info-box .rate-price-box .reviewRating {
           padding-left: 0;
           display: inline-block; }
-        #vendor-single #vendor-description .info-box .rate-price-box .ratingNumber {
-          display: inline-block;
+        #vendor-single #vendor-description .info-box .rate-price-box .vendorPrice {
           font-family: "Lato Light";
           font-size: 16px;
-          font-weight: 700;
-          margin: 0; }
+          font-weight: 700; }
       #vendor-single #vendor-description .info-box .vend-link {
         width: 100%;
         margin-top: 5px;
@@ -944,11 +942,71 @@ input, textarea {
     font-family: "Josefin Sans"; }
   #review-vendor #reviewText, #review-vendor #reviewTitle {
     width: 100%; }
-  #review-vendor #review-form .inputfiles {
+  #review-vendor #review-form .main-label {
+    font-family: "Lato Light";
+    margin-top: 5px; }
+  #review-vendor #review-form .ratingWrapper {
+    overflow: hidden;
+    display: flex; }
+    #review-vendor #review-form .ratingWrapper .five-star {
+      order: 5; }
+    #review-vendor #review-form .ratingWrapper .four-star {
+      order: 4; }
+    #review-vendor #review-form .ratingWrapper .three-star {
+      order: 3; }
+    #review-vendor #review-form .ratingWrapper .two-star {
+      order: 2; }
+    #review-vendor #review-form .ratingWrapper .one-star {
+      order: 1; }
+    #review-vendor #review-form .ratingWrapper .starRating {
+      float: right;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      margin: 0 0 0 -20px;
+      display: none; }
+    #review-vendor #review-form .ratingWrapper .ratingLabel {
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-color: #bcbcbc;
+      background-image: url("../images/star-rating-stars.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      transition: 0.2s all; }
+      #review-vendor #review-form .ratingWrapper .ratingLabel:hover {
+        background-color: black; }
+    #review-vendor #review-form .ratingWrapper .ratingLabel:hover ~ .ratingLabel {
+      background-color: black !important; }
+    #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel {
+      background-color: #424242; }
+      #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel:hover {
+        background-color: black; }
+      #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel:hover ~ .ratingLabel {
+        background-color: black; }
+  #review-vendor #review-form #userupl {
     display: none; }
   #review-vendor #review-form .button-light {
     cursor: pointer;
     margin: 15px 0 0 0; }
+  #review-vendor #review-form #imagePreview {
+    text-align: center; }
+    #review-vendor #review-form #imagePreview .userImageBox {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #282828; }
+      #review-vendor #review-form #imagePreview .userImageBox .userImage {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 100%;
+        max-height: 130px; }
 
 #gallery-delete-page {
   padding-top: 120px;
@@ -992,7 +1050,8 @@ input, textarea {
         max-height: 140px; }
 
 #login-page, #register-page {
-  padding-top: 120px; }
+  padding-top: 120px;
+  padding-bottom: 40px; }
   #login-page h3, #register-page h3 {
     text-align: center;
     font-family: "Josefin Sans";

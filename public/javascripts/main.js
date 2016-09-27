@@ -87,27 +87,23 @@ $(document).ready(function() {
         }
     }); //end of validate
 
-    //--------------------DELETING GALLERY FROM VENDOR---------------------
-    $('#review-delete-form').validate({
-
-        submitHandler: function(form){
-            console.log($('#review-delete-form').serialize());
-            $.ajax({
-                type: "POST",
-                url: $('#review-delete-form').attr('action'),
-                data: $('#review-delete-form').serialize(),
-                success: function(data){
-                    $('#message-modal').find('.form-response').html(data.message);
-                    $('#message-modal').modal('toggle'); //toggle modal on form submit
-                    if(data.status == 'success'){
-                        $('#message-modal').find('.view-button').children().html(data.buttontext);
-                        $('.view-button').attr('href', data.url);
-                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
-                    }
+    //--------------------DELETING REVIEW FROM VENDOR---------------------
+    $('#review-delete-form').submit( function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $('#review-delete-form').attr('action'),
+            data: $('#review-delete-form').serialize(),
+            success: function(data){
+                $('#message-modal').find('.form-response').html(data.message);
+                $('#message-modal').modal('toggle'); //toggle modal on form submit
+                if(data.status == 'success'){
+                    $('#message-modal').find('.view-button').children().html(data.buttontext);
+                    $('.view-button').attr('href', data.url);
+                    $(form).find('input[type=submit]').attr('disabled', 'disabled');
                 }
-            });
-            return false; //since we use Ajax
-        }
+            }
+        });
     }); //end of validate
 
     //--------------------ADDING GALLERY TO VENDOR---------------------
@@ -234,6 +230,40 @@ $(document).ready(function() {
             $('.modal:visible').each(reposition);
         });
     });
+
+    //Show thumbnails for user image upload
+    var inputLocalFont = document.getElementById("userupl");
+
+    if (inputLocalFont) {
+        inputLocalFont.addEventListener("change", previewImages, false);
+        var label = inputLocalFont.nextElementSibling,
+            labelVal = label.innerHTML;
+        function previewImages() {
+            $('#imagePreview').children().remove();
+            var fileList = this.files;
+
+            var anyWindow = window.URL || window.webkitURL;
+
+            for (var i = 0; i < fileList.length; i++) {
+                var objectUrl = anyWindow.createObjectURL(fileList[i]);
+                $('#imagePreview').append(
+                    '<div class="col-sm-2 "><div class="userImageBox"><img class="userImage" src="' + objectUrl + '" /></div></div> '
+                );
+                window.URL.revokeObjectURL(fileList[i]);
+            }
+
+            var fileName = '';
+            if (fileList && fileList.length >= 1)
+                fileName = ( this.getAttribute('data-multiple-caption') || '' ).replace('{count}', fileList.length);
+            else
+                fileName = ( this.getAttribute('data-single-caption') || '' ).replace('{count}', fileList.length);
+
+            if (fileName)
+                label.querySelector('span').innerHTML = fileName;
+            else
+                label.innerHTML = labelVal;
+        }
+    }
 
     //Change text in label for add to gallery button
     var inputs = document.querySelectorAll( '.inputfile' );

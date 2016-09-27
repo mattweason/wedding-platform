@@ -73,15 +73,18 @@
                                 <div class="box">
                                     <div class="feat-img" style="background-image: url(/{{this.featured_image}})"></div>
                                     <div class="desc-box">
-                                        <h2 class="vendName">{{this.vendor_name}}</h2>
-                                        <p class="vendCat">{{this.category}}</p>
-                                        <p class="vendAdd">{{this.address}}, {{this.address_2}}</p>
-                                        <p class="vendCity">{{this.city}},</p>
-                                        <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
-                                        <!--<div class="row">-->
-                                        <a class="vend-edit" href="/vendor/{{this.vendor_url}}/edit">Edit</a>
-                                        <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
-                                        <!--</div>-->
+                                        <div class="vendInfoWrapper">
+                                            <h2 class="vendName">{{this.vendor_name}}</h2>
+                                            <p class="vendCat">{{this.category}}</p>
+                                            <p class="vendAdd">{{this.address}}, {{this.address_2}}</p>
+                                            <p class="vendCity">{{this.city}},</p>
+                                            <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
+                                            <!--<div class="row">-->
+                                            <a class="vend-edit" href="/vendor/{{this.vendor_url}}/edit">Edit</a>
+                                            <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                            <!--</div>-->
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
