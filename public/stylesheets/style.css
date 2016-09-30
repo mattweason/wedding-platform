@@ -488,6 +488,9 @@ input, textarea {
         margin-bottom: 0px; }
       #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
         display: inline-block; }
+      #vendor-list .box .desc-box .noRating {
+        font-family: "Lato Light";
+        font-size: 14px; }
       #vendor-list .box .desc-box .vend-view, #vendor-list .box .desc-box .vend-edit {
         position: absolute;
         bottom: 10px;

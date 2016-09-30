@@ -49,7 +49,6 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdminAccess
     }
     function getCategory (vendor, categories, callback) {
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
-
             // Append categories as strings onto vendor object
             var vendorFull = functions.vendorJoin(vendor, category);
 
@@ -66,9 +65,35 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdminAccess
 //----------------------------------ADMIN USER LIST-----------------------------//
 router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
-    res.render('admin_user_list', {
-        admin: req.admin
+    async.waterfall([
+        getUsers,
+        getVendors,
+        vendorOwners
+    ], function (err, users, vendors) {
+        res.render('admin_user_list', {
+            admin: req.admin,
+            users: users,
+            vendor: vendors
+        });
     });
+
+    function getUsers (callback) {
+        connection.query('SELECT * FROM user WHERE NOT user.admin = "1" ORDER BY name', function (err, users) {
+            callback(null, users);
+        });
+    }
+    function getVendors (users, callback) {
+        connection.query('SELECT * FROM vendor ORDER BY vendor_name', function (err, vendors) {
+            callback(null, users, vendors);
+        });
+    }
+    function vendorOwners (users, vendors, callback) {
+        connection.query('SELECT * FROM vendor INNER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid', function (err, owners) {
+           var usersFull = functions.ownerJoin(users, owners);
+            console.log(usersFull);
+            callback(null, usersFull, vendors);
+        });
+    }
 });
 
 module.exports = router;

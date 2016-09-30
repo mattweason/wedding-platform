@@ -92,6 +92,7 @@ passport.use(new FacebookStrategy({
         var fbID = profile.id,
             fbToken = token,
             fbName = profile.displayName,
+            fbUsername = fbName.replace(" ", ".");
             fbEmail = profile.emails[0].value;
         connection.query("SELECT * FROM user WHERE username = ?",fbID, function(err, result){
             if(err) {return done(err)}
@@ -100,7 +101,7 @@ passport.use(new FacebookStrategy({
                 return done(null, result);
             }
             else
-                connection.query('INSERT INTO `user`(`username`, `facebook_token`, `email`, `name`) VALUES (?,?,?,?)',[fbID,fbToken,fbEmail,fbName],function(err, result){
+                connection.query('INSERT INTO `user`(`username`, `facebook_token`, `email`, `name`) VALUES (?,?,?,?)',[fbUsername,fbToken,fbEmail,fbName],function(err, result){
                     return done(null, result);
                 });
         });

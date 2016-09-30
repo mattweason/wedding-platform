@@ -134,7 +134,11 @@
                                             <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
                                             <!--<div class="row">-->
                                             <p class="vendPrice">{{this.price}}</p>
-                                            <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
+                                            {{#if rating}}
+                                                <div class="reviewRating">{{rating}}</div>
+                                            {{else}}
+                                                <p class="noRating">Not rated.</p>
+                                            {{/if}}
                                             <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
                                             <!--</div>-->
                                         </div>

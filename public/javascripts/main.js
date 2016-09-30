@@ -233,7 +233,6 @@ $(document).ready(function() {
 
     //Show thumbnails for user image upload
     var inputLocalFont = document.getElementById("userupl");
-
     if (inputLocalFont) {
         inputLocalFont.addEventListener("change", previewImages, false);
         var label = inputLocalFont.nextElementSibling,
@@ -305,8 +304,7 @@ $(document).ready(function() {
 
     //Fix header to top once scrolled to
     var distance = $('#masthead').offset().top + 1,
-        $window = $(window);
-    
+    $window = $(window);
     $window.scroll(function(){
         if ( $window.scrollTop() >= distance ) {
             $('#masthead').addClass('catch-header');

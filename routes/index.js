@@ -23,7 +23,9 @@ router.get('/', function(req, res, next) {
         getVendor,
         allCategories,
         getCategory,
+        vendorRating,
         getFeatured,
+        featuredRating,
         getCities
     ], function (err, vendorFull, featured, cities, categories) {
         res.render('home', {
@@ -51,19 +53,32 @@ router.get('/', function(req, res, next) {
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
 
             // Append categories as strings onto vendor object
-            var vendorFull = functions.vendorJoin(vendor, category);
+            var vendorCat = functions.vendorJoin(vendor, category);
 
-            callback(null, vendorFull, categories, category);
+            callback(null, vendorCat, categories, category);
         });
+    }
+    function vendorRating (vendor, categories, category, callback) {
+       connection.query('SELECT * FROM reviews ORDER BY vendor_fid ASC', function(err, reviews) {
+           var vendorFull = functions.vendorRating(vendor, reviews);
+           callback(null, vendorFull, categories, category);
+       });
     }
     function getFeatured (vendor, categories, category, callback) {
         connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
 
             // Append categories as strings onto vendor object
-            var featuredFull = functions.vendorJoin(featured, category);
+            var featuredCat = functions.vendorJoin(featured, category);
 
-            callback(null, vendor, featuredFull, categories);
+            callback(null, vendor, featuredCat, categories);
         });
+    }
+    function featuredRating (vendor, featured, categories, callback) {
+        connection.query('SELECT * FROM reviews ORDER BY vendor_fid ASC', function (err, reviews) {
+            var featuredFull = functions.vendorRating(featured, reviews);
+            console.log(featuredFull);
+            callback(null, vendor, featuredFull, categories);
+        } );
     }
     function getCities (vendor, featured, categories, callback) {
         connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {

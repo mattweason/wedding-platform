@@ -14,40 +14,24 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="filter">
-                            <label for="categoryselect">Category</label>
+                            <label for="categoryselect">Users</label>
                             <select class="select-filter cat-s chosen" id="category-search" name="categoryselect">
                                 <option value="All">All</option>
-                                {{#each categories}}
-                                    <option value="{{this.category_name}}">{{this.category_name}}</option>
+                                {{#each users}}
+                                    <option value="{{this.name}}">{{this.name}}</option>
                                 {{/each}}
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="filter">
-                            <label for="cityselect">Location</label>
+                            <label for="cityselect">Vendors</label>
                             <select class="select-filter city-s chosen" id="city-search" name="cityselect">
                                 <option value="All">All</option>
-                                {{#each city}}
-                                    <option value="{{this.city}}">{{this.city}}</option>
+                                {{#each vendor}}
+                                    <option value="{{this.vendor_name}}">{{this.vendor_name}}</option>
                                 {{/each}}
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="filter price-filter">
-                            <label for="price">Price</label>
-                            <div class="price-checkboxes">
-                                <input class="price-checkbox" type="checkbox" name="price" id="oneDollar" data-value="$">
-                                <label class="price-label one-dollar" for="oneDollar">$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="twoDollar" data-value="$$">
-                                <label class="price-label two-dollar" for="twoDollar">$$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="threeDollar" data-value="$$$">
-                                <label class="price-label three-dollar" for="threeDollar">$$$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="fourDollar" data-value="$$$$">
-                                <label class="price-label four-dollar" for="fourDollar">$$$$</label>
-                                <button class="sort" data-sort="vendPrice">Sort</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +44,23 @@
             <ul class="paginationTop"></ul>
             <div class="row">
                 <div class="list">
-
+                    {{#each users}}
+                        <div class="col-sm-6">
+                            <div class="user">
+                                <p class="userFullName">{{this.name}}</p>
+                                <p class="userName">{{this.username}}</p>
+                                <p class="userEmail">{{this.email}}</p>
+                                <div class="userVendors">
+                                    {{#if this.businesses}}
+                                        <p>Business Owned:</p>
+                                        {{#each this.businesses}}
+                                            <p class="userOwned">{{this}}</p>
+                                        {{/each}}
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
             </div>
             <ul class="paginationBottom"></ul>
