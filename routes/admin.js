@@ -68,12 +68,16 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
     async.waterfall([
         getUsers,
         getVendors,
+        getOwnedVendors,
+        getFreeVendors,
         vendorOwners
-    ], function (err, users, vendors) {
+    ], function (err, users, vendors, owned, free) {
         res.render('admin_user_list', {
             admin: req.admin,
             users: users,
-            vendor: vendors
+            vendor: vendors,
+            free: free,
+            owned: owned
         });
     });
 
@@ -87,13 +91,58 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
             callback(null, users, vendors);
         });
     }
-    function vendorOwners (users, vendors, callback) {
+    function getOwnedVendors (users, vendors, callback) {
+        connection.query('SELECT * FROM user2vendor INNER JOIN vendor ON user2vendor.vendor_fid = vendor.vendor_id GROUP BY vendor_fid', function (err, owned) {
+            callback(null, users, vendors, owned);
+        });
+    }
+    function getFreeVendors (users, vendors, owned, callback) {
+        connection.query('SELECT * FROM vendor LEFT OUTER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid WHERE user2vendor.vendor_fid IS NULL', function (err, free) {
+            callback(null, users, vendors, owned, free);
+        });
+    }
+    function vendorOwners (users, vendors, owned, free, callback) {
         connection.query('SELECT * FROM vendor INNER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid', function (err, owners) {
            var usersFull = functions.ownerJoin(users, owners);
             console.log(usersFull);
-            callback(null, usersFull, vendors);
+            callback(null, usersFull, vendors, owned, free);
         });
     }
 });
+
+//----------------------------------ASSIGN USER AS OWNER--------------------------//
+router.post('/assignuser', function(req, res){
+    var userID = req.body.user_id;
+    var vendorID = req.body.vendor_assign_list;
+
+    connection.query('INSERT INTO user2vendor (user_fid, vendor_fid) VALUES (?, ?)', [userID, vendorID], function(err){
+        if (err)
+            throw err;
+        res.send({
+            message: 'User Assigned',
+            buttontext: 'Refresh User List',
+            url: '/admin/users',
+            status: "success"
+        })
+    });
+});
+
+//----------------------------------UNASSIGN USER AS OWNER--------------------------//
+// router.post('/assignuser', function(req, res){
+//     var userID = req.body.user_id;
+//     var vendorID = req.body.vendor_assign_list;
+//     console.log(userID);
+//
+//     connection.query('INSERT INTO user2vendor (user_fid, vendor_fid) VALUES (?, ?)', [userID, vendorID], function(err){
+//         if (err)
+//             throw err;
+//         res.send({
+//             message: 'User Assigned',
+//             buttontext: 'Refresh User List',
+//             url: '/admin/users',
+//             status: "success"
+//         })
+//     });
+// });
 
 module.exports = router;

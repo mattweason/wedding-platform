@@ -1526,6 +1526,109 @@ input, textarea{
 //Admin User List-------------------------------------------------------------Admin User List//
 #users-list {
   padding-top: 160px;
+
+  #user-list-header {
+    height: 160px;
+    background-color: $color-gray;
+
+    .user-list-title {
+      h3 {
+        text-align: center;
+        margin: 35px auto 35px auto;
+        font-family: $font-header;
+        font-weight: 100;
+        color: #fff;
+      }
+    }
+    .filters{
+      .filter{
+        .search{
+          background:#fff url('chosen-sprite.png') no-repeat 100% -20px;
+          border: 1px solid #aaa;
+          height: 24px;
+        }
+        label{
+          font-family: $font-header;
+          font-weight: 100;
+          font-size: 18px;
+          color: #fff;
+        }
+        input{
+          font-family: $font-main;
+          width: 100%;
+        }
+        select{
+          padding: 1px;
+          height: 23px;
+          font-family: $font-main;
+          width: 100%;
+        }
+        .chosen-single{
+          font-family: $font-main;
+          height: 24px;
+          border-radius:0;
+          background: #fff;
+          box-shadow: none;
+        }
+        .chosen-drop{border-radius:0;}
+        .chosen-results{font-family: $font-main;}
+      }
+    }
+  }
+  .admin-user-list-wrapper{
+    background: #f4f4f4;
+    .userMeta{height: 140px;}
+    .userVendor, .userAssign{height: 140px;}
+    .user{
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      margin: 15px 0;
+      padding: 10px;
+      font-family: $font-main;
+      font-size: 16px;
+      span{
+        font-weight: 700;
+      }
+      .userOwnedLabel{font-weight: 700;}
+    }
+    select{
+      padding: 1px;
+      height: 23px;
+      font-family: $font-main;
+      width: 100%;
+    }
+    .chosen-single{
+      font-family: $font-main;
+      height: 24px;
+      border-radius:0;
+      background: #fff;
+      box-shadow: none;
+    }
+    .chosen-drop{border-radius:0;}
+    .chosen-results{font-family: $font-main;}
+    .userAssignSubmit, .userUnassignSubmit{
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-size: 18px;
+      line-height: 40px;
+      display: inline-block;
+      height: 40px;
+      width: 100%;
+      background: #282828;
+      border: none;
+      -webkit-transition: all 0.2s;
+      transition: all 0.2s;
+
+      &:hover{
+        background: #424242;
+      }
+    }
+  }
 }
 
 //Modal----------------------------------------------------------------------Modal//

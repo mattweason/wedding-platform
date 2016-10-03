@@ -106,6 +106,25 @@ $(document).ready(function() {
         });
     }); //end of validate
 
+    //--------------------ASSIGN USER TO AS VENDOR OWNER---------------------
+    $('#user-assign-form').submit( function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $('#user-assign-form').attr('action'),
+            data: $('#user-assign-form').serialize(),
+            success: function(data){
+                $('#message-modal').find('.form-response').html(data.message);
+                $('#message-modal').modal('toggle'); //toggle modal on form submit
+                if(data.status == 'success'){
+                    $('#message-modal').find('.view-button').children().html(data.buttontext);
+                    $('.view-button').attr('href', data.url);
+                    $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                }
+            }
+        });
+    }); //end of validate
+
     //--------------------ADDING GALLERY TO VENDOR---------------------
     $('#upload-gallery').validate({
 

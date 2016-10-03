@@ -1121,6 +1121,93 @@ input, textarea {
 
 #users-list {
   padding-top: 160px; }
+  #users-list #user-list-header {
+    height: 160px;
+    background-color: #282828; }
+    #users-list #user-list-header .user-list-title h3 {
+      text-align: center;
+      margin: 35px auto 35px auto;
+      font-family: "Josefin Sans";
+      font-weight: 100;
+      color: #fff; }
+    #users-list #user-list-header .filters .filter .search {
+      background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
+      border: 1px solid #aaa;
+      height: 24px; }
+    #users-list #user-list-header .filters .filter label {
+      font-family: "Josefin Sans";
+      font-weight: 100;
+      font-size: 18px;
+      color: #fff; }
+    #users-list #user-list-header .filters .filter input {
+      font-family: "Lato Light";
+      width: 100%; }
+    #users-list #user-list-header .filters .filter select {
+      padding: 1px;
+      height: 23px;
+      font-family: "Lato Light";
+      width: 100%; }
+    #users-list #user-list-header .filters .filter .chosen-single {
+      font-family: "Lato Light";
+      height: 24px;
+      border-radius: 0;
+      background: #fff;
+      box-shadow: none; }
+    #users-list #user-list-header .filters .filter .chosen-drop {
+      border-radius: 0; }
+    #users-list #user-list-header .filters .filter .chosen-results {
+      font-family: "Lato Light"; }
+  #users-list .admin-user-list-wrapper {
+    background: #f4f4f4; }
+    #users-list .admin-user-list-wrapper .userMeta {
+      height: 140px; }
+    #users-list .admin-user-list-wrapper .userVendor, #users-list .admin-user-list-wrapper .userAssign {
+      height: 140px; }
+    #users-list .admin-user-list-wrapper .user {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      margin: 15px 0;
+      padding: 10px;
+      font-family: "Lato Light";
+      font-size: 16px; }
+      #users-list .admin-user-list-wrapper .user span {
+        font-weight: 700; }
+      #users-list .admin-user-list-wrapper .user .userOwnedLabel {
+        font-weight: 700; }
+    #users-list .admin-user-list-wrapper select {
+      padding: 1px;
+      height: 23px;
+      font-family: "Lato Light";
+      width: 100%; }
+    #users-list .admin-user-list-wrapper .chosen-single {
+      font-family: "Lato Light";
+      height: 24px;
+      border-radius: 0;
+      background: #fff;
+      box-shadow: none; }
+    #users-list .admin-user-list-wrapper .chosen-drop {
+      border-radius: 0; }
+    #users-list .admin-user-list-wrapper .chosen-results {
+      font-family: "Lato Light"; }
+    #users-list .admin-user-list-wrapper .userAssignSubmit, #users-list .admin-user-list-wrapper .userUnassignSubmit {
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-size: 18px;
+      line-height: 40px;
+      display: inline-block;
+      height: 40px;
+      width: 100%;
+      background: #282828;
+      border: none;
+      -webkit-transition: all 0.2s;
+      transition: all 0.2s; }
+      #users-list .admin-user-list-wrapper .userAssignSubmit:hover, #users-list .admin-user-list-wrapper .userUnassignSubmit:hover {
+        background: #424242; }
 
 #message-modal .modal-content, #delete-modal .modal-content {
   margin: 0 100px;
