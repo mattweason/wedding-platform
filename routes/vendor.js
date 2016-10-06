@@ -27,6 +27,33 @@ router.get('/add', functions.ensureAuthenticated, function(req,res, next){
 
 });
 
+//---------------------------------------FAVORITING AND UNFAVORITING A VENDOR--------------------------------------------//
+router.get('/favorite/:action/:vendorID', function(req, res){
+    var userID = req.user[0].user_id;
+    var vendorID = req.params.vendorID;
+    var action = req.params.action;
+
+    if (action == 'add') {
+        connection.query(`INSERT INTO favoritevendors (user_fid, vendor_fid) VALUES (?, ?)`, [userID, vendorID], function(err) {
+            if (err)
+                throw err;
+            else
+                res.send({
+                    status: "success"
+                })
+        });
+    }
+    else if (action == 'remove') {
+        connection.query(`DELETE FROM favoritevendors WHERE user_fid = ? AND vendor_fid = ?`, [userID, vendorID], function(err) {
+            if (err)
+                throw err;
+            res.send({
+                status: "success"
+            })
+        });
+    }
+});
+
 //---------------------VENDOR REVIEW FORM-----------------------//
 router.get('/:vendorName/review', functions.ensureAuthenticated, function(req, res) {
     connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {

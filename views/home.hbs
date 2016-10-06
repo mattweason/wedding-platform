@@ -8,7 +8,12 @@
             <div class="featured-box">
                 <div class="row">
                     <div class="col-sm-5">
-                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})"></div>
+                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
+                            {{#if ../user}}
+                                <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
+                                <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
+                            {{/if}}
+                        </div>
                     </div>
                     <div class="col-sm-7">
                         <div class="desc-box">
@@ -125,7 +130,12 @@
                             <div class="vendor">
                                 <div class="col-sm-6">
                                     <div class="box">
-                                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})"></div>
+                                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
+                                            {{#if ../user}}
+                                                <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
+                                                <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
+                                            {{/if}}
+                                        </div>
                                         <div class="desc-box">
                                             <h2 class="vendName">{{this.vendor_name}}</h2>
                                             <p class="vendCat">{{this.category}}</p>

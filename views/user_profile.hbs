@@ -1,0 +1,123 @@
+<div id="user-profile">
+    <div class="container">
+        <div class="profile-header">
+            <h3>{{profile.name}}'s Profile</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="userMetaBox">
+                    <h4>User Information</h4>
+                    <p><span>Full Name: </span>{{profile.name}}</p>
+                    <p><span>Username: </span>{{profile.username}}</p>
+                    <p><span>Email: </span>{{profile.email}}</p>
+                </div>
+                <button class="button-light">FAVORITE VENDORS</button>
+                <button class="button-light">REVIEWS</button>
+                <button class="button-light">UPLOADED PHOTOS</button>
+            </div>
+            <div class="col-sm-9">
+                <div class="favoriteVendors">
+                    <div class="row">
+                        {{#if favorite}}
+                            {{#each favorite}}
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="favorite-box">
+                                            <div class="col-sm-5">
+                                                <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
+                                                    <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
+                                                    <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div class="desc-wrapper">
+                                                    <div class="desc-box">
+                                                        <h2>{{this.vendor_name}}</h2>
+                                                        <p class="vend-cat">{{this.category}}</p>
+                                                        <div class="overflow-box">
+                                                            <p class="vend-desc">{{this.description}}</p>
+                                                        </div>
+                                                        <div class="vend-info">
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <span>Address: </span>
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <p class="vend-add">{{this.address}}, {{this.address_2}}
+                                                                        <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <span>Phone: </span>
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <p class="vend-phone">{{this.phone_number}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+
+                    </div>
+                </div>
+                <div class="userReviews">
+                    <div class="row">
+                        {{#if review}}
+                            {{#each review}}
+                                <div class="col-sm-2">
+                                    <div class="reviewHead">
+                                        <a class="reviewUser" href="/vendor/{{this.vendor_url}}">{{this.vendor_name}}</a>
+                                        <p class="reviewDate">{{this.date}}</p>
+                                        <form action="/vendor/deletereview" id="review-delete-form" method="post">
+                                            <input type="hidden" name="review" value="{{this.id}}">
+                                            <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
+                                            <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="review-body">
+                                        <p class="reviewRating">{{this.rating}}</p>
+                                        <p class="reviewTitle">{{this.title}}</p>
+                                        <p class="reviewText">{{this.review}}</p>
+                                        <div class="reviewGallery">
+                                            <div class="row small-gutter">
+                                                {{#each this.photos}}
+                                                    <div class="col-sm-2">
+                                                        <a href="/{{this}}" data-toggle="lightbox" data-gallery="{{../this.username}}Gallery" class="vendor-item reviewPhotoWrapper">
+                                                            <div class="reviewPhoto" style="background-image: url(/{{this}})"></div>
+                                                        </a>
+                                                    </div>
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="user-gallery">
+                    {{#if userGallery}}
+                        <div class="row">
+                            <div class="user-grid">
+
+                                {{#each userGallery}}
+                                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="userGallery" class="user-item" >
+                                        <img src="/{{this.photo_url}}" alt="">
+                                    </a>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

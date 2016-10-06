@@ -92,7 +92,7 @@ passport.use(new FacebookStrategy({
         var fbID = profile.id,
             fbToken = token,
             fbName = profile.displayName,
-            fbUsername = fbName.replace(" ", ".");
+            fbUsername = fbName.replace(" ", "_");
             fbEmail = profile.emails[0].value;
         connection.query("SELECT * FROM user WHERE username = ?",fbID, function(err, result){
             if(err) {return done(err)}

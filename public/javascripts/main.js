@@ -4,7 +4,7 @@ require('bootstrap'); //bootstrap JS
 require('jquery-validation'); //form validation
 
 $(document).ready(function() {
-
+//--------------------------------------------------------------------------------AJAX CALLS
     //--------------------CREATING NEW VENDOR---------------------
     $('#add-form').validate({
 
@@ -211,6 +211,23 @@ $(document).ready(function() {
         }
     }); //end of validate
 
+    //--------------------FAVORITING VENDORS-----------------------------------
+    $('.fill').click(function() {
+        if ($(this).hasClass('favorited')) {
+            $(this).removeClass('favorited');
+            $.ajax({
+                url: "/vendor/favorite/remove/"+$(this).data('vendor')
+            })
+        }
+        else {
+            $(this).addClass('favorited');
+            $.ajax({
+                url: "/vendor/favorite/add/"+$(this).data('vendor'),
+            })
+        }
+    });
+
+//--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
     //Chosen field for category

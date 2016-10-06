@@ -58,12 +58,12 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="userMeta">
-                                                <a href="/profile/{{this.username}}" class="button-light">Profile</a>
+                                                <a href="/profile/{{this.user_id}}" class="button-light">Profile</a>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="userAssign">
-                                                <form action="admin/assignuser" id="user-assign-form" method="post">
+                                                <form action="/admin/assignuser" id="user-assign-form" method="post">
                                                     <label for="vendor_assign_list">Available Vendors</label>
                                                     <select class="select-filter chosen" id="vendor_assign_list" name="vendor_assign_list">
                                                         <option value="Select One">Select One</option>
@@ -79,11 +79,11 @@
                                         <div class="col-sm-6">
                                             <div class="userVendors">
                                                 {{#if this.businesses}}
-                                                    <form action="admin/unassignuser" id="user-unassign-form" method="post">
+                                                    <form action="/admin/unassignuser" id="user-unassign-form" method="post">
                                                         <p class="userOwnedLabel">Businesses Owned: </p>
                                                         {{#each this.businesses}}
-                                                            <input type="checkbox" name="userOwned" id="userOwned" value="{{this.id}}">
-                                                            <label for="userOwned">{{this.name}}</label>
+                                                            <input type="checkbox" name="user_owned" id="user_owned" value="{{this.id}}">
+                                                            <label for="user_owned">{{this.name}}</label>
                                                         {{/each}}
                                                         <input type="submit" class="userUnassignSubmit" value="UNASSIGN OWNER" name="submit">
                                                         <input type="hidden" name="user_id" value="{{this.user_id}}">

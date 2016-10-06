@@ -103,8 +103,7 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
     }
     function vendorOwners (users, vendors, owned, free, callback) {
         connection.query('SELECT * FROM vendor INNER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid', function (err, owners) {
-           var usersFull = functions.ownerJoin(users, owners);
-            console.log(usersFull);
+            var usersFull = functions.ownerJoin(users, owners);
             callback(null, usersFull, vendors, owned, free);
         });
     }
@@ -127,22 +126,37 @@ router.post('/assignuser', function(req, res){
     });
 });
 
-//----------------------------------UNASSIGN USER AS OWNER--------------------------//
-// router.post('/assignuser', function(req, res){
-//     var userID = req.body.user_id;
-//     var vendorID = req.body.vendor_assign_list;
-//     console.log(userID);
-//
-//     connection.query('INSERT INTO user2vendor (user_fid, vendor_fid) VALUES (?, ?)', [userID, vendorID], function(err){
-//         if (err)
-//             throw err;
-//         res.send({
-//             message: 'User Assigned',
-//             buttontext: 'Refresh User List',
-//             url: '/admin/users',
-//             status: "success"
-//         })
-//     });
-// });
+// ----------------------------------UNASSIGN USER AS OWNER--------------------------//
+router.post('/unassignuser', function(req, res){
+    var userID = req.body.user_id;
+    var vendorID = [];
+        vendorID.push(req.body.user_owned);
+    console.log(vendorID);
+    if (vendorID.length == 1)
+        connection.query('DELETE FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userID, vendorID], function(err) {
+            if (err)
+                throw err;
+            res.send({
+                message: 'User Unassigned',
+                buttontext: 'Refresh User List',
+                url: '/admin/users',
+                status: "success"
+            })
+        });
+    else
+        for (var i = 0; i < vendorID.length; i++) {
+            connection.query('DELETE FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userID, vendorID[i]], function(err){
+                if (err)
+                    throw err;
+                if (i == vendorID.length)
+                    res.send({
+                        message: 'User Unassigned',
+                        buttontext: 'Refresh User List',
+                        url: '/admin/users',
+                        status: "success"
+                    })
+            });
+        }
+});
 
 module.exports = router;

@@ -18,13 +18,17 @@ router.use('/admin', require('./admin'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    if (req.user)
+        var userID = req.user[0].user_id;
 
     async.waterfall([
         getVendor,
+        getFavorites,
         allCategories,
         getCategory,
         vendorRating,
         getFeatured,
+        getFeaturedFavorites,
         featuredRating,
         getCities
     ], function (err, vendorFull, featured, cities, categories) {
@@ -41,8 +45,18 @@ router.get('/', function(req, res, next) {
 
     function getVendor (callback) {
         connection.query('SELECT * FROM vendor ORDER BY vendor_name ASC', function(err, vendor) {
-           callback(null, vendor);
+            callback(null, vendor);
         });
+    }
+    function getFavorites (vendor, callback) {
+        if (userID)
+            connection.query('SELECT * FROM favoritevendors', function(err, favorites) {
+                var vendorFavorited = functions.vendorFavorites(vendor, favorites);
+                console.log(vendorFavorited);
+                callback(null, vendorFavorited);
+            });
+        else
+            callback(null, vendor);
     }
     function allCategories (vendor, callback) {
         connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
@@ -73,10 +87,19 @@ router.get('/', function(req, res, next) {
             callback(null, vendor, featuredCat, categories);
         });
     }
+    function getFeaturedFavorites (vendor, featured, categories, callback) {
+        if (userID)
+            connection.query('SELECT * FROM favoritevendors', function(err, favorites) {
+                var featuredFavorited = functions.vendorFavorites(featured, favorites);
+                console.log(featuredFavorited);
+                callback(null, vendor, featuredFavorited, categories);
+            });
+        else
+            callback(null, vendor, featured, categories);
+    }
     function featuredRating (vendor, featured, categories, callback) {
         connection.query('SELECT * FROM reviews ORDER BY vendor_fid ASC', function (err, reviews) {
             var featuredFull = functions.vendorRating(featured, reviews);
-            console.log(featuredFull);
             callback(null, vendor, featuredFull, categories);
         } );
     }
@@ -85,6 +108,71 @@ router.get('/', function(req, res, next) {
             callback(null, vendor, featured, cities, categories);
         });
     }
+});
+
+/*Get user profile page. */
+router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res) {
+
+    async.waterfall([
+        getUserProfile,
+        getFavorites,
+        getCategory,
+        getReviews,
+        getReviewPhotos,
+        getUserGallery
+    ], function (err, profile, favorites, reviews, userGallery) {
+        res.render('user_profile', {
+            profile: profile[0],
+            favorite: favorites,
+            review: reviews,
+            userGallery: userGallery
+        });
+    });
+
+    function getUserProfile (callback) {
+        connection.query('SELECT * FROM user WHERE user.user_id = ?', req.params.userID, function (err, profile) {
+            callback(null, profile);
+        });
+    }
+    function getFavorites (profile, callback) {
+        connection.query('SELECT * FROM vendor INNER JOIN favoritevendors ON vendor.vendor_id = favoritevendors.vendor_fid WHERE favoritevendors.user_fid = ?', req.params.userID, function (err, favorites) {
+            for (var i = 0; i < favorites.length; i++) {
+                favorites[i].favorite = 1;
+            }
+            callback(null, profile, favorites);
+        });
+    }
+    function getCategory (profile, favorites, callback) {
+        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
+            var favoriteCategory = functions.vendorJoin(favorites, category);
+            callback(null, profile, favoriteCategory);
+        });
+    }
+    function getReviews (profile, favorites, callback) {
+        connection.query(`SELECT * FROM reviews INNER JOIN vendor ON reviews.vendor_fid = vendor.vendor_id WHERE reviews.user_fid = ?`, req.params.userID, function (err, reviews) {
+            callback(null, profile, favorites, reviews);
+        });
+    }
+    function getReviewPhotos (profile, favorites, reviews, callback) {
+        connection.query('SELECT * FROM `usergallery` WHERE user_fid = ?', req.params.userID, function (err, photos) {
+            for (var i = 0; i < reviews.length; i++) {
+                for (var x = 0; x < photos.length; x++) {
+                    if (reviews[i].id == photos[x].review_fid) {
+                        if (reviews[i].photos == null)
+                            reviews[i].photos = [];
+                        reviews[i].photos.push(photos[x].photo_url);
+                    }
+                }
+            }
+            callback(null, profile, favorites, reviews);
+        });
+    }
+    function getUserGallery (profile, favorites, reviews, callback) {
+        connection.query('SELECT * FROM usergallery WHERE usergallery.user_fid = ?', req.params.userID, function (err, userGallery) {
+            callback(null, profile, favorites, reviews, userGallery);
+        });
+    }
+
 });
 
 //Upload photos and post to vendorgallery table

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<?xml-stylesheet type="text/css" href="/stylesheets/style.css"?>
+<svg version="1.1" id="heart-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-323 408.7 100 100" style="enable-background:new -323 408.7 100 100;" xml:space="preserve">
+<style type="text/css">
+	.outline{fill:#FFFFFF;}
+	.inside{fill:#FF0351;}
+</style>
+<path class="outline" d="M-273,426.5c-9.8-22-50-17.8-50,15.5c0,17,12.8,39.5,50,62.5c37.3-23,50-45.5,50-62.5
+	C-223,408.8-263.2,404.4-273,426.5z M-273,494.6c-26.5-17.3-41.7-36.3-41.7-52.6c0-14.5,9.9-20.8,19.1-20.8
+	c16.3,0,21.4,21.3,22.6,26c1-4.7,6.5-26,22.4-26c9.2,0,19.2,6.5,19.2,20.8C-231.3,458.3-246.5,477.3-273,494.6z"/>
+
+<path class="inside" id="heart-fill" onclick="addFavorite()" d="M-231.3,442c0,16.3-15.1,35.3-41.7,52.6c-26.5-17.3-41.7-36.3-41.7-52.6c0-14.5,9.9-20.8,19.1-20.8
+	c16.3,0,21.4,21.3,22.6,26c1-4.7,6.5-26,22.4-26C-241.3,421.2-231.3,427.6-231.3,442z"/>
+
+</svg>

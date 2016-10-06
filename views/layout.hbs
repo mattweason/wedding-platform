@@ -55,7 +55,7 @@
                                       <a href="/admin" class="admin-dashboard">Admin</a>
                                       <a href="/users/logout" class="log-out">Log Out</a>
                                   {{else}}
-                                      <a href="" class="my-profile">My Profile</a>
+                                      <a href="/profile/{{#each user}}{{this.user_id}}{{/each}}" class="my-profile">My Profile</a>
                                       <a href="/users/logout" class="log-out">Log Out</a>
                                   {{/if}}
                               {{else}}
