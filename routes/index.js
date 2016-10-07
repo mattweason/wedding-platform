@@ -44,7 +44,7 @@ router.get('/', function(req, res, next) {
     });
 
     function getVendor (callback) {
-        connection.query('SELECT * FROM vendor ORDER BY vendor_name ASC', function(err, vendor) {
+        connection.query('SELECT * FROM vendor WHERE vendor.approved = 1 ORDER BY vendor_name ASC ', function(err, vendor) {
             callback(null, vendor);
         });
     }
@@ -79,7 +79,7 @@ router.get('/', function(req, res, next) {
        });
     }
     function getFeatured (vendor, categories, category, callback) {
-        connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1', function (err, featured) {
+        connection.query('SELECT * FROM vendor WHERE vendor.is_featured = 1 AND vendor.approved = 1', function (err, featured) {
 
             // Append categories as strings onto vendor object
             var featuredCat = functions.vendorJoin(featured, category);
@@ -104,7 +104,7 @@ router.get('/', function(req, res, next) {
         } );
     }
     function getCities (vendor, featured, categories, callback) {
-        connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {
+        connection.query('SELECT DISTINCT city FROM vendor WHERE vendor.approved = 1 ORDER BY city', function (err, cities) {
             callback(null, vendor, featured, cities, categories);
         });
     }
@@ -135,7 +135,7 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
         });
     }
     function getFavorites (profile, callback) {
-        connection.query('SELECT * FROM vendor INNER JOIN favoritevendors ON vendor.vendor_id = favoritevendors.vendor_fid WHERE favoritevendors.user_fid = ?', req.params.userID, function (err, favorites) {
+        connection.query('SELECT * FROM vendor INNER JOIN favoritevendors ON vendor.vendor_id = favoritevendors.vendor_fid WHERE favoritevendors.user_fid = ? AND vendor.approved = 1', req.params.userID, function (err, favorites) {
             for (var i = 0; i < favorites.length; i++) {
                 favorites[i].favorite = 1;
             }
@@ -149,7 +149,7 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
         });
     }
     function getReviews (profile, favorites, callback) {
-        connection.query(`SELECT * FROM reviews INNER JOIN vendor ON reviews.vendor_fid = vendor.vendor_id WHERE reviews.user_fid = ?`, req.params.userID, function (err, reviews) {
+        connection.query(`SELECT * FROM reviews INNER JOIN vendor ON reviews.vendor_fid = vendor.vendor_id WHERE reviews.user_fid = ? AND vendor.approved = 1`, req.params.userID, function (err, reviews) {
             callback(null, profile, favorites, reviews);
         });
     }
@@ -164,6 +164,7 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
                     }
                 }
             }
+            console.log(reviews);
             callback(null, profile, favorites, reviews);
         });
     }

@@ -14927,6 +14927,44 @@ $(document).ready(function() {
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
+    //----------------------Profile Page Navigation-------------------------//
+        var $grid = $('.photo-grid').masonry({
+            // options
+            itemSelector: '.photo-item',
+            gutter: 10
+        });
+        $('#userReviews, #userGallery').css("display","none").css("visibility","visible");
+
+        //Favorite Vendors Clicked
+        $('#profileFavorites').click(function() {
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active');
+                $('#profileReviews, #profilePhotos').removeClass('active');
+                $('#userReviews, #userGallery').fadeOut(500);
+                $('#userFavorites').delay(500).fadeIn(500);
+            }
+        });
+
+        //Reviews Clicked
+        $('#profileReviews').click(function() {
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active');
+                $('#profileFavorites, #profilePhotos').removeClass('active');
+                $('#userFavorites, #userGallery').fadeOut(500);
+                $('#userReviews').delay(500).fadeIn(500);
+            }
+        });
+
+        //Photos Clicked
+        $('#profilePhotos').click(function() {
+            if (!$(this).hasClass('active')) {
+                $(this).addClass('active');
+                $('#profileFavorites, #profileReviews').removeClass('active');
+                $('#userFavorites, #userReviews').fadeOut(500);
+                $('#userGallery').delay(500).fadeIn(500);
+            }
+        });
+
     //Chosen field for category
     $("select#category").chosen();
 

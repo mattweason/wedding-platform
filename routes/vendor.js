@@ -56,7 +56,7 @@ router.get('/favorite/:action/:vendorID', function(req, res){
 
 //---------------------VENDOR REVIEW FORM-----------------------//
 router.get('/:vendorName/review', functions.ensureAuthenticated, function(req, res) {
-    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 1', req.params.vendorName, function (err, vendor) {
 
         res.render('review', {
             title: vendor[0].vendor_name + ' Review',
@@ -68,7 +68,7 @@ router.get('/:vendorName/review', functions.ensureAuthenticated, function(req, r
 
 //---------------------VENDOR GALLERY EDIT-----------------------//
 router.get('/:vendorName/gallery', functions.ensureAuthenticated, function(req, res) {
-    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+    connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 1', req.params.vendorName, function (err, vendor) {
 
         connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {
 
@@ -103,7 +103,7 @@ router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUs
     });
 
     function getVendor (callback) {
-        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 1', req.params.vendorName, function (err, vendor) {
             if(vendor[0].price == '$') {
                 vendor[0].onedollar = true;
             } else if (vendor[0].price == '$$') {
@@ -193,7 +193,7 @@ router.get('/:vendorName', function(req,res) {
     });
 
     function getVendor (callback) {
-        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 1', req.params.vendorName, function (err, vendor) {
             callback(null, vendor);
         });
     }
@@ -475,7 +475,7 @@ router.post('/create', function(req, res){
     //Get all basic form data (separate category)
 
     function queryExisting() {
-        var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}"`;
+        var query = `SELECT vendor_name FROM vendor WHERE vendor_name = "${dataCollection.vendor_name}" AND vendor.approved = 1`;
         connection.query(query, function(err, result) {
             if(err) {
                 throw err;
@@ -506,6 +506,10 @@ router.post('/create', function(req, res){
 
         dataCollection['featured_image'] = uploadPath;
 
+        if (req.admin) {
+            dataCollection.approved = 1;
+        }
+
         //create array of all values
         var dbValues = [];
         for (var key in dataCollection) {
@@ -515,6 +519,9 @@ router.post('/create', function(req, res){
         var query1 = Object.keys(dataCollection).join(", ");
         var query2 = "'" + dbValues.join("','") + "'";
         var query = `INSERT INTO vendor (${query1}) VALUES (${query2})`;
+
+        console.log(query1);
+        console.log(query2);
 
         // execute the query
         connection.query(query, function (err, feedback) {

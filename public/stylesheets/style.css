@@ -1111,6 +1111,9 @@ input, textarea {
 
 #user-profile {
   padding-top: 120px; }
+  #user-profile p {
+    font-family: "Lato Light";
+    font-size: 16px; }
   #user-profile h3 {
     text-align: center;
     font-family: "Josefin Sans";
@@ -1118,6 +1121,10 @@ input, textarea {
     border-bottom: none; }
   #user-profile .button-light {
     margin: 0 0 5px 0; }
+    #user-profile .button-light.active {
+      background-color: #282828;
+      color: #fff;
+      cursor: default; }
   #user-profile .favorite-box {
     padding: 0 0 20px 0; }
     #user-profile .favorite-box .feat-img {
@@ -1130,6 +1137,7 @@ input, textarea {
     #user-profile .favorite-box .desc-wrapper {
       height: 220px; }
     #user-profile .favorite-box .desc-box {
+      padding: 10px;
       background: #fff;
       height: 160px;
       width: 100%;
@@ -1137,34 +1145,120 @@ input, textarea {
       left: -60px;
       margin-top: 30px; }
       #user-profile .favorite-box .desc-box h2 {
-        margin-top: 0; }
-    #user-profile .favorite-box .overflow-box {
-      height: 60px; }
-      #user-profile .favorite-box .overflow-box .vend-desc {
+        font-family: "Playfair Display";
+        margin: 0 0 5px 0;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: #282828; }
+    #user-profile .favorite-box .vend-info {
+      padding-top: 10px;
+      border-top: 1px solid #282828; }
+      #user-profile .favorite-box .vend-info span {
+        font-size: 14px;
         font-family: "Lato Light";
-        font-size: 16px;
-        color: #282828;
-        line-height: 20px;
-        margin: 10px 0; }
-  #user-profile #user-gallery h3 {
+        font-weight: 700;
+        color: #282828; }
+      #user-profile .favorite-box .vend-info .vend-add, #user-profile .favorite-box .vend-info .vend-phone {
+        font-family: "Lato Light";
+        color: #828282;
+        font-size: 14px;
+        margin-bottom: 5px; }
+    #user-profile .favorite-box .vend-view {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 15px 20px 5px 0;
+      font-size: 18px;
+      line-height: 40px;
+      display: block;
+      height: 40px;
+      width: 120px;
+      background: #282828;
+      border: none; }
+      #user-profile .favorite-box .vend-view:hover {
+        background: #424242; }
+  #user-profile #userReviews, #user-profile #userGallery {
+    visibility: hidden; }
+  #user-profile #userReviews .reviewHead {
+    text-align: right; }
+    #user-profile #userReviews .reviewHead .reviewUser {
+      color: #282828;
+      font-weight: 700;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+      border: 1px solid #fff;
+      display: inline-block; }
+      #user-profile #userReviews .reviewHead .reviewUser:hover {
+        border-bottom: 1px solid #282828; }
+    #user-profile #userReviews .reviewHead .reviewDelete {
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 30px;
+      display: inline-block;
+      height: 30px;
+      width: 80px;
+      background: #282828;
+      border: none;
+      -webkit-transition: all 0.2s;
+      transition: all 0.2s; }
+      #user-profile #userReviews .reviewHead .reviewDelete:hover {
+        background: #424242; }
+  #user-profile #userReviews .reviewDate {
+    color: #828282;
+    font-size: 14px; }
+  #user-profile #userReviews .review-body {
+    border-bottom: 1px solid #282828;
+    margin-bottom: 40px; }
+    #user-profile #userReviews .review-body .reviewRating {
+      padding-left: 0; }
+    #user-profile #userReviews .review-body .reviewTitle {
+      font-weight: 700;
+      font-size: 16px; }
+    #user-profile #userReviews .review-body .reviewText {
+      margin-bottom: 20px; }
+    #user-profile #userReviews .review-body .reviewGallery {
+      padding: 0 10px; }
+      #user-profile #userReviews .review-body .reviewGallery .reviewPhoto {
+        height: 100px;
+        width: 100%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        box-shadow: none;
+        margin: 0 0 10px 0;
+        transition: 0.2s all; }
+        #user-profile #userReviews .review-body .reviewGallery .reviewPhoto:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px #282828; }
+  #user-profile #userGallery h3 {
     text-align: center;
     margin: 35px auto 35px auto;
     font-family: "Josefin Sans";
     font-weight: 100;
     color: #282828; }
-  #user-profile #user-gallery .grid-sizer {
+  #user-profile #userGallery .grid-sizer {
     width: 25%; }
-  #user-profile #user-gallery .user-item {
+  #user-profile #userGallery .photo-item {
     position: relative;
     width: 24%;
     margin-bottom: 10px; }
-    #user-profile #user-gallery .user-item img {
+    #user-profile #userGallery .photo-item img {
       width: 100%;
       box-shadow: none;
       -webkit-transition: all 0.2s;
       /* Safari */
       transition: all 0.2s; }
-      #user-profile #user-gallery .user-item img:hover {
+      #user-profile #userGallery .photo-item img:hover {
         transform: scale(1.02);
         box-shadow: 0 0 10px #282828; }
 
@@ -1345,6 +1439,10 @@ input, textarea {
       transform: translateY(50%); }
       #mastfooter .main-footer .footer-logo img {
         height: 90px; }
+    #mastfooter .main-footer .addVendor {
+      position: relative;
+      top: 50%;
+      transform: translateY(130%); }
     #mastfooter .main-footer .social-media {
       text-align: right;
       height: 40px;

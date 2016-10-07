@@ -11,12 +11,12 @@
                     <p><span>Username: </span>{{profile.username}}</p>
                     <p><span>Email: </span>{{profile.email}}</p>
                 </div>
-                <button class="button-light">FAVORITE VENDORS</button>
-                <button class="button-light">REVIEWS</button>
-                <button class="button-light">UPLOADED PHOTOS</button>
+                <button id="profileFavorites" class="button-light active">FAVORITE VENDORS</button>
+                <button id="profileReviews" class="button-light">YOUR REVIEWS</button>
+                <button id="profilePhotos" class="button-light">UPLOADED PHOTOS</button>
             </div>
             <div class="col-sm-9">
-                <div class="favoriteVendors">
+                <div id="userFavorites">
                     <div class="row">
                         {{#if favorite}}
                             {{#each favorite}}
@@ -34,22 +34,19 @@
                                                     <div class="desc-box">
                                                         <h2>{{this.vendor_name}}</h2>
                                                         <p class="vend-cat">{{this.category}}</p>
-                                                        <div class="overflow-box">
-                                                            <p class="vend-desc">{{this.description}}</p>
-                                                        </div>
                                                         <div class="vend-info">
                                                             <div class="row">
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-2">
                                                                     <span>Address: </span>
                                                                 </div>
-                                                                <div class="col-sm-9">
+                                                                <div class="col-sm-10">
                                                                     <p class="vend-add">{{this.address}}, {{this.address_2}}
                                                                         <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-sm-2">
                                                                     <span>Phone: </span>
                                                                 </div>
-                                                                <div class="col-sm-9">
+                                                                <div class="col-sm-10">
                                                                     <p class="vend-phone">{{this.phone_number}}</p>
                                                                 </div>
                                                             </div>
@@ -65,7 +62,7 @@
 
                     </div>
                 </div>
-                <div class="userReviews">
+                <div id="userReviews">
                     <div class="row">
                         {{#if review}}
                             {{#each review}}
@@ -102,18 +99,16 @@
                         {{/if}}
                     </div>
                 </div>
-                <div id="user-gallery">
+                <div id="userGallery">
                     {{#if userGallery}}
-                        <div class="row">
-                            <div class="user-grid">
+                        <div class="photo-grid">
 
-                                {{#each userGallery}}
-                                    <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="userGallery" class="user-item" >
-                                        <img src="/{{this.photo_url}}" alt="">
-                                    </a>
-                                {{/each}}
+                            {{#each userGallery}}
+                                <a href="/{{this.photo_url}}" data-toggle="lightbox" data-gallery="userGallery" class="photo-item" >
+                                    <img src="/{{this.photo_url}}" alt="">
+                                </a>
+                            {{/each}}
 
-                            </div>
                         </div>
                     {{/if}}
                 </div>
