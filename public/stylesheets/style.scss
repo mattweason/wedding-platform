@@ -176,6 +176,43 @@ input, textarea{
   }
 }
 
+//ListJS Pagination------------------------------------ListJS Pagination//
+.paginationBottom, .paginationTop{
+  text-align:center;
+  list-style-type:none;
+  li{
+    margin: 0 5px;
+    position:relative;
+    display:inline-block;
+    height:40px;
+    width:40px;
+    border:1px solid $color-gray;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+
+    &:hover, &.active{
+      background: $color-gray;
+
+      a{color:#fff;}
+    }
+
+    a{
+      font-family: $font-main;
+      font-size: 16px;
+      text-decoration: none;
+      color:$color-gray;
+      line-height: 40px;
+      display:block;
+      height:38px;
+      width:38px;
+      -webkit-transition: all 0.1s;
+      transition: all 0.1s;
+    }
+  }
+}
+
+.paginationBottom{margin-bottom: 40px;}
+
 //Header-------------------------------------------------Header//
 .landing-video {
   iframe {
@@ -258,6 +295,7 @@ input, textarea{
   }
 
   .user-area {
+    text-align: right;
     .my-profile{
       width: 100px;
     }
@@ -267,7 +305,7 @@ input, textarea{
       color: #fff;
       text-align: center;
       text-transform: uppercase;
-      margin: 40px 20px 5px 0;
+      margin: 40px 0 5px 20px;
       font-size: 14px;
       line-height: 30px;
       display: inline-block;
@@ -602,42 +640,6 @@ input, textarea{
 #vendor-list{
   padding-top: 40px;
 
-  .paginationBottom, .paginationTop{
-    text-align:center;
-    list-style-type:none;
-    li{
-      margin: 0 5px;
-      position:relative;
-      display:inline-block;
-      height:40px;
-      width:40px;
-      border:1px solid $color-gray;
-      -webkit-transition: all 0.1s;
-      transition: all 0.1s;
-
-      &:hover, &.active{
-        background: $color-gray;
-
-        a{color:#fff;}
-      }
-
-      a{
-        font-family: $font-main;
-        font-size: 16px;
-        text-decoration: none;
-        color:$color-gray;
-        line-height: 40px;
-        display:block;
-        height:38px;
-        width:38px;
-        -webkit-transition: all 0.1s;
-        transition: all 0.1s;
-      }
-    }
-  }
-
-  .paginationBottom{margin-bottom: 40px;}
-
   .box{
     padding: 20px 0;
     .feat-img{
@@ -690,7 +692,7 @@ input, textarea{
         font-size: 14px;
       }
 
-      .vend-view, .vend-edit {
+      .vend-view, .vend-edit, .vend-approve {
         position: absolute;
         bottom: 10px;
         font-family: $font-header;
@@ -802,7 +804,7 @@ input, textarea{
           line-height: 40px;
           display: inline-block;
           height: 40px;
-          width: 160px;
+          width: 100%;
           background: $color-gray;
           border: none;
 
@@ -1805,8 +1807,40 @@ input, textarea{
   }
   .admin-user-list-wrapper{
     background: #f4f4f4;
-    .userMeta{height: 140px;}
-    .userVendor, .userAssign{height: 140px;}
+    padding-top: 40px;
+    .userMeta{
+      height: 120px;
+      margin-bottom: 15px;
+      .button-light{
+        height: 100%;
+        line-height: 120px;
+      }
+    }
+    .profileButton{
+      position: relative;
+      height: 120px;
+      .button-light{
+        height: 115px;
+        line-height: 115px;
+      }
+    }
+    .userVendors, .userAssign{
+      height: 120px;
+      float: none;
+      display: table-cell;
+      vertical-align: bottom;
+      h4{
+        position: relative;
+        top: 50%;
+        text-align: center;
+        -webkit-transform: translateY(-300%);
+        -ms-transform: translateY(-300%);
+        transform: translateY(-300%);
+      }
+      .userOwned{
+        display: none;
+      }
+    }
     .user{
       width: 100%;
       height: 100%;

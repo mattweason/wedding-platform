@@ -169,10 +169,115 @@ router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUs
 });
 
 //---------------------VENDOR PAGE-----------------------------//
-router.get('/:vendorName', function(req,res) {
+router.get('/:vendorName/pending', functions.ensureAuthenticated, functions.checkAdminAccess, function(req,res) {
 
     async.waterfall([
         getVendor,
+        getCategory,
+        getGallery,
+        getUserGallery,
+        getReviews,
+        getReviewPhotos,
+        checkAccess
+    ], function (err, vendorCategory, gallery, userGallery, reviews, rating, access) {
+        res.render('vendor_single_pending', {
+            access: access,
+            title: vendorCategory[0].vendor_name,
+            vendor: vendorCategory[0],
+            review: reviews,
+            rating: rating,
+            gallery: gallery,
+            userGallery: userGallery,
+            admin: req.admin
+        });
+    });
+
+    function getVendor (callback) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 0', req.params.vendorName, function (err, vendor) {
+            callback(null, vendor);
+        });
+    }
+    function getCategory (vendor, callback) {
+        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
+            var vendorCategory = functions.vendorJoin(vendor, category);
+            callback(null, vendorCategory);
+        });
+    }
+    function getGallery (vendorCategory, callback) {
+        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, gallery) {
+            callback(null, vendorCategory, gallery);
+        });
+    }
+    function getUserGallery (vendorCategory, gallery, callback) {
+        connection.query('SELECT * FROM usergallery WHERE usergallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, userGallery) {
+            callback(null, vendorCategory, gallery, userGallery);
+        });
+    }
+    function getReviews (vendorCategory, gallery, userGallery, callback) {
+        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendorCategory[0].vendor_id, function (err, reviews) {
+            var ratingCounter = 0;
+            var ratingTotal = 0;
+            for (var i = 0; i < reviews.length; i++) {
+                var mysqlTime = reviews[0].timestamp.toString();
+                var time = mysqlTime.split(/[- :]/);
+                var date = time[1] + ' ' + time[2] + ', ' + time[3];
+                ratingTotal += reviews[i].rating;
+                reviews[i].date = date;
+                ratingCounter++;
+            }
+            function round(value, precision) {
+                var multiplier = Math.pow(10, precision || 1);
+                return Math.round(value * multiplier) / multiplier;
+            }
+            var rating = round(ratingTotal / ratingCounter);
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
+        });
+    }
+    function getReviewPhotos (vendorCategory, gallery, userGallery, reviews, rating, callback) {
+        connection.query('SELECT * FROM `usergallery` WHERE vendor_fid = ?', vendorCategory[0].vendor_id, function (err, photos) {
+            for (var i = 0; i < reviews.length; i++) {
+                for (var x = 0; x < photos.length; x++) {
+                    if (reviews[i].id == photos[x].review_fid) {
+                        if (reviews[i].photos == null)
+                            reviews[i].photos = [];
+                        reviews[i].photos.push(photos[x].photo_url);
+                    }
+                }
+            }
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
+        });
+    }
+    function checkAccess (vendorCategory, gallery, userGallery, reviews, rating, callback) {
+        var access = false;
+        if (req.user) {
+            var userLog = req.user[0];
+            if (userLog.admin) {
+                access = true;
+                callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+            }
+            else
+                connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
+                    if (userAccess.length) {
+                        access = true;
+                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+                    }
+                    else
+                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+                });
+        }
+        else
+            callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+    }
+});
+
+//---------------------VENDOR PAGE-----------------------------//
+router.get('/:vendorName', function(req,res) {
+    if (req.user)
+        var userID = req.user[0].user_id;
+
+    async.waterfall([
+        getVendor,
+        getFavorites,
         getCategory,
         getGallery,
         getUserGallery,
@@ -196,6 +301,16 @@ router.get('/:vendorName', function(req,res) {
         connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 1', req.params.vendorName, function (err, vendor) {
             callback(null, vendor);
         });
+    }
+    function getFavorites (vendor, callback) {
+        if (userID)
+            connection.query('SELECT * FROM favoritevendors', function(err, favorites) {
+                var vendorFavorited = functions.vendorFavorites(vendor, favorites);
+                console.log(vendorFavorited);
+                callback(null, vendorFavorited);
+            });
+        else
+            callback(null, vendor);
     }
     function getCategory (vendor, callback) {
         connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {

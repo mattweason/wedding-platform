@@ -135,6 +135,37 @@ input, textarea {
       .favorite-heart.fill.favorited:hover {
         opacity: 1; }
 
+.paginationBottom, .paginationTop {
+  text-align: center;
+  list-style-type: none; }
+  .paginationBottom li, .paginationTop li {
+    margin: 0 5px;
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #282828;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s; }
+    .paginationBottom li:hover, .paginationBottom li.active, .paginationTop li:hover, .paginationTop li.active {
+      background: #282828; }
+      .paginationBottom li:hover a, .paginationBottom li.active a, .paginationTop li:hover a, .paginationTop li.active a {
+        color: #fff; }
+    .paginationBottom li a, .paginationTop li a {
+      font-family: "Lato Light";
+      font-size: 16px;
+      text-decoration: none;
+      color: #282828;
+      line-height: 40px;
+      display: block;
+      height: 38px;
+      width: 38px;
+      -webkit-transition: all 0.1s;
+      transition: all 0.1s; }
+
+.paginationBottom {
+  margin-bottom: 40px; }
+
 .landing-video iframe {
   width: 100%;
   height: calc(100vh - 120px); }
@@ -190,27 +221,29 @@ input, textarea {
     -webkit-transition: all 0.2s;
     /* Safari */
     transition: all 0.2s; }
-  #masthead .user-area .my-profile {
-    width: 100px; }
-  #masthead .user-area a {
-    font-family: "Josefin Sans";
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 40px 20px 5px 0;
-    font-size: 14px;
-    line-height: 30px;
-    display: inline-block;
-    height: 30px;
-    width: 80px;
-    background: #282828;
-    border: none;
-    -webkit-transition: all 0.2s;
-    /* Safari */
-    transition: all 0.2s; }
-    #masthead .user-area a:hover {
-      background: #424242; }
+  #masthead .user-area {
+    text-align: right; }
+    #masthead .user-area .my-profile {
+      width: 100px; }
+    #masthead .user-area a {
+      font-family: "Josefin Sans";
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 40px 0 5px 20px;
+      font-size: 14px;
+      line-height: 30px;
+      display: inline-block;
+      height: 30px;
+      width: 80px;
+      background: #282828;
+      border: none;
+      -webkit-transition: all 0.2s;
+      /* Safari */
+      transition: all 0.2s; }
+      #masthead .user-area a:hover {
+        background: #424242; }
 
 #featured-vendor {
   margin-top: 160px;
@@ -451,35 +484,6 @@ input, textarea {
 
 #vendor-list {
   padding-top: 40px; }
-  #vendor-list .paginationBottom, #vendor-list .paginationTop {
-    text-align: center;
-    list-style-type: none; }
-    #vendor-list .paginationBottom li, #vendor-list .paginationTop li {
-      margin: 0 5px;
-      position: relative;
-      display: inline-block;
-      height: 40px;
-      width: 40px;
-      border: 1px solid #282828;
-      -webkit-transition: all 0.1s;
-      transition: all 0.1s; }
-      #vendor-list .paginationBottom li:hover, #vendor-list .paginationBottom li.active, #vendor-list .paginationTop li:hover, #vendor-list .paginationTop li.active {
-        background: #282828; }
-        #vendor-list .paginationBottom li:hover a, #vendor-list .paginationBottom li.active a, #vendor-list .paginationTop li:hover a, #vendor-list .paginationTop li.active a {
-          color: #fff; }
-      #vendor-list .paginationBottom li a, #vendor-list .paginationTop li a {
-        font-family: "Lato Light";
-        font-size: 16px;
-        text-decoration: none;
-        color: #282828;
-        line-height: 40px;
-        display: block;
-        height: 38px;
-        width: 38px;
-        -webkit-transition: all 0.1s;
-        transition: all 0.1s; }
-  #vendor-list .paginationBottom {
-    margin-bottom: 40px; }
   #vendor-list .box {
     padding: 20px 0; }
     #vendor-list .box .feat-img {
@@ -520,7 +524,7 @@ input, textarea {
       #vendor-list .box .desc-box .noRating {
         font-family: "Lato Light";
         font-size: 14px; }
-      #vendor-list .box .desc-box .vend-view, #vendor-list .box .desc-box .vend-edit {
+      #vendor-list .box .desc-box .vend-view, #vendor-list .box .desc-box .vend-edit, #vendor-list .box .desc-box .vend-approve {
         position: absolute;
         bottom: 10px;
         font-family: "Josefin Sans";
@@ -536,7 +540,7 @@ input, textarea {
         width: 120px;
         background: #282828;
         border: none; }
-        #vendor-list .box .desc-box .vend-view:hover, #vendor-list .box .desc-box .vend-edit:hover {
+        #vendor-list .box .desc-box .vend-view:hover, #vendor-list .box .desc-box .vend-edit:hover, #vendor-list .box .desc-box .vend-approve:hover {
           background: #424242; }
       #vendor-list .box .desc-box .vend-view {
         right: 0; }
@@ -606,7 +610,7 @@ input, textarea {
           line-height: 40px;
           display: inline-block;
           height: 40px;
-          width: 160px;
+          width: 100%;
           background: #282828;
           border: none; }
           #vendor-single #vendor-description .info-box .vend-link .vend-web:hover {
@@ -1340,11 +1344,34 @@ input, textarea {
     #users-list #user-list-header .filters .filter .chosen-results {
       font-family: "Lato Light"; }
   #users-list .admin-user-list-wrapper {
-    background: #f4f4f4; }
+    background: #f4f4f4;
+    padding-top: 40px; }
     #users-list .admin-user-list-wrapper .userMeta {
-      height: 140px; }
-    #users-list .admin-user-list-wrapper .userVendor, #users-list .admin-user-list-wrapper .userAssign {
-      height: 140px; }
+      height: 120px;
+      margin-bottom: 15px; }
+      #users-list .admin-user-list-wrapper .userMeta .button-light {
+        height: 100%;
+        line-height: 120px; }
+    #users-list .admin-user-list-wrapper .profileButton {
+      position: relative;
+      height: 120px; }
+      #users-list .admin-user-list-wrapper .profileButton .button-light {
+        height: 115px;
+        line-height: 115px; }
+    #users-list .admin-user-list-wrapper .userVendors, #users-list .admin-user-list-wrapper .userAssign {
+      height: 120px;
+      float: none;
+      display: table-cell;
+      vertical-align: bottom; }
+      #users-list .admin-user-list-wrapper .userVendors h4, #users-list .admin-user-list-wrapper .userAssign h4 {
+        position: relative;
+        top: 50%;
+        text-align: center;
+        -webkit-transform: translateY(-300%);
+        -ms-transform: translateY(-300%);
+        transform: translateY(-300%); }
+      #users-list .admin-user-list-wrapper .userVendors .userOwned, #users-list .admin-user-list-wrapper .userAssign .userOwned {
+        display: none; }
     #users-list .admin-user-list-wrapper .user {
       width: 100%;
       height: 100%;

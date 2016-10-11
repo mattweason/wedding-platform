@@ -2,7 +2,7 @@
     <div id="vendor-list-header">
         <div class="container">
             <div class="vend-list-title">
-                <h3>ADMIN VENDOR LIST</h3>
+                <h3>PENDING VENDOR LIST</h3>
             </div>
             <div class="filters">
                 <div class="row">
@@ -64,11 +64,10 @@
                                             <p class="vendCity">{{this.city}},</p>
                                             <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
                                             <!--<div class="row">-->
-                                            <a class="vend-edit" href="/vendor/{{this.vendor_url}}/edit">Edit</a>
-                                            <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                            <button class="vend-approve" data-vendorid="{{this.vendor_id}}">Approve</button>
+                                            <a class="vend-view" href="/vendor/{{this.vendor_url}}/pending">View</a>
                                             <!--</div>-->
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

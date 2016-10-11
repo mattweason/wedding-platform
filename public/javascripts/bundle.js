@@ -14924,6 +14924,22 @@ $(document).ready(function() {
         }
     });
 
+    //--------------------APPROVING VENDORS-----------------------------------
+    $('.vend-approve').click(function() {
+        $.ajax({
+            url: "/admin/approve/"+$(this).data('vendorid'),
+            success: function(data){
+                $('#message-modal').find('.form-response').html(data.message);
+                $('#message-modal').modal('toggle'); //toggle modal on form submit
+                if(data.status == 'success'){
+                    $('#message-modal').find('.view-button').children().html(data.buttontext);
+                    $('.view-button').attr('href', data.url);
+                    $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                }
+            }
+        })
+    });
+
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
@@ -15167,7 +15183,7 @@ $(document).ready(function() {
     });
 
     //----------------------------------------LIST.JS------------------------------------------//
-    //List.js options
+    //List.js options for vendor list
     $(function() {
         var paginationTopOptions = {
             name: "paginationTop",
@@ -15245,6 +15261,61 @@ $(document).ready(function() {
         $(".city-s").change(updateListCity);
 
         $("input:checkbox[name=price]").change(updateListPrice);
+    });
+
+    //List.js options for user list
+    $(function() {
+        var paginationTopOptions = {
+            name: "paginationTop",
+            paginationClass: "paginationTop",
+            outerWindow: 2
+        };
+        var paginationBottomOptions = {
+            name: "paginationBottom",
+            paginationClass: "paginationBottom",
+            innerWindow: 3,
+            left: 2,
+            right: 4
+        };
+        var options = {
+            valueNames: ['userFullName', 'userName', 'userEmail', 'userOwned'],
+            page: 8,
+            plugins: [
+                ListPagination(paginationTopOptions),
+                ListPagination(paginationBottomOptions)
+            ]
+        };
+
+        var userList = new List('users-list', options);
+
+        var updateListUser = function(){
+            var values_user = $(".user-s").val();
+
+            userList.filter(function(item) {
+                var users = item.values().userFullName;
+                if(values_user == 'All')
+                    return true;
+                else
+                    return (users.indexOf(values_user) !== -1);
+            });
+        };
+
+        var updateListOwned = function(){
+            var values_owned = $(".owned-s").val();
+
+            userList.filter(function(item) {
+                var userOwned = item.values().userOwned;
+                console.log(userOwned);
+                if(values_owned == 'All')
+                    return true;
+                else
+                    return (userOwned.indexOf(values_owned) !== -1);
+            });
+        };
+
+        $(".user-s").change(updateListUser);
+
+        $(".owned-s").change(updateListOwned);
     });
 
     //Show #no-vendors if there are no vendors in the filter

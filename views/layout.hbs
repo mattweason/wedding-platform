@@ -37,34 +37,35 @@
           <header>
               <div id="masthead">
                   <div class="container">
-                      <div class="col-sm-6 col-sm-offset-3">
-                          <div class="left-nav">
-                              <a href="#"><h3>Featured Vendors</h3></a>
+                      <div class="row">
+                          <div class="col-sm-6 col-sm-offset-3">
+                              <div class="left-nav">
+                                  <a href="#"><h3>Featured Vendors</h3></a>
+                              </div>
+                              <a href="/" class="logo-area">
+                                  <img class = "logo" src="/images/logo.png" alt="">
+                              </a>
+                              <div class="right-nav">
+                                  <a href="#"><h3>Vendor List</h3></a>
+                              </div>
                           </div>
-                          <a href="/" class="logo-area">
-                              <img class = "logo" src="/images/logo.png" alt="">
-                          </a>
-                          <div class="right-nav">
-                              <a href="#"><h3>Vendor List</h3></a>
-                          </div>
-                      </div>
-                      <div class="col-sm-3">
-                          <div class="user-area">
-                              {{#if user}}
-                                  {{#if admin}}
-                                      <a href="/admin" class="admin-dashboard">Admin</a>
-                                      <a href="/users/logout" class="log-out">Log Out</a>
+                          <div class="col-sm-3">
+                              <div class="user-area">
+                                  {{#if user}}
+                                      {{#if admin}}
+                                          <a href="/admin" class="admin-dashboard">Admin</a>
+                                          <a href="/users/logout" class="log-out">Log Out</a>
+                                      {{else}}
+                                          <a href="/profile/{{#each user}}{{this.user_id}}{{/each}}" class="my-profile">My Profile</a>
+                                          <a href="/users/logout" class="log-out">Log Out</a>
+                                      {{/if}}
                                   {{else}}
-                                      <a href="/profile/{{#each user}}{{this.user_id}}{{/each}}" class="my-profile">My Profile</a>
-                                      <a href="/users/logout" class="log-out">Log Out</a>
+                                      <a href="/users/login" class="sign-in">Sign In</a>
+                                      <a href="/users/register" class="sign-up">Sign Up</a>
                                   {{/if}}
-                              {{else}}
-                                  <a href="/users/login" class="sign-in">Sign In</a>
-                                  <a href="/users/register" class="sign-up">Sign Up</a>
-                              {{/if}}
+                              </div>
                           </div>
                       </div>
-
                   </div>
               </div>
           </header>

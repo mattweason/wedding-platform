@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="userMetaBox">
-                    <h4>User Information</h4>
+                    <h4>Your Information</h4>
                     <p><span>Full Name: </span>{{profile.name}}</p>
                     <p><span>Username: </span>{{profile.username}}</p>
                     <p><span>Email: </span>{{profile.email}}</p>
@@ -58,6 +58,10 @@
                                     </div>
                                 </div>
                             {{/each}}
+                        {{else}}
+                            <div class="col-sm-12">
+                                <h4>You have no favorite vendors yet.</h4>
+                            </div>
                         {{/if}}
 
                     </div>
@@ -96,6 +100,10 @@
                                     </div>
                                 </div>
                             {{/each}}
+                        {{else}}
+                            <div class="col-sm-12">
+                                <h4>You have not written any reviews yet.</h4>
+                            </div>
                         {{/if}}
                     </div>
                 </div>
@@ -109,6 +117,10 @@
                                 </a>
                             {{/each}}
 
+                        </div>
+                    {{else}}
+                        <div class="col-sm-12">
+                            <h4>You have not uploaded any photos yet.</h4>
                         </div>
                     {{/if}}
                 </div>

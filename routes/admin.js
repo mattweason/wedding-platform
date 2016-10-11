@@ -62,11 +62,55 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdminAccess
     }
 });
 
+//------------------------------------PENDING VENDOR LIST----------------------------//
+router.get('/pending', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
+
+    async.waterfall([
+        getVendor,
+        allCategories,
+        getCategory,
+        getCities
+    ], function (err, vendor, cities, categories) {
+        res.render('admin_pending_list', {
+            title: 'Pending Vendor List',
+            vendor: vendor,
+            city: cities,
+            categories: categories,
+            admin: req.admin
+        });
+    });
+
+    function getVendor (callback) {
+        connection.query('SELECT * FROM vendor WHERE approved = 0 ORDER BY vendor_name ASC', function(err, vendor) {
+            callback(null, vendor);
+        });
+    }
+    function allCategories (vendor, callback) {
+        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
+            callback(null, vendor, categories);
+        });
+    }
+    function getCategory (vendor, categories, callback) {
+        connection.query('SELECT * FROM vendor2category INNER JOIN category ON vendor2category.category_fid = category.category_id', function (err, category) {
+            // Append categories as strings onto vendor object
+            var vendorFull = functions.vendorJoin(vendor, category);
+
+            callback(null, vendorFull, categories);
+        });
+    }
+    function getCities (vendor, categories, callback) {
+        connection.query('SELECT DISTINCT city FROM vendor ORDER BY city', function (err, cities) {
+            callback(null, vendor, cities, categories);
+        });
+    }
+});
+
 //----------------------------------ADMIN USER LIST-----------------------------//
 router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
     async.waterfall([
         getUsers,
+        getReviewCount,
         getVendors,
         getOwnedVendors,
         getFreeVendors,
@@ -84,6 +128,12 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
     function getUsers (callback) {
         connection.query('SELECT * FROM user WHERE NOT user.admin = "1" ORDER BY name', function (err, users) {
             callback(null, users);
+        });
+    }
+    function getReviewCount (users, callback) {
+        connection.query('SELECT * FROM reviews', function (err, reviews) {
+            var userReviews = functions.reviewUserJoin(users, reviews);
+            callback(null, userReviews)
         });
     }
     function getVendors (users, callback) {
@@ -107,6 +157,20 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
             callback(null, usersFull, vendors, owned, free);
         });
     }
+});
+
+//----------------------------------------APPROVE A PENDING VENDOR---------------------------//
+router.get('/approve/:vendorID', function(req, res){
+    connection.query('UPDATE vendor SET approved = 1 WHERE vendor_id = ?', req.params.vendorID, function(err){
+        if (err)
+            throw err;
+        res.send({
+            message: 'Vendor Approved',
+            buttontext: 'Refresh Vendor List',
+            url: '/admin/pending',
+            status: "success"
+        })
+    });
 });
 
 //----------------------------------ASSIGN USER AS OWNER--------------------------//

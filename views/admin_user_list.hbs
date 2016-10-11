@@ -12,28 +12,6 @@
                             <input class="search search-filter">
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="filter">
-                            <label for="userselect">Users</label>
-                            <select class="select-filter user-s chosen" id="user-search" name="userselect">
-                                <option value="All">All</option>
-                                {{#each users}}
-                                    <option value="{{this.name}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="filter">
-                            <label for="vendorselect">Owned Vendors</label>
-                            <select class="select-filter vendor-s chosen" id="vendor-search" name="vendorselect">
-                                <option value="All">All</option>
-                                {{#each owned}}
-                                    <option value="{{this.vendor_name}}">{{this.vendor_name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -49,49 +27,45 @@
                             <div class="col-sm-6">
                                 <div class="user">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="userMeta">
-                                                <p class="userFullName"><span>Full Name: </span>{{this.name}}</p>
-                                                <p class="userName"><span>Username: </span>{{this.username}}</p>
-                                                <p class="userEmail"><span>Email: </span>{{this.email}}</p>
-                                            </div>
+                                        <div class="col-sm-6 userMeta">
+                                            <p class="userFullName"><span>Full Name: </span>{{this.name}}</p>
+                                            <p class="userName"><span>Username: </span>{{this.username}}</p>
+                                            <p class="userEmail"><span>Email: </span>{{this.email}}</p>
+                                            <p class="userReviews"><span># of Reviews: </span>{{this.review_count}}</p>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="userMeta">
-                                                <a href="/profile/{{this.user_id}}" class="button-light">Profile</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="userAssign">
-                                                <form action="/admin/assignuser" id="user-assign-form" method="post">
-                                                    <label for="vendor_assign_list">Available Vendors</label>
-                                                    <select class="select-filter chosen" id="vendor_assign_list" name="vendor_assign_list">
-                                                        <option value="Select One">Select One</option>
-                                                        {{#each ../free}}
-                                                            <option value="{{this.vendor_id}}">{{this.vendor_name}}</option>
-                                                        {{/each}}
-                                                    </select>
+                                        <div class="col-sm-6 userVendors">
+                                            {{#if this.businesses}}
+                                                <form action="/admin/unassignuser" id="user-unassign-form" method="post">
+                                                    <p class="userOwnedLabel">Businesses Owned: </p>
+                                                    {{#each this.businesses}}
+                                                        <input type="checkbox" name="user_owned" id="user_owned" value="{{this.id}}">
+                                                        <label for="user_owned">{{this.name}}</label>
+                                                    {{/each}}
+                                                    <p class="userOwned">{{#each businesses}}{{this.name}} {{/each}}</p>
+                                                    <input type="submit" class="userUnassignSubmit" value="UNASSIGN OWNER" name="submit">
                                                     <input type="hidden" name="user_id" value="{{this.user_id}}">
-                                                    <input type="submit" class="userAssignSubmit" value="ASSIGN OWNER" name="submit">
                                                 </form>
-                                            </div>
+                                            {{else}}
+                                                <h4>No Businesses Owned.</h4>
+                                            {{/if}}
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="userVendors">
-                                                {{#if this.businesses}}
-                                                    <form action="/admin/unassignuser" id="user-unassign-form" method="post">
-                                                        <p class="userOwnedLabel">Businesses Owned: </p>
-                                                        {{#each this.businesses}}
-                                                            <input type="checkbox" name="user_owned" id="user_owned" value="{{this.id}}">
-                                                            <label for="user_owned">{{this.name}}</label>
-                                                        {{/each}}
-                                                        <input type="submit" class="userUnassignSubmit" value="UNASSIGN OWNER" name="submit">
-                                                        <input type="hidden" name="user_id" value="{{this.user_id}}">
-                                                    </form>
-                                                {{else}}
-                                                    <h4>No Businesses Owned.</h4>
-                                                {{/if}}
-                                            </div>
+                                    </div>
+                                    <div class="row userWrapper">
+                                        <div class="col-sm-6 profileButton">
+                                            <a href="/profile/{{this.user_id}}" class="button-light">Profile</a>
+                                        </div>
+                                        <div class="col-sm-6 userAssign">
+                                            <form action="/admin/assignuser" id="user-assign-form" method="post">
+                                                <label for="vendor_assign_list">Available Vendors</label>
+                                                <select class="select-filter chosen" id="vendor_assign_list" name="vendor_assign_list">
+                                                    <option value="Select One">Select One</option>
+                                                    {{#each ../free}}
+                                                        <option value="{{this.vendor_id}}">{{this.vendor_name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                                <input type="hidden" name="user_id" value="{{this.user_id}}">
+                                                <input type="submit" class="userAssignSubmit" value="ASSIGN OWNER" name="submit">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
