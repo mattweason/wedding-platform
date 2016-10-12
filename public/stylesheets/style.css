@@ -42,6 +42,12 @@ a {
   -webkit-transition: all 0.2s;
   transition: all 0.2s; }
 
+h3 {
+  text-align: center;
+  font-family: "Josefin Sans";
+  font-weight: 100;
+  color: #282828; }
+
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0; }
@@ -225,13 +231,20 @@ input, textarea {
     text-align: right; }
     #masthead .user-area .my-profile {
       width: 100px; }
+    #masthead .user-area .contact {
+      width: 30px;
+      height: 30px; }
+      #masthead .user-area .contact:before {
+        line-height: 27px;
+        position: relative;
+        top: 2px; }
     #masthead .user-area a {
       font-family: "Josefin Sans";
       text-decoration: none;
       color: #fff;
       text-align: center;
       text-transform: uppercase;
-      margin: 40px 0 5px 20px;
+      margin: 40px 0 5px 10px;
       font-size: 14px;
       line-height: 30px;
       display: inline-block;
@@ -671,11 +684,7 @@ input, textarea {
         transform: scale(1.02);
         box-shadow: 0px 0px 10px #282828; }
   #vendor-single #user-gallery h3 {
-    text-align: center;
-    margin: 35px auto 35px auto;
-    font-family: "Josefin Sans";
-    font-weight: 100;
-    color: #282828; }
+    margin: 35px auto 35px auto; }
   #vendor-single #user-gallery .grid-sizer {
     width: 25%; }
   #vendor-single #user-gallery .user-item {
@@ -692,11 +701,7 @@ input, textarea {
         transform: scale(1.02);
         box-shadow: 0 0 10px #282828; }
   #vendor-single #vendor-reviews h3 {
-    text-align: center;
-    margin: 35px auto 35px auto;
-    font-family: "Josefin Sans";
-    font-weight: 100;
-    color: #282828; }
+    margin: 35px auto 35px auto; }
   #vendor-single #vendor-reviews h4 {
     text-align: center;
     font-family: "Lato Light";
@@ -837,9 +842,6 @@ input, textarea {
 
 #vendor-add, #vendor-edit {
   padding-top: 120px; }
-  #vendor-add h3, #vendor-edit h3 {
-    text-align: center;
-    font-family: "Josefin Sans"; }
   #vendor-add #add-form, #vendor-edit #add-form {
     padding: 40px 0; }
     #vendor-add #add-form textarea, #vendor-edit #add-form textarea {
@@ -973,9 +975,6 @@ input, textarea {
 #review-vendor {
   padding-top: 160px;
   padding-bottom: 60px; }
-  #review-vendor h3 {
-    text-align: center;
-    font-family: "Josefin Sans"; }
   #review-vendor #reviewText, #review-vendor #reviewTitle {
     width: 100%; }
   #review-vendor #review-form .main-label {
@@ -1047,9 +1046,6 @@ input, textarea {
 #gallery-delete-page {
   padding-top: 120px;
   padding-bottom: 40px; }
-  #gallery-delete-page h3 {
-    text-align: center;
-    font-family: "Josefin Sans"; }
   #gallery-delete-page .upload-gallery-area {
     margin: 20px 0; }
   #gallery-delete-page #upload-gallery #upl {
@@ -1089,8 +1085,6 @@ input, textarea {
   padding-top: 120px;
   padding-bottom: 40px; }
   #login-page h3, #register-page h3 {
-    text-align: center;
-    font-family: "Josefin Sans";
     margin-bottom: 40px;
     border-bottom: none; }
   #login-page .right, #register-page .right {
@@ -1114,13 +1108,12 @@ input, textarea {
       background: #424242; }
 
 #user-profile {
-  padding-top: 120px; }
+  padding-top: 120px;
+  padding-bottom: 40px; }
   #user-profile p {
     font-family: "Lato Light";
     font-size: 16px; }
   #user-profile h3 {
-    text-align: center;
-    font-family: "Josefin Sans";
     margin-bottom: 40px;
     border-bottom: none; }
   #user-profile .button-light {
@@ -1245,11 +1238,7 @@ input, textarea {
           transform: scale(1.05);
           box-shadow: 0 0 10px #282828; }
   #user-profile #userGallery h3 {
-    text-align: center;
-    margin: 35px auto 35px auto;
-    font-family: "Josefin Sans";
-    font-weight: 100;
-    color: #282828; }
+    margin: 35px auto 35px auto; }
   #user-profile #userGallery .grid-sizer {
     width: 25%; }
   #user-profile #userGallery .photo-item {
@@ -1274,8 +1263,6 @@ input, textarea {
   #admin .adminArea {
     align-self: center; }
   #admin h3 {
-    text-align: center;
-    font-family: "Josefin Sans";
     margin-bottom: 40px; }
   #admin .addVendor {
     border-right: 1px solid #282828;
@@ -1311,11 +1298,7 @@ input, textarea {
     height: 160px;
     background-color: #282828; }
     #users-list #user-list-header .user-list-title h3 {
-      text-align: center;
-      margin: 35px auto 35px auto;
-      font-family: "Josefin Sans";
-      font-weight: 100;
-      color: #fff; }
+      margin: 35px auto 35px auto; }
     #users-list #user-list-header .filters .filter .search {
       background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
       border: 1px solid #aaa;
@@ -1418,6 +1401,82 @@ input, textarea {
       #users-list .admin-user-list-wrapper .userAssignSubmit:hover, #users-list .admin-user-list-wrapper .userUnassignSubmit:hover {
         background: #424242; }
 
+#contact-page {
+  padding-top: 120px;
+  padding-bottom: 40px; }
+  #contact-page h3 {
+    margin: 35px auto 35px auto; }
+  #contact-page input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px; }
+  #contact-page textarea {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 200px; }
+  #contact-page .button-light {
+    margin-top: 0;
+    height: 45px; }
+
+#claim-business-page {
+  padding-top: 120px;
+  padding-bottom: 40px; }
+  #claim-business-page h3 {
+    margin: 35px auto 35px auto; }
+  #claim-business-page h4 {
+    font-family: "Josefin Sans Bold";
+    text-align: center;
+    margin: 30px 0 10px 0; }
+  #claim-business-page .description {
+    font-family: "Lato Light";
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px; }
+  #claim-business-page #businessContact {
+    display: none; }
+    #claim-business-page #businessContact .title {
+      text-align: center;
+      font-size: 16px;
+      font-family: "Lato Light";
+      font-weight: 700;
+      margin-top: 15px; }
+    #claim-business-page #businessContact .businessInfo {
+      font-family: "Lato Light";
+      font-size: 16px;
+      text-align: center; }
+  #claim-business-page label {
+    font-family: "Lato Light";
+    line-height: 30px;
+    font-size: 16px; }
+  #claim-business-page input {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px; }
+  #claim-business-page select {
+    padding: 1px;
+    height: 29px;
+    font-family: "Lato Light";
+    width: 100%; }
+  #claim-business-page .chosen-container-active.chosen-with-drop .chosen-single div b {
+    background-position: -18px 5px; }
+  #claim-business-page .chosen-single {
+    font-family: "Lato Light";
+    height: 30px;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none; }
+    #claim-business-page .chosen-single span {
+      line-height: 29px; }
+    #claim-business-page .chosen-single div b {
+      background: url(chosen-sprite.png) no-repeat 0px 5px; }
+  #claim-business-page .chosen-drop {
+    border-radius: 0; }
+  #claim-business-page .chosen-results {
+    font-family: "Lato Light"; }
+  #claim-business-page .button-light {
+    margin-top: 20px;
+    height: 45px; }
+
 #message-modal .modal-content, #delete-modal .modal-content {
   margin: 0 100px;
   padding: 20px;
@@ -1466,10 +1525,18 @@ input, textarea {
       transform: translateY(50%); }
       #mastfooter .main-footer .footer-logo img {
         height: 90px; }
-    #mastfooter .main-footer .addVendor {
+    #mastfooter .main-footer .footerButton {
       position: relative;
       top: 50%;
-      transform: translateY(130%); }
+      transform: translateY(50%); }
+      #mastfooter .main-footer .footerButton .button-light {
+        width: 220px;
+        margin: 0 auto; }
+      #mastfooter .main-footer .footerButton .footerDesc {
+        font-family: "Lato Light";
+        color: #fff;
+        text-align: center;
+        font-size: 16px; }
     #mastfooter .main-footer .social-media {
       text-align: right;
       height: 40px;

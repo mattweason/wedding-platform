@@ -137,22 +137,22 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
         });
     }
     function getVendors (users, callback) {
-        connection.query('SELECT * FROM vendor ORDER BY vendor_name', function (err, vendors) {
+        connection.query('SELECT * FROM vendor WHERE approved = 1 ORDER BY vendor_name', function (err, vendors) {
             callback(null, users, vendors);
         });
     }
     function getOwnedVendors (users, vendors, callback) {
-        connection.query('SELECT * FROM user2vendor INNER JOIN vendor ON user2vendor.vendor_fid = vendor.vendor_id GROUP BY vendor_fid', function (err, owned) {
+        connection.query('SELECT * FROM user2vendor INNER JOIN vendor ON user2vendor.vendor_fid = vendor.vendor_id WHERE vendor.approved = 1 GROUP BY vendor_fid', function (err, owned) {
             callback(null, users, vendors, owned);
         });
     }
     function getFreeVendors (users, vendors, owned, callback) {
-        connection.query('SELECT * FROM vendor LEFT OUTER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid WHERE user2vendor.vendor_fid IS NULL', function (err, free) {
+        connection.query('SELECT * FROM vendor LEFT OUTER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid WHERE user2vendor.vendor_fid IS NULL AND vendor.approved = 1', function (err, free) {
             callback(null, users, vendors, owned, free);
         });
     }
     function vendorOwners (users, vendors, owned, free, callback) {
-        connection.query('SELECT * FROM vendor INNER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid', function (err, owners) {
+        connection.query('SELECT * FROM vendor INNER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid WHERE vendor.approved = 1', function (err, owners) {
             var usersFull = functions.ownerJoin(users, owners);
             callback(null, usersFull, vendors, owned, free);
         });

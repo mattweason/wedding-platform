@@ -15,6 +15,7 @@ router.use(functions.checkAdmin);
 //bring in all sub-routes
 router.use('/vendor', require('./vendor'));
 router.use('/admin', require('./admin'));
+router.use('/api', require('./api'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -108,6 +109,37 @@ router.get('/', function(req, res, next) {
             callback(null, vendor, featured, cities, categories);
         });
     }
+});
+
+//* Get contact page */
+router.get('/contact', function(req, res, next) {
+    res.render('contact', {
+        admin: req.admin,
+        title: 'Contact Us'
+    });
+});
+
+//* Get claim business page */
+router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, next) {
+
+    async.waterfall([
+        getFreeVendors
+
+    ], function (err, free) {
+        res.render('claim-business', {
+            admin: req.admin,
+            title: 'Claim Your Business',
+            free: free
+        });
+    });
+
+    function getFreeVendors (callback) {
+        connection.query('SELECT * FROM vendor LEFT OUTER JOIN user2vendor ON vendor.vendor_id = user2vendor.vendor_fid WHERE user2vendor.vendor_fid IS NULL AND vendor.approved = 1', function (err, free) {
+            callback(null, free);
+        });
+    }
+
+
 });
 
 /*Get user profile page. */

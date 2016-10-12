@@ -71,6 +71,13 @@ a {
   transition: all 0.2s;
 }
 
+h3 {
+  text-align: center;
+  font-family: $font-header;
+  font-weight: 100;
+  color: $color-gray;
+}
+
 .no-gutter > [class*='col-'] {
   padding-right:0;
   padding-left:0;
@@ -299,13 +306,22 @@ input, textarea{
     .my-profile{
       width: 100px;
     }
+    .contact{
+      width: 30px;
+      height: 30px;
+      &:before{
+        line-height: 27px;
+        position: relative;
+        top: 2px;
+      }
+    }
     a {
       font-family: $font-header;
       text-decoration: none;
       color: #fff;
       text-align: center;
       text-transform: uppercase;
-      margin: 40px 0 5px 20px;
+      margin: 40px 0 5px 10px;
       font-size: 14px;
       line-height: 30px;
       display: inline-block;
@@ -892,11 +908,7 @@ input, textarea{
 
   #user-gallery {
     h3 {
-      text-align: center;
       margin: 35px auto 35px auto;
-      font-family: $font-header;
-      font-weight: 100;
-      color: $color-gray;
     }
 
     .grid-sizer {
@@ -922,11 +934,7 @@ input, textarea{
 
   #vendor-reviews{
     h3{
-      text-align: center;
       margin: 35px auto 35px auto;
-      font-family: $font-header;
-      font-weight: 100;
-      color: $color-gray;
     }
     h4{
       text-align: center;
@@ -1106,11 +1114,6 @@ input, textarea{
 }
 #vendor-add, #vendor-edit {
   padding-top: $header-height;
-
-  h3 {
-    text-align: center;
-    font-family: $font-header;
-  }
 
   #add-form {
     padding: 40px 0;
@@ -1301,11 +1304,6 @@ input, textarea{
   padding-top: 160px;
   padding-bottom: 60px;
 
-  h3 {
-    text-align: center;
-    font-family: $font-header;
-  }
-
   .ratingWrapper {
     //input[type="checkbox"] {
     //  display: none;
@@ -1402,11 +1400,6 @@ input, textarea{
   padding-top: $header-height;
   padding-bottom: 40px;
 
-  h3 {
-    text-align: center;
-    font-family: $font-header;
-  }
-
   .upload-gallery-area {
     margin: 20px 0;
   }
@@ -1469,8 +1462,6 @@ input, textarea{
   padding-bottom: 40px;
 
   h3 {
-    text-align: center;
-    font-family: $font-header;
     margin-bottom: 40px;
     border-bottom: none;
   }
@@ -1499,13 +1490,12 @@ input, textarea{
 //User Profile Page-------------------------------------------------------User Profile Page//
 #user-profile{
   padding-top: $header-height;
+  padding-bottom: 40px;
   p{
     font-family: $font-main;
     font-size: 16px;
   }
   h3 {
-    text-align: center;
-    font-family: $font-header;
     margin-bottom: 40px;
     border-bottom: none;
   }
@@ -1667,11 +1657,7 @@ input, textarea{
   }
   #userGallery {
     h3 {
-      text-align: center;
       margin: 35px auto 35px auto;
-      font-family: $font-header;
-      font-weight: 100;
-      color: $color-gray;
     }
 
     .grid-sizer {
@@ -1708,8 +1694,6 @@ input, textarea{
   }
 
   h3 {
-    text-align: center;
-    font-family: $font-header;
     margin-bottom: 40px;
   }
 
@@ -1763,11 +1747,7 @@ input, textarea{
 
     .user-list-title {
       h3 {
-        text-align: center;
         margin: 35px auto 35px auto;
-        font-family: $font-header;
-        font-weight: 100;
-        color: #fff;
       }
     }
     .filters{
@@ -1893,6 +1873,96 @@ input, textarea{
   }
 }
 
+//Contact Page--------------------------------------------------------------Contact Page//
+#contact-page{
+  padding-top: $header-height;
+  padding-bottom: 40px;
+  h3{
+    margin: 35px auto 35px auto;
+  }
+  input{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  textarea{
+    margin-bottom: 10px;
+    width: 100%;
+    height: 200px;
+  }
+  .button-light{
+    margin-top: 0;
+    height: 45px;
+  }
+}
+
+//Claim Business--------------------------------------------------------------Claim Business//
+#claim-business-page{
+  padding-top: $header-height;
+  padding-bottom: 40px;
+  h3{
+    margin: 35px auto 35px auto;
+  }
+  h4{
+    font-family: $font-header-bold;
+    text-align: center;
+    margin: 30px 0 10px 0;
+  }
+  .description{
+    font-family: $font-main;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  #businessContact{
+    display: none;
+    .title{
+      text-align: center;
+      font-size: 16px;
+      font-family: $font-main;
+      font-weight: 700;
+      margin-top: 15px;
+    }
+    .businessInfo{
+      font-family: $font-main;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+  label{
+    font-family: $font-main;
+    line-height: 30px;
+    font-size: 16px;
+  }
+  input{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  select{
+    padding: 1px;
+    height: 29px;
+    font-family: $font-main;
+    width: 100%;
+  }
+  .chosen-container-active.chosen-with-drop .chosen-single div b {background-position: -18px 5px;}
+  .chosen-single{
+    font-family: $font-main;
+    height: 30px;
+    border-radius:0;
+    background: #fff;
+    box-shadow: none;
+    span{line-height: 29px;}
+    div{b{background: url(chosen-sprite.png) no-repeat 0px 5px;}}
+  }
+  .chosen-drop{border-radius:0;}
+  .chosen-results{font-family: $font-main;}
+  .button-light{
+    margin-top: 20px;
+    height: 45px;
+  }
+}
+
 //Modal----------------------------------------------------------------------Modal//
 #message-modal, #delete-modal {
 
@@ -1964,10 +2034,20 @@ input, textarea{
       }
     }
 
-    .addVendor{
+    .footerButton{
       position: relative;
       top: 50%;
-      transform: translateY(130%);
+      transform: translateY(50%);
+      .button-light{
+        width: 220px;
+        margin: 0 auto;
+      }
+      .footerDesc{
+        font-family: $font-main;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+      }
     }
 
     .social-media {

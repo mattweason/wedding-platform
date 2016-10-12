@@ -1,0 +1,62 @@
+<div id="claim-business-page">
+    <div class="container">
+        <div class="row">
+            <h3>CLAIM YOUR BUSINESS</h3>
+            <form id="claims-form" action="" method="post">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="fname">First Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" name="fname" id="fname" placeholder="First Name">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="lname">Last Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" name="lname" id="lname" placeholder="Last Name">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="emailadd">Email Address</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="email" name="emailadd" id="emailadd" placeholder="Email">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="business-list">Unclaimed Businesses</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="chosen" id="business-list" name="business-list">
+                                <option value="Select One">Select One</option>
+                                {{#each free}}
+                                    <option value="{{this.vendor_id}}">{{this.vendor_name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="description">To claim a business here on Vendor on a Dime please fill out the form to the left with your name and email and select the business you would like to claim. Once we have reviewed your request we will call you at the number listed for the business.</p>
+                    <p class="description">If the information listed below is incorrect or your business does not appear in the Unclaimed Businesses list please
+                        <a href="/contact">Contact Us</a>.</p>
+                </div>
+                <div class="col-sm-offset-4 col-sm-4">
+                    <div id="businessContact">
+                        <h4>Review of Business Contact Information</h4>
+                        <p class="description">Please review the information below before submitting your request.</p>
+                        <p class="title">Business Name</p>
+                        <p id="name" class="businessInfo"></p>
+                        <p class="title">Business Phone #</p>
+                        <p id="phone" class="businessInfo"></p>
+                        <p class="title">Business Address</p>
+                        <p id="address1" class="businessInfo"></p>
+                        <p id="address2" class="businessInfo"></p>
+                    </div>
+                    <input type="submit" class="button-light" id="contact-submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -243,6 +243,22 @@ $(document).ready(function() {
         })
     });
 
+    //------------------------CLAIM BUSINESS PROCESS---------------------------
+    $('#business-list').on('change', function() {
+        var vendorID = $(this).val();
+        console.log(vendorID);
+        $.ajax({
+            url: "/api/business/"+vendorID,
+            success: function(data){
+                $('#name').html(data.name);
+                $('#phone').html(data.phone);
+                $('#address1').html(data.address1);
+                $('#address2').html(data.address2);
+                $('#businessContact').slideDown(500);
+            }
+        })
+    });
+
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
