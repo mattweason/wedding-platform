@@ -131,6 +131,9 @@
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
+                                            {{#if this.is_featured}}
+                                                <div class="ribbon-wrapper-home"><div class="ribbon-home">FEATURED</div></div>
+                                            {{/if}}
                                             {{#if ../user}}
                                                 <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
                                                 <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">

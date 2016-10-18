@@ -4,6 +4,9 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="feat-img" style="background-image: url(/{{vendor.featured_image}})">
+                        {{#if vendor.is_featured}}
+                            <div class="ribbon-wrapper"><div class="ribbon">FEATURED</div></div>
+                        {{/if}}
                         {{#if user}}
                             <img src="/images/heart-fill.png" class="favorite-heart fill {{#if vendor.favorite}}favorited{{/if}}" data-vendor="{{vendor.vendor_id}}" alt="Click to favorite this vendor.">
                             <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">

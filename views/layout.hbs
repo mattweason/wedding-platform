@@ -22,6 +22,7 @@
     <script src="/javascripts/jquery.dotdotdot.min.js" type="text/javascript"></script>
     <script src="/javascripts/slick.min.js" type="text/javascript"></script>
     <script src="/javascripts/list.min.js" type="text/javascript"></script>
+      <script src="/javascripts/jquery.cookie.js" type="text/javascript"></script>
     <script src="/javascripts/list.pagination.min.js" type="text/javascript"></script>
 
   </head>
@@ -40,13 +41,21 @@
                       <div class="row">
                           <div class="col-sm-6 col-sm-offset-3">
                               <div class="left-nav">
-                                  <a href="#"><h3>Featured Vendors</h3></a>
+                                  {{#if home}}
+                                      <a href="#" class="scroll-nav" data-id="featured-vendor"><h3>Featured Vendors</h3></a>
+                                  {{else}}
+                                      <a href="/" class="scroll-nav" data-id="featured-vendor"><h3>Featured Vendors</h3></a>
+                                  {{/if}}
                               </div>
                               <a href="/" class="logo-area">
                                   <img class = "logo" src="/images/logo.png" alt="">
                               </a>
                               <div class="right-nav">
-                                  <a href="#"><h3>Vendor List</h3></a>
+                                  {{#if home}}
+                                      <a href="#" class="scroll-nav" data-id="vendors-list"><h3>Vendor List</h3></a>
+                                  {{else}}
+                                      <a href="/" class="scroll-nav" data-id="vendors-list"><h3>Vendor List</h3></a>
+                                  {{/if}}
                               </div>
                           </div>
                           <div class="col-sm-3">
@@ -159,9 +168,6 @@
                               <a href="#">Copyright 2016</a>
                           </div>
                       </div>
-
-
-
                   </div>
               </div>
           </footer>
