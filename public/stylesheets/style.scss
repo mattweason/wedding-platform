@@ -206,7 +206,6 @@ input, textarea{
 .ribbon-home, .ribbon {
   font-family: $font-header;
   font-weight: 700;
-  color: #333;
   text-align: center;
   -webkit-transform: rotate(45deg);
   -moz-transform:    rotate(45deg);
@@ -229,7 +228,7 @@ input, textarea{
 
 .ribbon{
   right: -6px;
-  top: 36px;
+  top: 37px;
   width: 175px;
 }
 
@@ -257,7 +256,7 @@ input, textarea{
 }
 .ribbon-home:after, .ribbon:after {
   right: 0;
-}​
+}
 
 //ListJS Pagination------------------------------------ListJS Pagination//
 .paginationBottom, .paginationTop{
@@ -498,6 +497,13 @@ input, textarea{
 
     &.slick-center{
       opacity: 1;
+
+      .desc-box{
+        .vend-view{
+          pointer-events: auto;
+          cursor: pointer;
+        }
+      }
     }
     .feat-img{
       position: relative;
@@ -513,9 +519,8 @@ input, textarea{
       height: 280px;
       position: absolute;
       padding: 10px 20px;
-      top: 30px;
+      top: 50px;
       right: 40px;
-
 
       h2 {
         font-family: $font-title;
@@ -535,7 +540,7 @@ input, textarea{
       }
 
       .overflow-box{
-        height: 110px;
+        height: 130px;
 
         .vend-desc {
           font-family: $font-main;
@@ -546,10 +551,13 @@ input, textarea{
         }
       }
 
+      .desc-box-bottom{
+        border-top: 1px solid $color-gray;
+        padding-top: 10px;
+      }
 
       .vend-info{
         padding-top: 10px;
-        border-top: 1px solid $color-gray;
         span {
           font-size: 14px;
           font-family: $font-main;
@@ -565,23 +573,46 @@ input, textarea{
         }
       }
 
+      .priceRating{
+        display: inline-block;
+        .vend-price{
+          //letter-spacing: 10px;
+          //padding-left: 5px;
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 5px;
+        }
+        .reviewRating{
+          padding-left: 0;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .reviewCount{
+          display: inline-block;
+          vertical-align: middle;
+          font-family: $font-main;
+          font-size: 14px;
+          color: #828282;
+        }
+      }
+
       .vend-view{
-        position: absolute;
-        bottom: 10px;
-        right: 0;
         font-family: $font-header;
         text-decoration: none;
         color: #fff;
         text-align: center;
         text-transform: uppercase;
-        margin: 15px 20px 5px 0;
+        margin: 0;
         font-size: 18px;
         line-height: 40px;
-        display: block;
+        display: inline-block;
+        float: right;
         height: 40px;
         width: 120px;
         background: $color-gray;
         border: none;
+        pointer-events: none;
+        cursor: default;
 
         &:hover {
           background: lighten($color-gray, 10%);

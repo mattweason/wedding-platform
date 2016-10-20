@@ -15,39 +15,48 @@
                             {{/if}}
                         </div>
                     </div>
-                    <div class="col-sm-7">
-                        <div class="desc-box">
+                    <div class="col-sm-7 desc-box">
+                        <div class="desc-box-placeholder">
                             <h2>{{this.vendor_name}}</h2>
                             <p class="vend-cat">{{this.category}}</p>
-                            <div class="overflow-box">
-                                <p class="vend-desc">{{this.description}}</p>
-                            </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="vend-info">
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <span>Address: </span>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <p class="vend-add">{{this.address}}, {{this.address_2}}
-                                                    <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <span>Phone: </span>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <p class="vend-phone">{{this.phone_number}}</p>
-                                            </div>
-                                        </div>
-
+                                        <span>Address: </span>
+                                        <p class="vend-add">{{this.address}}, {{this.address_2}}
+                                            <br>{{this.city}}, {{this.province}} {{this.postal_code}}</p>
+                                        <span>Phone: </span>
+                                        <p class="vend-phone">{{this.phone_number}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="overflow-box">
+                                        <p class="vend-desc">{{this.description}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <!--<p class="vend-price">Price: {{this.price}}</p>-->
-                                <!--<p class="vend-rating" >Rating: {{this.rating}}</p>-->
-                                <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                <div class="col-sm-12">
+                                    <div class="desc-box-bottom">
+                                        <div class="priceRating">
+                                            <p class="vend-price">{{this.price}}</p>
+                                            <p class="reviewRating" >
+                                            {{#if this.rating}}
+                                                {{this.rating}}</p>
+                                                <p class="reviewCount"> (
+
+                                                {{#if this.ratingCount}}
+                                                    {{this.ratingCount}} reviews
+                                                {{else}}
+                                                    1 review
+                                                {{/if}})</p>
+                                            {{else}}
+                                                Not rated.</p>
+                                            {{/if}}
+                                        </div>
+                                        <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

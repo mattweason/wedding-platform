@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: 'Josefin Sans';
   src: url("../fonts/JosefinSans-Light.ttf") format("truetype");
@@ -161,7 +160,6 @@ input, textarea {
 .ribbon-home, .ribbon {
   font-family: "Josefin Sans";
   font-weight: 700;
-  color: #333;
   text-align: center;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -182,7 +180,7 @@ input, textarea {
 
 .ribbon {
   right: -6px;
-  top: 36px;
+  top: 37px;
   width: 175px; }
 
 .ribbon-home:before, .ribbon-home:after, .ribbon:before, .ribbon:after {
@@ -207,11 +205,9 @@ input, textarea {
 .ribbon-home:after, .ribbon:after {
   right: 0; }
 
-ΓÇï
 .paginationBottom, .paginationTop {
   text-align: center;
   list-style-type: none; }
-  ΓÇï
   .paginationBottom li, .paginationTop li {
     margin: 0 5px;
     position: relative;
@@ -221,15 +217,10 @@ input, textarea {
     border: 1px solid #282828;
     -webkit-transition: all 0.1s;
     transition: all 0.1s; }
-    ΓÇï
-    .paginationBottom li:hover, ΓÇï
-    .paginationBottom li.active, .paginationTop li:hover, .paginationTop li.active {
+    .paginationBottom li:hover, .paginationBottom li.active, .paginationTop li:hover, .paginationTop li.active {
       background: #282828; }
-      ΓÇï
-      .paginationBottom li:hover a, ΓÇï
-      .paginationBottom li.active a, .paginationTop li:hover a, .paginationTop li.active a {
+      .paginationBottom li:hover a, .paginationBottom li.active a, .paginationTop li:hover a, .paginationTop li.active a {
         color: #fff; }
-    ΓÇï
     .paginationBottom li a, .paginationTop li a {
       font-family: "Lato Light";
       font-size: 16px;
@@ -393,6 +384,9 @@ input, textarea {
     transition: opacity 0.5s ease-in-out; }
     #featured-vendor .featured-box.slick-center {
       opacity: 1; }
+      #featured-vendor .featured-box.slick-center .desc-box .vend-view {
+        pointer-events: auto;
+        cursor: pointer; }
     #featured-vendor .featured-box .feat-img {
       position: relative;
       height: 340px;
@@ -406,7 +400,7 @@ input, textarea {
       height: 280px;
       position: absolute;
       padding: 10px 20px;
-      top: 30px;
+      top: 50px;
       right: 40px; }
       #featured-vendor .featured-box .desc-box h2 {
         font-family: "Playfair Display";
@@ -422,16 +416,18 @@ input, textarea {
         margin-bottom: 2px;
         border-bottom: 1px solid #282828; }
       #featured-vendor .featured-box .desc-box .overflow-box {
-        height: 110px; }
+        height: 130px; }
         #featured-vendor .featured-box .desc-box .overflow-box .vend-desc {
           font-family: "Lato Light";
           font-size: 16px;
           color: #282828;
           line-height: 20px;
           margin: 10px 0; }
+      #featured-vendor .featured-box .desc-box .desc-box-bottom {
+        border-top: 1px solid #282828;
+        padding-top: 10px; }
       #featured-vendor .featured-box .desc-box .vend-info {
-        padding-top: 10px;
-        border-top: 1px solid #282828; }
+        padding-top: 10px; }
         #featured-vendor .featured-box .desc-box .vend-info span {
           font-size: 14px;
           font-family: "Lato Light";
@@ -442,23 +438,39 @@ input, textarea {
           color: #828282;
           font-size: 14px;
           margin-bottom: 5px; }
+      #featured-vendor .featured-box .desc-box .priceRating {
+        display: inline-block; }
+        #featured-vendor .featured-box .desc-box .priceRating .vend-price {
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 5px; }
+        #featured-vendor .featured-box .desc-box .priceRating .reviewRating {
+          padding-left: 0;
+          display: inline-block;
+          vertical-align: middle; }
+        #featured-vendor .featured-box .desc-box .priceRating .reviewCount {
+          display: inline-block;
+          vertical-align: middle;
+          font-family: "Lato Light";
+          font-size: 14px;
+          color: #828282; }
       #featured-vendor .featured-box .desc-box .vend-view {
-        position: absolute;
-        bottom: 10px;
-        right: 0;
         font-family: "Josefin Sans";
         text-decoration: none;
         color: #fff;
         text-align: center;
         text-transform: uppercase;
-        margin: 15px 20px 5px 0;
+        margin: 0;
         font-size: 18px;
         line-height: 40px;
-        display: block;
+        display: inline-block;
+        float: right;
         height: 40px;
         width: 120px;
         background: #282828;
-        border: none; }
+        border: none;
+        pointer-events: none;
+        cursor: default; }
         #featured-vendor .featured-box .desc-box .vend-view:hover {
           background: #424242; }
 
