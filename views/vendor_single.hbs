@@ -32,20 +32,23 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12"><div class="line"></div></div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="rate-price-box">
                                     <div class="vendorPrice">{{vendor.price}}</div>
-                                    <div class="reviewRating">{{#if rating}}
-                                        {{rating}}
+                                    <p class="reviewRating">
+                                    {{#if vendor.rating}}
+                                        {{vendor.rating}}</p>
+                                        <p class="reviewCount"> (
+                                            {{#if vendor.ratingCount}}
+                                                {{vendor.ratingCount}}
+                                            {{else}}
+                                                1
+                                            {{/if}})</p>
                                     {{else}}
-                                        Not rated.
-                                    {{/if}}</div>
+                                        Not rated.</p>
+                                    {{/if}}
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="vend-link">
-                                    <a class="vend-web" href="{{vendor.url}}" target="_blank">WEBSITE</a>
-                                </div>
+                                <a class="vend-web" href="{{vendor.url}}" target="_blank">WEBSITE</a>
                             </div>
                         </div>
                     </div>

@@ -489,6 +489,7 @@ input, textarea{
     padding: 20px 0;
     position: relative;
     opacity: 0.15;
+    outline: none;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
@@ -578,6 +579,7 @@ input, textarea{
         .vend-price{
           //letter-spacing: 10px;
           //padding-left: 5px;
+          font-family: $font-main;
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px;
@@ -783,65 +785,103 @@ input, textarea{
       top: 35px;
       right: 20px;
 
-      h2 {
-        font-family: $font-title;
-        margin: 0 0 5px 0;
-        font-size: 24px;
-        text-transform: uppercase;
-        color: $color-gray;
-      }
+      .desc-box-lining{
+        height: 100%;
+        position: relative;
 
-      .vendCat{
-        font-family: $font-main;
-        font-size: 14px;
-        color: $color-gray;
-        padding-bottom: 5px;
-        margin-bottom: 2px;
-        border-bottom: 1px solid $color-gray;
-      }
-
-      .vendAdd, .vendAdd2, .vendCity{
-        font-family: $font-main;
-        color: $color-lgray;
-        font-size: 14px;
-        margin-bottom: 0px;
-      }
-
-      .vendAdd2, .vendCity{
-        display: inline-block;
-      }
-
-      .noRating{
-        font-family: $font-main;
-        font-size: 14px;
-      }
-
-      .vend-view, .vend-edit, .vend-approve {
-        position: absolute;
-        bottom: 10px;
-        font-family: $font-header;
-        text-decoration: none;
-        color: #fff;
-        text-align: center;
-        text-transform: uppercase;
-        margin: 15px 20px 5px 0;
-        font-size: 18px;
-        line-height: 40px;
-        display: block;
-        height: 40px;
-        width: 120px;
-        background: $color-gray;
-        border: none;
-
-        &:hover {
-          background: lighten($color-gray, 10%);
+        h2 {
+          font-family: $font-title;
+          margin: 0 0 5px 0;
+          font-size: 24px;
+          text-transform: uppercase;
+          color: $color-gray;
         }
-      }
-      .vend-view{
-        right: 0;
-      }
-      .vend-edit{
-        left: 20px;
+
+        .vendCat{
+          font-family: $font-main;
+          font-size: 14px;
+          color: $color-gray;
+          padding-bottom: 5px;
+          margin-bottom: 2px;
+          border-bottom: 1px solid $color-gray;
+        }
+
+        .vendAdd, .vendAdd2, .vendCity{
+          font-family: $font-main;
+          color: $color-lgray;
+          font-size: 14px;
+          margin-bottom: 0px;
+        }
+
+        .vendAdd2, .vendCity{
+          display: inline-block;
+        }
+
+        .noRating{
+          font-family: $font-main;
+          font-size: 14px;
+        }
+
+        .desc-box-bottom{
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+        }
+
+        .priceRating{
+          display: inline-block;
+          position: absolute;
+          bottom: 5px;
+          .vendPrice{
+            font-family: $font-main;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+          }
+          .reviewRating{
+            display: inline-block;
+            vertical-align: middle;
+            font-family: $font-main;
+            padding-left: 0;
+            margin-bottom: 0;
+          }
+          .reviewCount{
+            display: inline-block;
+            vertical-align: middle;
+            font-family: $font-main;
+            font-size: 14px;
+            color: #828282;
+            margin-bottom: 0;
+          }
+        }
+
+        .vend-view, .vend-edit, .vend-approve {
+          position: absolute;
+          bottom: 0;
+          font-family: $font-header;
+          text-decoration: none;
+          color: #fff;
+          text-align: center;
+          text-transform: uppercase;
+          margin: 0;
+          font-size: 18px;
+          line-height: 40px;
+          display: inline-block;
+          height: 40px;
+          width: 120px;
+          background: $color-gray;
+          border: none;
+
+          &:hover {
+            background: lighten($color-gray, 10%);
+          }
+        }
+        .vend-view{
+          right: 0;
+        }
+        .vend-edit{
+          left: 20px;
+        }
       }
     }
   }
@@ -894,47 +934,52 @@ input, textarea{
           margin-bottom: 5px;
         }
       }
-      .rate-price-box{
+      .line{
         width: 100%;
+        border-top: 1px solid $color-gray;
+      }
+      .rate-price-box{
         margin-top: 5px;
         padding-top: 5px;
-        border-top: 1px solid $color-gray;
+        display: inline-block;
         .reviewRating{
+          font-family: $font-main;
           padding-left: 0;
           display: inline-block;
         }
+        .reviewCount{
+          display: inline-block;
+          vertical-align: middle;
+          font-family: $font-main;
+          font-size: 14px;
+          color: #828282;
+        }
         .vendorPrice{
           font-family: $font-main;
-          font-size: 16px;
+          font-size: 18px;
           font-weight: 700;
+          margin-bottom: 5px;
         }
       }
 
-      .vend-link{
-        width: 100%;
-        margin-top: 5px;
-        text-align:right;
+      .vend-web{
+        font-family: $font-header;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 0 5px 0;
+        font-size: 18px;
+        line-height: 40px;
+        display: inline-block;
+        float: right;
+        height: 40px;
+        width: 100px;
+        background: $color-gray;
+        border: none;
 
-        .vend-web{
-          bottom: 10px;
-          right: 0;
-          font-family: $font-header;
-          text-decoration: none;
-          color: #fff;
-          text-align: center;
-          text-transform: uppercase;
-          margin: 15px 0 5px 0;
-          font-size: 18px;
-          line-height: 40px;
-          display: inline-block;
-          height: 40px;
-          width: 100%;
-          background: $color-gray;
-          border: none;
-
-          &:hover {
-            background: lighten($color-gray, 10%);
-          }
+        &:hover {
+          background: lighten($color-gray, 10%);
         }
       }
     }
@@ -1120,6 +1165,7 @@ input, textarea{
       border-bottom: 1px solid $color-gray;
       margin-bottom: 40px;
       .reviewRating{
+        font-family: $font-main;
         padding-left: 0;
       }
       .reviewTitle{
@@ -1735,6 +1781,7 @@ input, textarea{
       border-bottom: 1px solid $color-gray;
       margin-bottom: 40px;
       .reviewRating{
+        font-family: $font-main;
         padding-left: 0;
       }
       .reviewTitle{

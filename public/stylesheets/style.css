@@ -377,6 +377,7 @@ input, textarea {
     padding: 20px 0;
     position: relative;
     opacity: 0.15;
+    outline: none;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
@@ -441,6 +442,7 @@ input, textarea {
       #featured-vendor .featured-box .desc-box .priceRating {
         display: inline-block; }
         #featured-vendor .featured-box .desc-box .priceRating .vend-price {
+          font-family: "Lato Light";
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px; }
@@ -600,51 +602,80 @@ input, textarea {
       padding: 10px 20px;
       top: 35px;
       right: 20px; }
-      #vendor-list .box .desc-box h2 {
-        font-family: "Playfair Display";
-        margin: 0 0 5px 0;
-        font-size: 24px;
-        text-transform: uppercase;
-        color: #282828; }
-      #vendor-list .box .desc-box .vendCat {
-        font-family: "Lato Light";
-        font-size: 14px;
-        color: #282828;
-        padding-bottom: 5px;
-        margin-bottom: 2px;
-        border-bottom: 1px solid #282828; }
-      #vendor-list .box .desc-box .vendAdd, #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
-        font-family: "Lato Light";
-        color: #828282;
-        font-size: 14px;
-        margin-bottom: 0px; }
-      #vendor-list .box .desc-box .vendAdd2, #vendor-list .box .desc-box .vendCity {
-        display: inline-block; }
-      #vendor-list .box .desc-box .noRating {
-        font-family: "Lato Light";
-        font-size: 14px; }
-      #vendor-list .box .desc-box .vend-view, #vendor-list .box .desc-box .vend-edit, #vendor-list .box .desc-box .vend-approve {
-        position: absolute;
-        bottom: 10px;
-        font-family: "Josefin Sans";
-        text-decoration: none;
-        color: #fff;
-        text-align: center;
-        text-transform: uppercase;
-        margin: 15px 20px 5px 0;
-        font-size: 18px;
-        line-height: 40px;
-        display: block;
-        height: 40px;
-        width: 120px;
-        background: #282828;
-        border: none; }
-        #vendor-list .box .desc-box .vend-view:hover, #vendor-list .box .desc-box .vend-edit:hover, #vendor-list .box .desc-box .vend-approve:hover {
-          background: #424242; }
-      #vendor-list .box .desc-box .vend-view {
-        right: 0; }
-      #vendor-list .box .desc-box .vend-edit {
-        left: 20px; }
+      #vendor-list .box .desc-box .desc-box-lining {
+        height: 100%;
+        position: relative; }
+        #vendor-list .box .desc-box .desc-box-lining h2 {
+          font-family: "Playfair Display";
+          margin: 0 0 5px 0;
+          font-size: 24px;
+          text-transform: uppercase;
+          color: #282828; }
+        #vendor-list .box .desc-box .desc-box-lining .vendCat {
+          font-family: "Lato Light";
+          font-size: 14px;
+          color: #282828;
+          padding-bottom: 5px;
+          margin-bottom: 2px;
+          border-bottom: 1px solid #282828; }
+        #vendor-list .box .desc-box .desc-box-lining .vendAdd, #vendor-list .box .desc-box .desc-box-lining .vendAdd2, #vendor-list .box .desc-box .desc-box-lining .vendCity {
+          font-family: "Lato Light";
+          color: #828282;
+          font-size: 14px;
+          margin-bottom: 0px; }
+        #vendor-list .box .desc-box .desc-box-lining .vendAdd2, #vendor-list .box .desc-box .desc-box-lining .vendCity {
+          display: inline-block; }
+        #vendor-list .box .desc-box .desc-box-lining .noRating {
+          font-family: "Lato Light";
+          font-size: 14px; }
+        #vendor-list .box .desc-box .desc-box-lining .desc-box-bottom {
+          position: absolute;
+          width: 100%;
+          bottom: 0; }
+        #vendor-list .box .desc-box .desc-box-lining .priceRating {
+          display: inline-block;
+          position: absolute;
+          bottom: 5px; }
+          #vendor-list .box .desc-box .desc-box-lining .priceRating .vendPrice {
+            font-family: "Lato Light";
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px; }
+          #vendor-list .box .desc-box .desc-box-lining .priceRating .reviewRating {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: "Lato Light";
+            padding-left: 0;
+            margin-bottom: 0; }
+          #vendor-list .box .desc-box .desc-box-lining .priceRating .reviewCount {
+            display: inline-block;
+            vertical-align: middle;
+            font-family: "Lato Light";
+            font-size: 14px;
+            color: #828282;
+            margin-bottom: 0; }
+        #vendor-list .box .desc-box .desc-box-lining .vend-view, #vendor-list .box .desc-box .desc-box-lining .vend-edit, #vendor-list .box .desc-box .desc-box-lining .vend-approve {
+          position: absolute;
+          bottom: 0;
+          font-family: "Josefin Sans";
+          text-decoration: none;
+          color: #fff;
+          text-align: center;
+          text-transform: uppercase;
+          margin: 0;
+          font-size: 18px;
+          line-height: 40px;
+          display: inline-block;
+          height: 40px;
+          width: 120px;
+          background: #282828;
+          border: none; }
+          #vendor-list .box .desc-box .desc-box-lining .vend-view:hover, #vendor-list .box .desc-box .desc-box-lining .vend-edit:hover, #vendor-list .box .desc-box .desc-box-lining .vend-approve:hover {
+            background: #424242; }
+        #vendor-list .box .desc-box .desc-box-lining .vend-view {
+          right: 0; }
+        #vendor-list .box .desc-box .desc-box-lining .vend-edit {
+          left: 20px; }
 
 #no-vendors {
   display: none; }
@@ -680,40 +711,45 @@ input, textarea {
         color: #828282;
         font-size: 14px;
         margin-bottom: 5px; }
-      #vendor-single #vendor-description .info-box .rate-price-box {
+      #vendor-single #vendor-description .info-box .line {
         width: 100%;
+        border-top: 1px solid #282828; }
+      #vendor-single #vendor-description .info-box .rate-price-box {
         margin-top: 5px;
         padding-top: 5px;
-        border-top: 1px solid #282828; }
+        display: inline-block; }
         #vendor-single #vendor-description .info-box .rate-price-box .reviewRating {
+          font-family: "Lato Light";
           padding-left: 0;
           display: inline-block; }
+        #vendor-single #vendor-description .info-box .rate-price-box .reviewCount {
+          display: inline-block;
+          vertical-align: middle;
+          font-family: "Lato Light";
+          font-size: 14px;
+          color: #828282; }
         #vendor-single #vendor-description .info-box .rate-price-box .vendorPrice {
           font-family: "Lato Light";
-          font-size: 16px;
-          font-weight: 700; }
-      #vendor-single #vendor-description .info-box .vend-link {
-        width: 100%;
-        margin-top: 5px;
-        text-align: right; }
-        #vendor-single #vendor-description .info-box .vend-link .vend-web {
-          bottom: 10px;
-          right: 0;
-          font-family: "Josefin Sans";
-          text-decoration: none;
-          color: #fff;
-          text-align: center;
-          text-transform: uppercase;
-          margin: 15px 0 5px 0;
           font-size: 18px;
-          line-height: 40px;
-          display: inline-block;
-          height: 40px;
-          width: 100%;
-          background: #282828;
-          border: none; }
-          #vendor-single #vendor-description .info-box .vend-link .vend-web:hover {
-            background: #424242; }
+          font-weight: 700;
+          margin-bottom: 5px; }
+      #vendor-single #vendor-description .info-box .vend-web {
+        font-family: "Josefin Sans";
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 15px 0 5px 0;
+        font-size: 18px;
+        line-height: 40px;
+        display: inline-block;
+        float: right;
+        height: 40px;
+        width: 100px;
+        background: #282828;
+        border: none; }
+        #vendor-single #vendor-description .info-box .vend-web:hover {
+          background: #424242; }
     #vendor-single #vendor-description h2 {
       font-family: "Playfair Display";
       font-size: 36px;
@@ -849,6 +885,7 @@ input, textarea {
     border-bottom: 1px solid #282828;
     margin-bottom: 40px; }
     #vendor-single #vendor-reviews .review-body .reviewRating {
+      font-family: "Lato Light";
       padding-left: 0; }
     #vendor-single #vendor-reviews .review-body .reviewTitle {
       font-weight: 700;
@@ -1303,6 +1340,7 @@ input, textarea {
     border-bottom: 1px solid #282828;
     margin-bottom: 40px; }
     #user-profile #userReviews .review-body .reviewRating {
+      font-family: "Lato Light";
       padding-left: 0; }
     #user-profile #userReviews .review-body .reviewTitle {
       font-weight: 700;

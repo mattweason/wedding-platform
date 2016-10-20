@@ -284,13 +284,12 @@ router.get('/:vendorName', function(req,res) {
         getReviews,
         getReviewPhotos,
         checkAccess
-    ], function (err, vendorCategory, gallery, userGallery, reviews, rating, access) {
+    ], function (err, vendor, gallery, userGallery, reviews, access) {
         res.render('vendor_single', {
             access: access,
-            title: vendorCategory[0].vendor_name,
-            vendor: vendorCategory[0],
+            title: vendor[0].vendor_name,
+            vendor: vendor[0],
             review: reviews,
-            rating: rating,
             gallery: gallery,
             userGallery: userGallery,
             admin: req.admin
@@ -318,38 +317,24 @@ router.get('/:vendorName', function(req,res) {
             callback(null, vendorCategory);
         });
     }
-    function getGallery (vendorCategory, callback) {
-        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, gallery) {
-            callback(null, vendorCategory, gallery);
+    function getGallery (vendor, callback) {
+        connection.query('SELECT * FROM vendorgallery WHERE vendorgallery.vendor_fid = ?', vendor[0].vendor_id, function (err, gallery) {
+            callback(null, vendor, gallery);
         });
     }
-    function getUserGallery (vendorCategory, gallery, callback) {
-        connection.query('SELECT * FROM usergallery WHERE usergallery.vendor_fid = ?', vendorCategory[0].vendor_id, function (err, userGallery) {
-            callback(null, vendorCategory, gallery, userGallery);
+    function getUserGallery (vendor, gallery, callback) {
+        connection.query('SELECT * FROM usergallery WHERE usergallery.vendor_fid = ?', vendor[0].vendor_id, function (err, userGallery) {
+            callback(null, vendor, gallery, userGallery);
         });
     }
-    function getReviews (vendorCategory, gallery, userGallery, callback) {
-        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendorCategory[0].vendor_id, function (err, reviews) {
-            var ratingCounter = 0;
-            var ratingTotal = 0;
-            for (var i = 0; i < reviews.length; i++) {
-                var mysqlTime = reviews[0].timestamp.toString();
-                var time = mysqlTime.split(/[- :]/);
-                var date = time[1] + ' ' + time[2] + ', ' + time[3];
-                ratingTotal += reviews[i].rating;
-                reviews[i].date = date;
-                ratingCounter++;
-            }
-            function round(value, precision) {
-                var multiplier = Math.pow(10, precision || 1);
-                return Math.round(value * multiplier) / multiplier;
-            }
-            var rating = round(ratingTotal / ratingCounter);
-            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
+    function getReviews (vendor, gallery, userGallery, callback) {
+        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendor[0].vendor_id, function (err, reviews) {
+            var vendorRating = functions.vendorRating(vendor, reviews);
+            callback(null, vendorRating, gallery, userGallery, reviews);
         });
     }
-    function getReviewPhotos (vendorCategory, gallery, userGallery, reviews, rating, callback) {
-        connection.query('SELECT * FROM `usergallery` WHERE vendor_fid = ?', vendorCategory[0].vendor_id, function (err, photos) {
+    function getReviewPhotos (vendor, gallery, userGallery, reviews, callback) {
+        connection.query('SELECT * FROM `usergallery` WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {
            for (var i = 0; i < reviews.length; i++) {
                for (var x = 0; x < photos.length; x++) {
                    if (reviews[i].id == photos[x].review_fid) {
@@ -359,29 +344,29 @@ router.get('/:vendorName', function(req,res) {
                    }
                }
            }
-            callback(null, vendorCategory, gallery, userGallery, reviews, rating);
+            callback(null, vendor, gallery, userGallery, reviews);
         });
     }
-    function checkAccess (vendorCategory, gallery, userGallery, reviews, rating, callback) {
+    function checkAccess (vendor, gallery, userGallery, reviews, callback) {
         var access = false;
         if (req.user) {
             var userLog = req.user[0];
             if (userLog.admin) {
                 access = true;
-                callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+                callback(null, vendor, gallery, userGallery, reviews, access);
             }
             else
                 connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
                     if (userAccess.length) {
                         access = true;
-                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+                        callback(null, vendor, gallery, userGallery, reviews, access);
                     }
                     else
-                        callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+                        callback(null, vendor, gallery, userGallery, reviews, access);
                 });
         }
         else
-            callback(null, vendorCategory, gallery, userGallery, reviews, rating, access);
+            callback(null, vendor, gallery, userGallery, reviews, access);
     }
 });
 
