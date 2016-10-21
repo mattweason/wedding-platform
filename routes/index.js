@@ -154,6 +154,7 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
         getUserGallery
     ], function (err, profile, favorites, reviews, userGallery) {
         res.render('user_profile', {
+            admin: req.admin,
             profile: profile[0],
             favorite: favorites,
             review: reviews,
