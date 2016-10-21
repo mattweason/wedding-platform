@@ -665,7 +665,9 @@ router.post('/update', function(req, res){
     });
 
     form.on('fileBegin', function(field, file) {
-        file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+        if (file.name) {
+            file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+        }
     });
 
     form.on('file', function (name, file) {

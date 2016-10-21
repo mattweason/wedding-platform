@@ -596,7 +596,7 @@ input, textarea {
       background-repeat: no-repeat; }
     #vendor-list .box .desc-box {
       background-color: #fff;
-      width: 300px;
+      width: 320px;
       height: 190px;
       position: absolute;
       padding: 10px 20px;
@@ -675,7 +675,7 @@ input, textarea {
         #vendor-list .box .desc-box .desc-box-lining .vend-view {
           right: 0; }
         #vendor-list .box .desc-box .desc-box-lining .vend-edit {
-          left: 20px; }
+          left: 0; }
 
 #no-vendors {
   display: none; }
