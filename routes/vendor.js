@@ -289,6 +289,7 @@ router.get('/:vendorName', function(req,res) {
             access: access,
             title: vendor[0].vendor_name,
             vendor: vendor[0],
+            vendorDesc: functions.nl2br(vendor[0].description),
             review: reviews,
             gallery: gallery,
             userGallery: userGallery,
