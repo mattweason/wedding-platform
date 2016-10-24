@@ -415,6 +415,8 @@ $(document).ready(function() {
 
             if ($('#featured-thumbnail').length) {
                 reader.onload = function (e) {
+                    // remove background from wrapper
+                    $("#thumbnail-wrapper").css("background-image","none");
                     // get loaded data and render thumbnail.
                     document.getElementById("featured-thumbnail").src = e.target.result;
                 };

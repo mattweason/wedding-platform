@@ -1018,6 +1018,8 @@ input, textarea {
           border: 1px solid #fff; }
           #vendor-add #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover, #vendor-edit #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover {
             opacity: 0.8; }
+    #vendor-add #add-form .featured-image-area input, #vendor-edit #add-form .featured-image-area input {
+      margin-top: 0; }
     #vendor-add #add-form .featured-image-area .form-label, #vendor-edit #add-form .featured-image-area .form-label {
       margin-top: 20px;
       height: auto;
@@ -1025,8 +1027,8 @@ input, textarea {
       text-align: center;
       cursor: default; }
     #vendor-add #add-form .featured-image-area #featured_image, #vendor-edit #add-form .featured-image-area #featured_image {
-      width: 0.1px;
-      height: 0.1px;
+      width: 0;
+      height: 0;
       opacity: 0;
       overflow: hidden;
       position: absolute;
@@ -1044,15 +1046,19 @@ input, textarea {
         line-height: 140px; }
     #vendor-add #add-form .featured-image-area #featured_image + .featured-image-button *, #vendor-edit #add-form .featured-image-area #featured_image + .featured-image-button * {
       pointer-events: none; }
-    #vendor-add #add-form .featured-image-area .thumbnail-wrapper, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper {
-      height: 140px; }
-      #vendor-add #add-form .featured-image-area .thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper .helper {
+    #vendor-add #add-form .featured-image-area #thumbnail-wrapper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper {
+      height: 140px;
+      margin-top: 10px;
+      background-image: url("../images/placeholder.jpg");
+      background-size: cover;
+      backgroud-repeat: no-repeat;
+      background-position: center center; }
+      #vendor-add #add-form .featured-image-area #thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .helper {
         display: inline-block;
         height: 100%;
         vertical-align: middle; }
-      #vendor-add #add-form .featured-image-area .thumbnail-wrapper #featured-thumbnail, #vendor-edit #add-form .featured-image-area .thumbnail-wrapper #featured-thumbnail {
+      #vendor-add #add-form .featured-image-area #thumbnail-wrapper #featured-thumbnail, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper #featured-thumbnail {
         vertical-align: middle;
-        margin-top: 10px;
         max-width: 100%;
         max-height: 140px; }
     #vendor-add #add-form .featured-image-area p, #vendor-edit #add-form .featured-image-area p {

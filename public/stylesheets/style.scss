@@ -1347,6 +1347,7 @@ input, textarea{
     }
 
     .featured-image-area{
+      input{margin-top: 0;}
       .form-label{
         margin-top: 20px;
         height: auto;
@@ -1355,8 +1356,8 @@ input, textarea{
         cursor: default;
       }
       #featured_image{
-        width: 0.1px;
-        height: 0.1px;
+        width: 0;
+        height: 0;
         opacity: 0;
         overflow: hidden;
         position: absolute;
@@ -1380,8 +1381,13 @@ input, textarea{
       #featured_image + .featured-image-button * {
         pointer-events: none;
       }
-      .thumbnail-wrapper{
+      #thumbnail-wrapper{
         height: 140px;
+        margin-top: 10px;
+        background-image: url('../images/placeholder.jpg');
+        background-size: cover;
+        backgroud-repeat: no-repeat;
+        background-position: center center;
         .helper {
           display: inline-block;
           height: 100%;
@@ -1389,7 +1395,6 @@ input, textarea{
         }
         #featured-thumbnail{
           vertical-align: middle;
-          margin-top: 10px;
           max-width: 100%;
           max-height: 140px;
         }
