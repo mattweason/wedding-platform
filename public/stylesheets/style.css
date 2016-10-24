@@ -1049,10 +1049,11 @@ input, textarea {
     #vendor-add #add-form .featured-image-area #thumbnail-wrapper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper {
       height: 140px;
       margin-top: 10px;
-      background-image: url("../images/placeholder.jpg");
       background-size: cover;
       backgroud-repeat: no-repeat;
       background-position: center center; }
+      #vendor-add #add-form .featured-image-area #thumbnail-wrapper .placeholder, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .placeholder {
+        background-image: url("../images/placeholder.jpg"); }
       #vendor-add #add-form .featured-image-area #thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .helper {
         display: inline-block;
         height: 100%;

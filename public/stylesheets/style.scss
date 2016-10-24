@@ -1384,10 +1384,12 @@ input, textarea{
       #thumbnail-wrapper{
         height: 140px;
         margin-top: 10px;
-        background-image: url('../images/placeholder.jpg');
         background-size: cover;
         backgroud-repeat: no-repeat;
         background-position: center center;
+        .placeholder{
+          background-image: url('../images/placeholder.jpg');
+        }
         .helper {
           display: inline-block;
           height: 100%;

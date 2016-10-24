@@ -672,7 +672,9 @@ router.post('/update', function(req, res){
     });
 
     form.on('file', function (name, file) {
-        featuredImage = file.path;
+        if(file.name) {
+            featuredImage = file.path;
+        }
     });
 
     form.on('end', function(){

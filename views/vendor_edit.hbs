@@ -146,19 +146,16 @@
             <div class="row">
                 <div class="featured-image-area">
                     <div class="col-sm-offset-4 col-sm-4">
-                        <label class="form-label">Featured Image*</label>
+                        <label class="form-label">Featured Image</label>
                     </div>
                     <div class="col-sm-offset-4 col-sm-2">
                         <input type="file" name="featured_image" class="inputfile" id="featured_image" accept='image/*'/>
                         <label class="button-light featured-image-button" for="featured_image"><span>Choose Image</span></label>
                     </div>
                     <div class="col-sm-2">
-                        <div id="thumbnail-wrapper">
+                        <div id="thumbnail-wrapper" {{#if vendor.featured_image}}style="background-image: url(/{{vendor.featured_image}})"{{else}}class="placeholder"{{/if}}>
                             <span class="helper"></span><img id="featured-thumbnail" />
                         </div>
-                    </div>
-                    <div class="col-sm-offset-4 col-sm-4">
-                        <p>* Leave blank if you are not changing the featured image.</p>
                     </div>
                 </div>
             </div>
