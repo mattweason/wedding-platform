@@ -1840,12 +1840,17 @@ input, textarea{
 //Admin Page--------------------------------------------------------------Admin Page//
 #admin {
   padding-top: $header-height;
+  padding-bottom: 40px;
   height: calc(100vh - 280px);
-  display: flex;
-  justify-content: center;
+  min-height: 267px;
+  width: 100%;
+  display: table;
+  text-align: center;
 
   .adminArea {
     align-self: center;
+    display: table-cell;
+    vertical-align: middle;
   }
 
   h3 {

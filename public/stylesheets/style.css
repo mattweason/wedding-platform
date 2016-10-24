@@ -1381,11 +1381,16 @@ input, textarea {
 
 #admin {
   padding-top: 120px;
+  padding-bottom: 40px;
   height: calc(100vh - 280px);
-  display: flex;
-  justify-content: center; }
+  min-height: 267px;
+  width: 100%;
+  display: table;
+  text-align: center; }
   #admin .adminArea {
-    align-self: center; }
+    align-self: center;
+    display: table-cell;
+    vertical-align: middle; }
   #admin h3 {
     margin-bottom: 40px; }
   #admin .addVendor {
