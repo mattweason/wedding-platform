@@ -912,12 +912,13 @@ input, textarea {
   display: flex;
   justify-content: center; }
   .ekko-lightbox .modal-dialog {
-    width: auto;
-    max-width: 800px;
+    width: 75vw;
+    height: 75vh;
     align-self: center;
     display: inline-block; }
     .ekko-lightbox .modal-dialog .modal-content {
-      border-radius: 0; }
+      border-radius: 0;
+      height: 100%; }
       .ekko-lightbox .modal-dialog .modal-content .modal-header {
         height: 0;
         padding: 0; }
@@ -932,36 +933,50 @@ input, textarea {
           opacity: 0.8; }
           .ekko-lightbox .modal-dialog .modal-content .modal-header .close:hover {
             opacity: 1; }
-      .ekko-lightbox .modal-dialog .modal-content .modal-body img {
-        max-height: 80vh; }
-      .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container {
-        position: relative; }
-        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%); }
-        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-right {
-          right: -55px;
-          width: 80px;
-          height: 80px;
-          background-color: #282828;
-          background-image: url("../images/right-arrow.png");
-          -webkit-transition: all 0.2s;
-          /* Safari */
-          transition: all 0.2s; }
-          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-right:hover {
-            background-color: #424242; }
-        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-left {
-          left: -55px;
-          width: 80px;
-          height: 80px;
-          background-color: #282828;
-          background-image: url("../images/left-arrow.png");
-          -webkit-transition: all 0.2s;
-          /* Safari */
-          transition: all 0.2s; }
-          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-left:hover {
-            background-color: #424242; }
+      .ekko-lightbox .modal-dialog .modal-content .modal-body {
+        position: relative;
+        padding: 15px;
+        height: 100%; }
+        .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container {
+          vertical-align: middle;
+          display: inline-block;
+          height: 100%;
+          width: 100%; }
+          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+            .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container div img {
+              max-width: 100%;
+              max-height: 100%;
+              height: auto; }
+          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%); }
+          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-right {
+            right: -40px;
+            width: 80px;
+            height: 80px;
+            background-color: #282828;
+            background-image: url("../images/right-arrow.png");
+            -webkit-transition: all 0.2s;
+            /* Safari */
+            transition: all 0.2s; }
+            .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-right:hover {
+              background-color: #424242; }
+          .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-left {
+            left: -40px;
+            width: 80px;
+            height: 80px;
+            background-color: #282828;
+            background-image: url("../images/left-arrow.png");
+            -webkit-transition: all 0.2s;
+            /* Safari */
+            transition: all 0.2s; }
+            .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container .ekko-lightbox-nav-overlay .glyphicon-left:hover {
+              background-color: #424242; }
 
 #vendor-add, #vendor-edit {
   padding-top: 120px; }
