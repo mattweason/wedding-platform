@@ -1283,6 +1283,12 @@ input, textarea{
 }
 #vendor-add, #vendor-edit {
   padding-top: $header-height;
+  .add-desc{
+    font-family: $font-main;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 40px;
+  }
 
   #add-form {
     padding: 40px 0;

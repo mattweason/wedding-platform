@@ -12,6 +12,10 @@
                 </div>
                 <div class="col-sm-6">
                     <h3>ADD VENDOR</h3>
+                    {{#if admin}}
+                    {{else}}
+                        <p class="add-desc">To suggest a new vendor to be added, please fill out the vendor information below. Your submission will be reviewed by our staff and approved if all the information checks out.</p>
+                    {{/if}}
                 </div>
             </div>
 

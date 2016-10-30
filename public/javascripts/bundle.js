@@ -14721,11 +14721,17 @@ $(document).ready(function() {
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
-                        $('#message-modal').find('.view-button').children().html(data.buttontext);
-                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
-                        $('.view-button').attr('href', data.url);
-                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
-                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                        if (data.guest){
+                            $('#message-modal').find('.view-button').children().html(data.buttontext);
+                            $('.view-button').attr('href', data.url);
+                            $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                        } else {
+                            $('#message-modal').find('.view-button').children().html(data.buttontext);
+                            $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
+                            $('.view-button').attr('href', data.url);
+                            $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
+                            $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                        }
                     } else if (data.status == 'failure') {
                         $('#dismiss-button').removeClass('notdisplay'); //Make dismiss button visible
                         $('.view-button').addClass('notdisplay'); //Make variable modal button invisible
@@ -15118,9 +15124,6 @@ $(document).ready(function() {
                     document.getElementById("featured-thumbnail").src = e.target.result;
                 };
             }
-
-
-            
 
             // read the image file as a data URL.
             reader.readAsDataURL(this.files[0]);

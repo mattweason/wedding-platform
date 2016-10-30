@@ -980,6 +980,11 @@ input, textarea {
 
 #vendor-add, #vendor-edit {
   padding-top: 120px; }
+  #vendor-add .add-desc, #vendor-edit .add-desc {
+    font-family: "Lato Light";
+    font-size: 18px;
+    text-align: center;
+    padding-top: 40px; }
   #vendor-add #add-form, #vendor-edit #add-form {
     padding: 40px 0; }
     #vendor-add #add-form textarea, #vendor-edit #add-form textarea {

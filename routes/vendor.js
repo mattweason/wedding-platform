@@ -563,15 +563,6 @@ router.post('/create', function(req, res){
         }
     });
 
-    // form.onPart = function (part) {
-    //     if(!part.filename || part.filename.match(/\.(jpg|jpeg|png)$/i)) {
-    //         this.handlePart(part);
-    //     }
-    //     else {
-    //         console.log(part.filename + ' is not allowed');
-    //     }
-    // };
-
     form.on('fileBegin', function(field, file) {
         file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
         featuredImage = file.path;
@@ -632,13 +623,23 @@ router.post('/create', function(req, res){
         console.log(query1);
         console.log(query2);
 
+        //set the message for admin or user
+        var message;
+        var guest = 0;
+        if (req.user[0].admin) {
+            message = 'Vendor successfully added.';
+        } else {
+            message = 'Thank you for your submission! It will be review by our staff for approval.';
+            guest = 1;
+        }
+
         // execute the query
         connection.query(query, function (err, feedback) {
             if (err)
                 throw err;
             else {
                 connection.query('SELECT max(vendor_id) FROM vendor', function (err, vendor) {
-                    functions.addCategory(vendor[0]['max(vendor_id)'], category, 'Vendor successfully added.', dataCollection.vendor_url, res);
+                    functions.addCategory(vendor[0]['max(vendor_id)'], category, message, dataCollection.vendor_url, guest, res);
                 });
             }
         });
