@@ -283,8 +283,9 @@ router.get('/:vendorName', function(req,res) {
         getUserGallery,
         getReviews,
         getReviewPhotos,
+        getUser,
         checkAccess
-    ], function (err, vendor, gallery, userGallery, reviews, access) {
+    ], function (err, vendor, gallery, userGallery, reviews, userLog, access) {
         res.render('vendor_single', {
             access: access,
             title: vendor[0].vendor_name,
@@ -293,6 +294,7 @@ router.get('/:vendorName', function(req,res) {
             review: reviews,
             gallery: gallery,
             userGallery: userGallery,
+            user: userLog,
             admin: req.admin
         });
     });
@@ -348,26 +350,32 @@ router.get('/:vendorName', function(req,res) {
             callback(null, vendor, gallery, userGallery, reviews);
         });
     }
-    function checkAccess (vendor, gallery, userGallery, reviews, callback) {
-        var access = false;
+    function getUser (vendor, gallery, userGallery, reviews, callback) {
+        var userLog = false;
         if (req.user) {
-            var userLog = req.user[0];
+            userLog = req.user[0];
+        }
+        callback(null, vendor, gallery, userGallery, reviews, userLog);
+    }
+    function checkAccess (vendor, gallery, userGallery, reviews, userLog, callback) {
+        var access = false;
+        if (userLog) {
             if (userLog.admin) {
                 access = true;
-                callback(null, vendor, gallery, userGallery, reviews, access);
+                callback(null, vendor, gallery, userGallery, reviews, userLog, access);
             }
             else
-                connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendorCategory[0].vendor_id], function (err, userAccess) {
+                connection.query('SELECT * FROM user2vendor WHERE user_fid = ? AND vendor_fid = ?', [userLog.user_id, vendor[0].vendor_id], function (err, userAccess) {
                     if (userAccess.length) {
                         access = true;
-                        callback(null, vendor, gallery, userGallery, reviews, access);
+                        callback(null, vendor, gallery, userGallery, reviews, userLog, access);
                     }
                     else
-                        callback(null, vendor, gallery, userGallery, reviews, access);
+                        callback(null, vendor, gallery, userGallery, reviews, userLog, access);
                 });
         }
         else
-            callback(null, vendor, gallery, userGallery, reviews, access);
+            callback(null, vendor, gallery, userGallery, reviews, userLog, access);
     }
 });
 

@@ -112,11 +112,21 @@
                             <div class="reviewHead">
                                 <a class="reviewUser" href="">{{this.username}}</a>
                                 <p class="reviewDate">{{this.date}}</p>
-                                <form action="/vendor/deletereview" id="review-delete-form" method="post">
-                                    <input type="hidden" name="review" value="{{this.id}}">
-                                    <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
-                                    <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
-                                </form>
+                                {{#if ../user.admin}}
+                                    <form action="/vendor/deletereview" id="review-delete-form" method="post">
+                                        <input type="hidden" name="review" value="{{this.id}}">
+                                        <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
+                                        <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
+                                    </form>
+                                {{else}}
+                                    {{#equal this.user_fid ../user.user_id}}
+                                        <form action="/vendor/deletereview" id="review-delete-form" method="post">
+                                            <input type="hidden" name="review" value="{{this.id}}">
+                                            <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
+                                            <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
+                                        </form>
+                                    {{/equal}}
+                                {{/if}}
                             </div>
                         </div>
                         <div class="col-sm-10">

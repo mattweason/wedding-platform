@@ -61,6 +61,9 @@ app.use(function(req,res,next){
   next();
 });
 
+//Bring in Handlebar helpers
+require('./lib/helpers')(hbs);
+
 app.use('/', routes);
 app.use('/users', users);
 
