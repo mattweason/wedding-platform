@@ -168,6 +168,92 @@ router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUs
     }
 });
 
+//---------------------EDITING PENDING VENDOR------------------------//
+router.get('/:vendorName/pending/edit', functions.ensureAuthenticated, functions.checkAdminAccess, function(req,res, next){
+
+    async.waterfall([
+        getVendor,
+        joinCategory,
+        getCategory,
+        getCities,
+        checkAccess
+    ], function (err, vendor, category, cities, access) {
+        res.render('vendor_edit', {
+            title: 'Update Vendor',
+            vendor: vendor,
+            category: category,
+            city: cities,
+            access: access,
+            admin: req.admin
+        });
+    });
+
+    function getVendor (callback) {
+        connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ?', req.params.vendorName, function (err, vendor) {
+            if(vendor[0].price == '$') {
+                vendor[0].onedollar = true;
+            } else if (vendor[0].price == '$$') {
+                vendor[0].twodollar = true;
+            } else if (vendor[0].price == '$$$') {
+                vendor[0].threedollar = true;
+            } else if (vendor[0].price == '$$$$') {
+                vendor[0].fourdollar = true;
+            }
+
+            if(vendor[0].is_featured == 1) {
+                vendor[0].featured = true;
+            } else {
+                vendor[0].notfeatured = true;
+            }
+            callback(null, vendor[0]);
+        });
+    }
+    function joinCategory (vendor, callback) {
+        connection.query('SELECT category_fid FROM vendor2category  WHERE vendor_fid = ?', vendor.vendor_id, function (err, categoryJoin) {
+            if (err) {throw err;}
+
+            else {
+
+                //Take categories belonging to vendor and add the selected property
+                var categorySelect = [];
+                for (var i = 0; i < categoryJoin.length; i++) {
+                    categorySelect.push(categoryJoin[i].category_fid);
+                }
+            }
+            callback(null, vendor, categorySelect);
+        });
+    }
+    function getCategory (vendor, categorySelect, callback) {
+        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category) {
+            for (var i = 0; i < category.length; i++) {
+                if (categorySelect.indexOf(category[i].category_id) > -1) {
+                    category[i].selected = true;
+                }
+            }
+            callback(null, vendor, category);
+        });
+    }
+    function getCities (vendor, category, callback) {
+        connection.query("SELECT city FROM ontariomunicipalities ORDER BY city", function(err, cities) {
+            for (var i = 0; i < cities.length; i++) {
+                if (cities[i].city == vendor.city) {
+                    cities[i].selected = true;
+                }
+            }
+            callback(null, vendor, category, cities);
+        });
+    }
+    function checkAccess (vendor, category, cities, callback) {
+        var access = false;
+        if (req.user) {
+            var userLog = req.user[0];
+            if (userLog.admin)
+                access = true;
+        }
+        callback(null, vendor, category, cities, access);
+    }
+});
+
 //---------------------VENDOR PAGE-----------------------------//
 router.get('/:vendorName/pending', functions.ensureAuthenticated, functions.checkAdminAccess, function(req,res) {
 
@@ -194,6 +280,7 @@ router.get('/:vendorName/pending', functions.ensureAuthenticated, functions.chec
 
     function getVendor (callback) {
         connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 0', req.params.vendorName, function (err, vendor) {
+            console.log(vendor);
             callback(null, vendor);
         });
     }
