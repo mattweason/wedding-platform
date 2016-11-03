@@ -158,8 +158,8 @@
                         <label class="button-light featured-image-button" for="featured_image"><span>Choose Image</span></label>
                     </div>
                     <div class="col-sm-2">
-                        <div class="thumbnail-wrapper">
-                            <img id="featured-thumbnail" />
+                        <div id="thumbnail-wrapper" {{#if vendor.featured_image}}style="background-image: url(/{{vendor.featured_image}})"{{else}}class="placeholder"{{/if}}>
+                            <span class="helper"></span><img id="featured-thumbnail" />
                         </div>
                     </div>
                 </div>
