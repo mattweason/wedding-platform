@@ -676,6 +676,8 @@ input, textarea {
           right: 0; }
         #vendor-list .box .desc-box .desc-box-lining .vend-edit {
           left: 0; }
+        #vendor-list .box .desc-box .desc-box-lining .vend-approve {
+          left: 0; }
 
 #no-vendors {
   display: none; }
