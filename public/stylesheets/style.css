@@ -914,6 +914,7 @@ input, textarea {
   display: flex;
   justify-content: center; }
   .ekko-lightbox .modal-dialog {
+    font-family: "Lato Light";
     width: 75vw;
     height: 75vh;
     align-self: center;
@@ -1641,7 +1642,13 @@ input, textarea {
   color: #282828;
   text-align: center;
   border-radius: 0; }
+  #message-modal .modal-content .form-response, #delete-modal .modal-content .form-response {
+    font-family: "Lato Light";
+    font-size: 18px;
+    margin: 10px 0 20px 0; }
   #message-modal .modal-content button, #delete-modal .modal-content button {
+    font-family: "Josefin Sans";
+    text-transform: uppercase;
     background: #fff;
     height: 45px;
     margin: 5px 0;
