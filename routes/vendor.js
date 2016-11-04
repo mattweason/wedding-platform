@@ -571,7 +571,7 @@ router.post('/deletereview', function(req, res){
         else
             res.send({
                 message: 'Review Deleted',
-                buttontext: 'Keep Viewing Vendor',
+                buttontext: 'Refresh Vendor',
                 url: '/vendor/' + vendorName,
                 status: "success"
             })
