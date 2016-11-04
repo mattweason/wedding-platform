@@ -845,10 +845,12 @@ input, textarea{
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px;
-            span{
-              font-size: 14px;
-              font-weight: 300;
-            }
+          }
+          .vendNoPrice{
+            font-family: $font-main;
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 5px;
           }
           .reviewRating{
             display: inline-block;

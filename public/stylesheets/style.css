@@ -648,9 +648,11 @@ input, textarea {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px; }
-            #vendor-list .box .desc-box .desc-box-lining .priceRating .vendPrice span {
-              font-size: 14px;
-              font-weight: 300; }
+          #vendor-list .box .desc-box .desc-box-lining .priceRating .vendNoPrice {
+            font-family: "Lato Light";
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 5px; }
           #vendor-list .box .desc-box .desc-box-lining .priceRating .reviewRating {
             display: inline-block;
             vertical-align: middle;

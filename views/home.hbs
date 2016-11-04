@@ -164,11 +164,11 @@
                                                 <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
                                                 <div class="desc-box-bottom">
                                                     <div class="priceRating">
-                                                        <p class="vendPrice">
+
                                                             {{#if this.price}}
-                                                                {{this.price}}
+                                                                <p class="vendPrice">{{this.price}}</p>
                                                             {{else}}
-                                                                <span>Not priced.</span>
+                                                                <p class="vendNoPrice">Not priced.</p>
                                                             {{/if}}
                                                         </p>
                                                     <p class="reviewRating" >
