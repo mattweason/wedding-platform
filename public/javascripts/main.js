@@ -270,6 +270,12 @@ $(document).ready(function() {
 
     //Disable delete gallery button if nothing is checked
     $('.delete-photo-check').click(function(){
+        if ($(this).is(':checked')){
+            $(this).parents('.delete-box').addClass('inputChecked');
+        }
+        else {
+            $(this).parents('.delete-box').removeClass('inputChecked');
+        }
         if ($("#delete-gallery input:checkbox:checked").length) {
             $('#delete-gallery-submit').removeAttr('disabled');
         }

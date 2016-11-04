@@ -1226,23 +1226,35 @@ input, textarea {
     font-weight: 300; }
   #gallery-delete-page #upload-gallery #upl + label * {
     pointer-events: none; }
-  #gallery-delete-page .delete-box {
+  #gallery-delete-page #delete-gallery .delete-box {
     height: 100%;
     margin: 10px 0;
-    padding: 10px 0;
     border: 1px solid #e6e6e6;
     text-align: center; }
-    #gallery-delete-page .delete-box:hover {
+    #gallery-delete-page #delete-gallery .delete-box.inputChecked {
       background: #f2f2f2; }
-    #gallery-delete-page .delete-box .delete-form {
-      display: inline-block; }
-    #gallery-delete-page .delete-box .delete-photo {
-      height: 150px; }
-      #gallery-delete-page .delete-box .delete-photo img {
-        display: block;
-        margin: auto;
-        max-width: 200px;
-        max-height: 140px; }
+    #gallery-delete-page #delete-gallery .delete-box label {
+      width: 100%;
+      height: 100%;
+      padding: 10px 0;
+      margin: 0; }
+      #gallery-delete-page #delete-gallery .delete-box label input {
+        display: none; }
+      #gallery-delete-page #delete-gallery .delete-box label:hover {
+        cursor: pointer;
+        background: #f2f2f2; }
+      #gallery-delete-page #delete-gallery .delete-box label .delete-form {
+        display: inline-block; }
+      #gallery-delete-page #delete-gallery .delete-box label .delete-photo {
+        height: 150px; }
+        #gallery-delete-page #delete-gallery .delete-box label .delete-photo img {
+          cursor: pointer;
+          display: block;
+          margin: auto;
+          max-width: 200px;
+          max-height: 140px; }
+        #gallery-delete-page #delete-gallery .delete-box label .delete-photo p {
+          cursor: pointer; }
   #gallery-delete-page #delete-gallery-submit:disabled {
     opacity: 0.6; }
     #gallery-delete-page #delete-gallery-submit:disabled:hover {

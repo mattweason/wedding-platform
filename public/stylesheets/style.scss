@@ -1626,33 +1626,46 @@ input, textarea{
       pointer-events: none;
     }
   }
+  #delete-gallery{
+    .delete-box {
+      height: 100%;
+      margin: 10px 0;
+      border: 1px solid darken(#fff, 10%);
+      text-align: center;
+      &.inputChecked{background: darken(#fff, 5%);}
+      label{
+        width: 100%;
+        height: 100%;
+        padding: 10px 0;
+        margin: 0;
+        input{display: none;}
 
-  .delete-box {
-    height: 100%;
-    margin: 10px 0;
-    padding: 10px 0;
-    border: 1px solid darken(#fff, 10%);
-    text-align: center;
+        &:hover {
+          cursor: pointer;
+          background: darken(#fff, 5%);
+        }
 
-    &:hover {
-      background: darken(#fff, 5%);
-    }
+        .delete-form {
+          display: inline-block;
+        }
 
-    .delete-form {
-      display: inline-block;
-    }
+        .delete-photo {
+          height: 150px;
 
-    .delete-photo {
-      height: 150px;
-
-      img {
-        display: block;
-        margin: auto;
-        max-width: 200px;
-        max-height: 140px;
+          img {
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            max-width: 200px;
+            max-height: 140px;
+          }
+          p{cursor: pointer;}
+        }
       }
+
     }
   }
+
   #delete-gallery-submit:disabled{
     opacity: 0.6;
     &:hover{

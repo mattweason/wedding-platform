@@ -31,13 +31,15 @@
                 {{#each photos}}
                     <div class="col-sm-3">
                         <div class="delete-box">
-                            <div class="delete-photo">
-                                <img src="/{{this.photo_url}}" alt=""><br>
-                            </div>
-                            <div class="delete-form">
+                            <label>
                                 <input class="delete-photo-check" type="checkbox" name="delete_photo" value="{{this.photo_url}}">
-                                <label class="form-label" for="delete_photo">Mark for deletion.</label>
-                            </div>
+                                <div class="delete-photo">
+                                    <img src="/{{this.photo_url}}" alt=""><br>
+                                </div>
+                                <div class="delete-form">
+                                    <p class="form-label">Click to mark for deletion.</p>
+                                </div>
+                            </label>
                         </div>
                     </div>
                 {{/each}}
