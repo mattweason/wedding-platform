@@ -48,6 +48,7 @@
             </div>
         </div>
         <div id="vendor-list">
+            {{#if vendor}}
             <ul class="paginationTop"></ul>
             <div class="row">
                 <div class="list">
@@ -76,6 +77,9 @@
                 </div>
             </div>
             <ul class="paginationBottom"></ul>
+            {{else}}
+                <h4>There are no pending vendors at this time.</h4>
+            {{/if}}
         </div>
     </div>
 </div>

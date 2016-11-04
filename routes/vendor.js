@@ -716,7 +716,7 @@ router.post('/create', function(req, res){
         if (req.user[0].admin) {
             message = 'Vendor successfully added.';
         } else {
-            message = 'Thank you for your submission! It will be review by our staff for approval.';
+            message = 'Thank you for your submission! It will be reviewed by our staff for approval.';
             guest = 1;
         }
 

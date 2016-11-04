@@ -166,7 +166,7 @@ router.get('/approve/:vendorID', function(req, res){
             throw err;
         res.send({
             message: 'Vendor Approved',
-            buttontext: 'Refresh Vendor List',
+            buttontext: 'Refresh List',
             url: '/admin/pending',
             status: "success"
         })

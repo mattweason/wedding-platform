@@ -585,6 +585,8 @@ input, textarea {
 
 #vendor-list {
   padding-top: 40px; }
+  #vendor-list h4 {
+    text-align: center; }
   #vendor-list .box {
     padding: 20px 0; }
     #vendor-list .box .feat-img {
