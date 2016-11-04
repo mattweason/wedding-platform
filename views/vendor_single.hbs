@@ -34,7 +34,13 @@
                             <div class="col-sm-12"><div class="line"></div></div>
                             <div class="col-sm-12">
                                 <div class="rate-price-box">
-                                    <div class="vendorPrice">{{vendor.price}}</div>
+                                    <div class="vendorPrice">
+                                        {{#if vendor.price}}
+                                            {{vendor.price}}
+                                        {{else}}
+                                            <p>Not priced.</p>
+                                        {{/if}}
+                                    </div>
                                     <p class="reviewRating">
                                     {{#if vendor.rating}}
                                         {{vendor.rating}}</p>

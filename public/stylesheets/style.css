@@ -67,7 +67,8 @@ h3 {
   height: 45px;
   background: #282828;
   width: 100%;
-  border: none; }
+  border: none;
+  transition: 0.2s all; }
   .button-dark:hover {
     background: #424242; }
 
@@ -83,7 +84,8 @@ h3 {
   line-height: 45px;
   background: #fff;
   width: 100%;
-  border: 1px solid #282828; }
+  border: 1px solid #282828;
+  transition: 0.2s all; }
   .button-light:hover {
     background: #f2f2f2; }
 
@@ -446,6 +448,9 @@ input, textarea {
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px; }
+          #featured-vendor .featured-box .desc-box .priceRating .vend-price p {
+            font-size: 14px;
+            font-weight: 300; }
         #featured-vendor .featured-box .desc-box .priceRating .reviewRating {
           padding-left: 0;
           display: inline-block;
@@ -643,6 +648,9 @@ input, textarea {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px; }
+            #vendor-list .box .desc-box .desc-box-lining .priceRating .vendPrice span {
+              font-size: 14px;
+              font-weight: 300; }
           #vendor-list .box .desc-box .desc-box-lining .priceRating .reviewRating {
             display: inline-block;
             vertical-align: middle;
@@ -737,6 +745,9 @@ input, textarea {
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px; }
+          #vendor-single #vendor-description .info-box .rate-price-box .vendorPrice p {
+            font-size: 14px;
+            font-weight: 300; }
       #vendor-single #vendor-description .info-box .vend-web {
         font-family: "Josefin Sans";
         text-decoration: none;
@@ -1232,6 +1243,10 @@ input, textarea {
         margin: auto;
         max-width: 200px;
         max-height: 140px; }
+  #gallery-delete-page #delete-gallery-submit:disabled {
+    opacity: 0.6; }
+    #gallery-delete-page #delete-gallery-submit:disabled:hover {
+      background-color: #282828; }
 
 #login-page, #register-page {
   padding-top: 120px;

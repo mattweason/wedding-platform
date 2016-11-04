@@ -14965,6 +14965,16 @@ $(document).ready(function() {
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
+    //Disable delete gallery button if nothing is checked
+    $('.delete-photo-check').click(function(){
+        if ($("#delete-gallery input:checkbox:checked").length) {
+            $('#delete-gallery-submit').removeAttr('disabled');
+        }
+        else {
+            $('#delete-gallery-submit').attr("disabled","disabled");
+        }
+    });
+
     //---------------------Go to page and scroll to id---------------------//
     // Read the cookie and if it's defined scroll to id
     var scroll = $.cookie('scroll');

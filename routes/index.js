@@ -244,6 +244,7 @@ router.post('/uploadGallery', function(req,res){
 //Upload photos and post to vendorgallery table
 router.post('/gallerydelete', function(req,res){
 
+    console.log(req.body);
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
 

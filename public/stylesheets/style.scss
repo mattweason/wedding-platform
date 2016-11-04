@@ -101,6 +101,7 @@ h3 {
   background: $color-gray;
   width: 100%;
   border: none;
+  transition: 0.2s all;
 
   &:hover {
     background: lighten($color-gray, 10%);
@@ -120,6 +121,7 @@ h3 {
   background: #fff;
   width: 100%;
   border: 1px solid $color-gray;
+  transition: 0.2s all;
 
   &:hover {
     background: darken(#fff, 5%);
@@ -583,6 +585,10 @@ input, textarea{
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px;
+          p{
+            font-size: 14px;
+            font-weight: 300;
+          }
         }
         .reviewRating{
           padding-left: 0;
@@ -839,6 +845,10 @@ input, textarea{
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px;
+            span{
+              font-size: 14px;
+              font-weight: 300;
+            }
           }
           .reviewRating{
             display: inline-block;
@@ -964,6 +974,10 @@ input, textarea{
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 5px;
+          p{
+            font-size: 14px;
+            font-weight: 300;
+          }
         }
       }
 
@@ -1637,6 +1651,12 @@ input, textarea{
         max-width: 200px;
         max-height: 140px;
       }
+    }
+  }
+  #delete-gallery-submit:disabled{
+    opacity: 0.6;
+    &:hover{
+      background-color: $color-gray;
     }
   }
 }

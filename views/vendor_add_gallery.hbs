@@ -35,7 +35,7 @@
                                 <img src="/{{this.photo_url}}" alt=""><br>
                             </div>
                             <div class="delete-form">
-                                <input type="checkbox" name="delete_photo" value="{{this.photo_url}}">
+                                <input class="delete-photo-check" type="checkbox" name="delete_photo" value="{{this.photo_url}}">
                                 <label class="form-label" for="delete_photo">Mark for deletion.</label>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-sm-offset-5 col-sm-2">
                     <input type="hidden" name="vendor_url" value="{{vendor.vendor_url}}">
-                    <input id="delete-gallery-submit" class="button-dark" type="submit" value="Delete Image(s)" name="submit">
+                    <input id="delete-gallery-submit" class="button-dark" type="submit" value="Delete Image(s)" name="submit" disabled>
                 </div>
             </div>
         </form>
