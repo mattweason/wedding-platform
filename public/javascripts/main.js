@@ -131,6 +131,25 @@ $(document).ready(function() {
         });
     }); //end of validate
 
+    //--------------------UNASSIGN USER TO AS VENDOR OWNER---------------------
+    $('#user-unassign-form').submit( function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: $('#user-unassign-form').attr('action'),
+            data: $('#user-unassign-form').serialize(),
+            success: function(data){
+                $('#message-modal').find('.form-response').html(data.message);
+                $('#message-modal').modal('toggle'); //toggle modal on form submit
+                if(data.status == 'success'){
+                    $('#message-modal').find('.view-button').children().html(data.buttontext);
+                    $('.view-button').attr('href', data.url);
+                    $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                }
+            }
+        });
+    }); //end of validate
+
     //--------------------ADDING GALLERY TO VENDOR---------------------
     $('#upload-gallery').validate({
 
@@ -163,7 +182,6 @@ $(document).ready(function() {
     $('#delete-gallery').validate({
 
         submitHandler: function(form){
-            console.log($('#delete-gallery').serialize());
             $.ajax({
                 type: "POST",
                 url: $('#delete-gallery').attr('action'),
@@ -282,6 +300,23 @@ $(document).ready(function() {
         else {
             $('#delete-gallery-submit').attr("disabled","disabled");
         }
+    });
+
+    //Disable unnassign owner button if nothing is checked
+    $('.user_owned').click(function(){
+        if ($(".userUnassignForm input:checkbox:checked").length)
+            $(this).siblings('.userUnassignSubmit').removeAttr('disabled');
+        else
+            $(this).siblings('.userUnassignSubmit').attr("disabled","disabled");
+    });
+
+    //Disable assign owner button if proper selection is not made
+    $('.vendorAssignList').on('change', function(){
+        console.log('i changed');
+        if ($(this).val() != 'Select One')
+            $(this).siblings('.userAssignSubmit').removeAttr('disabled');
+        else
+            $(this).siblings('.userAssignSubmit').attr("disabled","disabled");
     });
 
     //---------------------Go to page and scroll to id---------------------//

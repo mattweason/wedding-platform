@@ -1583,6 +1583,10 @@ input, textarea {
       border: none;
       -webkit-transition: all 0.2s;
       transition: all 0.2s; }
+      #users-list .admin-user-list-wrapper .userAssignSubmit:disabled, #users-list .admin-user-list-wrapper .userUnassignSubmit:disabled {
+        opacity: 0.6; }
+        #users-list .admin-user-list-wrapper .userAssignSubmit:disabled:hover, #users-list .admin-user-list-wrapper .userUnassignSubmit:disabled:hover {
+          background-color: #282828; }
       #users-list .admin-user-list-wrapper .userAssignSubmit:hover, #users-list .admin-user-list-wrapper .userUnassignSubmit:hover {
         background: #424242; }
 

@@ -2089,6 +2089,12 @@ input, textarea{
       border: none;
       -webkit-transition: all 0.2s;
       transition: all 0.2s;
+      &:disabled{
+        opacity: 0.6;
+        &:hover{
+          background-color: $color-gray;
+        }
+      }
 
       &:hover{
         background: #424242;
