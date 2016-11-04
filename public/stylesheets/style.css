@@ -768,9 +768,6 @@ input, textarea {
       color: #282828;
       line-height: 20px; }
     #vendor-single #vendor-description .vend-edit-link {
-      position: absolute;
-      top: -20px;
-      right: 0;
       font-family: "Josefin Sans";
       text-decoration: none;
       color: #fff;
