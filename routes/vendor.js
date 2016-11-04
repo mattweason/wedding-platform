@@ -810,7 +810,7 @@ router.post('/update', function(req, res){
                 throw err;
             else{
                 connection.query(`DELETE FROM vendor2category WHERE vendor_fid = ${dataCollection.vendor_id}`, function (err, output) {
-                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited.', dataCollection.vendor_url, res);
+                    functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited.', dataCollection.vendor_url, 0, res);
                 });
             }
         });
