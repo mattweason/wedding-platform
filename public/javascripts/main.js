@@ -284,6 +284,24 @@ $(document).ready(function() {
     });
 
 //--------------------------------------------------------------------------------AJAX CALLS
+    //-----------------------SENDING EMAIL-------------------------------------//
+    var from,to,subject,reason,text,cname;
+    $("#contact-submit").click(function(){
+        cname=$("#fname").val() + " " + $("#lname").val();
+        from=$("#emailadd").val();
+        to="matt@oasiscode.com";
+        reason=$("#subject").val();
+        subject="Contact request from Vendor on a Dime";
+        text= "From: " + cname + "\n" + "\n" + "Subject: " + reason + "\n\n" +  "Message: " + $("#message").val();
+        $("#context").text("Sending E-mail...Please wait");
+        $.get("http://localhost:3000/send",{from:from,to:to,subject:subject,text:text},function(data){
+            if(data=="sent")
+            {
+                window.location.replace("/thankyou");
+            }
+        });
+    });
+
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
     //Disable delete gallery button if nothing is checked

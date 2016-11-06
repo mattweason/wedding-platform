@@ -39,7 +39,7 @@
               <div id="masthead">
                   <div class="container">
                       <div class="row">
-                          <div class="col-sm-6 col-sm-offset-3">
+                          <div class="col-md-6 col-md-offset-3 hidden-sm hidden-xs">
                               <div class="left-nav">
                                   {{#if home}}
                                       <a href="#" class="scroll-nav" data-id="featured-vendor"><h3>Featured Vendors</h3></a>
@@ -58,7 +58,26 @@
                                   {{/if}}
                               </div>
                           </div>
-                          <div class="col-sm-3">
+                          <div class="hidden-md hidden-lg hidden-xl col-sm-7 col-sm-offset-0">
+                              <a href="/" class="logo-area">
+                                  <img class = "logo" src="/images/logo.png" alt="">
+                              </a>
+                              <div class="left-nav">
+                                  {{#if home}}
+                                      <a href="#" class="scroll-nav" data-id="featured-vendor"><h3>Featured Vendors</h3></a>
+                                  {{else}}
+                                      <a href="/" class="scroll-nav" data-id="featured-vendor"><h3>Featured Vendors</h3></a>
+                                  {{/if}}
+                              </div>
+                              <div class="right-nav">
+                                  {{#if home}}
+                                      <a href="#" class="scroll-nav" data-id="vendors-list"><h3>Vendor List</h3></a>
+                                  {{else}}
+                                      <a href="/" class="scroll-nav" data-id="vendors-list"><h3>Vendor List</h3></a>
+                                  {{/if}}
+                              </div>
+                          </div>
+                          <div class="col-md-3 col-sm-5">
                               <div class="user-area">
                                   <a href="/contact" class="contact socicon-mail"></a>
                                   {{#if user}}

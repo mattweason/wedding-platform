@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
+var nodemailer = require("nodemailer");
+
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');

@@ -6,7 +6,23 @@ var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var functions = require('./../lib/functions'); //bring in the functions.js
+var nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
+var xoauth2 = require('xoauth2');
 connection = sql.connect(mysql, sql.credentials);
+
+var transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    auth: {
+        xoauth2: xoauth2.createXOAuth2Generator({
+            user: 'matt@oasiscode.com',
+            clientId: '870779677249-lalq2b1sp4i6sjphqfjf5n6ofoqn4nuh.apps.googleusercontent.com',
+            clientSecret: '76y0n0NrVa5_Z-Ytch4YrwTI',
+            refreshToken: '1/X2mVD2gVsLeLsYr4oYj4jVcU9rGxw84eq5ew4mSZoKY',
+            accessToken: 'ya29.Ci-NAwPqquTrqV63ozIqk8L0X0UcESvOA0l3J6O0yV9N5oNb68kXjirsUue1CWbspQ'
+        })
+    }
+}));
 
 const fs = require('fs-extra');
 
@@ -116,6 +132,35 @@ router.get('/contact', function(req, res, next) {
     res.render('contact', {
         admin: req.admin,
         title: 'Contact Us'
+    });
+});
+
+//* Get contact page */
+router.get('/thankyou', function(req, res, next) {
+    res.render('thankyou', {
+        admin: req.admin,
+        title: 'Thank You'
+    });
+});
+
+//* Send email from contact form */
+router.get('/send', function(req, res) {
+    var mailOptions={
+        from : req.query.from,
+        to : req.query.to,
+        subject : req.query.subject,
+        text : req.query.text
+    };
+    console.log(mailOptions);
+    transporter.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+            res.end("error");
+        }else{
+            console.log(response.response.toString());
+            console.log("Message sent: " + response.message);
+            res.end("sent");
+        }
     });
 });
 
