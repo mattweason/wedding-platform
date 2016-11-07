@@ -348,6 +348,9 @@ input, textarea {
   margin-top: 120px;
   margin-bottom: 40px;
   padding-top: 40px; }
+  #featured-vendor .featured-carousel {
+    max-width: 1366px;
+    margin: 0 auto; }
   #featured-vendor .slick-arrow {
     background-color: #282828;
     cursor: pointer;
@@ -355,16 +358,44 @@ input, textarea {
     transition: all 0.1s; }
     #featured-vendor .slick-arrow:hover {
       background-color: #424242; }
+  @media (min-width: 1367px) {
+    #featured-vendor .left-fade {
+      pointer-events: none;
+      height: 380px;
+      position: relative;
+      top: 400px;
+      display: block;
+      z-index: 1;
+      width: 175px;
+      margin-top: -380px;
+      background: -moz-linear-gradient(left, white 0%, rgba(255, 255, 255, 0) 100%);
+      background: -webkit-linear-gradient(left, white 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%); }
+    #featured-vendor .right-fade {
+      pointer-events: none;
+      height: 380px;
+      position: relative;
+      bottom: 20px;
+      left: 1191px;
+      display: block;
+      z-index: 1;
+      width: 175px;
+      margin-top: -380px;
+      background: -moz-linear-gradient(right, white 0%, rgba(255, 255, 255, 0) 100%);
+      background: -webkit-linear-gradient(right, white 0%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%); } }
   #featured-vendor .slick-prev {
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 150px;
-    left: 120px; }
+    top: 230px;
+    left: 130px;
+    margin-top: -80px; }
   #featured-vendor .slick-next {
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 150px;
-    right: 120px; }
+    bottom: 230px;
+    left: 1160px;
+    margin-bottom: -80px; }
   #featured-vendor .slick-dots {
     text-align: center;
     padding-left: 0;
@@ -421,10 +452,10 @@ input, textarea {
       background-color: #fff;
       width: 660px;
       height: 280px;
-      position: absolute;
+      position: relative;
       padding: 10px 20px;
-      top: 50px;
-      right: 40px; }
+      top: 30px;
+      right: 160px; }
       #featured-vendor .featured-box .desc-box h2 {
         font-family: "Playfair Display";
         margin: 0 0 5px 0;

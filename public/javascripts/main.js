@@ -537,8 +537,8 @@ $(document).ready(function() {
 
     //Initialize slick carousel for featured vendors
     $('.featured-carousel').slick({
-        prevArrow:"<img class='a-left control-c prev slick-prev' src='/images/left-arrow.png'>",
-        nextArrow:"<img class='a-right control-c next slick-next' src='/images/right-arrow.png'>",
+        prevArrow:"<div class='left-fade'></div><img class='a-left control-c prev slick-prev' src='/images/left-arrow.png'>",
+        nextArrow:"<img class='a-right control-c next slick-next' src='/images/right-arrow.png'><div class='right-fade'></div>",
         customPaging: function(slider) {
             return $('<button type="button" data-role="none" role="button" tabindex="0" />');
         },
