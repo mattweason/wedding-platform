@@ -15331,7 +15331,6 @@ $(document).ready(function() {
         var activeFilters = [];
 
         vendorList.on('updated', function(list) {
-            console.log('you changed it');
             if (list.matchingItems.length > 0) {
                 $('#no-vendors').hide();
             } else {
@@ -15339,27 +15338,31 @@ $(document).ready(function() {
             }
         });
 
-        var updateListCat = function(){
+        var updateList = function(){
             var values_cat = $(".cat-s").val();
-
-            vendorList.filter(function(item) {
-                var vendorCategory = item.values().vendCat;
-                if(values_cat == 'All')
-                    return true;
-                else
-                    return (vendorCategory.indexOf(values_cat) !== -1);
-            });
-        };
-
-        var updateListCity = function(){
             var values_city = $(".city-s").val();
+            // var isChecked = $("input:checkbox[name=price]").checked;
+            // var value_price = $("input:checkbox[name=price]").data("value");
+
+            // if(isChecked){
+            //     //  add to list of active filters
+            //     activeFilters.push(value_price);
+            //     console.log('price filter');
+            // }
+            // else
+            // {
+            //     // remove from active filters
+            //     activeFilters.splice(activeFilters.indexOf(value_price), 1);
+            // }
+            
 
             vendorList.filter(function(item) {
-                var vendorCity = item.values().vendCity;
-                if(values_city == 'All')
-                    return true;
-                else
-                    return (vendorCity.indexOf(values_city) !== -1);
+                var vendorCategory = item.values().vendCat.replace(/&amp;/g, '&');
+                var vendorCity = item.values().vendCity.replace(/&amp;/g, '&');
+                console.log(vendorCategory + 'item' + values_cat + 'dropdown');
+                return ((vendorCategory.indexOf(values_cat) !== -1) || values_cat == 'All')
+                        && ((vendorCity.indexOf(values_city) !== -1) || values_city == 'All')
+                        // && (activeFilters.indexOf(item.values().vendPrice) > -1)
             });
         };
 
@@ -15386,9 +15389,9 @@ $(document).ready(function() {
             });
         };
 
-        $(".cat-s").change(updateListCat);
+        $(".cat-s").change(updateList);
 
-        $(".city-s").change(updateListCity);
+        $(".city-s").change(updateList);
 
         $("input:checkbox[name=price]").change(updateListPrice);
     });
