@@ -12,7 +12,6 @@ $(document).ready(function() {
             if (!$('.is-file').hasClass('valid')) {
                 $(form).find('.is-file').attr('name', '');
             }
-            console.log(form);
             var formData = new FormData(form);
             $.ajax({
                 type: "POST",
@@ -165,7 +164,6 @@ $(document).ready(function() {
                     $('#message-modal').find('.form-response').html(data.message);
                     $('#message-modal').modal('toggle'); //toggle modal on form submit
                     if(data.status == 'success'){
-                        console.log(data.status);
                         $('#message-modal').find('.view-button').children().html(data.buttontext);
                         $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
                         $('.view-button').attr('href', data.url);
@@ -206,7 +204,6 @@ $(document).ready(function() {
     $('#register').validate({
 
         submitHandler: function(form){
-            console.log($('#register').serialize());
             $.ajax({
                 type: "POST",
                 url: $('#register').attr('action'),
@@ -270,7 +267,6 @@ $(document).ready(function() {
     //------------------------CLAIM BUSINESS PROCESS---------------------------
     $('#business-list').on('change', function() {
         var vendorID = $(this).val();
-        console.log(vendorID);
         $.ajax({
             url: "/api/business/"+vendorID,
             success: function(data){
@@ -330,7 +326,6 @@ $(document).ready(function() {
 
     //Disable assign owner button if proper selection is not made
     $('.vendorAssignList').on('change', function(){
-        console.log('i changed');
         if ($(this).val() != 'Select One')
             $(this).siblings('.userAssignSubmit').removeAttr('disabled');
         else
@@ -734,7 +729,6 @@ $(document).ready(function() {
 
             userList.filter(function(item) {
                 var userOwned = item.values().userOwned;
-                console.log(userOwned);
                 if(values_owned == 'All')
                     return true;
                 else
@@ -751,7 +745,6 @@ $(document).ready(function() {
     $('.search-filter').change(function() {
         if ($('#vendor-list').find('.vendor').length) {
             $('#no-vendors').css({'display': 'block'});
-            console.log($('#vendor-list').find('.vendor').length);
         }
     });
     

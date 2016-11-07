@@ -92,16 +92,16 @@ passport.use(new FacebookStrategy({
         var fbID = profile.id,
             fbToken = token,
             fbName = profile.displayName,
-            fbUsername = fbName.replace(" ", "_");
+            fbUsername = fbName.replace(" ", "_"),
             fbEmail = profile.emails[0].value;
-        connection.query("SELECT * FROM user WHERE username = ?",fbID, function(err, result){
+        connection.query("SELECT * FROM user WHERE facebook_id = ?",fbID, function(err, result){
             if(err) {return done(err)}
             //if username doesn't exist
             if(result.length){
                 return done(null, result);
             }
             else
-                connection.query('INSERT INTO `user`(`username`, `facebook_token`, `email`, `name`) VALUES (?,?,?,?)',[fbUsername,fbToken,fbEmail,fbName],function(err, result){
+                connection.query('INSERT INTO `user`(`username`, `facebook_id`, `facebook_token`, `email`, `name`) VALUES (?,?,?,?,?)',[fbUsername,fbID,fbToken,fbEmail,fbName],function(err, result){
                     return done(null, result);
                 });
         });
@@ -110,11 +110,16 @@ passport.use(new FacebookStrategy({
 
 //serialize and deserialize (something about cookies and sessions)
 passport.serializeUser(function(user, done) {
-    done(null, {user_id: user.user_id});
+    console.log(user);
+    if (user.user_id == null) //Checks if the user variable is an object or an array. Facebook is an object of one array, and regular sign in is just an array.
+        done(null, user[0].user_id);
+    else
+        done(null, user.user_id);
 });
 
 passport.deserializeUser(function(id, done) {
-    connection.query('SELECT * FROM user WHERE user_id = ?',id.user_id, function(err, user){
+    console.log(id);
+    connection.query('SELECT * FROM user WHERE user_id = ?',id, function(err, user){
         if(err) throw err;
         done(err, user);
     });

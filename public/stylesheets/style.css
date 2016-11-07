@@ -247,6 +247,7 @@ input, textarea {
   background-color: #fff;
   height: 120px;
   position: absolute;
+  z-index: 15;
   width: 100%;
   -webkit-transition: all 0.2s;
   /* Safari */
