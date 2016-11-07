@@ -746,7 +746,10 @@ input, textarea {
 #no-vendors {
   display: none; }
   #no-vendors h4 {
-    font-family: "Lato Light"; }
+    font-family: "Lato Light";
+    text-align: center;
+    margin-top: 100px;
+    font-size: 24px; }
 
 #vendor-single {
   padding-top: 120px;
@@ -899,7 +902,7 @@ input, textarea {
     font-family: "Lato Light";
     font-size: 16px; }
   #vendor-single #vendor-reviews .review-link {
-    text-align: right; }
+    text-align: center; }
     #vendor-single #vendor-reviews .review-link .review-button {
       font-family: "Josefin Sans";
       text-decoration: none;

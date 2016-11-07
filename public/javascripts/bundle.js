@@ -15330,6 +15330,15 @@ $(document).ready(function() {
         var vendorList = new List('vendors-list', options);
         var activeFilters = [];
 
+        vendorList.on('updated', function(list) {
+            console.log('you changed it');
+            if (list.matchingItems.length > 0) {
+                $('#no-vendors').hide();
+            } else {
+                $('#no-vendors').show();
+            }
+        });
+
         var updateListCat = function(){
             var values_cat = $(".cat-s").val();
 
@@ -15436,13 +15445,6 @@ $(document).ready(function() {
         $(".user-s").change(updateListUser);
 
         $(".owned-s").change(updateListOwned);
-    });
-
-    //Show #no-vendors if there are no vendors in the filter
-    $('.search-filter').change(function() {
-        if ($('#vendor-list').find('.vendor').length) {
-            $('#no-vendors').css({'display': 'block'});
-        }
     });
     
 }); //end of document ready

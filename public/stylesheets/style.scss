@@ -973,6 +973,9 @@ input, textarea{
   display: none;
   h4{
     font-family: $font-main;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 24px;
   }
 }
 
@@ -1183,7 +1186,7 @@ input, textarea{
       font-size: 16px;
     }
     .review-link{
-      text-align: right;
+      text-align: center;
 
       .review-button{
         font-family: $font-header;
