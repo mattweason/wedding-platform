@@ -1339,6 +1339,21 @@ input, textarea {
     border: none; }
     #login-page .submit:hover, #register-page .submit:hover {
       background: #424242; }
+  #login-page .facebookSignUp, #register-page .facebookSignUp {
+    text-align: center; }
+    #login-page .facebookSignUp h3, #register-page .facebookSignUp h3 {
+      display: inline-block;
+      margin-bottom: 20px; }
+    #login-page .facebookSignUp .bannerLine, #register-page .facebookSignUp .bannerLine {
+      display: inline-block;
+      width: 20px;
+      margin-bottom: 5px;
+      border-top: 1px solid #282828; }
+    #login-page .facebookSignUp .submit, #register-page .facebookSignUp .submit {
+      background-color: #3b5998;
+      transition: all 0.2s; }
+      #login-page .facebookSignUp .submit:hover, #register-page .facebookSignUp .submit:hover {
+        background-color: #4c70ba; }
 
 #user-profile {
   padding-top: 120px;
@@ -1349,6 +1364,10 @@ input, textarea {
   #user-profile h3 {
     margin-bottom: 40px;
     border-bottom: none; }
+  #user-profile h4 {
+    font-family: "Josefin Sans";
+    font-size: 24px;
+    font-weight: 700; }
   #user-profile .button-light {
     margin: 0 0 5px 0; }
     #user-profile .button-light.active {

@@ -106,7 +106,7 @@ router.get('/', function(req, res, next) {
     }
     function getFeaturedFavorites (vendor, featured, categories, callback) {
         if (userID)
-            connection.query('SELECT * FROM favoritevendors', function(err, favorites) {
+            connection.query('SELECT * FROM favoritevendors WHERE user_fid = ?', userID, function(err, favorites) {
                 var featuredFavorited = functions.vendorFavorites(featured, favorites);
                 console.log(featuredFavorited);
                 callback(null, vendor, featuredFavorited, categories);
