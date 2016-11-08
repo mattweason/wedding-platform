@@ -1559,7 +1559,8 @@ input, textarea {
     height: 160px;
     background-color: #282828; }
     #users-list #user-list-header .user-list-title h3 {
-      margin: 35px auto 35px auto; }
+      margin: 35px auto 35px auto;
+      color: #fff; }
     #users-list #user-list-header .filters .filter .search {
       background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
       border: 1px solid #aaa;

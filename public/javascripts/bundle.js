@@ -15328,7 +15328,6 @@ $(document).ready(function() {
         };
 
         var vendorList = new List('vendors-list', options);
-        var activeFilters = [];
 
         vendorList.on('updated', function(list) {
             if (list.matchingItems.length > 0) {
@@ -15341,59 +15340,23 @@ $(document).ready(function() {
         var updateList = function(){
             var values_cat = $(".cat-s").val();
             var values_city = $(".city-s").val();
-            // var isChecked = $("input:checkbox[name=price]").checked;
-            // var value_price = $("input:checkbox[name=price]").data("value");
-
-            // if(isChecked){
-            //     //  add to list of active filters
-            //     activeFilters.push(value_price);
-            //     console.log('price filter');
-            // }
-            // else
-            // {
-            //     // remove from active filters
-            //     activeFilters.splice(activeFilters.indexOf(value_price), 1);
-            // }
-            
+            var activeFilters = [];
+            var priceBoxes = $('input.price-checkbox');
+            for (var i = 0; priceBoxes.length > i; i++)
+                if (priceBoxes[i].checked)
+                    activeFilters.push($(priceBoxes[i]).data("value"));
 
             vendorList.filter(function(item) {
                 var vendorCategory = item.values().vendCat.replace(/&amp;/g, '&');
                 var vendorCity = item.values().vendCity.replace(/&amp;/g, '&');
-                console.log(vendorCategory + 'item' + values_cat + 'dropdown');
+                var areFilters = activeFilters.length ? (activeFilters.indexOf(item.values().vendPrice) > -1) : true;
                 return ((vendorCategory.indexOf(values_cat) !== -1) || values_cat == 'All')
                         && ((vendorCity.indexOf(values_city) !== -1) || values_city == 'All')
-                        // && (activeFilters.indexOf(item.values().vendPrice) > -1)
+                        && (areFilters);
             });
         };
 
-        var updateListPrice = function(){
-            var isChecked = this.checked;
-            var value_price = $(this).data("value");
-
-            if(isChecked){
-                //  add to list of active filters
-                activeFilters.push(value_price);
-            }
-            else
-            {
-                // remove from active filters
-                activeFilters.splice(activeFilters.indexOf(value_price), 1);
-            }
-
-            vendorList.filter(function (item) {
-                if(activeFilters.length > 0)
-                {
-                    return(activeFilters.indexOf(item.values().vendPrice)) > -1;
-                }
-                return true;
-            });
-        };
-
-        $(".cat-s").change(updateList);
-
-        $(".city-s").change(updateList);
-
-        $("input:checkbox[name=price]").change(updateListPrice);
+        $(".cat-s, .city-s, input:checkbox[name=price]").change(updateList);
     });
 
     //List.js options for user list
@@ -15420,34 +15383,6 @@ $(document).ready(function() {
         };
 
         var userList = new List('users-list', options);
-
-        var updateListUser = function(){
-            var values_user = $(".user-s").val();
-
-            userList.filter(function(item) {
-                var users = item.values().userFullName;
-                if(values_user == 'All')
-                    return true;
-                else
-                    return (users.indexOf(values_user) !== -1);
-            });
-        };
-
-        var updateListOwned = function(){
-            var values_owned = $(".owned-s").val();
-
-            userList.filter(function(item) {
-                var userOwned = item.values().userOwned;
-                if(values_owned == 'All')
-                    return true;
-                else
-                    return (userOwned.indexOf(values_owned) !== -1);
-            });
-        };
-
-        $(".user-s").change(updateListUser);
-
-        $(".owned-s").change(updateListOwned);
     });
     
 }); //end of document ready
