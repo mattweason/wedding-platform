@@ -366,12 +366,15 @@ $(document).ready(function() {
     }
 
     //----------------------Profile Page Navigation-------------------------//
-        var $grid = $('.photo-grid').masonry({
-            // options
-            itemSelector: '.photo-item',
-            gutter: 10
+        var $grid = $('.photo-grid').imagesLoaded( function() {
+            // init Masonry after all images have loaded
+            $grid.masonry({
+                itemSelector: '.photo-item',
+                gutter: 10
+            });
+            $('#userReviews, #userGallery').css("display","none").css("visibility","visible");
         });
-        $('#userReviews, #userGallery').css("display","none").css("visibility","visible");
+
 
         //Favorite Vendors Clicked
         $('#profileFavorites').click(function() {

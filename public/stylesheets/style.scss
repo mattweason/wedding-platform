@@ -1289,8 +1289,10 @@ input, textarea{
   justify-content: center;
   .modal-dialog{
     font-family: $font-main;
-    width: 75vw;
-    height: 75vh;
+    width: 75vw !important;
+    height: 75vh !important;
+    max-width: 75vw !important;
+    max-height: 75vh !important;
     align-self: center;
     display: inline-block;
     .modal-content{

@@ -982,8 +982,10 @@ input, textarea {
   justify-content: center; }
   .ekko-lightbox .modal-dialog {
     font-family: "Lato Light";
-    width: 75vw;
-    height: 75vh;
+    width: 75vw !important;
+    height: 75vh !important;
+    max-width: 75vw !important;
+    max-height: 75vh !important;
     align-self: center;
     display: inline-block; }
     .ekko-lightbox .modal-dialog .modal-content {
