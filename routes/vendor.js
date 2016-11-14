@@ -301,7 +301,7 @@ router.get('/:vendorName/pending', functions.ensureAuthenticated, functions.chec
         });
     }
     function getReviews (vendorCategory, gallery, userGallery, callback) {
-        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendorCategory[0].vendor_id, function (err, reviews) {
+        connection.query('SELECT reviews.*, user.username FROM `reviews` INNER JOIN user ON reviews.user_fid = user.user_id WHERE vendor_fid = ? ORDER BY timestamp DESC', vendorCategory[0].vendor_id,          function (err, reviews) {
             var ratingCounter = 0;
             var ratingTotal = 0;
             for (var i = 0; i < reviews.length; i++) {
@@ -381,7 +381,7 @@ router.get('/:vendorName', function(req,res) {
             review: reviews,
             gallery: gallery,
             userGallery: userGallery,
-            user: userLog,
+            userActive: userLog,
             admin: req.admin
         });
     });

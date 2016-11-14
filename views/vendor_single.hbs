@@ -7,7 +7,7 @@
                         {{#if vendor.is_featured}}
                             <div class="ribbon-wrapper"><div class="ribbon">FEATURED</div></div>
                         {{/if}}
-                        {{#if user}}
+                        {{#if userActive}}
                             <img src="/images/heart-fill.png" class="favorite-heart fill {{#if vendor.favorite}}favorited{{/if}}" data-vendor="{{vendor.vendor_id}}" alt="Click to favorite this vendor.">
                             <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
                         {{/if}}
@@ -118,14 +118,14 @@
                             <div class="reviewHead">
                                 <a class="reviewUser" href="">{{this.username}}</a>
                                 <p class="reviewDate">{{this.date}}</p>
-                                {{#if ../user.admin}}
+                                {{#if ../userActive.admin}}
                                     <form action="/vendor/deletereview" id="review-delete-form" method="post">
                                         <input type="hidden" name="review" value="{{this.id}}">
                                         <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
                                         <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
                                     </form>
                                 {{else}}
-                                    {{#equal this.user_fid ../user.user_id}}
+                                    {{#equal this.user_fid ../userActive.user_id}}
                                         <form action="/vendor/deletereview" id="review-delete-form" method="post">
                                             <input type="hidden" name="review" value="{{this.id}}">
                                             <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
