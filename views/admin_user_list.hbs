@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-sm-6 userVendors">
                                             {{#if this.businesses}}
-                                                <form action="/admin/unassignuser" id="user-unassign-form" class="userUnassignForm" method="post">
+                                                <form action="/admin/unassignuser" class="userUnassignForm" method="post">
                                                     <p class="userOwnedLabel">Businesses Owned: </p>
                                                     {{#each this.businesses}}
                                                         <input type="checkbox" name="user_owned" class="user_owned" value="{{this.id}}">
@@ -55,7 +55,7 @@
                                             <a href="/profile/{{this.user_id}}" class="button-light">Profile</a>
                                         </div>
                                         <div class="col-sm-6 userAssign">
-                                            <form action="/admin/assignuser" id="user-assign-form" class="userAssignForm" method="post">
+                                            <form action="/admin/assignuser" class="userAssignForm" method="post">
                                                 <label for="vendor_assign_list">Available Vendors</label>
                                                 <select class="select-filter chosen vendorAssignList" id="vendor_assign_list" name="vendor_assign_list">
                                                     <option value="Select One">Select One</option>
