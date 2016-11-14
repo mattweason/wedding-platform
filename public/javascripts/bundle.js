@@ -15222,10 +15222,13 @@ $(document).ready(function() {
     });
 
     //Initialize dotdotdot function
-    $(".overflow-box").dotdotdot({
-        ellipsis	: '... ',
-        wrap		: 'word'
+    $(window).on("load", function() {
+        $(".overflow-box").dotdotdot({
+            ellipsis	: '... ',
+            wrap		: 'word'
+        });
     });
+
 
     //Initialize slick carousel for featured vendors
     $('.featured-carousel').slick({
