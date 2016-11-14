@@ -3,8 +3,13 @@
 
         <div class="row">
             <div class="col-sm-3">
-                <a href="/vendor/{{vendor.vendor_url}}" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
-                <p class="back-text">Back to Vendor</p>
+                {{#if pending}}
+                    <a href="/vendor/{{vendor.vendor_url}}/pending" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
+                    <p class="back-text">Back to Vendor</p>
+                {{else}}
+                    <a href="/vendor/{{vendor.vendor_url}}" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
+                    <p class="back-text">Back to Vendor</p>
+                {{/if}}
             </div>
             <div class="col-sm-6">
                 <h3>{{vendor.vendor_name}} Edit Page</h3>

@@ -179,6 +179,7 @@ router.get('/:vendorName/pending/edit', functions.ensureAuthenticated, functions
         checkAccess
     ], function (err, vendor, category, cities, access) {
         res.render('vendor_edit', {
+            pending: 1,
             title: 'Update Vendor',
             vendor: vendor,
             category: category,
