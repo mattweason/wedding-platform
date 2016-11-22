@@ -189,6 +189,8 @@ router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, n
 
 /*Get user profile page. */
 router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res) {
+    req.profile = '/profile/' + req.params.userID;
+    console.log(req.profile);
 
     async.waterfall([
         getUserProfile,
@@ -242,7 +244,6 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
                     }
                 }
             }
-            console.log(reviews);
             callback(null, profile, favorites, reviews);
         });
     }

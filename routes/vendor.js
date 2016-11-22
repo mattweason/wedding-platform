@@ -281,7 +281,6 @@ router.get('/:vendorName/pending', functions.ensureAuthenticated, functions.chec
 
     function getVendor (callback) {
         connection.query('SELECT * FROM vendor WHERE vendor.vendor_url = ? AND vendor.approved = 0', req.params.vendorName, function (err, vendor) {
-            console.log(vendor);
             callback(null, vendor);
         });
     }
@@ -396,7 +395,6 @@ router.get('/:vendorName', function(req,res) {
         if (userID)
             connection.query('SELECT * FROM favoritevendors', function(err, favorites) {
                 var vendorFavorited = functions.vendorFavorites(vendor, favorites);
-                console.log(vendorFavorited);
                 callback(null, vendorFavorited);
             });
         else
@@ -565,15 +563,16 @@ router.post('/deletereview', function(req, res){
         deleteReviewDB,
         selectPhotos,
         deletePhotosDB,
-        deletePhotos
-    ], function(err) {
+        deletePhotos,
+        setURL
+    ], function(err, url) {
         if (err)
             console.log(err);
         else
             res.send({
                 message: 'Review Deleted',
                 buttontext: 'Refresh Vendor',
-                url: '/vendor/' + vendorName,
+                url: url,
                 status: "success"
             })
     });
@@ -619,6 +618,15 @@ router.post('/deletereview', function(req, res){
         else
             callback(null);
 
+    }
+    function setURL (callback) {
+        var url = '/vendor/' + vendorName;
+
+        if (req.profile) {
+            console.log(req.profile);
+            url = req.profile;
+        }
+        callback(null, url);
     }
 });
 
@@ -707,9 +715,6 @@ router.post('/create', function(req, res){
         var query1 = Object.keys(dataCollection).join(", ");
         var query2 = "'" + dbValues.join("','") + "'";
         var query = `INSERT INTO vendor (${query1}) VALUES (${query2})`;
-
-        console.log(query1);
-        console.log(query2);
 
         //set the message for admin or user
         var message;
