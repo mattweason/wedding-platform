@@ -557,7 +557,12 @@ router.post('/leavereview', function(req, res){
 router.post('/deletereview', function(req, res){
 
     var reviewID = req.body.review;
-    var vendorName = req.body.vendorName;
+    var urlPath = '';
+    var buttonText = '';
+    if (req.body.vendorName)
+        urlPath = req.body.vendorName;
+    else if (req.body.userID)
+        urlPath = req.body.userID;
 
     async.waterfall([
         deleteReviewDB,
@@ -571,7 +576,7 @@ router.post('/deletereview', function(req, res){
         else
             res.send({
                 message: 'Review Deleted',
-                buttontext: 'Refresh Vendor',
+                buttontext: buttonText,
                 url: url,
                 status: "success"
             })
@@ -620,12 +625,16 @@ router.post('/deletereview', function(req, res){
 
     }
     function setURL (callback) {
-        var url = '/vendor/' + vendorName;
-
-        if (req.profile) {
-            console.log(req.profile);
-            url = req.profile;
+        var url = '';
+        if (req.body.vendorName) {
+            url = '/vendor/' + urlPath;
+            buttonText = 'Refresh Vendor';
         }
+        else if (req.body.userID) {
+            url = '/profile/' + urlPath;
+            buttonText = 'Refresh Profile';
+        }
+
         callback(null, url);
     }
 });

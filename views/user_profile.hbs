@@ -76,7 +76,7 @@
                                         <p class="reviewDate">{{this.date}}</p>
                                         <form action="/vendor/deletereview" id="review-delete-form" method="post">
                                             <input type="hidden" name="review" value="{{this.id}}">
-                                            <input type="hidden" name="vendorName" value="{{../vendor.vendor_url}}">
+                                            <input type="hidden" name="userID" value="{{../profile.user_id}}">
                                             <input id="delete-review-submit" class="reviewDelete" type="submit" value="DELETE" name="submit">
                                         </form>
                                     </div>
