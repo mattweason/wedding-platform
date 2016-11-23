@@ -667,7 +667,7 @@ input, textarea {
         #vendor-list .box .desc-box .desc-box-lining h2 {
           font-family: "Playfair Display";
           margin: 0 0 5px 0;
-          font-size: 24px;
+          font-size: 20px;
           text-transform: uppercase;
           color: #282828; }
         #vendor-list .box .desc-box .desc-box-lining .vendCat {
@@ -1714,7 +1714,13 @@ input, textarea {
     text-align: center;
     margin-top: 10px; }
   #claim-business-page #businessContact {
-    display: none; }
+    display: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
     #claim-business-page #businessContact .title {
       text-align: center;
       font-size: 16px;

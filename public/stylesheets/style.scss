@@ -865,7 +865,7 @@ input, textarea{
         h2 {
           font-family: $font-title;
           margin: 0 0 5px 0;
-          font-size: 24px;
+          font-size: 20px;
           text-transform: uppercase;
           color: $color-gray;
         }
@@ -2260,6 +2260,12 @@ input, textarea{
   }
   #businessContact{
     display: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; // locks fields on Safari
+    -khtml-user-select: none; // locks fields on Safari
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     .title{
       text-align: center;
       font-size: 16px;

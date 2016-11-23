@@ -149,7 +149,7 @@ router.get('/send', function(req, res) {
         from : req.query.from,
         to : req.query.to,
         subject : req.query.subject,
-        text : req.query.text
+        html : req.query.text
     };
     console.log(mailOptions);
     transporter.sendMail(mailOptions, function(error, response){
@@ -163,6 +163,27 @@ router.get('/send', function(req, res) {
         }
     });
 });
+
+//* Send email from claim-business-form form */
+// router.get('/send', function(req, res) {
+//     var mailOptions={
+//         from : req.query.from,
+//         to : req.query.to,
+//         subject : req.query.subject,
+//         text : req.query.text
+//     };
+//     console.log(mailOptions);
+//     transporter.sendMail(mailOptions, function(error, response){
+//         if(error){
+//             console.log(error);
+//             res.end("error");
+//         }else{
+//             console.log(response.response.toString());
+//             console.log("Message sent: " + response.message);
+//             res.end("sent");
+//         }
+//     });
+// });
 
 //* Get claim business page */
 router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, next) {

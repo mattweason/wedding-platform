@@ -14965,6 +14965,10 @@ $(document).ready(function() {
         $.ajax({
             url: "/api/business/"+vendorID,
             success: function(data){
+                $('#businessName').val(data.name);
+                $('#businessPhone').val(data.phone);
+                $('#businessAdd1').val(data.address1);
+                $('#businessAdd2').val(data.address2);
                 $('#name').html(data.name);
                 $('#phone').html(data.phone);
                 $('#address1').html(data.address1);
@@ -14976,6 +14980,7 @@ $(document).ready(function() {
 
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------SENDING EMAIL-------------------------------------//
+    //Contact Form
     var from,to,subject,reason,text,cname;
     $("#contact-submit").click(function(){
         cname=$("#fname").val() + " " + $("#lname").val();
@@ -14983,7 +14988,7 @@ $(document).ready(function() {
         to="matt@oasiscode.com";
         reason=$("#subject").val();
         subject="Contact request from Vendor on a Dime";
-        text= "From: " + cname + "\n" + "\n" + "Subject: " + reason + "\n\n" +  "Message: " + $("#message").val();
+        text= "From: " + cname + "<br><br>" + "Subject: " + reason + "<br><br>" +  "Message: " + $("#message").val();
         $("#context").text("Sending E-mail...Please wait");
         $.get("http://localhost:3000/send",{from:from,to:to,subject:subject,text:text},function(data){
             if(data=="sent")
@@ -14992,6 +14997,27 @@ $(document).ready(function() {
             }
         });
     });
+    var cbfrom, cbto, cbname, business, businessName, businessPhone, businessAdd1, businessAdd2;
+    $("#claim-business-submit").click(function(){
+        cbname=$("#cbfname").val() + " " + $("#cblname").val();
+        cbfrom=$("#cbemailadd").val();
+        cbto="matt@oasiscode.com";
+        businessName=$("#businessName").val();
+        businessPhone=$("#businessPhone").val();
+        businessAdd1=$("#businessAdd1").val();
+        businessAdd2=$("#businessAdd2").val();
+        subject="Claim business request from Vendor on a Dime";
+        text= "<strong>From:</strong> " + cbname + "<br><br>" + "<strong>Claim Business Request</strong><br><br><br>" +  "<strong>Business Name:</strong> " + businessName + "<br>" + "<strong>Business Phone:</strong> " + businessPhone + "<br>"+  "<strong>Business Address 1:</strong> " + businessAdd1 + "<br>"+  "<strong>Business Address 2:</strong> " + businessAdd2 + "<br>";
+        $("#context").text("Sending E-mail...Please wait");
+        $.get("http://localhost:3000/send",{from:cbfrom,to:cbto,subject:subject,text:text},function(data){
+            if(data=="sent")
+            {
+                window.location.replace("/thankyou");
+            }
+        });
+    });
+
+    //Claim Business Form
 
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
