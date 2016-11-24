@@ -1846,19 +1846,27 @@ input, textarea {
       position: relative;
       top: 50%;
       transform: translateY(180%); }
+      #mastfooter .main-footer .social-media .seperator {
+        display: inline-block;
+        margin-left: 2px;
+        border-right: 1px solid #fff;
+        height: 100%;
+        vertical-align: middle; }
       #mastfooter .main-footer .social-media .social-button {
         display: inline-block;
         vertical-align: middle; }
         #mastfooter .main-footer .social-media .social-button a {
-          margin: 0 10px;
+          margin: 0;
           display: block;
           height: 40px;
           width: 40px;
           text-align: center;
-          line-height: 40px;
+          line-height: 47px;
           font-size: 20px;
           color: #fff;
           text-decoration: none; }
+        #mastfooter .main-footer .social-media .social-button .socicon-mail:hover {
+          color: #FF8C00; }
         #mastfooter .main-footer .social-media .social-button .socicon-instagram {
           background: -webkit-linear-gradient(-110deg, #8a3ab9, #4c68d7, #cd486b, #fbad50, #fbad50);
           -webkit-background-clip: text;
