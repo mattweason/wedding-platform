@@ -1706,12 +1706,21 @@ input, textarea{
       margin: 10px 0;
       border: 1px solid darken(#fff, 10%);
       text-align: center;
-      &.inputChecked{background: darken(#fff, 5%);}
+      transition: 0.2s all;
+      &.inputChecked{
+        background: $color-gray;
+        .form-label{color: white;}
+        label:hover{
+          cursor: pointer;
+          background: lighten($color-gray, 5%);
+        }
+      }
       label{
         width: 100%;
         height: 100%;
         padding: 10px 0;
         margin: 0;
+        transition: 0.2s all;
         input{display: none;}
 
         &:hover {
@@ -1725,6 +1734,7 @@ input, textarea{
 
         .delete-photo {
           height: 150px;
+          display: flex;
 
           img {
             cursor: pointer;
