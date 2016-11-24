@@ -1011,6 +1011,7 @@ input, textarea {
         padding: 15px;
         height: 100%; }
         .ekko-lightbox .modal-dialog .modal-content .modal-body .ekko-lightbox-container {
+          overflow: hidden;
           vertical-align: middle;
           display: inline-block;
           height: 100%;

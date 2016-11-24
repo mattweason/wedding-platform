@@ -1319,6 +1319,7 @@ input, textarea{
         padding: 15px;
         height: 100%;
         .ekko-lightbox-container{
+          overflow: hidden;
           vertical-align: middle;
           display: inline-block;
           height: 100%;
