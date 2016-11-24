@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
+var gm = require('gm');
 var async = require('async');
 var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
@@ -164,27 +165,6 @@ router.get('/send', function(req, res) {
     });
 });
 
-//* Send email from claim-business-form form */
-// router.get('/send', function(req, res) {
-//     var mailOptions={
-//         from : req.query.from,
-//         to : req.query.to,
-//         subject : req.query.subject,
-//         text : req.query.text
-//     };
-//     console.log(mailOptions);
-//     transporter.sendMail(mailOptions, function(error, response){
-//         if(error){
-//             console.log(error);
-//             res.end("error");
-//         }else{
-//             console.log(response.response.toString());
-//             console.log("Message sent: " + response.message);
-//             res.end("sent");
-//         }
-//     });
-// });
-
 //* Get claim business page */
 router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, next) {
 
@@ -303,7 +283,27 @@ router.post('/uploadGallery', function(req,res){
     });
 
     form.on('end', function(){
-        functions.addGallery(vendorID, vendorPhotos, 'Gallery successfully updated.', vendorURL, res);
+        var counter = 0;
+        for (var i = 0; i < vendorPhotos.path.length; i++) {
+            var uploadPath = 'uploads/' + vendorURL + '-' + Date.now() + i + vendorPhotos.ext[i];
+
+            functions.renameResizeImage(vendorPhotos.path[i], uploadPath);
+
+            connection.query(`INSERT INTO vendorgallery(vendor_fid, photo_url) VALUES ( ${vendorID} , '${uploadPath}' )`, function (err) {
+                if (err) {throw err}
+
+                counter++;
+                if (counter == vendorPhotos.path.length)
+                    res.send({  //update vendor category
+                        message: 'Gallery Successfully Updated',
+                        buttontext: 'View Vendor',
+                        buttontextgal: 'Keep Editing',
+                        url: '/vendor/' + vendorURL,
+                        urlgal: '/vendor/' + vendorURL + '/gallery',
+                        status: "success"
+                    });
+            });
+        }
     });
 
 });

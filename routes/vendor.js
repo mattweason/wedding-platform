@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
+var gm = require('gm');
 var async = require('async');
 var _ = require('underscore');
 var path = require('path');
@@ -532,7 +533,7 @@ router.post('/leavereview', function(req, res){
             for (var i = 0; i < userPhotos.path.length; i++) {
                 var uploadPath = 'uploads/useruploads/' + fields.vendorName + fields.userID + '-' + Date.now() + i + userPhotos.ext[i];
 
-                fs.rename(userPhotos.path[i], uploadPath);
+                functions.renameResizeImage(userPhotos.path[i], uploadPath);
 
                 connection.query(`INSERT INTO usergallery(review_fid, user_fid, vendor_fid, photo_url) VALUES ( ?, ?, ?, ?)`, [reviewID, fields.userID, fields.vendorID, uploadPath], function (err) {
                     if (err) {
@@ -644,7 +645,9 @@ router.post('/create', function(req, res){
 
     //Set up formidable
     var form = new formidable.IncomingForm();
+    form.keepExtensions = true;
 
+    var fileExtension;
     var dataCollection = {};
     var featuredImage;
     var category;
@@ -669,6 +672,7 @@ router.post('/create', function(req, res){
     });
 
     form.on('fileBegin', function(field, file) {
+        fileExtension = path.extname(file.name);
         file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
         featuredImage = file.path;
     });
@@ -705,9 +709,22 @@ router.post('/create', function(req, res){
     function insertVendor() {
 
         //Rename file and add path to dataCollection
-        var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image';
+        var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image' + fileExtension;
 
-        fs.rename(featuredImage, uploadPath);
+        fs.rename(featuredImage, uploadPath, function() {
+            gm(uploadPath).size(function(err, size) {
+                if (err)
+                    console.log(err);
+                else if (size.width > 500)
+                    gm(uploadPath)
+                        .resize(500)
+                        .noProfile()
+                        .write(uploadPath, function (err) {
+                            if (!err) console.log('done');
+                        });
+
+            });
+        });
 
         dataCollection['featured_image'] = uploadPath;
 
@@ -799,7 +816,20 @@ router.post('/update', function(req, res){
         var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image';
 
         if(typeof featuredImage !== "undefined") {
-            fs.rename(featuredImage, uploadPath); //Rename file in uploads/featuredimage folder
+            fs.rename(featuredImage, uploadPath, function() {  //Rename and resize file in uploads/featuredimage folder
+                gm(uploadPath).size(function(err, size) {
+                    if (err)
+                        console.log(err);
+                    else if (size.width > 500)
+                        gm(uploadPath)
+                            .resize(500)
+                            .noProfile()
+                            .write(uploadPath, function (err) {
+                                if (!err) console.log('done');
+                            });
+
+                });
+            });
             dataCollection['featured_image'] = uploadPath; //Add featured_image key and value to dataCollection
         }
         

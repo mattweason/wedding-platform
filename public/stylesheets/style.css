@@ -209,7 +209,8 @@ input, textarea {
 
 .paginationBottom, .paginationTop {
   text-align: center;
-  list-style-type: none; }
+  list-style-type: none;
+  padding-left: 0; }
   .paginationBottom li, .paginationTop li {
     margin: 0 5px;
     position: relative;
@@ -1144,7 +1145,7 @@ input, textarea {
       background-size: cover;
       backgroud-repeat: no-repeat;
       background-position: center center; }
-      #vendor-add #add-form .featured-image-area #thumbnail-wrapper .placeholder, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .placeholder {
+      #vendor-add #add-form .featured-image-area #thumbnail-wrapper.placeholder, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper.placeholder {
         background-image: url("../images/placeholder.jpg"); }
       #vendor-add #add-form .featured-image-area #thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .helper {
         display: inline-block;

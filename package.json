@@ -19,6 +19,7 @@
     "file-system": "^2.2.1",
     "formidable": "^1.0.17",
     "fs-extra": "^0.30.0",
+    "gm": "^1.23.0",
     "hbs": "~4.0.0",
     "jquery": "^3.1.0",
     "jquery-ui": "^1.12.0",
