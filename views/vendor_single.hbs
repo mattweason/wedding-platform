@@ -28,6 +28,23 @@
                                 <div class="col-sm-9">
                                     <p class="vend-phone">{{vendor.phone_number}}</p>
                                 </div>
+                                {{#if vendor.fax}}
+                                    <div class="col-sm-3">
+                                        <span>Fax: </span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="vend-phone">{{vendor.fax}}</p>
+                                    </div>
+                                {{/if}}
+                                {{#if vendor.email}}
+                                    <div class="col-sm-3">
+                                        <span>Email: </span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <a href="{{vendor.email}}" target="_top">{{vendor.email}}</a>
+                                    </div>
+                                {{/if}}
+
                             </div>
                         </div>
                         <div class="row">

@@ -45,9 +45,6 @@
                         <div class="col-sm-9">
                             <input type="text" name="vendor_name" value="{{vendor.vendor_name}}" required><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="category">Category</label>
                         </div>
@@ -58,27 +55,18 @@
                                 {{/each}}
                             </select><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="address">Address 1</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="address" value="{{vendor.address}}" required><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="address_2">Address 2</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="address_2" value="{{vendor.address_2}}"><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="city">City</label>
                         </div>
@@ -89,36 +77,30 @@
                                 {{/each}}
                             </select><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="province">Province</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="province" value="{{vendor.province}}"><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="postal_code">Postal Code</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="postal_code" value="{{vendor.postal_code}}"><br>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="phone_number">Phone Number</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="phone_number" value="{{vendor.phone_number}}"><br>
                         </div>
-                    </div>
-
-                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="budget">Budget</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="Budget" value="{{vendor.budget}}"><br>
+                        </div>
                         <div class="col-sm-3">
                             <label class = "form-label" for="price">Price</label>
                         </div>
@@ -130,21 +112,46 @@
                                 <option value="$$$$" {{#if vendor.fourdollar}}selected{{/if}}>$$$$</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-3">
                             <label class = "form-label" for="url">Vendor Website</label>
                         </div>
                         <div class="col-sm-9">
                             <input type="text" name="url" value="{{vendor.url}}"><br>
                         </div>
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="fax">Fax</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="fax" value="{{vendor.fax}}"><br>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="email">Email</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="email" value="{{vendor.email}}"><br>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
-                    <label class = "form-label" for="description">Description</label>
-                    <textarea name="description" placeholder = "Vendor Description" required>{{vendor.description}}</textarea>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="contact_title">Contact Title</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="contact_title"><br>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class = "form-label" for="contact_name">Contact Name</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" name="contact_name"><br>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class = "form-label" for="description">Description</label>
+                            <textarea name="description" placeholder = "Vendor Description" required>{{vendor.description}}</textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
 

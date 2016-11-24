@@ -998,7 +998,7 @@ input, textarea{
 
     .info-box{
       width: 300px;
-      height: 160px;
+      height: auto;
       padding: 10px 20px;
       position: absolute;
       background-color: #fff;
@@ -1006,6 +1006,10 @@ input, textarea{
       left: 90px;
 
       .vend-info{
+        a{
+          display: inline-block;
+          margin-bottom: 5px;
+        }
         span {
           font-size: 14px;
           font-family: $font-main;
@@ -1039,6 +1043,7 @@ input, textarea{
           font-family: $font-main;
           font-size: 14px;
           color: #828282;
+          margin-bottom: 17px;
         }
         .vendorPrice{
           font-family: $font-main;
@@ -1058,7 +1063,7 @@ input, textarea{
         color: #fff;
         text-align: center;
         text-transform: uppercase;
-        margin: 15px 0 5px 0;
+        margin: 27px 0 0 0;
         font-size: 18px;
         line-height: 40px;
         display: inline-block;
@@ -1385,7 +1390,7 @@ input, textarea{
     padding: 40px 0;
 
     textarea {
-      height: 329px;
+      height: 363px;
       width: 100%;
     }
 
@@ -2362,6 +2367,7 @@ input, textarea{
     }
 
     #delete-modal-confirm, #dismiss-button {
+      text-transform: uppercase;
       text-decoration: none;
       color: #fff;
       text-align: center;
