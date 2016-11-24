@@ -880,6 +880,8 @@ input, textarea{
           border-bottom: 1px solid $color-gray;
         }
 
+        .vendTags{display: none;}
+
         .vendAdd, .vendAdd2, .vendCity{
           font-family: $font-main;
           color: $color-lgray;
@@ -1461,6 +1463,10 @@ input, textarea{
           }
         }
       }
+    }
+
+    textarea[name="tags"] {
+      height: 60px;
     }
 
     .featured-image-area{

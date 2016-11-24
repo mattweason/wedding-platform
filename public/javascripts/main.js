@@ -657,7 +657,7 @@ $(document).ready(function() {
             right: 4
         };
         var options = {
-            valueNames: ['vendName', 'vendCat', 'vendPrice', 'vendCity'],
+            valueNames: ['vendName', 'vendCat', 'vendPrice', 'vendCity', 'vendTags'],
             page: 8,
             plugins: [
                 ListPagination(paginationTopOptions),

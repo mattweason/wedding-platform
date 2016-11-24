@@ -678,6 +678,8 @@ input, textarea {
           padding-bottom: 5px;
           margin-bottom: 2px;
           border-bottom: 1px solid #282828; }
+        #vendor-list .box .desc-box .desc-box-lining .vendTags {
+          display: none; }
         #vendor-list .box .desc-box .desc-box-lining .vendAdd, #vendor-list .box .desc-box .desc-box-lining .vendAdd2, #vendor-list .box .desc-box .desc-box-lining .vendCity {
           font-family: "Lato Light";
           color: #828282;
@@ -1116,6 +1118,8 @@ input, textarea {
           border: 1px solid #fff; }
           #vendor-add #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover, #vendor-edit #add-form .featured-select .wrapper .is-featured-radio:checked + .featured-radio-label:hover {
             opacity: 0.8; }
+    #vendor-add #add-form textarea[name="tags"], #vendor-edit #add-form textarea[name="tags"] {
+      height: 60px; }
     #vendor-add #add-form .featured-image-area input, #vendor-edit #add-form .featured-image-area input {
       margin-top: 0; }
     #vendor-add #add-form .featured-image-area .form-label, #vendor-edit #add-form .featured-image-area .form-label {
