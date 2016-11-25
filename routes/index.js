@@ -172,7 +172,8 @@ router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, n
         getFreeVendors
 
     ], function (err, free) {
-        res.render('claim-business', {
+        res.render('claim_business', {
+            user: req.user[0],
             admin: req.admin,
             title: 'Claim Your Business',
             free: free

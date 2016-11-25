@@ -284,43 +284,119 @@ $(document).ready(function() {
 //--------------------------------------------------------------------------------AJAX CALLS
     //-----------------------SENDING EMAIL-------------------------------------//
     //Contact Form
-    var from,to,subject,reason,text,cname;
-    $("#contact-submit").click(function(){
-        cname=$("#fname").val() + " " + $("#lname").val();
-        from=$("#emailadd").val();
-        to="matt@oasiscode.com";
-        reason=$("#subject").val();
-        subject="Contact request from Vendor on a Dime";
-        text= "From: " + cname + "<br><br>" + "Subject: " + reason + "<br><br>" +  "Message: " + $("#message").val();
-        $("#context").text("Sending E-mail...Please wait");
-        $.get("http://localhost:3000/send",{from:from,to:to,subject:subject,text:text},function(data){
-            if(data=="sent")
-            {
-                window.location.replace("/thankyou");
+    $('[data-required]').each(function(i){
+        var input = $(this);
+        input.change(function(){
+            if (this.value.length > 0) {
+               input.removeClass('needInput');
             }
         });
     });
-    var cbfrom, cbto, cbname, business, businessName, businessPhone, businessAdd1, businessAdd2;
-    $("#claim-business-submit").click(function(){
-        cbname=$("#cbfname").val() + " " + $("#cblname").val();
-        cbfrom=$("#cbemailadd").val();
-        cbto="matt@oasiscode.com";
-        businessName=$("#businessName").val();
-        businessPhone=$("#businessPhone").val();
-        businessAdd1=$("#businessAdd1").val();
-        businessAdd2=$("#businessAdd2").val();
-        subject="Claim business request from Vendor on a Dime";
-        text= "<strong>From:</strong> " + cbname + "<br><br>" + "<strong>Claim Business Request</strong><br><br><br>" +  "<strong>Business Name:</strong> " + businessName + "<br>" + "<strong>Business Phone:</strong> " + businessPhone + "<br>"+  "<strong>Business Address 1:</strong> " + businessAdd1 + "<br>"+  "<strong>Business Address 2:</strong> " + businessAdd2 + "<br>";
-        $("#context").text("Sending E-mail...Please wait");
-        $.get("http://localhost:3000/send",{from:cbfrom,to:cbto,subject:subject,text:text},function(data){
-            if(data=="sent")
-            {
-                window.location.replace("/thankyou");
+    var from,to,subject,reason,text,cname;
+    $("#contact-submit").click(function(){
+        var input = document.getElementById('email');
+        if (input.value.length > 0)
+            console.log('You are a bot');
+
+        else {
+            var incomplete = 0;
+            $('[data-required]').each(function(i){
+                if (this.value.length == 0){
+                    $(this).addClass('needInput');
+                    incomplete++;
+                }
+            });
+            if(incomplete > 0) {
+                $("#context").text("Please fill in the required fields.").addClass('colorAlert');
+            }
+            else {
+                cname=$("#fname").val() + " " + $("#lname").val();
+                from=$("#emailadd").val();
+                to="matt@oasiscode.com";
+                reason=$("#subject").val();
+                subject="Contact request from Vendor on a Dime";
+                text= "From: " + cname + "<br>" + "Email: " + from + "<br><br>" + "Subject: " + reason + "<br><br>" +  "Message: " + $("#message").val();
+                $("#context").text("Sending E-mail...Please wait").removeClass('colorAlert');
+                $.get("http://localhost:3000/send",{from:from,to:to,subject:subject,text:text},function(data){
+                    if(data=="sent")
+                    {
+                        window.location.replace("/thankyou");
+                    }
+                });
+            }
+        }
+
+
+    });
+
+    //Claim Business Form
+    $('[data-required]').each(function(i){
+        var input = $(this);
+        input.change(function(){
+            if (this.value.length > 0) {
+                input.removeClass('needInput');
             }
         });
     });
 
-    //Claim Business Form
+    var cbfrom, cbto, cbname, business, businessName, businessPhone, businessAdd1, businessAdd2, userName, userFullName, userID;
+    $("#claim-business-submit").click(function(){
+        var input = document.getElementById('email');
+
+        if (input.value.length > 0)
+            console.log('You are a bot');
+
+        else {
+            var incomplete = 0;
+            $('[data-required]').each(function(i){
+                if (this.value.length == 0){
+                    $(this).addClass('needInput');
+                    incomplete++;
+                }
+            });
+            if((incomplete > 0) && ($("#businessName").val().length > 0))
+                $("#context").text("Please fill in the required fields.").addClass('colorAlert');
+
+            else if ((incomplete == 0) && ($("#businessName").val().length == 0))
+                $("#context").text("Please select a business to claim.").addClass('colorAlert');
+
+            else if ((incomplete > 0) && ($("#businessName").val().length == 0))
+                $("#context").text("Please fill in the required fields and select a business to claim.").addClass('colorAlert');
+
+            else {
+                cbname=$("#cbfname").val() + " " + $("#cblname").val();
+                cbfrom=$("#cbemailadd").val();
+                cbto="matt@oasiscode.com";
+                userName=$("#userName").val();
+                userFullName=$("#userFullName").val();
+                userID=$("#userID").val();
+                businessName=$("#businessName").val();
+                businessPhone=$("#businessPhone").val();
+                businessAdd1=$("#businessAdd1").val();
+                businessAdd2=$("#businessAdd2").val();
+                subject="Claim business request from Vendor on a Dime";
+                text=
+                    "<h2>Claim Business Request</h2><br>" +
+                    "<strong>From:</strong> " + cbname + "<br><br>" +
+                    "<strong>Email:</strong> " + cbfrom + "<br><br>" +
+                    "<h3 style='margin-bottom:5px;text-decoration:underline;'>User Information</h3>" + '<br>' +
+                    "<strong>User Name:</strong> " + userFullName + "<br>" +
+                    "<strong>Username:</strong> " + userName + "<br>"+
+                    "<strong>User ID #:</strong> " + userID + "<br><br>"+
+                    "<h3 style='margin-bottom:5px;text-decoration:underline;'>Vendor Information</h3>" + '<br>' +
+                    "<strong>Vendor Name:</strong> " + businessName + "<br>" +
+                    "<strong>Vendor Phone:</strong> " + businessPhone + "<br>"+
+                    "<strong>Vendor Address 1:</strong> " + businessAdd1 + "<br>"+
+                    "<strong>Vendor Address 2:</strong> " + businessAdd2 + "<br>";
+                $("#context").text("Sending E-mail...Please wait").removeClass('colorAlert');
+                $.get("http://localhost:3000/send",{from:cbfrom,to:cbto,subject:subject,text:text},function(data) {
+                    if (data == "sent") {
+                        window.location.replace("/thankyou");
+                    }
+                });
+            }
+        }
+    });
 
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
@@ -712,7 +788,7 @@ $(document).ready(function() {
             right: 4
         };
         var options = {
-            valueNames: ['userFullName', 'userName', 'userEmail', 'userOwned'],
+            valueNames: ['userFullName', 'userName', 'userEmail', 'userOwned', 'userID'],
             page: 8,
             plugins: [
                 ListPagination(paginationTopOptions),

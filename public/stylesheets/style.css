@@ -1614,6 +1614,8 @@ input, textarea {
     #users-list .admin-user-list-wrapper .userMeta {
       height: 120px;
       margin-bottom: 15px; }
+      #users-list .admin-user-list-wrapper .userMeta p {
+        margin-bottom: 5px; }
       #users-list .admin-user-list-wrapper .userMeta .button-light {
         height: 100%;
         line-height: 120px; }
@@ -1692,19 +1694,37 @@ input, textarea {
   padding-bottom: 40px; }
   #contact-page h3 {
     margin: 35px auto 35px auto; }
-  #contact-page input {
+  #contact-page .contactForm #email {
+    display: none; }
+  #contact-page .contactForm input {
     width: 100%;
     height: 30px;
-    margin-bottom: 10px; }
-  #contact-page textarea {
+    margin-bottom: 10px;
+    box-shadow: none;
+    transition: 0.2s all; }
+    #contact-page .contactForm input.needInput {
+      -webkit-box-shadow: 0px 0px 1px 1px red;
+      -moz-box-shadow: 0px 0px 1px 1px red;
+      box-shadow: 0px 0px 1px 1px red;
+      border: 1px solid darkgray; }
+  #contact-page .contactForm textarea {
     margin-bottom: 10px;
     width: 100%;
-    height: 200px; }
-  #contact-page .button-light {
+    height: 200px;
+    box-shadow: none;
+    transition: 0.2s all; }
+    #contact-page .contactForm textarea.needInput {
+      -webkit-box-shadow: 0px 0px 1px 1px red;
+      -moz-box-shadow: 0px 0px 1px 1px red;
+      box-shadow: 0px 0px 1px 1px red;
+      border: 1px solid darkgray; }
+  #contact-page .contactForm .button-light {
     margin-top: 0;
     height: 45px; }
-  #contact-page #context {
+  #contact-page .contactForm #context {
     font-family: "Lato Light"; }
+    #contact-page .contactForm #context.colorAlert {
+      color: red; }
 
 #thankyou {
   height: calc(100vh - 240px);
@@ -1720,6 +1740,10 @@ input, textarea {
 #claim-business-page {
   padding-top: 120px;
   padding-bottom: 40px; }
+  #claim-business-page #context {
+    font-family: "Lato Light"; }
+    #claim-business-page #context.colorAlert {
+      color: red; }
   #claim-business-page h3 {
     margin: 35px auto 35px auto; }
   #claim-business-page h4 {
@@ -1753,10 +1777,19 @@ input, textarea {
     font-family: "Lato Light";
     line-height: 30px;
     font-size: 16px; }
+  #claim-business-page #email {
+    display: none; }
   #claim-business-page input {
     width: 100%;
     height: 30px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    box-shadow: none;
+    transition: 0.2s all; }
+    #claim-business-page input.needInput {
+      -webkit-box-shadow: 0px 0px 1px 1px red;
+      -moz-box-shadow: 0px 0px 1px 1px red;
+      box-shadow: 0px 0px 1px 1px red;
+      border: 1px solid darkgray; }
   #claim-business-page select {
     padding: 1px;
     height: 29px;
@@ -1781,6 +1814,14 @@ input, textarea {
   #claim-business-page .button-light {
     margin-top: 20px;
     height: 45px; }
+  #claim-business-page #business_list_chosen {
+    box-shadow: none;
+    transition: 0.2s all; }
+    #claim-business-page #business_list_chosen.needInput {
+      -webkit-box-shadow: 0px 0px 1px 1px red;
+      -moz-box-shadow: 0px 0px 1px 1px red;
+      box-shadow: 0px 0px 1px 1px red;
+      border: 1px solid darkgray; }
 
 #message-modal .modal-content, #delete-modal .modal-content {
   margin: 0 100px;
