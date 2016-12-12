@@ -196,6 +196,13 @@ input, textarea{
   height: 105px;
   bottom: -9px;
   left: -9px;
+
+  @media(max-width: 1199px) {
+    top: -9px;
+    right: -9px;
+    bottom: auto;
+    left: auto;
+  }
 }
 
 .ribbon-wrapper {
@@ -226,6 +233,13 @@ input, textarea{
   right: 31px;
   bottom: -49px;
   width: 145px;
+
+  @media(max-width: 1199px) {
+    left: -8px;
+    top: 26px;
+    right: auto;
+    bottom: auto;
+  }
 }
 
 .ribbon{
@@ -275,6 +289,11 @@ input, textarea{
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
 
+    @media(max-width: 400px) {
+      height: 30px;
+      width: 30px;
+    }
+
     &:hover, &.active{
       background: $color-gray;
 
@@ -292,6 +311,12 @@ input, textarea{
       width:38px;
       -webkit-transition: all 0.1s;
       transition: all 0.1s;
+
+      @media(max-width: 400px) {
+        height: 28px;
+        width: 28px;
+        line-height: 30px;
+      }
     }
   }
 }
@@ -497,7 +522,7 @@ input, textarea{
 
   .slick-prev{
     position: relative;
-    z-index: 1;
+    z-index: 2;
     top: 230px;
     left: 130px;
     margin-top: -80px;
@@ -505,7 +530,7 @@ input, textarea{
 
   .slick-next{
     position: relative;
-    z-index: 1;
+    z-index: 2;
     bottom: 230px;
     left: 1160px;
     margin-bottom: -80px;
@@ -700,6 +725,13 @@ input, textarea{
   height: 160px;
   background-color: $color-gray;
 
+  @media(max-width: 991px) {height: 230px;}
+
+  @media(max-width: 767px) {
+    text-align: center;
+    height: 360px;
+  }
+
   .vend-list-title {
     h3{
       text-align: center;
@@ -735,6 +767,12 @@ input, textarea{
         width:40px;height:23px;
         -webkit-transition: all 0.1s;
         transition: all 0.1s;
+
+        @media(min-width: 992px) and (max-width: 1199px) {
+          font-size: 13px;
+          line-height: 20px;
+          width: 35px;
+        }
 
         &:hover{
           opacity:1;
@@ -789,20 +827,31 @@ input, textarea{
         }
       }
     }
+
+    @media(max-width: 991px) {margin-bottom: 10px;}
   }
 
   .filters{
+    @media(max-width: 767px) {
+      display: inline-block;
+      text-align: left;
+    }
     .filter{
+      @media(max-width: 767px) {margin-bottom: 10px;}
       .search{
         background:#fff url('chosen-sprite.png') no-repeat 100% -20px;
         border: 1px solid #aaa;
         height: 24px;
+
+        @media(min-width: 768px) and (max-width: 991px) {margin-bottom: 10px;}
       }
       label{
         font-family: $font-header;
         font-weight: 100;
         font-size: 18px;
         color: #fff;
+
+        @media(max-width: 767px) {display: block;}
       }
       .no-dollar{
         font-family: $font-header-bold;
@@ -813,12 +862,19 @@ input, textarea{
       input{
         font-family: $font-main;
         width: 100%;
+
+        @media(max-width: 767px) {width: 300px;}
       }
       select{
         padding: 1px;
         height: 23px;
         font-family: $font-main;
         width: 100%;
+      }
+      .chosen-container{
+        width: 100% !important;
+
+        @media(max-width: 767px) {width: 300px;}
       }
       .chosen-single{
         font-family: $font-main;
@@ -842,14 +898,27 @@ input, textarea{
 
   .box{
     padding: 20px 0;
+
+    @media(max-width: 1199px) {
+      margin-bottom: -40px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    @media(max-width: 400px) {margin-bottom: 0;}
     .feat-img{
       position: relative;
-      height: 220px;
       width: 330px;
+      height: 220px;
       background-size:cover;
       background-position:center center;
       background-repeat:no-repeat;
+
+      @media(max-width: 1199px) {width: 360px;}
+
+      @media(max-width: 400px) {width: 320px;}
     }
+
     .desc-box{
       background-color: #fff;
       width: 320px;
@@ -858,6 +927,16 @@ input, textarea{
       padding: 10px 20px;
       top: 35px;
       right: 20px;
+
+      @media(max-width: 1199px) {
+        position: relative;
+        top: -40px;
+        right: auto;
+      }
+
+      @media(max-width: 400px) {
+        top: 0;
+      }
 
       .desc-box-lining{
         height: 100%;
@@ -990,6 +1069,52 @@ input, textarea{
   #vendor-description {
     padding: 40px 0 140px 0;
 
+    @media(max-width: 767px) {padding: 0;}
+
+    .mobile-box{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      .feat-img{
+        width: 320px;
+        height: 200px;
+        position: relative;
+        .ribbon-wrapper{right: -9px;}
+      }
+      .info-box{
+        position: relative;
+        top: auto;
+        left: auto;
+        padding: 0;
+      }
+      @media(max-width: 767px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .feat-img{
+          order: 1;
+          width: 100%;
+          height: 400px;
+        }
+        .info-box{
+          order: 2;
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+      @media(max-width: 650px) {
+        .feat-img{height: 330px;}
+      }
+      @media(max-width: 500px) {
+        .feat-img{height: 260px;}
+      }
+      @media(max-width: 400px) {
+        .feat-img{height: 200px;}
+      }
+    }
+
     .feat-img {
       height: 300px;
       width: 100%;
@@ -1006,6 +1131,8 @@ input, textarea{
       background-color: #fff;
       top: 240px;
       left: 90px;
+
+      @media(max-width: 1199px) {left: 50px;}
 
       .vend-info{
         a{
@@ -1138,8 +1265,9 @@ input, textarea{
 
     .vendor-item {
       position: relative;
-      width: 24%;
-      margin-bottom: 10px;
+      width: 25%;
+      padding: 5px 5px;
+      @media(max-width: 767px) {width: 33%;}
       img {
         width: 100%;
         box-shadow: none;
@@ -1164,8 +1292,9 @@ input, textarea{
 
     .user-item {
       position: relative;
-      width: 24%;
-      margin-bottom: 10px;
+      width: 25%;
+      padding: 5px 5px;
+      @media(max-width: 767px) {width: 33%;}
       img {
         width: 100%;
         box-shadow: none;
@@ -1217,6 +1346,12 @@ input, textarea{
     }
     .reviewHead {
       text-align: right;
+      @media(max-width: 767px) {
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
       .reviewUser {
         color: $color-gray;
         font-weight: 700;
@@ -1245,6 +1380,7 @@ input, textarea{
         border: none;
         -webkit-transition: all 0.2s;
         transition: all 0.2s;
+        @media(max-width: 767px) {margin-top: 0;}
 
         &:hover{
           background: #424242;
@@ -1780,6 +1916,10 @@ input, textarea{
   }
   .right{margin-left: 7.5px;}
   .left{margin-right: 7.5px;}
+  @media(max-width: 991px) {
+    .right{margin-left: 0;}
+    .left{margin-right: 0;}
+  }
   .submit{
     font-family: $font-main;
     font-size: 18px;
@@ -1814,6 +1954,17 @@ input, textarea{
       background-color: #3b5998;
       transition: all 0.2s;
       &:hover{ background-color: lighten(#3b5998, 10%);}
+    }
+  }
+  @media(max-width: 767px) {
+    text-align: center;
+    input{
+      display: inline-block;
+      width: 260px;
+    }
+    .submit{
+      width: 260px;
+      display: inline-block;
     }
   }
 }
@@ -2452,19 +2603,27 @@ input, textarea{
     height: $footer-height;
     background-color: $color-gray;
 
+    @media(min-width: 768px) and (max-width: 991px) {height: 280px;}
+    @media(max-width: 767px) {height: 470px;}
+
+    .footer-box{
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media(min-width: 992px) {height: $footer-height;}
+      @media(max-width: 767px) {height: 110px;}
+    }
+
     .footer-logo {
-      position: relative;
-      top: 50%;
-      transform: translateY(50%);
       img {
         height: 90px;
       }
+      @media(min-width: 768px) and (max-width: 991px) {text-align: center;}
     }
 
     .footerButton{
-      position: relative;
-      top: 50%;
-      transform: translateY(50%);
       .button-light{
         width: 220px;
         margin: 0 auto;
@@ -2480,11 +2639,9 @@ input, textarea{
     .social-media {
       text-align: right;
       height: 40px;
-      position: relative;
-      top: 50%;
-      transform: translateY(180%);
+      @media(min-width: 768px) and (max-width: 991px) {text-align: center;}
 
-      .seperator{
+      .separator{
         display: inline-block;
         margin-left: 2px;
         border-right: 1px solid #fff;
@@ -2505,6 +2662,11 @@ input, textarea{
           font-size: 20px;
           color: #fff;
           text-decoration: none;
+
+          @media(max-width: 1199px) {
+            height: 35px;
+            width: 35px;
+          }
         }
 
         .socicon-mail:hover{
@@ -2545,10 +2707,12 @@ input, textarea{
     height: 50px;
     line-height: 50px;
     text-align: center;
+    font-family: $font-header;
+    color: $color-gray;
+    p{
+      margin: 0;
+    }
     a {
-      font-family: $font-header;
-      color: $color-gray;
-
       &:hover {
         text-decoration: none;
         border-bottom: 1px solid $color-gray;

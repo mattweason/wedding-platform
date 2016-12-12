@@ -695,7 +695,8 @@ $(document).ready(function() {
             $('.vendor-grid').masonry({
                 // options
                 itemSelector: '.vendor-item',
-                gutter: 10
+                gutter: 0,
+                percentPosition: true
             });
         });
 
@@ -704,7 +705,7 @@ $(document).ready(function() {
             $('.user-grid').masonry({
                 // options
                 itemSelector: '.user-item',
-                gutter: 10
+                gutter: 0
             });
         });
 
@@ -723,18 +724,18 @@ $(document).ready(function() {
         var paginationTopOptions = {
             name: "paginationTop",
             paginationClass: "paginationTop",
-            outerWindow: 2
+            innerWindow: 1,
+            outerWindow: 1
         };
         var paginationBottomOptions = {
             name: "paginationBottom",
             paginationClass: "paginationBottom",
-            innerWindow: 3,
-            left: 2,
-            right: 4
+            innerWindow: 1,
+            outerWindow: 1
         };
         var options = {
             valueNames: ['vendName', 'vendCat', 'vendPrice', 'vendCity', 'vendTags'],
-            page: 8,
+            page: 6,
             plugins: [
                 ListPagination(paginationTopOptions),
                 ListPagination(paginationBottomOptions)
