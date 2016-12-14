@@ -1398,22 +1398,22 @@ input, textarea {
       display: inline-block;
       width: 30px;
       height: 30px;
-      background-color: #bcbcbc;
-      background-image: url("../images/star-rating-stars.png");
+      opacity: 0.2;
+      background-image: url("../images/rating-coin.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
       transition: 0.2s all; }
       #review-vendor #review-form .ratingWrapper .ratingLabel:hover {
-        background-color: black; }
+        opacity: 1; }
     #review-vendor #review-form .ratingWrapper .ratingLabel:hover ~ .ratingLabel {
-      background-color: black !important; }
+      opacity: 1 !important; }
     #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel {
-      background-color: #424242; }
+      opacity: 0.7; }
       #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel:hover {
-        background-color: black; }
+        opacity: 1; }
       #review-vendor #review-form .ratingWrapper .starRating:checked ~ .ratingLabel:hover ~ .ratingLabel {
-        background-color: black; }
+        opacity: 1; }
   #review-vendor #review-form #userupl {
     display: none; }
   #review-vendor #review-form .button-light {

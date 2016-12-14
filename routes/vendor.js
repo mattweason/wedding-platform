@@ -8,6 +8,7 @@ var path = require('path');
 var mysql = require('mysql'); //bring in the mysql package
 var sql = require('./../lib/sql'); //bring in the sql.js package of functions
 var functions = require('./../lib/functions'); //bring in all custom functions
+var moment = require('moment');
 connection = sql.connect(mysql, sql.credentials);
 
 const fs = require('fs-extra');
@@ -370,6 +371,7 @@ router.get('/:vendorName', function(req,res) {
         getGallery,
         getUserGallery,
         getReviews,
+        formatReviewDate,
         getReviewPhotos,
         getUser,
         checkAccess
@@ -422,6 +424,13 @@ router.get('/:vendorName', function(req,res) {
             var vendorRating = functions.vendorRating(vendor, reviews);
             callback(null, vendorRating, gallery, userGallery, reviews);
         });
+    }
+    function formatReviewDate (vendor, gallery, userGallery, reviews, callback) {
+        for (var i = 0; i < reviews.length; i++) {
+            reviews[i].date = moment(reviews[i].timestamp).format('YYYY, MMM DD');
+            console.log(reviews[i].date);
+        }
+        callback(null, vendor, gallery, userGallery, reviews);
     }
     function getReviewPhotos (vendor, gallery, userGallery, reviews, callback) {
         connection.query('SELECT * FROM `usergallery` WHERE vendor_fid = ?', vendor[0].vendor_id, function (err, photos) {

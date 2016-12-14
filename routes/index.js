@@ -70,7 +70,6 @@ router.get('/', function(req, res, next) {
         if (userID)
             connection.query('SELECT * FROM favoritevendors WHERE user_fid = ?', userID, function(err, favorites) {
                 var vendorFavorited = functions.vendorFavorites(vendor, favorites);
-                console.log(vendorFavorited);
                 callback(null, vendorFavorited);
             });
         else
@@ -109,7 +108,6 @@ router.get('/', function(req, res, next) {
         if (userID)
             connection.query('SELECT * FROM favoritevendors WHERE user_fid = ?', userID, function(err, favorites) {
                 var featuredFavorited = functions.vendorFavorites(featured, favorites);
-                console.log(featuredFavorited);
                 callback(null, vendor, featuredFavorited, categories);
             });
         else
@@ -192,7 +190,6 @@ router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, n
 /*Get user profile page. */
 router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res) {
     req.profile = '/profile/' + req.params.userID;
-    console.log(req.profile);
 
     async.waterfall([
         getUserProfile,
@@ -232,6 +229,7 @@ router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res)
     }
     function getReviews (profile, favorites, callback) {
         connection.query(`SELECT * FROM reviews INNER JOIN vendor ON reviews.vendor_fid = vendor.vendor_id WHERE reviews.user_fid = ? AND vendor.approved = 1`, req.params.userID, function (err, reviews) {
+            console.log(reviews);
             callback(null, profile, favorites, reviews);
         });
     }
@@ -312,7 +310,6 @@ router.post('/uploadGallery', function(req,res){
 //Upload photos and post to vendorgallery table
 router.post('/gallerydelete', function(req,res){
 
-    console.log(req.body);
     var vendorURL = req.body.vendor_url;
     var path = req.body.delete_photo;
 

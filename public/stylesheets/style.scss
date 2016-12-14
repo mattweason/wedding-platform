@@ -1783,24 +1783,34 @@ input, textarea{
         display: inline-block;
         width: 30px;
         height: 30px;
-        background-color: #bcbcbc;
-        background-image: url("../images/star-rating-stars.png");
+        opacity: 0.2;
+        //background-color: #bcbcbc;
+        background-image: url("../images/rating-coin.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         transition: 0.2s all;
         &:hover{
-          background-color: darken($color-gray, 20%);
+          //background-color: darken($color-gray, 20%);
+          opacity: 1;
         }
       }
       .ratingLabel:hover ~ .ratingLabel{
-        background-color: darken($color-gray, 20%)!important;
+        //background-color: darken($color-gray, 20%)!important;
+        opacity: 1 !important;
       }
 
       .starRating:checked ~ .ratingLabel{
-        background-color: lighten($color-gray, 10%);
-        &:hover{background-color: darken($color-gray, 20%);}
-        &:hover ~ .ratingLabel{background-color: darken($color-gray, 20%)}
+        //background-color: lighten($color-gray, 10%);
+        opacity: 0.7;
+        &:hover{
+          //background-color: darken($color-gray, 20%);
+          opacity: 1;
+        }
+        &:hover ~ .ratingLabel{
+          //background-color: darken($color-gray, 20%);
+          opacity: 1;
+        }
       }
     }
     #userupl{
