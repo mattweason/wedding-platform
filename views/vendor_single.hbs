@@ -89,11 +89,6 @@
 
             <!-- FOR MOBILE --------------------------------------------------------------------------------------- FOR MOBILE -->
             <div class="row hidden-md hidden-lg hidden-xl">
-                <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-                    {{#if access}}
-                        <a class="vend-edit-link" href="/vendor/{{vendor.vendor_url}}/edit">Edit Vendor</a>
-                    {{/if}}
-                </div>
                 <div class="col-sm-12">
                     <h2>{{vendor.vendor_name}}</h2>
                     <p class="vend-cat">{{vendor.category}}</p>
@@ -174,11 +169,9 @@
                 </div>
                 <div class="col-sm-12">
                     <p class="vend-desc">{{{vendorDesc}}}</p>
-                    <div class="hidden-xs">
-                        {{#if access}}
-                            <a class="vend-edit-link" href="/vendor/{{vendor.vendor_url}}/edit">Edit Vendor</a>
-                        {{/if}}
-                    </div>
+                    {{#if access}}
+                        <a class="vend-edit-link" href="/vendor/{{vendor.vendor_url}}/edit">Edit Vendor</a>
+                    {{/if}}
                 </div>
             </div>
         </div>

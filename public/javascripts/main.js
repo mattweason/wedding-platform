@@ -470,7 +470,7 @@ $(document).ready(function() {
             // init Masonry after all images have loaded
             $grid.masonry({
                 itemSelector: '.photo-item',
-                gutter: 10
+                gutter: 0
             });
             $('#userReviews, #userGallery').css("display","none").css("visibility","visible");
         });

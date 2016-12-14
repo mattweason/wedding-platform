@@ -89,6 +89,11 @@ h3 {
 }
 
 //General-------------------------------------------------General//
+.margin-bottom-sm{
+  @media(max-width: 991px) {
+    margin-bottom: 20px;
+  }
+}
 .button-dark {
   text-decoration: none;
   color: #fff;
@@ -730,6 +735,15 @@ input, textarea{
   @media(max-width: 767px) {
     text-align: center;
     height: 360px;
+  }
+
+  &.admin-header{
+    @media(max-width: 991px) {height: 180px;}
+
+    @media(max-width: 767px) {
+      text-align: center;
+      height: 310px;
+    }
   }
 
   .vend-list-title {
@@ -1646,6 +1660,9 @@ input, textarea{
         background-size: cover;
         backgroud-repeat: no-repeat;
         background-position: center center;
+        @media(max-width: 767px) {height: 280px;}
+        @media(max-width: 550px) {height: 240px;}
+        @media(max-width: 450px) {height: 200px;}
         &.placeholder{
           background-image: url('../images/placeholder.jpg');
         }
@@ -1887,7 +1904,7 @@ input, textarea{
             cursor: pointer;
             display: block;
             margin: auto;
-            max-width: 200px;
+            max-width: 80%;
             max-height: 140px;
           }
           p{cursor: pointer;}
@@ -1988,18 +2005,39 @@ input, textarea{
     font-weight: 700;
   }
 
-  .button-light{
-    margin: 0 0 5px 0;
-    &.active{
-      background-color: $color-gray;
-      color: #fff;
-      cursor: default;
+  .profile-nav{
+    @media(max-width: 991px) {
+      display: flex;
+      flex-direction: row;
     }
+    .button-light {
+      margin: 0 0 5px 0;
+      @media(min-width: 768px) and (max-width: 991px) {
+        margin: 0 5px 5px 5px;
+        &:first-of-type{margin: 0 5px 5px 0;}
+        &:last-of-type{margin: 0 0 5px 5px;}
+      }
+      @media(max-width: 767px) {
+        height: 100px;
+        img{max-height: 60px;}
+      }
+      &.active {
+        background-color: $color-gray;
+        color: #fff;
+        cursor: default;
+      }
+    }
+    @media(max-width: 991px) {margin: 10px 0;}
   }
+
+
 
   .favorite-box{
     padding: 0 0 20px 0;
-
+    @media(max-width: 767px) {margin: 0 80px;}
+    @media(max-width: 650px) {margin: 0 40px;}
+    @media(max-width: 500px) {margin: 0 20px;}
+    @media(max-width: 400px) {margin: 0;}
     .feat-img{
       position: relative;
       height: 220px;
@@ -2008,7 +2046,15 @@ input, textarea{
       background-position:center center;
       background-repeat:no-repeat;
     }
-    .desc-wrapper{height: 220px;}
+    .desc-wrapper{
+      height: 220px;
+      @media(max-width: 767px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+    }
     .desc-box{
       padding: 10px;
       background: #fff;
@@ -2017,6 +2063,12 @@ input, textarea{
       position: relative;
       left: -60px;
       margin-top: 30px;
+      @media(max-width: 767px) {
+        width: 90%;
+        left: auto;
+        top: -60px;
+        margin-top: 0;
+      }
       h2 {
         font-family: $font-title;
         margin: 0 0 5px 0;
@@ -2073,6 +2125,12 @@ input, textarea{
 
     .reviewHead {
       text-align: right;
+      @media(max-width: 767px) {
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
       .reviewUser {
         color: $color-gray;
         font-weight: 700;
@@ -2155,8 +2213,9 @@ input, textarea{
 
     .photo-item {
       position: relative;
-      width: 24%;
-      margin-bottom: 10px;
+      width: 25%;
+      padding: 5px 5px;
+      @media(max-width: 767px) {width: 33%;}
       img {
         width: 100%;
         box-shadow: none;
@@ -2195,20 +2254,35 @@ input, textarea{
     border-right: 1px solid $color-gray;
     border-bottom: 1px solid $color-gray;
     padding: 0 10px 10px 0;
+    @media(max-width: 767px) {
+      border: none;
+      padding: 0 0 10px 0;
+    }
   }
 
   .vendorList {
     border-bottom: 1px solid $color-gray;
     padding: 0 0 10px 10px;
+    @media(max-width: 767px) {
+      border: none;
+      padding: 0 0 10px 0;
+    }
   }
 
   .pendingVendors {
     border-right: 1px solid $color-gray;
     padding: 10px 10px 0 0;
+    @media(max-width: 767px) {
+      border: none;
+      padding: 0 0 10px 0;
+    }
   }
 
   .userList {
     padding: 10px 0 0 10px;
+    @media(max-width: 767px) {
+      padding: 0 0 10px 0;
+    }
   }
 
   .adminButton {
@@ -2305,17 +2379,33 @@ input, textarea{
       float: none;
       display: table-cell;
       vertical-align: bottom;
+      @media(max-width: 767px) {
+        margin-top: 20px;
+        display: flex;
+        height: auto;
+        .userAssignForm{
+          width: 100%;
+        }
+      }
       h4{
         position: relative;
-        top: 50%;
         text-align: center;
-        -webkit-transform: translateY(-300%);
-        -ms-transform: translateY(-300%);
-        transform: translateY(-300%);
+        width: 100%;
+        @media(max-width: 767px) {
+          height: 60px;
+          line-height: 60px;
+        }
+        @media(min-width: 768px){
+          top: 50%;
+          -webkit-transform: translateY(-300%);
+          -ms-transform: translateY(-300%);
+          transform: translateY(-300%);
+        }
       }
       .userOwned{
         display: none;
       }
+      .chosen-container{width: 100% !important;}
     }
     .user{
       width: 100%;
@@ -2504,6 +2594,7 @@ input, textarea{
     font-family: $font-main;
     width: 100%;
   }
+  .chosen-container{width: 100% !important;}
   .chosen-container-active.chosen-with-drop .chosen-single div b {background-position: -18px 5px;}
   .chosen-single{
     font-family: $font-main;

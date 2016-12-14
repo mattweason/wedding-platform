@@ -56,6 +56,10 @@ h3 {
   padding-right: 5px;
   padding-left: 5px; }
 
+@media (max-width: 991px) {
+  .margin-bottom-sm {
+    margin-bottom: 20px; } }
+
 .button-dark {
   text-decoration: none;
   color: #fff;
@@ -565,6 +569,13 @@ input, textarea {
     #vendor-list-header {
       text-align: center;
       height: 360px; } }
+  @media (max-width: 991px) {
+    #vendor-list-header.admin-header {
+      height: 180px; } }
+  @media (max-width: 767px) {
+    #vendor-list-header.admin-header {
+      text-align: center;
+      height: 310px; } }
   #vendor-list-header .vend-list-title h3 {
     text-align: center;
     margin: 35px auto 35px auto;
@@ -1294,6 +1305,15 @@ input, textarea {
       background-size: cover;
       backgroud-repeat: no-repeat;
       background-position: center center; }
+      @media (max-width: 767px) {
+        #vendor-add #add-form .featured-image-area #thumbnail-wrapper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper {
+          height: 280px; } }
+      @media (max-width: 550px) {
+        #vendor-add #add-form .featured-image-area #thumbnail-wrapper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper {
+          height: 240px; } }
+      @media (max-width: 450px) {
+        #vendor-add #add-form .featured-image-area #thumbnail-wrapper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper {
+          height: 200px; } }
       #vendor-add #add-form .featured-image-area #thumbnail-wrapper.placeholder, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper.placeholder {
         background-image: url("../images/placeholder.jpg"); }
       #vendor-add #add-form .featured-image-area #thumbnail-wrapper .helper, #vendor-edit #add-form .featured-image-area #thumbnail-wrapper .helper {
@@ -1468,7 +1488,7 @@ input, textarea {
           cursor: pointer;
           display: block;
           margin: auto;
-          max-width: 200px;
+          max-width: 80%;
           max-height: 140px; }
         #gallery-delete-page #delete-gallery .delete-box label .delete-photo p {
           cursor: pointer; }
@@ -1545,14 +1565,45 @@ input, textarea {
     font-family: "Josefin Sans";
     font-size: 24px;
     font-weight: 700; }
-  #user-profile .button-light {
+  @media (max-width: 991px) {
+    #user-profile .profile-nav {
+      display: flex;
+      flex-direction: row; } }
+  #user-profile .profile-nav .button-light {
     margin: 0 0 5px 0; }
-    #user-profile .button-light.active {
+    @media (min-width: 768px) and (max-width: 991px) {
+      #user-profile .profile-nav .button-light {
+        margin: 0 5px 5px 5px; }
+        #user-profile .profile-nav .button-light:first-of-type {
+          margin: 0 5px 5px 0; }
+        #user-profile .profile-nav .button-light:last-of-type {
+          margin: 0 0 5px 5px; } }
+    @media (max-width: 767px) {
+      #user-profile .profile-nav .button-light {
+        height: 100px; }
+        #user-profile .profile-nav .button-light img {
+          max-height: 60px; } }
+    #user-profile .profile-nav .button-light.active {
       background-color: #282828;
       color: #fff;
       cursor: default; }
+  @media (max-width: 991px) {
+    #user-profile .profile-nav {
+      margin: 10px 0; } }
   #user-profile .favorite-box {
     padding: 0 0 20px 0; }
+    @media (max-width: 767px) {
+      #user-profile .favorite-box {
+        margin: 0 80px; } }
+    @media (max-width: 650px) {
+      #user-profile .favorite-box {
+        margin: 0 40px; } }
+    @media (max-width: 500px) {
+      #user-profile .favorite-box {
+        margin: 0 20px; } }
+    @media (max-width: 400px) {
+      #user-profile .favorite-box {
+        margin: 0; } }
     #user-profile .favorite-box .feat-img {
       position: relative;
       height: 220px;
@@ -1562,6 +1613,12 @@ input, textarea {
       background-repeat: no-repeat; }
     #user-profile .favorite-box .desc-wrapper {
       height: 220px; }
+      @media (max-width: 767px) {
+        #user-profile .favorite-box .desc-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%; } }
     #user-profile .favorite-box .desc-box {
       padding: 10px;
       background: #fff;
@@ -1570,6 +1627,12 @@ input, textarea {
       position: relative;
       left: -60px;
       margin-top: 30px; }
+      @media (max-width: 767px) {
+        #user-profile .favorite-box .desc-box {
+          width: 90%;
+          left: auto;
+          top: -60px;
+          margin-top: 0; } }
       #user-profile .favorite-box .desc-box h2 {
         font-family: "Playfair Display";
         margin: 0 0 5px 0;
@@ -1612,6 +1675,12 @@ input, textarea {
     visibility: hidden; }
   #user-profile #userReviews .reviewHead {
     text-align: right; }
+    @media (max-width: 767px) {
+      #user-profile #userReviews .reviewHead {
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; } }
     #user-profile #userReviews .reviewHead .reviewUser {
       color: #282828;
       font-weight: 700;
@@ -1673,8 +1742,11 @@ input, textarea {
     width: 25%; }
   #user-profile #userGallery .photo-item {
     position: relative;
-    width: 24%;
-    margin-bottom: 10px; }
+    width: 25%;
+    padding: 5px 5px; }
+    @media (max-width: 767px) {
+      #user-profile #userGallery .photo-item {
+        width: 33%; } }
     #user-profile #userGallery .photo-item img {
       width: 100%;
       box-shadow: none;
@@ -1703,14 +1775,29 @@ input, textarea {
     border-right: 1px solid #282828;
     border-bottom: 1px solid #282828;
     padding: 0 10px 10px 0; }
+    @media (max-width: 767px) {
+      #admin .addVendor {
+        border: none;
+        padding: 0 0 10px 0; } }
   #admin .vendorList {
     border-bottom: 1px solid #282828;
     padding: 0 0 10px 10px; }
+    @media (max-width: 767px) {
+      #admin .vendorList {
+        border: none;
+        padding: 0 0 10px 0; } }
   #admin .pendingVendors {
     border-right: 1px solid #282828;
     padding: 10px 10px 0 0; }
+    @media (max-width: 767px) {
+      #admin .pendingVendors {
+        border: none;
+        padding: 0 0 10px 0; } }
   #admin .userList {
     padding: 10px 0 0 10px; }
+    @media (max-width: 767px) {
+      #admin .userList {
+        padding: 0 0 10px 0; } }
   #admin .adminButton {
     font-family: "Lato Light";
     font-size: 18px;
@@ -1784,15 +1871,31 @@ input, textarea {
       float: none;
       display: table-cell;
       vertical-align: bottom; }
+      @media (max-width: 767px) {
+        #users-list .admin-user-list-wrapper .userVendors, #users-list .admin-user-list-wrapper .userAssign {
+          margin-top: 20px;
+          display: flex;
+          height: auto; }
+          #users-list .admin-user-list-wrapper .userVendors .userAssignForm, #users-list .admin-user-list-wrapper .userAssign .userAssignForm {
+            width: 100%; } }
       #users-list .admin-user-list-wrapper .userVendors h4, #users-list .admin-user-list-wrapper .userAssign h4 {
         position: relative;
-        top: 50%;
         text-align: center;
-        -webkit-transform: translateY(-300%);
-        -ms-transform: translateY(-300%);
-        transform: translateY(-300%); }
+        width: 100%; }
+        @media (max-width: 767px) {
+          #users-list .admin-user-list-wrapper .userVendors h4, #users-list .admin-user-list-wrapper .userAssign h4 {
+            height: 60px;
+            line-height: 60px; } }
+        @media (min-width: 768px) {
+          #users-list .admin-user-list-wrapper .userVendors h4, #users-list .admin-user-list-wrapper .userAssign h4 {
+            top: 50%;
+            -webkit-transform: translateY(-300%);
+            -ms-transform: translateY(-300%);
+            transform: translateY(-300%); } }
       #users-list .admin-user-list-wrapper .userVendors .userOwned, #users-list .admin-user-list-wrapper .userAssign .userOwned {
         display: none; }
+      #users-list .admin-user-list-wrapper .userVendors .chosen-container, #users-list .admin-user-list-wrapper .userAssign .chosen-container {
+        width: 100% !important; }
     #users-list .admin-user-list-wrapper .user {
       width: 100%;
       height: 100%;
@@ -1949,6 +2052,8 @@ input, textarea {
     height: 29px;
     font-family: "Lato Light";
     width: 100%; }
+  #claim-business-page .chosen-container {
+    width: 100% !important; }
   #claim-business-page .chosen-container-active.chosen-with-drop .chosen-single div b {
     background-position: -18px 5px; }
   #claim-business-page .chosen-single {

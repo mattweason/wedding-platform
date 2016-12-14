@@ -1,7 +1,7 @@
 <div id="vendor-add">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                         {{#if admin}}
                             <a href="/admin/dashboard" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
                             <p class="back-text">Back to Admin Dashboard</p>
@@ -10,7 +10,7 @@
                             <p class="back-text">Back to Home</p>
                         {{/if}}
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <h3>ADD VENDOR</h3>
                     {{#if admin}}
                     {{else}}
@@ -20,56 +20,42 @@
             </div>
 
             <form id="add-form" class = "add-vendor" enctype="multipart/form-data" action="/vendor/create" method = "post">
-                {{#if access}}
-                    <div class="row">
-                        <div class="col-sm-offset-4 col-sm-4">
-                            <div class="featured-select">
-                                <div class="wrapper">
-                                    <label class="form-label">Featured Vendor</label>
-                                    <input id="yes-featured" class="is-featured-radio" type="radio" name="is_featured" value="1">
-                                    <label class="featured-radio-label" for="yes-featured">Yes</label>
-                                    <input id="not-featured" class="is-featured-radio" type="radio" name="is_featured" value="0" checked>
-                                    <label class="featured-radio-label" for="not-featured">No</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/if}}
+
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="vendor_name">Vendor Name</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="vendor_name" required><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="category">Category</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="category" id = "category" data-placeholder="Choose a Category" multiple required>
                                 {{#each category}}
                                     <option value="{{this.category_id}}">{{this.category_name}}</option>
                                 {{/each}}
                             </select><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="address">Address 1</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="address" required><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="address_2">Address 2</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="address_2"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="city">City</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="city" id = "city" data-placeholder="Choose a City" required>
                                 <option value=""></option>
                                 {{#each city}}
@@ -77,34 +63,34 @@
                                 {{/each}}
                             </select><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="province">Province</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="province"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="postal_code">Postal Code</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="postal_code"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="phone_number">Phone Number</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="phone_number"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="budget">Budget</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="Budget"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="price">Price</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="price" id="price" data-placeholder="Choose a Price">
                                 <option value=""></option>
                                 <option value="$">$</option>
@@ -113,39 +99,39 @@
                                 <option value="$$$$">$$$$</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="url">Vendor Website</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="url"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="fax">Fax</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="fax"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="email">Email</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="email"><br>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="contact_title">Contact Title</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="contact_title"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="contact_name">Contact Name</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="contact_name"><br>
                         </div>
                         <div class="col-sm-12">
@@ -157,18 +143,18 @@
             </div>
             <div class="row">
                 <div class="featured-image-area">
-                    <div class="col-sm-offset-4 col-sm-4">
+                    <div class="col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
                         <label class = "form-label" for="tags">Tags</label>
                         <textarea name="tags" placeholder="Enter a list of searchable tags"></textarea>
                     </div>
-                    <div class="col-sm-offset-4 col-sm-4">
+                    <div class="col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
                         <label class="form-label">Featured Image</label>
                     </div>
-                    <div class="col-sm-offset-4 col-sm-2">
+                    <div class="col-lg-offset-4 col-lg-2 col-sm-offset-3 col-sm-3">
                         <input type="file" name="featured_image" class="inputfile" id="featured_image"/>
                         <label class="button-light featured-image-button" for="featured_image"><span>Choose Image</span></label>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-2 col-sm-offset-0 col-sm-3">
                         <div id="thumbnail-wrapper" {{#if vendor.featured_image}}style="background-image: url(/{{vendor.featured_image}})"{{else}}class="placeholder"{{/if}}>
                             <span class="helper"></span><img id="featured-thumbnail" />
                         </div>
@@ -176,7 +162,7 @@
                 </div>
             </div>
             <div class="row submit-area">
-                <div class="col-sm-offset-4 col-sm-4">
+                <div class="col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
                     <input class="add-submit button-light" type="submit" value="Add Vendor">
                 </div>
             </div>

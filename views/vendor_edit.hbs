@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 {{#if pending}}
                     <a href="/vendor/{{vendor.vendor_url}}/pending" class="button-light back-button"><img src="/images/back-arrow.png" alt=""></a>
                     <p class="back-text">Back to Vendor</p>
@@ -11,7 +11,7 @@
                     <p class="back-text">Back to Vendor</p>
                 {{/if}}
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h3>{{vendor.vendor_name}} Edit Page</h3>
             </div>
         </div>
@@ -19,7 +19,7 @@
         <form id="add-form" class="add-vendor" enctype="multipart/form-data" action="/vendor/update" method = "post">
             {{#if access}}
                 <div class="row">
-                    <div class="col-sm-offset-4 col-sm-4">
+                    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
                         <div class="featured-select">
                             <div class="wrapper">
                                 <label class="form-label">Featured Vendor</label>
@@ -35,76 +35,76 @@
 
             <div class="row">
 
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="vendor_name">Vendor Name</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="vendor_name" value="{{vendor.vendor_name}}" required><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="category">Category</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="category" id = "category" data-placeholder="Choose Categories" multiple required>
                                 {{#each category}}
                                     <option value="{{this.category_id}}" {{#if this.selected}}selected{{/if}}>{{this.category_name}}</option>
                                 {{/each}}
                             </select><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="address">Address 1</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="address" value="{{vendor.address}}" required><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="address_2">Address 2</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="address_2" value="{{vendor.address_2}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="city">City</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="city" id = "city" data-placeholder="Choose a City" required>
                                 {{#each city}}
                                     <option value="{{this.city}}" {{#if this.selected}}selected{{/if}}>{{this.city}}</option>
                                 {{/each}}
                             </select><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="province">Province</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="province" value="{{vendor.province}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="postal_code">Postal Code</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="postal_code" value="{{vendor.postal_code}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="phone_number">Phone Number</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="phone_number" value="{{vendor.phone_number}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="budget">Budget</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="Budget" value="{{vendor.budget}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="price">Price</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <select name="price" id="price">
                                 <option value="$" {{#if vendor.onedollar}}selected{{/if}}>$</option>
                                 <option value="$$" {{#if vendor.twodollar}}selected{{/if}}>$$</option>
@@ -112,39 +112,39 @@
                                 <option value="$$$$" {{#if vendor.fourdollar}}selected{{/if}}>$$$$</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="url">Vendor Website</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="url" value="{{vendor.url}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="fax">Fax</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="fax" value="{{vendor.fax}}"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="email">Email</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="email" value="{{vendor.email}}"><br>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="contact_title">Contact Title</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="contact_title"><br>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-4 col-lg-3">
                             <label class = "form-label" for="contact_name">Contact Name</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-9 col-md-8 col-lg-9">
                             <input type="text" name="contact_name"><br>
                         </div>
                         <div class="col-sm-12">
@@ -157,18 +157,18 @@
 
             <div class="row">
                 <div class="featured-image-area">
-                    <div class="col-sm-offset-4 col-sm-4">
+                    <div class="col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
                         <label class = "form-label" for="tags">Tags</label>
                         <textarea name="tags" placeholder="Enter a list of searchable tags">{{vendor.tags}}</textarea>
                     </div>
-                    <div class="col-sm-offset-4 col-sm-4">
+                    <div class="col-lg-offset-4 col-lg-4 col-sm-offset-3 col-sm-6">
                         <label class="form-label">Featured Image</label>
                     </div>
-                    <div class="col-sm-offset-4 col-sm-2">
+                    <div class="col-lg-offset-4 col-lg-2 col-sm-offset-3 col-sm-3">
                         <input type="file" name="featured_image" class="inputfile" id="featured_image" accept='image/*'/>
                         <label class="button-light featured-image-button" for="featured_image"><span>Choose Image</span></label>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-lg-2 col-sm-offset-0 col-sm-3">
                         <div id="thumbnail-wrapper" {{#if vendor.featured_image}}style="background-image: url(/{{vendor.featured_image}})"{{else}}class="placeholder"{{/if}}>
                             <span class="helper"></span><img id="featured-thumbnail" />
                         </div>
@@ -177,14 +177,14 @@
             </div>
 
             <div class="row submit-area">
-                <div class="col-sm-offset-3 col-sm-3">
-                    <input class="add-submit button-light" type="submit" value="Update Vendor">
-                </div>
-                <div class="col-sm-2">
+                <div class="col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-3 col-md-push-6 col-lg-2">
                     <a class="button-light" id="edit-gallery" href="/vendor/{{vendor.vendor_url}}/gallery">Edit Gallery</a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-2 col-md-push-6">
                     <button id="delete-modal-button" class="delete-submit button-dark" >Delete Vendor</button>
+                </div>
+                <div class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-3 col-md-pull-5 col-lg-pull-4">
+                    <input class="add-submit button-light" type="submit" value="Update Vendor">
                 </div>
             </div>
 
