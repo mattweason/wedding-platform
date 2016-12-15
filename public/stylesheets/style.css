@@ -428,8 +428,10 @@ input, textarea {
               #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .vend-info {
                 width: 50%; } }
           #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .overflow-box {
-            width: 60%;
-            height: 135px; }
+            width: 60%; }
+            @media (max-width: 991px) {
+              #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .overflow-box {
+                height: 135px; } }
             #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .overflow-box .vend-desc {
               margin: 5px 0; }
         #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .desc-box-bottom {
@@ -476,7 +478,7 @@ input, textarea {
     @media (max-width: 1199px) {
       #featured-vendor .slick-prev {
         left: 40px; } }
-    @media (max-width: 1399px) {
+    @media (min-width: 1200px) and (max-width: 1399px) {
       #featured-vendor .slick-prev {
         left: 80px; } }
   #featured-vendor .slick-next {
@@ -488,7 +490,7 @@ input, textarea {
     @media (max-width: 1199px) {
       #featured-vendor .slick-next {
         right: 40px; } }
-    @media (max-width: 1399px) {
+    @media (min-width: 1200px) and (max-width: 1399px) {
       #featured-vendor .slick-next {
         right: 80px; } }
   #featured-vendor .slick-dots {

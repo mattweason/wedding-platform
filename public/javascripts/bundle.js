@@ -15332,7 +15332,6 @@ $(document).ready(function() {
         });
     });
 
-
     //Initialize slick carousel for featured vendors
     $('.featured-carousel').slick({
         prevArrow:"<div class='left-fade'></div><img class='a-left control-c prev slick-prev' src='/images/left-arrow.png'>",

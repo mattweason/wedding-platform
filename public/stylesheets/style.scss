@@ -543,7 +543,9 @@ input, textarea{
             }
             .overflow-box{
               width: 60%;
-              height: 135px;
+              @media(max-width: 991px) {
+                height: 135px;
+              }
               .vend-desc{
                 margin: 5px 0;
               }
@@ -607,7 +609,7 @@ input, textarea{
     @media(max-width: 1199px) {
       left: 40px;
     }
-    @media(max-width: 1399px) {
+    @media(min-width: 1200px) and (max-width: 1399px) {
       left: 80px;
     }
   }
@@ -621,7 +623,7 @@ input, textarea{
     @media(max-width: 1199px) {
       right: 40px;
     }
-    @media(max-width: 1399px) {
+    @media(min-width: 1200px) and (max-width: 1399px) {
       right: 80px;
     }
   }
