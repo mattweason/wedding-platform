@@ -378,6 +378,62 @@ input, textarea {
   #featured-vendor .featured-carousel {
     max-width: 1366px;
     margin: 0 auto; }
+    @media (max-width: 991px) {
+      #featured-vendor .featured-carousel.mobile-carousel .slick-list {
+        margin-bottom: -60px; } }
+    #featured-vendor .featured-carousel.mobile-carousel .featured-box {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+      @media (max-width: 991px) {
+        #featured-vendor .featured-carousel.mobile-carousel .featured-box {
+          flex-direction: column; } }
+      #featured-vendor .featured-carousel.mobile-carousel .featured-box .feat-img {
+        width: 40%; }
+        @media (max-width: 500px) {
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .feat-img {
+            height: 260px; } }
+        @media (max-width: 991px) {
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .feat-img {
+            width: 100%; } }
+      #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box {
+        right: 40px;
+        top: 0;
+        height: auto;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        @media (max-width: 991px) {
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box {
+            top: -50px;
+            width: 90%;
+            right: auto; } }
+        #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-title, #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details {
+          width: 100%; }
+        #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details {
+          flex-direction: row;
+          display: flex; }
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .vend-metric {
+            width: 50%;
+            margin-top: 10px; }
+            #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .vend-metric .vend-view {
+              display: block;
+              float: none; }
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .vend-info {
+            width: 40%; }
+            @media (max-width: 767px) {
+              #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .vend-info {
+                width: 50%; } }
+          #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .overflow-box {
+            width: 60%;
+            height: 135px; }
+            #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .vend-details .overflow-box .vend-desc {
+              margin: 5px 0; }
+        #featured-vendor .featured-carousel.mobile-carousel .featured-box .desc-box .desc-box-bottom {
+          width: 100%; }
   #featured-vendor .slick-arrow {
     background-color: #282828;
     cursor: pointer;
@@ -385,7 +441,7 @@ input, textarea {
     transition: all 0.1s; }
     #featured-vendor .slick-arrow:hover {
       background-color: #424242; }
-  @media (min-width: 1367px) {
+  @media (min-width: 1399px) {
     #featured-vendor .left-fade {
       pointer-events: none;
       height: 380px;
@@ -415,14 +471,26 @@ input, textarea {
     position: relative;
     z-index: 2;
     top: 230px;
-    left: 130px;
+    left: 120px;
     margin-top: -80px; }
+    @media (max-width: 1199px) {
+      #featured-vendor .slick-prev {
+        left: 40px; } }
+    @media (max-width: 1399px) {
+      #featured-vendor .slick-prev {
+        left: 80px; } }
   #featured-vendor .slick-next {
-    position: relative;
+    position: absolute;
     z-index: 2;
-    bottom: 230px;
-    left: 1160px;
+    right: 120px;
+    bottom: 263px;
     margin-bottom: -80px; }
+    @media (max-width: 1199px) {
+      #featured-vendor .slick-next {
+        right: 40px; } }
+    @media (max-width: 1399px) {
+      #featured-vendor .slick-next {
+        right: 80px; } }
   #featured-vendor .slick-dots {
     text-align: center;
     padding-left: 0;
@@ -531,6 +599,7 @@ input, textarea {
             font-weight: 300; }
         #featured-vendor .featured-box .desc-box .priceRating .reviewRating {
           padding-left: 0;
+          min-height: 24px;
           display: inline-block;
           vertical-align: middle; }
         #featured-vendor .featured-box .desc-box .priceRating .reviewCount {

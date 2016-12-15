@@ -483,6 +483,79 @@ input, textarea{
   .featured-carousel{
     max-width: 1366px;
     margin: 0 auto;
+
+    &.mobile-carousel{ //-------------Mobile Carousel
+      .slick-list {
+        @media(max-width: 991px){
+          margin-bottom: -60px;
+        }
+      }
+      .featured-box{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        @media(max-width: 991px){
+          flex-direction: column;
+        }
+        .feat-img{
+          width: 40%;
+          @media(max-width: 500px) {
+            height: 260px;
+          }
+          @media(max-width: 991px) {
+            width: 100%;
+          }
+        }
+        .desc-box{
+          right: 40px;
+          top: 0;
+          height: auto;
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          @media(max-width: 991px) {
+            top: -50px;
+            width: 90%;
+            right: auto;
+          }
+          .vend-title, .vend-details{
+            width: 100%;
+          }
+          .vend-details{
+            flex-direction: row;
+            display: flex;
+            .vend-metric{
+              width: 50%;
+              margin-top: 10px;
+              .vend-view{
+                display: block;
+                float: none;
+              }
+            }
+            .vend-info{
+              width: 40%;
+              @media (max-width: 767px){
+                width: 50%;
+              }
+            }
+            .overflow-box{
+              width: 60%;
+              height: 135px;
+              .vend-desc{
+                margin: 5px 0;
+              }
+            }
+          }
+          .desc-box-bottom{
+            width: 100%;
+          }
+        }
+      }
+
+    }
   }
 
   .slick-arrow {
@@ -494,7 +567,7 @@ input, textarea{
     &:hover {background-color: lighten($color-gray, 10%);}
   }
 
-  @media(min-width: 1367px) {
+  @media(min-width: 1399px) {
     .left-fade{
       pointer-events: none;
       height: 380px;
@@ -529,16 +602,28 @@ input, textarea{
     position: relative;
     z-index: 2;
     top: 230px;
-    left: 130px;
+    left: 120px;
     margin-top: -80px;
+    @media(max-width: 1199px) {
+      left: 40px;
+    }
+    @media(max-width: 1399px) {
+      left: 80px;
+    }
   }
 
   .slick-next{
-    position: relative;
+    position: absolute;
     z-index: 2;
-    bottom: 230px;
-    left: 1160px;
+    right: 120px;
+    bottom: 263px;
     margin-bottom: -80px;
+    @media(max-width: 1199px) {
+      right: 40px;
+    }
+    @media(max-width: 1399px) {
+      right: 80px;
+    }
   }
 
   .slick-dots{
@@ -688,6 +773,7 @@ input, textarea{
         }
         .reviewRating{
           padding-left: 0;
+          min-height: 24px;
           display: inline-block;
           vertical-align: middle;
         }
@@ -1784,31 +1870,25 @@ input, textarea{
         width: 30px;
         height: 30px;
         opacity: 0.2;
-        //background-color: #bcbcbc;
         background-image: url("../images/rating-coin.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         transition: 0.2s all;
         &:hover{
-          //background-color: darken($color-gray, 20%);
           opacity: 1;
         }
       }
       .ratingLabel:hover ~ .ratingLabel{
-        //background-color: darken($color-gray, 20%)!important;
         opacity: 1 !important;
       }
 
       .starRating:checked ~ .ratingLabel{
-        //background-color: lighten($color-gray, 10%);
         opacity: 0.7;
         &:hover{
-          //background-color: darken($color-gray, 20%);
           opacity: 1;
         }
         &:hover ~ .ratingLabel{
-          //background-color: darken($color-gray, 20%);
           opacity: 1;
         }
       }
