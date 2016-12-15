@@ -521,7 +521,9 @@ input, textarea {
   #featured-vendor .slick-dots {
     text-align: center;
     padding-left: 0;
-    margin-top: 10px; }
+    margin-top: 10px;
+    position: relative;
+    z-index: 2; }
     #featured-vendor .slick-dots li {
       display: inline-block;
       width: 10px;

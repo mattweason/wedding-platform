@@ -101,7 +101,7 @@
                             <input class="search search-filter">
                         </div>
                     </div>
-                    <div class="col-sm-6 hidden-xs hidden-md hidden-lg hidden-xl">
+                    <div class="col-sm-6 col-md-3 col-md-push-6">
                         <div class="filter price-filter">
                             <label for="price">Price</label>
                             <div class="price-checkboxes">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-3 col-md-pull-3">
                         <div class="filter">
                             <label for="categoryselect">Category</label>
                             <select class="select-filter cat-s chosen" id="category-search" name="categoryselect">
@@ -128,7 +128,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-sm-6 col-md-3 col-md-pull-3">
                         <div class="filter">
                             <label for="cityselect">Location</label>
                             <select class="select-filter city-s chosen" id="city-search" name="cityselect">
@@ -137,22 +137,6 @@
                                     <option value="{{this.city}}">{{this.city}}</option>
                                 {{/each}}
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 hidden-sm">
-                        <div class="filter price-filter">
-                            <label for="price">Price</label>
-                            <div class="price-checkboxes">
-                                <input class="price-checkbox" type="checkbox" name="price" id="oneDollar" data-value="$">
-                                <label class="price-label one-dollar" for="oneDollar">$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="twoDollar" data-value="$$">
-                                <label class="price-label two-dollar" for="twoDollar">$$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="threeDollar" data-value="$$$">
-                                <label class="price-label three-dollar" for="threeDollar">$$$</label>
-                                <input class="price-checkbox" type="checkbox" name="price" id="fourDollar" data-value="$$$$">
-                                <label class="price-label four-dollar" for="fourDollar">$$$$</label>
-                                <button class="sort" data-sort="vendPrice">Sort</button>
-                            </div>
                         </div>
                     </div>
                 </div>
