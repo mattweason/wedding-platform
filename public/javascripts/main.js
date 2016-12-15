@@ -400,6 +400,11 @@ $(document).ready(function() {
 
     //-----------------------GENERAL JAVASCRIPT-------------------------------//
 
+    //Slide down user-area for mobile when profile button is clicked
+    $('#profile-dropdown').click(function(){
+        $('.user-area-mobile').toggle("slide", { direction: "right" });
+    });
+
     //Disable delete gallery button if nothing is checked
     $('.delete-photo-check').click(function(){
         if ($(this).is(':checked')){

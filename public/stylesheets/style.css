@@ -320,18 +320,18 @@ input, textarea {
     -webkit-transition: all 0.2s;
     /* Safari */
     transition: all 0.2s; }
-  #masthead .user-area {
+  #masthead .user-area, #masthead .user-area-mobile {
     text-align: right; }
-    #masthead .user-area .my-profile {
+    #masthead .user-area .my-profile, #masthead .user-area-mobile .my-profile {
       width: 100px; }
-    #masthead .user-area .contact {
+    #masthead .user-area .contact, #masthead .user-area-mobile .contact {
       width: 30px;
       height: 30px; }
-      #masthead .user-area .contact:before {
+      #masthead .user-area .contact:before, #masthead .user-area-mobile .contact:before {
         line-height: 27px;
         position: relative;
         top: 2px; }
-    #masthead .user-area a {
+    #masthead .user-area a, #masthead .user-area-mobile a {
       font-family: "Josefin Sans";
       text-decoration: none;
       color: #fff;
@@ -348,8 +348,33 @@ input, textarea {
       -webkit-transition: all 0.2s;
       /* Safari */
       transition: all 0.2s; }
-      #masthead .user-area a:hover {
+      #masthead .user-area a:hover, #masthead .user-area-mobile a:hover {
         background: #424242; }
+  #masthead #profile-dropdown {
+    position: absolute;
+    right: 20px;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    margin-top: 18px;
+    background-color: #282828;
+    background-image: url("../images/user-icon.png");
+    background-size: 75%;
+    background-position: center center;
+    background-repeat: no-repeat; }
+  #masthead .user-area-mobile {
+    position: absolute;
+    padding: 20px;
+    right: 70px;
+    top: 5px;
+    background-color: white;
+    display: none; }
+    #masthead .user-area-mobile a:first-of-type {
+      margin-left: 0; }
+    #masthead .user-area-mobile a {
+      margin-top: 0;
+      margin-bottom: 0; }
   @media (max-width: 1199px) {
     #masthead h3 {
       font-size: 18px; }

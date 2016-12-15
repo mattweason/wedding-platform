@@ -27,6 +27,7 @@
     <script src="/javascripts/list.min.js" type="text/javascript"></script>
       <script src="/javascripts/jquery.cookie.js" type="text/javascript"></script>
     <script src="/javascripts/list.pagination.min.js" type="text/javascript"></script>
+      <script src="/javascripts/jquery-ui.min.js" type="text/javascript"></script>
 
   </head>
 
@@ -81,7 +82,24 @@
                               </div>
                           </div>
                           <div class="col-md-3 col-sm-5 col-xs-7">
-                              <div class="user-area">
+                              <div class="hidden-xs user-area">
+                                  {{#if user}}
+                                      {{#if admin}}
+                                          <a href="/admin" class="admin-dashboard">Admin</a>
+                                          <a href="/users/logout" class="log-out">Log Out</a>
+                                      {{else}}
+                                          <a href="/profile/{{#each user}}{{this.user_id}}{{/each}}" class="my-profile">My Profile</a>
+                                          <a href="/users/logout" class="log-out">Log Out</a>
+                                      {{/if}}
+                                  {{else}}
+                                      <a href="/users/login" class="sign-in">Sign In</a>
+                                      <a href="/users/register" class="sign-up">Sign Up</a>
+                                  {{/if}}
+                              </div>
+                          </div>
+                          <div class="hidden-sm hidden-md hidden-lg hidden-xl">
+                              <button id="profile-dropdown"></button>
+                              <div class="user-area-mobile">
                                   {{#if user}}
                                       {{#if admin}}
                                           <a href="/admin" class="admin-dashboard">Admin</a>
