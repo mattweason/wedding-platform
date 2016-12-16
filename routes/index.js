@@ -53,7 +53,7 @@ router.get('/', function(req, res, next) {
         res.render('home', {
             home: 1,
             admin: req.admin,
-            title: 'Vendors on a Dime',
+            title: 'Vendor on a Dime',
             vendor: vendorFull,
             featured: featured,
             city: cities,
