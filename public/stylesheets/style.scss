@@ -519,6 +519,10 @@ input, textarea{
     max-width: 1366px;
     margin: 0 auto;
 
+    .center {
+      transform: none !important;
+    }
+
     &.mobile-carousel{ //-------------Mobile Carousel
       .slick-list {
         @media(max-width: 991px){
@@ -2769,6 +2773,9 @@ input, textarea{
     color: $color-gray;
     text-align: center;
     border-radius: 0;
+
+    @media (max-width: 767px) {margin: 0 50px;}
+    @media (max-width: 500px) {margin: 0;}
 
     .form-response{
       font-family: $font-main;

@@ -410,6 +410,8 @@ input, textarea {
   #featured-vendor .featured-carousel {
     max-width: 1366px;
     margin: 0 auto; }
+    #featured-vendor .featured-carousel .center {
+      transform: none !important; }
     @media (max-width: 991px) {
       #featured-vendor .featured-carousel.mobile-carousel .slick-list {
         margin-bottom: -60px; } }
@@ -2197,6 +2199,12 @@ input, textarea {
   color: #282828;
   text-align: center;
   border-radius: 0; }
+  @media (max-width: 767px) {
+    #message-modal .modal-content, #delete-modal .modal-content {
+      margin: 0 50px; } }
+  @media (max-width: 500px) {
+    #message-modal .modal-content, #delete-modal .modal-content {
+      margin: 0; } }
   #message-modal .modal-content .form-response, #delete-modal .modal-content .form-response {
     font-family: "Lato Light";
     font-size: 18px;

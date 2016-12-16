@@ -15355,6 +15355,16 @@ $(document).ready(function() {
         });
     });
 
+    //Center featured vendor carousel if there is only one item
+    $(window).on("load", function() {
+        $('.slick-track').each(function(){
+            if($('> div',this).length == 1)
+            {
+                $(this).addClass('center');
+            }
+        });
+    });
+
     //Initialize slick carousel for featured vendors
     $('.featured-carousel').slick({
         prevArrow:"<div class='left-fade'></div><img class='a-left control-c prev slick-prev' src='/images/left-arrow.png'>",
