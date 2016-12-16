@@ -85,6 +85,8 @@
         {{/each}}
     </div>
 </div>
+{{else}}
+    <div class="spacer"></div>
 {{/if}}
 
 <div id="vendors-list">
@@ -152,66 +154,66 @@
                 </div>
             </div>
         </div>
-            <div id="vendor-list">
-                <ul class="paginationTop"></ul>
-                <div class="row">
-                    <div class="list">
-                        {{#each vendor}}
-                            <div class="vendor">
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
-                                            {{#if this.is_featured}}
-                                                <div class="ribbon-wrapper-home"><div class="ribbon-home">FEATURED</div></div>
-                                            {{/if}}
-                                            {{#if ../user}}
-                                                <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
-                                                <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
-                                            {{/if}}
-                                        </div>
-                                        <div class="desc-box">
-                                            <div class="desc-box-lining">
-                                                <h2 class="vendName">{{this.vendor_name}}</h2>
-                                                <p class="vendCat">{{this.category}}</p>
-                                                <p class="vendAdd">{{this.address}}, {{this.address_2}}</p>
-                                                <p class="vendCity">{{this.city}},</p>
-                                                <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
-                                                <p class="vendTags">{{this.tags}}</p>
-                                                <div class="desc-box-bottom">
-                                                    <div class="priceRating">
+        <div id="vendor-list">
+            <ul class="paginationTop"></ul>
+            <div class="row">
+                <div class="list">
+                    {{#each vendor}}
+                        <div class="vendor">
+                            <div class="col-sm-6">
+                                <div class="box">
+                                    <div class="feat-img" style="background-image: url(/{{this.featured_image}})">
+                                        {{#if this.is_featured}}
+                                            <div class="ribbon-wrapper-home"><div class="ribbon-home">FEATURED</div></div>
+                                        {{/if}}
+                                        {{#if ../user}}
+                                            <img src="/images/heart-fill.png" class="favorite-heart fill {{#if this.favorite}}favorited{{/if}}" data-vendor="{{this.vendor_id}}" alt="Click to favorite this vendor.">
+                                            <img src="/images/heart-outline.png" class="favorite-heart outline" alt="">
+                                        {{/if}}
+                                    </div>
+                                    <div class="desc-box">
+                                        <div class="desc-box-lining">
+                                            <h2 class="vendName">{{this.vendor_name}}</h2>
+                                            <p class="vendCat">{{this.category}}</p>
+                                            <p class="vendAdd">{{this.address}}, {{this.address_2}}</p>
+                                            <p class="vendCity">{{this.city}},</p>
+                                            <p class="vendAdd2" >{{this.province}} {{this.postal_code}}</p>
+                                            <p class="vendTags">{{this.tags}}</p>
+                                            <div class="desc-box-bottom">
+                                                <div class="priceRating">
 
-                                                            {{#if this.price}}
-                                                                <p class="vendPrice">{{this.price}}</p>
-                                                            {{else}}
-                                                                <p class="vendNoPrice">Not priced.</p>
-                                                            {{/if}}
-                                                    <p class="reviewRating" >
-                                                        {{#if this.rating}}
-                                                            {{this.rating}}</p>
-                                                            <p class="reviewCount"> (
-
-                                                                {{#if this.ratingCount}}
-                                                                    {{this.ratingCount}}
-                                                                {{else}}
-                                                                    1
-                                                                {{/if}})</p>
+                                                        {{#if this.price}}
+                                                            <p class="vendPrice">{{this.price}}</p>
                                                         {{else}}
-                                                            Not rated.</p>
+                                                            <p class="vendNoPrice">Not priced.</p>
                                                         {{/if}}
-                                                    </div>
+                                                <p class="reviewRating" >
+                                                    {{#if this.rating}}
+                                                        {{this.rating}}</p>
+                                                        <p class="reviewCount"> (
 
-                                                    <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                                            {{#if this.ratingCount}}
+                                                                {{this.ratingCount}}
+                                                            {{else}}
+                                                                1
+                                                            {{/if}})</p>
+                                                    {{else}}
+                                                        Not rated.</p>
+                                                    {{/if}}
                                                 </div>
-                                            </div>
 
+                                                <a class="vend-view" href="/vendor/{{this.vendor_url}}/">View</a>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                        {{/each}}
-                    </div>
+                        </div>
+                    {{/each}}
                 </div>
-                <ul class="paginationBottom"></ul>
+            </div>
+            <ul class="paginationBottom"></ul>
         </div>
     </div>
 </div>

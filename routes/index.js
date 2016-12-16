@@ -34,7 +34,7 @@ router.use('/vendor', require('./vendor'));
 router.use('/admin', require('./admin'));
 router.use('/api', require('./api'));
 
-/* GET home page. */
+/* GET home page */
 router.get('/', function(req, res, next) {
     if (req.user)
         var userID = req.user[0].user_id;
@@ -187,7 +187,7 @@ router.get('/claimbusiness', functions.ensureAuthenticated, function(req, res, n
 
 });
 
-/*Get user profile page. */
+/*Get user profile page */
 router.get('/profile/:userID', functions.ensureAuthenticated, function(req, res) {
     req.profile = '/profile/' + req.params.userID;
 

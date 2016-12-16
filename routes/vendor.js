@@ -670,9 +670,12 @@ router.post('/create', function(req, res){
                     category = fields[propName];
                 } else if(propName == 'vendor_name') {
                     dataCollection[propName] = fields[propName];
-                    var str = fields[propName];
-                    str = str.replace(/\s+/g, '_').toLowerCase();
-                    dataCollection['vendor_url'] = str;
+                    var vendorName = fields[propName];
+                    dataCollection['vendor_url'] = functions.urlSafe(vendorName);
+                } else if(propName == 'url') {
+                    dataCollection[propName] = fields[propName];
+                    var vendorWebsite = fields[propName];
+                    dataCollection['url'] = functions.stripHttp(vendorWebsite);
                 } else {
                     dataCollection[propName] = fields[propName];
                 }
@@ -682,8 +685,17 @@ router.post('/create', function(req, res){
 
     form.on('fileBegin', function(field, file) {
         fileExtension = path.extname(file.name);
-        file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
-        featuredImage = file.path;
+        if (file.name) {
+            file.path = path.join(__dirname, '/../uploads/featuredimage/'+file.name);
+        }
+    });
+
+    form.on('file', function (name, file) {
+        if(file.name) {
+            featuredImage = file.path;
+        } else {
+            featuredImage = 'images/placeholder.jpg';
+        }
     });
 
     form.on('end', function(){
@@ -720,22 +732,25 @@ router.post('/create', function(req, res){
         //Rename file and add path to dataCollection
         var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image' + fileExtension;
 
-        fs.rename(featuredImage, uploadPath, function() {
-            gm(uploadPath).size(function(err, size) {
-                if (err)
-                    console.log(err);
-                else if (size.width > 500)
-                    gm(uploadPath)
-                        .resize(500)
-                        .noProfile()
-                        .write(uploadPath, function (err) {
-                            if (!err) console.log('done');
-                        });
+        if(featuredImage !== 'images/placeholder.jpg') {
+            fs.rename(featuredImage, uploadPath, function () {
+                gm(uploadPath).size(function (err, size) {
+                    if (err)
+                        console.log(err);
+                    else if (size.width > 500)
+                        gm(uploadPath)
+                            .resize(500)
+                            .noProfile()
+                            .write(uploadPath, function (err) {
+                                if (!err) console.log('done');
+                            });
 
+                });
             });
-        });
-
-        dataCollection['featured_image'] = uploadPath;
+            dataCollection['featured_image'] = uploadPath;
+        } else {
+            dataCollection['featured_image'] = featuredImage;
+        }
 
         if (req.admin) {
             dataCollection.approved = 1;
@@ -792,9 +807,12 @@ router.post('/update', function(req, res){
                     category = fields[propName];
                 } else if(propName == 'vendor_name') {
                     dataCollection[propName] = fields[propName];
-                    var str = fields[propName];
-                    str = str.replace(/\s+/g, '_').toLowerCase();
-                    dataCollection['vendor_url'] = str;
+                    var vendorName = fields[propName];
+                    dataCollection['vendor_url'] = functions.urlSafe(vendorName);
+                } else if(propName == 'url') {
+                    dataCollection[propName] = fields[propName];
+                    var vendorWebsite = fields[propName];
+                    dataCollection['url'] = functions.stripHttp(vendorWebsite);
                 } else {
                     dataCollection[propName] = fields[propName];
                 }
@@ -811,6 +829,8 @@ router.post('/update', function(req, res){
     form.on('file', function (name, file) {
         if(file.name) {
             featuredImage = file.path;
+        } else {
+            featuredImage = 'images/placeholder.jpg';
         }
     });
 
@@ -824,7 +844,7 @@ router.post('/update', function(req, res){
         //Rename file and add path to dataCollection
         var uploadPath = 'uploads/featuredimage/' + dataCollection.vendor_url + '-featured-image';
 
-        if(typeof featuredImage !== "undefined") {
+        if(featuredImage !== 'images/placeholder.jpg') {
             fs.rename(featuredImage, uploadPath, function() {  //Rename and resize file in uploads/featuredimage folder
                 gm(uploadPath).size(function(err, size) {
                     if (err)
@@ -840,6 +860,8 @@ router.post('/update', function(req, res){
                 });
             });
             dataCollection['featured_image'] = uploadPath; //Add featured_image key and value to dataCollection
+        } else {
+            dataCollection['featured_image'] = featuredImage;
         }
         
         //create array of all values

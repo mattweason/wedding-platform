@@ -56,9 +56,16 @@ h3 {
   padding-right: 5px;
   padding-left: 5px; }
 
+.spacer {
+  margin-top: 120px; }
+
 @media (max-width: 991px) {
   .margin-bottom-sm {
     margin-bottom: 20px; } }
+
+.flex-column {
+  display: flex;
+  flex-direction: column; }
 
 .button-dark {
   text-decoration: none;
@@ -1316,6 +1323,10 @@ input, textarea {
     padding-top: 40px; }
   #vendor-add #add-form, #vendor-edit #add-form {
     padding: 40px 0; }
+    #vendor-add #add-form #category, #vendor-edit #add-form #category {
+      order: 1; }
+    #vendor-add #add-form #category-error, #vendor-edit #add-form #category-error {
+      order: 2; }
     #vendor-add #add-form textarea, #vendor-edit #add-form textarea {
       height: 363px;
       width: 100%; }

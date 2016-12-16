@@ -5,9 +5,27 @@ require('jquery-validation'); //form validation
 
 $(document).ready(function() {
 //--------------------------------------------------------------------------------AJAX CALLS
+    //Add function to validator
+    $.validator.addMethod("needsSelection", function (value, element) {
+        var count = $(element).find('option:selected').length;
+        return count > 0;
+    });
+    $.validator.messages.needsSelection = 'You gotta pick something.';
     //--------------------CREATING NEW VENDOR---------------------
     $('#add-form').validate({
-
+        rules: {
+            category: {
+                needsSelection: true
+            },
+            agree: "required"
+        },
+        messages: {
+            category: {
+                needsSelection: "Please select at least one Category"
+            },
+            agree: ""
+        },
+        ignore: ':hidden:not("#category")',
         submitHandler: function(form){
             if (!$('.is-file').hasClass('valid')) {
                 $(form).find('.is-file').attr('name', '');
