@@ -232,10 +232,10 @@ router.post('/removecategory', function(req, res){
         });
     }
 
-   function deleteCategory (categoryName, callback) {
+   function deleteCategory (callback) {
        connection.query('DELETE FROM category where category_id = ?', categoryID, function(err){
            if (err) throw err;
-           callback(null, categoryName);
+           callback(null);
        })
    }
 
