@@ -1,0 +1,43 @@
+<div id="category">
+    <div class="addRemoveCategoryArea">
+        <div class="container">
+            <h3>Add/Remove Category</h3>
+            <div class="row no-gutter">
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-5 col-md-offset-2 col-md-4">
+                    <div class="addCategoryBox">
+                        <form action="/admin/addcategory" class="addCategoryForm" method="post">
+                            <input type="text" name="category_name" placeholder="Category Name" required>
+                            <input type="submit" class="addCategorySubmit" value="ADD CATEGORY" name="submit">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-5 col-md-4">
+                    <div class="removeCategoryBox">
+                        <form action="/admin/removecategory" class="removeCategoryForm" method="post">
+                            <select class="select-filter chosen categoryList" data-placeholder="Select One" id="category_remove_list" name="category_remove_list">
+                                {{#each category}}
+                                    <option value="{{this.category_id}}">{{this.category_name}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="submit" class="removeCategorySubmit" value="REMOVE CATEGORY" name="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <form id = "remove-category-form" class = "remove-cat" action="/vendor/delete" method = "post">
+                <input type="hidden" name="vendor_id" value="{{vendor.vendor_id}}">
+                <div class="modal fade" id="delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <p>Are you sure you want to delete {{vendor.vendor_name}} from the database?</p>
+                            <div class="row">
+                                <div class="col-sm-6"><input id="delete-modal-confirm" type="submit" value="Delete Vendor"></div>
+                                <div class="col-sm-6"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

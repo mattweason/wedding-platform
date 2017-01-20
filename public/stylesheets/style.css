@@ -1883,32 +1883,41 @@ input, textarea {
   #admin h3 {
     margin-bottom: 40px; }
   #admin .addVendor {
-    border-right: 1px solid #282828;
-    border-bottom: 1px solid #282828;
     padding: 0 10px 10px 0; }
     @media (max-width: 767px) {
       #admin .addVendor {
-        border: none;
         padding: 0 0 10px 0; } }
   #admin .vendorList {
-    border-bottom: 1px solid #282828;
     padding: 0 0 10px 10px; }
     @media (max-width: 767px) {
       #admin .vendorList {
-        border: none;
         padding: 0 0 10px 0; } }
   #admin .pendingVendors {
-    border-right: 1px solid #282828;
     padding: 10px 10px 0 0; }
     @media (max-width: 767px) {
       #admin .pendingVendors {
-        border: none;
         padding: 0 0 10px 0; } }
   #admin .userList {
     padding: 10px 0 0 10px; }
     @media (max-width: 767px) {
       #admin .userList {
         padding: 0 0 10px 0; } }
+  #admin .addRemoveCategory {
+    padding: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    @media (max-width: 767px) {
+      #admin .addRemoveCategory {
+        padding: 0; } }
+    #admin .addRemoveCategory .adminButton {
+      width: 282.5px; }
+      @media (max-width: 1199px) {
+        #admin .addRemoveCategory .adminButton {
+          width: 232.5px; } }
+      @media (max-width: 767px) {
+        #admin .addRemoveCategory .adminButton {
+          width: 100%; } }
   #admin .adminButton {
     font-family: "Lato Light";
     font-size: 18px;
@@ -1923,6 +1932,65 @@ input, textarea {
     width: 100%;
     border: none; }
     #admin .adminButton:hover {
+      background: #424242; }
+
+#category {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  height: calc(100vh - 280px);
+  min-height: 400px; }
+  @media (max-width: 767px) {
+    #category {
+      min-height: 500px; } }
+  #category .addCategoryBox, #category .removeCategoryBox {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    #category .addCategoryBox form, #category .removeCategoryBox form {
+      width: 100%;
+      padding: 0 20px; }
+    #category .addCategoryBox input, #category .removeCategoryBox input {
+      width: 100%;
+      height: 40px; }
+  #category .chosen-container {
+    width: 100% !important; }
+  #category .chosen-single {
+    width: 100%;
+    font-family: "Lato Light";
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+    height: 40px;
+    line-height: 40px; }
+    #category .chosen-single b {
+      margin-top: 9px; }
+  #category .chosen-drop {
+    border-radius: 0; }
+  #category .chosen-results {
+    font-family: "Lato Light"; }
+  #category .addCategorySubmit, #category .removeCategorySubmit {
+    font-family: "Josefin Sans";
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 40px;
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    background: #282828;
+    border: none;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s; }
+    #category .addCategorySubmit:disabled, #category .removeCategorySubmit:disabled {
+      opacity: 0.6; }
+      #category .addCategorySubmit:disabled:hover, #category .removeCategorySubmit:disabled:hover {
+        background-color: #282828; }
+    #category .addCategorySubmit:hover, #category .removeCategorySubmit:hover {
       background: #424242; }
 
 #users-list {

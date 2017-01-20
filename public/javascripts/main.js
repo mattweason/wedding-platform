@@ -11,6 +11,50 @@ $(document).ready(function() {
         return count > 0;
     });
     $.validator.messages.needsSelection = 'You gotta pick something.';
+    //---------------------ADDING NEW CATEGORY--------------------
+    $('.addCategoryForm').validate({
+        submitHandler: function(form){
+            $.ajax({
+                type: "POST",
+                url: $('.addCategoryForm').attr('action'),
+                data: $('.addCategoryForm').serialize(), // serializes the form's elements.
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
+                        $('.view-button').attr('href', data.url);
+                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    });
+    //---------------------REMOVING CATEGORY--------------------
+    $('.removeCategoryForm').validate({
+        submitHandler: function(form){
+            $.ajax({
+                type: "POST",
+                url: $('.removeCategoryForm').attr('action'),
+                data: $('.removeCategoryForm').serialize(), // serializes the form's elements.
+                success: function(data){
+                    $('#message-modal').find('.form-response').html(data.message);
+                    $('#message-modal').modal('toggle'); //toggle modal on form submit
+                    if(data.status == 'success'){
+                        $('#message-modal').find('.view-button').children().html(data.buttontext);
+                        $('#message-modal').find('.gallery-button').children().html(data.buttontextgal);
+                        $('.view-button').attr('href', data.url);
+                        $('.gallery-button').removeClass('notdisplay').attr('href', data.urlgal);
+                        $(form).find('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                }
+            });
+            return false; //since we use Ajax
+        }
+    });
     //--------------------CREATING NEW VENDOR---------------------
     $('#add-form').validate({
         rules: {
@@ -31,6 +75,15 @@ $(document).ready(function() {
                 $(form).find('.is-file').attr('name', '');
             }
             var formData = new FormData(form);
+            //include all fields into formData
+            var fieldData = jQuery('#add-form').serializeArray(),
+                counter = 1;
+            for (var i=0; i<fieldData.length; i++){
+                if(fieldData[i].name == "cat"){
+                    formData.append('category'+counter, fieldData[i].value);
+                    counter++;
+                }
+            }
             $.ajax({
                 type: "POST",
                 processData: false,

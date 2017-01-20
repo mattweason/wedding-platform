@@ -798,13 +798,13 @@ router.post('/update', function(req, res){
 
     var dataCollection = {};
     var featuredImage;
-    var category;
+    var category = [];
 
     form.parse(req, function(err, fields) {
         for (var propName in fields) {
             if (fields.hasOwnProperty(propName)) {
-                if(propName == 'category') {
-                    category = fields[propName];
+                if(propName.indexOf('category') >= 0) {
+                    category.push(fields[propName]);
                 } else if(propName == 'vendor_name') {
                     dataCollection[propName] = fields[propName];
                     var vendorName = fields[propName];
@@ -813,6 +813,8 @@ router.post('/update', function(req, res){
                     dataCollection[propName] = fields[propName];
                     var vendorWebsite = fields[propName];
                     dataCollection['url'] = functions.stripHttp(vendorWebsite);
+                } else if(propName == 'cat') {
+                    console.log('ignore');
                 } else {
                     dataCollection[propName] = fields[propName];
                 }
@@ -886,6 +888,7 @@ router.post('/update', function(req, res){
                 throw err;
             else{
                 connection.query(`DELETE FROM vendor2category WHERE vendor_fid = ${dataCollection.vendor_id}`, function (err, output) {
+                    console.log(category);
                     functions.addCategory(dataCollection.vendor_id, category, 'Vendor successfully edited.', dataCollection.vendor_url, 0, res);
                 });
             }

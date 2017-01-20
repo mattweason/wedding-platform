@@ -159,6 +159,88 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
     }
 });
 
+//----------------------------------ADD/REMOVE CATEGORY----------------------------------//
+router.get('/category', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
+
+    connection.query('SELECT * FROM category', function (err, categories) {
+        res.render('category', {
+            admin: req.admin,
+            category: categories
+        });
+    });
+});
+
+//----------------------------------ADD CATEGORY-----------------------------------------//
+router.post('/addcategory', function(req, res){
+    var category = req.body.category_name;
+
+    connection.query('INSERT INTO category (category_name) VALUES (?)', category, function(err){
+        if (err) throw err;
+        res.send({
+            message: 'Category ' + category + ' Added',
+            buttontext: 'Add/Remove More',
+            buttontextgal: 'Admin Dashboard',
+            url: '/admin/category',
+            urlgal: '/admin',
+            status: 'success'
+        })
+    })
+});
+
+//----------------------------------REMOVE CATEGORY-----------------------------------------//
+router.post('/removecategory', function(req, res){
+    var categoryID = req.body.category_remove_list;
+    var categoryName;
+    console.log(req.body);
+
+    async.waterfall([
+        getCategoryName,
+        checkIfActive,
+        deleteCategory
+    ], function (err, result) {
+        res.send({
+            message: 'Category ' + categoryName + ' Removed',
+            buttontext: 'Add/Remove More',
+            buttontextgal: 'Admin Dashboard',
+            url: '/admin/category',
+            urlgal: '/admin',
+            status: 'success'
+        });
+    });
+
+    function getCategoryName (callback) {
+        connection.query('SELECT category_name FROM category WHERE category_id = ?', categoryID, function(err, result) {
+            categoryName = result[0].category_name;
+            callback(null);
+        })
+    }
+
+    function checkIfActive (callback) {
+        connection.query('SELECT * FROM vendor2category WHERE category_fid = ?', categoryID, function(err, result) {
+            var vendorCount = result.length;
+            if(result.length)
+                res.send({
+                    message: 'Category ' + categoryName + ' is still active on ' + vendorCount + ' vendor(s), cannot delete category.',
+                    buttontext: 'Add/Remove More',
+                    buttontextgal: 'View Vendors',
+                    url: '/admin/category',
+                    urlgal: '/admin/vendors',
+                    status: 'success'
+                });
+            else if(!result.length)
+                callback(null);
+        });
+    }
+
+   function deleteCategory (categoryName, callback) {
+       connection.query('DELETE FROM category where category_id = ?', categoryID, function(err){
+           if (err) throw err;
+           callback(null, categoryName);
+       })
+   }
+
+});
+
 //----------------------------------------APPROVE A PENDING VENDOR---------------------------//
 router.get('/approve/:vendorID', function(req, res){
     connection.query('UPDATE vendor SET approved = 1 WHERE vendor_id = ?', req.params.vendorID, function(err){
@@ -190,7 +272,7 @@ router.post('/assignuser', function(req, res){
     });
 });
 
-// ----------------------------------UNASSIGN USER AS OWNER--------------------------//
+//----------------------------------UNASSIGN USER AS OWNER--------------------------//
 router.post('/unassignuser', function(req, res){
     var userID = req.body.user_id;
     var vendorID = [];
@@ -222,5 +304,7 @@ router.post('/unassignuser', function(req, res){
             });
         }
 });
+
+//----------------------------------ADD CATEGORY----------------------------------//
 
 module.exports = router;
