@@ -43,7 +43,7 @@ router.get('/vendors', functions.ensureAuthenticated, functions.checkAdminAccess
         });
     }
     function allCategories (vendor, callback) {
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
+        connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, categories) {
             callback(null, vendor, categories);
         });
     }
@@ -86,7 +86,7 @@ router.get('/pending', functions.ensureAuthenticated, functions.checkAdminAccess
         });
     }
     function allCategories (vendor, callback) {
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
+        connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, categories) {
             callback(null, vendor, categories);
         });
     }
@@ -162,7 +162,7 @@ router.get('/users', functions.ensureAuthenticated, functions.checkAdminAccess, 
 //----------------------------------ADD/REMOVE CATEGORY----------------------------------//
 router.get('/category', functions.ensureAuthenticated, functions.checkAdminAccess, function(req, res, next) {
 
-    connection.query('SELECT * FROM category', function (err, categories) {
+    connection.query('SELECT * FROM category ORDER BY category_name ASC', function (err, categories) {
         res.render('category', {
             admin: req.admin,
             category: categories

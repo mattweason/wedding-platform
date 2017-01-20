@@ -76,7 +76,7 @@ router.get('/', function(req, res, next) {
             callback(null, vendor);
     }
     function allCategories (vendor, callback) {
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, categories) {
+        connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, categories) {
             callback(null, vendor, categories);
         });
     }

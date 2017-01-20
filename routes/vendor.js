@@ -16,7 +16,7 @@ const fs = require('fs-extra');
 //---------------------ADDING NEW VENDOR------------------------//
 router.get('/add', functions.ensureAuthenticated, function(req,res, next){
 
-    connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category){
+    connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, category){
         connection.query("SELECT * FROM ontariomunicipalities ORDER BY city", function(err, cities){
             res.render('vendor_add', {
                 title: 'Add New Vendor',
@@ -140,7 +140,7 @@ router.get('/:vendorName/edit', functions.ensureAuthenticated, functions.checkUs
         });
     }
     function getCategory (vendor, categorySelect, callback) {
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category) {
+        connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, category) {
             for (var i = 0; i < category.length; i++) {
                 if (categorySelect.indexOf(category[i].category_id) > -1) {
                     category[i].selected = true;
@@ -227,7 +227,7 @@ router.get('/:vendorName/pending/edit', functions.ensureAuthenticated, functions
         });
     }
     function getCategory (vendor, categorySelect, callback) {
-        connection.query("SELECT * FROM category ORDER BY category_id ASC", function(err, category) {
+        connection.query("SELECT * FROM category ORDER BY category_name ASC", function(err, category) {
             for (var i = 0; i < category.length; i++) {
                 if (categorySelect.indexOf(category[i].category_id) > -1) {
                     category[i].selected = true;
