@@ -2064,7 +2064,7 @@ input, textarea{
 }
 
 //Login and Register Page-----------------------------------------------Login and Register Page//
-#login-page, #register-page {
+#login-page, #register-page, #forgot-page, #reset-page {
   padding-top: $header-height;
   padding-bottom: 40px;
 
@@ -2077,6 +2077,11 @@ input, textarea{
   @media(max-width: 991px) {
     .right{margin-left: 0;}
     .left{margin-right: 0;}
+  }
+  .forgotWrapper{
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
   }
   .submit{
     font-family: $font-main;

@@ -1608,22 +1608,26 @@ input, textarea {
     #gallery-delete-page #delete-gallery-submit:disabled:hover {
       background-color: #282828; }
 
-#login-page, #register-page {
+#login-page, #register-page, #forgot-page, #reset-page {
   padding-top: 120px;
   padding-bottom: 40px; }
-  #login-page h3, #register-page h3 {
+  #login-page h3, #register-page h3, #forgot-page h3, #reset-page h3 {
     margin-bottom: 40px;
     border-bottom: none; }
-  #login-page .right, #register-page .right {
+  #login-page .right, #register-page .right, #forgot-page .right, #reset-page .right {
     margin-left: 7.5px; }
-  #login-page .left, #register-page .left {
+  #login-page .left, #register-page .left, #forgot-page .left, #reset-page .left {
     margin-right: 7.5px; }
   @media (max-width: 991px) {
-    #login-page .right, #register-page .right {
+    #login-page .right, #register-page .right, #forgot-page .right, #reset-page .right {
       margin-left: 0; }
-    #login-page .left, #register-page .left {
+    #login-page .left, #register-page .left, #forgot-page .left, #reset-page .left {
       margin-right: 0; } }
-  #login-page .submit, #register-page .submit {
+  #login-page .forgotWrapper, #register-page .forgotWrapper, #forgot-page .forgotWrapper, #reset-page .forgotWrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px; }
+  #login-page .submit, #register-page .submit, #forgot-page .submit, #reset-page .submit {
     font-family: "Lato Light";
     font-size: 18px;
     text-decoration: none;
@@ -1636,30 +1640,30 @@ input, textarea {
     background: #282828;
     width: 100%;
     border: none; }
-    #login-page .submit:hover, #register-page .submit:hover {
+    #login-page .submit:hover, #register-page .submit:hover, #forgot-page .submit:hover, #reset-page .submit:hover {
       background: #424242; }
-  #login-page .facebookSignUp, #register-page .facebookSignUp {
+  #login-page .facebookSignUp, #register-page .facebookSignUp, #forgot-page .facebookSignUp, #reset-page .facebookSignUp {
     text-align: center; }
-    #login-page .facebookSignUp h3, #register-page .facebookSignUp h3 {
+    #login-page .facebookSignUp h3, #register-page .facebookSignUp h3, #forgot-page .facebookSignUp h3, #reset-page .facebookSignUp h3 {
       display: inline-block;
       margin-bottom: 20px; }
-    #login-page .facebookSignUp .bannerLine, #register-page .facebookSignUp .bannerLine {
+    #login-page .facebookSignUp .bannerLine, #register-page .facebookSignUp .bannerLine, #forgot-page .facebookSignUp .bannerLine, #reset-page .facebookSignUp .bannerLine {
       display: inline-block;
       width: 20px;
       margin-bottom: 5px;
       border-top: 1px solid #282828; }
-    #login-page .facebookSignUp .submit, #register-page .facebookSignUp .submit {
+    #login-page .facebookSignUp .submit, #register-page .facebookSignUp .submit, #forgot-page .facebookSignUp .submit, #reset-page .facebookSignUp .submit {
       background-color: #3b5998;
       transition: all 0.2s; }
-      #login-page .facebookSignUp .submit:hover, #register-page .facebookSignUp .submit:hover {
+      #login-page .facebookSignUp .submit:hover, #register-page .facebookSignUp .submit:hover, #forgot-page .facebookSignUp .submit:hover, #reset-page .facebookSignUp .submit:hover {
         background-color: #4c70ba; }
   @media (max-width: 767px) {
-    #login-page, #register-page {
+    #login-page, #register-page, #forgot-page, #reset-page {
       text-align: center; }
-      #login-page input, #register-page input {
+      #login-page input, #register-page input, #forgot-page input, #reset-page input {
         display: inline-block;
         width: 260px; }
-      #login-page .submit, #register-page .submit {
+      #login-page .submit, #register-page .submit, #forgot-page .submit, #reset-page .submit {
         width: 260px;
         display: inline-block; } }
 
