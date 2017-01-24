@@ -166,7 +166,8 @@ router.post('/login',
 
 //Forgot Route
 router.post('/forgot', function(req, res, next) {
-    var userEmail = req.body.useremail;
+    var userEmail = req.body.useremail,
+        userName;
 
     async.waterfall([
         createToken,
@@ -187,6 +188,7 @@ router.post('/forgot', function(req, res, next) {
 
     function checkUser (token, callback) {
         connection.query('SELECT * FROM user WHERE email = ?',userEmail, function(err, user){
+            userName = user[0].username;
             if(err) throw err;
             if (!user.length || user[0].admin > 0) {
                 req.flash('error', 'No account with that email address exists.');
@@ -199,18 +201,20 @@ router.post('/forgot', function(req, res, next) {
                 var tokenExpire = Date.now() + 3600000;
                 connection.query('UPDATE user SET token= ?, token_expire= ? WHERE email = ?', [token, tokenExpire, userEmail], function(err, result) {
                     if (err) throw err;
-                    callback(null, token, userEmail);
+                    callback(null, token);
                 });
             }
         });
     }
 
-    function sendEmail (token, userEmail, callback) {
+    function sendEmail (token, callback) {
         var mailOptions={
             from : 'noreply@vendoronadime.com',
             to : userEmail,
             subject : 'Vendor on a Dime Password Reset',
-            text : 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+            text : 'You are receiving this because you (or someone else) have requested the reset of the password for your account:\n\n' +
+                'Username: ' + userName + '\n' +
+                'Email: ' + userEmail + '\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                 'http://' + req.headers.host + '/users/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
@@ -272,7 +276,7 @@ router.post('/reset/:token', function(req, res) {
             from : 'noreply@vendoronadime.com',
             to : userEmail,
             subject : 'Your Vendor on a Dime password has changed.',
-            text : 'This is a confirmation that the password for your account ' + userEmail + ' has just been changed.\n'
+            text : 'This is a confirmation that the password for your account with the username: ' + userName + ', has just been changed.\n'
         };
         transporter.sendMail(mailOptions, function(err){
             if(err) {

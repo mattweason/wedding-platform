@@ -383,7 +383,7 @@ $(document).ready(function() {
             else {
                 cname=$("#fname").val() + " " + $("#lname").val();
                 from=$("#emailadd").val();
-                to="matt@oasiscode.com";
+                to="vendor.on.a.dime@gmail.com";
                 reason=$("#subject").val();
                 subject="Contact request from Vendor on a Dime";
                 text= "From: " + cname + "<br>" + "Email: " + from + "<br><br>" + "Subject: " + reason + "<br><br>" +  "Message: " + $("#message").val();
@@ -396,8 +396,6 @@ $(document).ready(function() {
                 });
             }
         }
-
-
     });
 
     //Claim Business Form
