@@ -388,7 +388,7 @@ $(document).ready(function() {
                 subject="Contact request from Vendor on a Dime";
                 text= "From: " + cname + "<br>" + "Email: " + from + "<br><br>" + "Subject: " + reason + "<br><br>" +  "Message: " + $("#message").val();
                 $("#context").text("Sending E-mail...Please wait").removeClass('colorAlert');
-                $.get("http://localhost:3000/send",{from:from,to:to,subject:subject,text:text},function(data){
+                $.get("http://159.203.56.159/send",{from:from,to:to,subject:subject,text:text},function(data){
                     if(data=="sent")
                     {
                         window.location.replace("/thankyou");
