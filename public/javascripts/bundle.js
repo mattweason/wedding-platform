@@ -15155,7 +15155,7 @@ $(document).ready(function() {
                     "<strong>Vendor Address 1:</strong> " + businessAdd1 + "<br>"+
                     "<strong>Vendor Address 2:</strong> " + businessAdd2 + "<br>";
                 $("#context").text("Sending E-mail...Please wait").removeClass('colorAlert');
-                $.get("http://localhost:3000/send",{from:cbfrom,to:cbto,subject:subject,text:text},function(data) {
+                $.get("http://159.203.56.159/send",{from:cbfrom,to:cbto,subject:subject,text:text},function(data) {
                     if (data == "sent") {
                         window.location.replace("/thankyou");
                     }
